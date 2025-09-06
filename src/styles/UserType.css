@@ -1,0 +1,267 @@
+/* UserType.css - Header styles removed, using global styles from App.css */
+
+.content {
+  flex: 1;
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.campaign-header {
+  text-align: center;
+  margin-bottom: 32px;
+  padding: 0 20px;
+  display: block;
+  width: 100%;
+}
+
+.campaign-header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1F2937;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+  display: block;
+  width: 100%;
+}
+
+.campaign-header h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+  display: block;
+  width: 100%;
+}
+
+.campaign-header p {
+  font-size: 14px;
+  color: #6B7280;
+  line-height: 1.4;
+  margin: 0 auto;
+  display: block;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 32px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+}
+
+.hero h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1F2937;
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+/* UserType specific hero paragraph - scoped to avoid conflicts */
+.container .hero p {
+  font-size: 14px;
+  color: #6B7280;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.type-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.type-button {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border: 2px solid #E5E7EB;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.type-button:hover {
+  border-color: #ad34ab;
+  box-shadow: 0 4px 12px rgba(173, 52, 171, 0.15);
+  transform: translateY(-2px);
+}
+
+.type-button:active {
+  transform: translateY(0);
+}
+
+.type-icon {
+  font-size: 32px;
+  min-width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.individual:hover .type-icon {
+  background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+}
+
+.group:hover .type-icon {
+  background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+}
+
+.type-content {
+  flex: 1;
+}
+
+.type-content h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1F2937;
+  margin: 0 0 8px 0;
+}
+
+.type-content p {
+  font-size: 14px;
+  color: #6B7280;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.info-note {
+  background: linear-gradient(135deg, #fdf4ff 0%, #f0f9ff 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: auto;
+}
+
+.info-note p {
+  font-size: 13px;
+  color: #64748B;
+  margin: 0;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* Hover animations */
+.type-button:hover .type-content h3 {
+  color: #ad34ab;
+}
+
+/* Disabled state for Kelompok */
+.type-button.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #f9fafb;
+}
+
+.type-button.disabled:hover {
+  border-color: #E5E7EB;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transform: none;
+}
+
+.type-button.disabled .type-icon {
+  background: #e5e7eb;
+  opacity: 0.7;
+}
+
+.type-button.disabled:hover .type-icon {
+  background: #e5e7eb;
+}
+
+.type-button.disabled .type-content h3 {
+  color: #9ca3af;
+}
+
+.type-button.disabled:hover .type-content h3 {
+  color: #9ca3af;
+}
+
+.type-button.disabled .type-content p {
+  color: #9ca3af;
+}
+
+.coming-soon {
+  font-size: 12px;
+  font-weight: 400;
+  color: #f59e0b;
+  background: #fef3c7;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: 8px;
+}
+
+/* Mobile optimizations */
+@media (max-width: 450px) {
+  .content {
+    padding: 24px 16px;
+  }
+  
+  .campaign-header h1 {
+    font-size: 22px;
+  }
+  
+  .campaign-header h2 {
+    font-size: 18px;
+  }
+  
+  .type-button {
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .type-icon {
+    font-size: 28px;
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+  }
+  
+  .type-content h3 {
+    font-size: 16px;
+  }
+  
+  .type-content p {
+    font-size: 13px;
+  }
+}
+
+/* Focus states for accessibility */
+.back-arrow:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+.type-button:focus {
+  outline: none;
+  border-color: #ad34ab;
+  box-shadow: 0 0 0 3px rgba(173, 52, 171, 0.3);
+}
+
+/* Animation for smooth transitions */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.type-selection {
+  animation: slideUp 0.5s ease-out;
+}

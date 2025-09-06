@@ -1,0 +1,302 @@
+/* Ajakan page styles */
+
+/* Container */
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  background-color: #fff;
+  min-height: 100vh;
+  position: relative;
+  padding-top: 60px;
+}
+
+/* Header styles removed - using global styles from App.css */
+
+/* Progress Steps */
+.progress-section {
+  padding: 16px;
+  background: white;
+  overflow-x: auto;
+}
+
+.progress-steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 24px;
+  min-width: max-content;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+.step-number {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 8px;
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+.step-number.active {
+  background: #ad34ab;
+  color: white;
+  border: none;
+}
+
+.step-number.inactive {
+  background: white;
+  color: #989898;
+  border: 1px solid #989898;
+}
+
+.step-text {
+  font-size: 14px;
+  margin: 0;
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
+.step-text.active {
+  color: #ad34ab;
+  font-weight: 600;
+}
+
+.step-text.inactive {
+  color: #989898;
+}
+
+.step-divider {
+  width: 24px;
+  height: 2px;
+  background: #e5e5e5;
+  margin: 0 8px;
+  border: none;
+  flex-shrink: 0;
+}
+
+/* Ajakan Section */
+.ajakan-section {
+  padding: 20px 16px;
+  margin-bottom: 120px;
+}
+
+.ajakan-header {
+  margin-bottom: 24px;
+}
+
+.ajakan-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 8px 0;
+}
+
+.ajakan-description {
+  font-size: 14px;
+  color: #6B7280;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Form */
+.ajakan-form {
+  margin-bottom: 32px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.required {
+  color: #EF4444;
+}
+
+.ajakan-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border: 1.5px solid #D1D5DB;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #374151;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+
+.ajakan-textarea:focus {
+  outline: none;
+  border-color: #ad34ab;
+  box-shadow: 0 0 0 3px rgba(173, 52, 171, 0.1);
+}
+
+.ajakan-textarea::placeholder {
+  color: #9CA3AF;
+}
+
+.character-count {
+  text-align: right;
+  font-size: 12px;
+  color: #6B7280;
+  margin-top: 4px;
+}
+
+/* Tips Section */
+.tips-section {
+  background: #F8F9FA;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #E5E7EB;
+}
+
+.tips-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 12px 0;
+}
+
+.tips-list {
+  margin: 0;
+  padding-left: 16px;
+  list-style-type: disc;
+}
+
+.tips-list li {
+  font-size: 13px;
+  color: #6B7280;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.tips-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Bottom Navigation */
+.bottom-navigation {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 480px;
+  width: 100%;
+  background: white;
+}
+
+.nav-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 16px;
+  gap: 8px;
+}
+
+.nav-btn {
+  text-align: center;
+  line-height: normal;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  width: 100%;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-btn.prev {
+  color: #6A6A6A;
+  background: #F8F9FA;
+  border: none;
+}
+
+.nav-btn.prev:hover {
+  background: #E5E7EB;
+}
+
+.nav-btn.next {
+  color: white;
+  background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+  border: none;
+}
+
+.nav-btn.next:hover:not(.disabled) {
+  background: linear-gradient(135deg, #9c2a9a 0%, #c844ef 100%);
+}
+
+.nav-btn.next.disabled {
+  background: #D1D5DB;
+  color: #9CA3AF;
+  cursor: not-allowed;
+}
+
+.nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Save Later */
+.save-later {
+  cursor: pointer;
+  border-top: 1px solid #E5E7EB;
+  background-color: #FCFCFC;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.save-later-btn {
+  text-align: center;
+  line-height: normal;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  width: 100%;
+  align-items: center;
+  padding: 16px;
+  background-color: #FCFCFC;
+  color: #ad34ab;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.save-later-btn:hover {
+  background-color: #F0F9FF;
+}
+
+/* Mobile Responsive */
+@media (max-width: 450px) {
+  .progress-section {
+    padding: 12px 16px;
+  }
+  
+  .ajakan-section {
+    padding: 16px 12px;
+  }
+  
+  .nav-buttons {
+    padding: 12px 16px;
+  }
+}
