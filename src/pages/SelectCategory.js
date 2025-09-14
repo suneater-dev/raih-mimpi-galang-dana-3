@@ -11,8 +11,8 @@ const SelectCategory = () => {
   };
 
   const handleGeneralCategory = () => {
-    // Navigate to general category flow
-    navigate('/general-form');
+    // Navigate to bantuan lainnya category selection
+    navigate('/bantuan-lainnya');
   };
 
   const handleModalClose = () => {

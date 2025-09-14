@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ProgressSteps from '../components/ProgressSteps';
 import '../styles/TargetDonasi.css';
 
 const TargetDonasi = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [amount, setAmount] = useState('');
   const [duration, setDuration] = useState('');
   const [fundUsage, setFundUsage] = useState('');
+
+  // Get data from previous steps
+  const previousData = location.state || {};
 
   const durationOptions = [
     { id: 'duration-30', value: '30', label: '30 hari' },
@@ -29,12 +33,40 @@ const TargetDonasi = () => {
   };
 
   const handleNext = () => {
-    navigate('/judul-kampanye');
+    if (isFormValid) {
+      navigate('/judul-kampanye', {
+        state: {
+          ...previousData,
+          targetData: {
+            amount,
+            duration,
+            fundUsage
+          }
+        }
+      });
+    }
   };
 
   const handleBack = () => {
-    navigate('/riwayat-medis');
+    navigate('/riwayat-medis', { state: previousData });
   };
+
+  const handleSaveAndContinueLater = () => {
+    navigate('/dashboard');
+  };
+
+  // Form validation
+  const isFormValid = amount.trim() !== '' && duration !== '' && fundUsage.trim() !== '';
+
+  const steps = [
+    { number: 1, label: 'Pasien', active: false },
+    { number: 2, label: 'Data diri', active: false },
+    { number: 3, label: 'Penerima', active: false },
+    { number: 4, label: 'Target donasi', active: true },
+    { number: 5, label: 'Judul', active: false },
+    { number: 6, label: 'Cerita', active: false },
+    { number: 7, label: 'Ajakan', active: false }
+  ];
 
   return (
     <div className="container">
@@ -46,8 +78,10 @@ const TargetDonasi = () => {
         <div className="header-title white-text">Bantuan Medis & Kesehatan</div>
       </header>
 
-      {/* Progress Section */}
-      <ProgressSteps currentStep={5} />
+      {/* Progress Steps */}
+      <div className="progress-section-modern">
+        <ProgressSteps steps={steps} />
+      </div>
 
       {/* Form Section */}
       <div className="modern-card">

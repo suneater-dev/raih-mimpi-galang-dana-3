@@ -67,6 +67,16 @@ const DetailPasien = () => {
     navigate('/bantuan-medis');
   };
 
+  const steps = [
+    { number: 1, label: 'Pasien', active: false },
+    { number: 2, label: 'Data diri', active: true },
+    { number: 3, label: 'Penerima', active: false },
+    { number: 4, label: 'Target donasi', active: false },
+    { number: 5, label: 'Judul', active: false },
+    { number: 6, label: 'Cerita', active: false },
+    { number: 7, label: 'Ajakan', active: false }
+  ];
+
   return (
     <div className="container">
       {/* Header */}
@@ -74,78 +84,83 @@ const DetailPasien = () => {
         <button className="back-arrow white-text" onClick={handleBack}>
           ←
         </button>
-        <div className="header-title white-text">Bantuan Medis & Kesehatan</div>
+        <div className="logo white-text">Bantuan Medis & Kesehatan</div>
+        <div className="header-spacer"></div>
       </header>
 
-      {/* Progress Section */}
-      <ProgressSteps currentStep={2} />
+      {/* Progress Steps */}
+      <div className="progress-section-modern">
+        <ProgressSteps steps={steps} />
+      </div>
 
-      {/* Form Section */}
-      <div className="modern-card">
-        {/* Selected Patient */}
-        <div className="form-group-modern">
-          <h2 className="modern-subheading">Siapa yang sakit?</h2>
-          <div className="selected-option-modern">
-            <span className="selected-text-modern">Saya sendiri</span>
-            <button className="modern-btn secondary" onClick={() => navigate('/bantuan-medis')} style={{padding: '8px 16px'}}>
-              Ubah
-            </button>
+      {/* Main Content */}
+      <div className="main-content-modern">
+        <div className="form-section-modern">
+          {/* Selected Patient */}
+          <div className="form-group-modern">
+            <h2 className="modern-subheading">Siapa yang sakit?</h2>
+            <div className="selected-option-modern">
+              <span className="selected-text-modern">Saya sendiri</span>
+              <button className="change-btn-modern" onClick={() => navigate('/bantuan-medis')}>
+                Ubah
+              </button>
+            </div>
           </div>
-        </div>
 
-        {/* Phone Number */}
-        <div className="form-group-modern">
-          <label className="form-label-modern">Masukkan no. ponsel kamu</label>
-          <p className="modern-text small" style={{marginBottom: '16px'}}>Seluruh notifikasi akan dikirim melalui nomor ini</p>
-          <input 
-            type="tel" 
-            className="modern-input" 
-            placeholder="628312412312" 
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-          />
-        </div>
+          {/* Phone Number */}
+          <div className="form-group-modern">
+            <label className="form-label-modern">Masukkan no. ponsel kamu</label>
+            <p className="form-description-modern">Seluruh notifikasi akan dikirim melalui nomor ini</p>
+            <input 
+              type="tel" 
+              className="modern-input detail-input" 
+              placeholder="628312412312" 
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+          </div>
 
-        {/* Bank Account Selection */}
-        <div className="form-group-modern">
-          <label className="form-label-modern">Pilih rekening bank penggalangan dana</label>
-          <p className="modern-text small" style={{marginBottom: '16px'}}>Donasi hanya bisa dicairkan ke rekening ini.</p>
-          
-          <div className="modern-checkbox-group">
-            {bankOptions.map((option) => (
-              <div key={option.id} className="checkbox-option-modern">
-                <label className={`modern-option ${selectedBankOptions.includes(option.id) ? 'selected' : ''}`}>
-                  <input 
-                    type="checkbox"
-                    checked={selectedBankOptions.includes(option.id)}
-                    onChange={() => handleCheckboxChange(option.id)}
-                  />
-                  <div className="modern-option-content">
-                    <h4>{option.label}</h4>
-                  </div>
-                </label>
-                {option.info && selectedBankOptions.includes(option.id) && (
-                  <div className="checkbox-info-modern">
-                    <p className="modern-text small">{option.info}</p>
-                  </div>
-                )}
-              </div>
-            ))}
+          {/* Bank Account Selection */}
+          <div className="form-group-modern">
+            <label className="form-label-modern">Pilih rekening bank penggalangan dana</label>
+            <p className="form-description-modern">Donasi hanya bisa dicairkan ke rekening ini.</p>
+            
+            <div className="modern-checkbox-group">
+              {bankOptions.map((option) => (
+                <div key={option.id} className="checkbox-option-modern">
+                  <label className={`modern-checkbox-option ${selectedBankOptions.includes(option.id) ? 'selected' : ''}`}>
+                    <input 
+                      type="checkbox"
+                      checked={selectedBankOptions.includes(option.id)}
+                      onChange={() => handleCheckboxChange(option.id)}
+                    />
+                    <span className="checkmark-modern"></span>
+                    <div className="checkbox-content">
+                      <h4>{option.label}</h4>
+                    </div>
+                  </label>
+                  {option.info && selectedBankOptions.includes(option.id) && (
+                    <div className="checkbox-info-modern">
+                      <p className="info-text-modern">{option.info}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Bottom Navigation */}
       <div className="bottom-nav-modern">
-        <button className="modern-btn secondary" onClick={handleBack}>
-          ← Sebelumnya
-        </button>
-        <button 
-          className="modern-btn"
-          onClick={handleNext}
-        >
-          Selanjutnya →
-        </button>
+        <div className="nav-buttons-container">
+          <button className="nav-btn-secondary" onClick={handleBack}>
+            Sebelumnya
+          </button>
+          <button className="nav-btn-primary" onClick={handleNext}>
+            Selanjutnya
+          </button>
+        </div>
       </div>
 
     </div>

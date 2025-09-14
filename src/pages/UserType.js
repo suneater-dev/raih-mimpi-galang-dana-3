@@ -7,13 +7,14 @@ const UserType = () => {
   const [selectedType, setSelectedType] = useState('');
 
   const handleTypeSelection = (type) => {
-    if (type === 'group') {
-      // Group functionality coming soon
-      return;
-    }
     setSelectedType(type);
-    // Navigate to UserInfo after selection for individuals
-    navigate('/user-info', { state: { userType: type } });
+    if (type === 'group') {
+      // Navigate to KelompokInfo for group registration
+      navigate('/kelompok-info', { state: { userType: type } });
+    } else {
+      // Navigate to UserInfo after selection for individuals
+      navigate('/user-info', { state: { userType: type } });
+    }
   };
 
   return (
@@ -43,13 +44,13 @@ const UserType = () => {
           </button>
 
           <button
-            className="type-button group disabled"
+            className="type-button group"
             onClick={() => handleTypeSelection('group')}
           >
             <div className="type-icon">👥</div>
             <div className="type-content">
-              <h3>Kelompok <span className="coming-soon">Segera Hadir</span></h3>
-              <p>Fitur untuk organisasi, komunitas, atau kelompok sedang dalam pengembangan</p>
+              <h3>Kelompok</h3>
+              <p>Saya mewakili organisasi, yayasan, lembaga, atau komunitas</p>
             </div>
           </button>
         </div>

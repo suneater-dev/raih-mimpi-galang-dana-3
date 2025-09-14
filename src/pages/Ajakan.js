@@ -12,8 +12,8 @@ const Ajakan = () => {
   };
 
   const handleNext = () => {
-    // Navigate to final step or completion
-    navigate('/campaign-complete');
+    // Navigate to ads offering page for medical campaigns
+    navigate('/ads-offering-medis');
   };
 
   const handleSaveAndContinueLater = () => {
@@ -23,6 +23,16 @@ const Ajakan = () => {
   const handleAjakanChange = (e) => {
     setAjakanText(e.target.value);
   };
+
+  const steps = [
+    { number: 1, label: 'Pasien', active: false },
+    { number: 2, label: 'Data diri', active: false },
+    { number: 3, label: 'Penerima', active: false },
+    { number: 4, label: 'Target donasi', active: false },
+    { number: 5, label: 'Judul', active: false },
+    { number: 6, label: 'Cerita', active: false },
+    { number: 7, label: 'Ajakan', active: true }
+  ];
 
   return (
     <div className="container">
@@ -35,7 +45,9 @@ const Ajakan = () => {
       </header>
 
       {/* Progress Steps */}
-      <ProgressSteps currentStep={8} />
+      <div className="progress-section-modern">
+        <ProgressSteps steps={steps} />
+      </div>
 
       {/* Ajakan Form Section */}
       <div className="modern-card" style={{margin: '20px'}}>

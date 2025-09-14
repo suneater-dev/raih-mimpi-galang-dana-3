@@ -1,0 +1,423 @@
+/* Progress Section - Match modern style */
+.progress-section-modern {
+    padding: 20px 20px 16px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* Override ProgressSteps to match modern design */
+.progress-section-modern .progress-section {
+    padding: 0;
+    background: transparent;
+    margin: 0;
+}
+
+.progress-section-modern .progress-steps {
+    margin-bottom: 0;
+    overflow-x: auto;
+    padding-bottom: 0;
+}
+
+.progress-section-modern .step-number.active {
+    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px -3px rgba(173, 52, 171, 0.4);
+    font-weight: 700 !important;
+}
+
+.progress-section-modern .step-text.active {
+    color: #ad34ab !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+}
+
+.progress-section-modern .step-number.inactive {
+    background: rgba(248, 250, 252, 0.8) !important;
+    color: #94a3b8 !important;
+    border: 1px solid rgba(148, 163, 184, 0.5) !important;
+    font-weight: 600 !important;
+}
+
+.progress-section-modern .step-text.inactive {
+    color: #94a3b8 !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+}
+
+/* Main Content */
+.main-content-modern {
+    padding: 32px 20px !important;
+    min-height: calc(100vh - 200px);
+    background: transparent;
+}
+
+/* Selected Category Section */
+.selected-category-section {
+    margin-bottom: 32px;
+}
+
+.selected-category-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    padding: 20px 24px;
+    box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.1);
+}
+
+.selected-category-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.selected-category-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e293b;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+.change-category-btn {
+    background: none;
+    border: none;
+    color: #3b82f6;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    transition: color 0.3s ease;
+}
+
+.change-category-btn:hover {
+    color: #1d4ed8;
+}
+
+/* Question Section */
+.question-section-modern {
+    margin-bottom: 40px;
+}
+
+.question-title-modern {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    margin-bottom: 24px !important;
+    line-height: 1.4 !important;
+    letter-spacing: -0.01em !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif !important;
+}
+
+/* Input Container */
+.input-container-modern {
+    margin-top: 16px;
+}
+
+.beneficiary-input {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid rgba(226, 232, 240, 0.8);
+    border-radius: 16px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    color: #1e293b;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+.beneficiary-input:focus {
+    outline: none;
+    border-color: #ad34ab;
+    box-shadow: 0 0 0 3px rgba(173, 52, 171, 0.1);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.beneficiary-input::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
+}
+
+/* Terms Section */
+.terms-section-modern {
+    margin-bottom: 40px;
+}
+
+.terms-title-modern {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 24px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+.terms-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Custom Checkbox - Match original simpler layout */
+.term-item-modern {
+    margin-bottom: 16px;
+}
+
+.checkbox-container-modern {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    gap: 12px;
+    padding: 0;
+    background: none;
+    border: none;
+    transition: none;
+}
+
+.checkbox-container-modern:hover {
+    background: none;
+    border: none;
+}
+
+.checkbox-container-modern input {
+    display: none;
+}
+
+.checkmark-modern {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #3b82f6;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    margin-top: 2px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.checkbox-container-modern input:checked + .checkmark-modern {
+    background: #3b82f6;
+    border-color: #3b82f6;
+}
+
+.checkbox-container-modern input:checked + .checkmark-modern::after {
+    content: '✓';
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.term-text-modern {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    margin: 0;
+}
+
+/* Bottom Navigation - Match original layout */
+.bottom-nav-modern {
+    padding: 24px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(226, 232, 240, 0.5);
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.nav-buttons-container {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.nav-btn-secondary {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 12px 20px;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    pointer-events: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.nav-btn-secondary:hover {
+    border-color: rgba(173, 52, 171, 0.3);
+    color: #ad34ab;
+}
+
+.nav-btn-primary {
+    flex: 1;
+    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+    border: none;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 14px 20px;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px -3px rgba(173, 52, 171, 0.4);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    pointer-events: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.nav-btn-primary:hover:not(.disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -5px rgba(173, 52, 171, 0.5);
+}
+
+.nav-btn-primary.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: 0 4px 15px -3px rgba(173, 52, 171, 0.2) !important;
+    pointer-events: none;
+}
+
+.save-continue-later-btn {
+    background: none;
+    border: none;
+    color: #3b82f6;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 0;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    transition: color 0.3s ease;
+}
+
+.save-continue-later-btn:hover {
+    color: #1d4ed8;
+}
+
+/* Header Logo Adjustment */
+.header.gradient .logo.white-text {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: white !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: white !important;
+    background-clip: unset !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .progress-section-modern {
+        padding: 16px 16px 12px 16px;
+        background: rgba(255, 255, 255, 0.98);
+    }
+    
+    .main-content-modern {
+        padding: 24px 16px !important;
+    }
+    
+    .selected-category-card {
+        padding: 16px 20px;
+        border-radius: 12px;
+    }
+    
+    .question-title-modern {
+        font-size: 16px !important;
+    }
+    
+    .terms-title-modern {
+        font-size: 16px;
+    }
+    
+    .checkbox-container-modern {
+        gap: 10px;
+    }
+    
+    .term-text-modern {
+        font-size: 14px;
+    }
+    
+    .bottom-nav-modern {
+        padding: 20px 16px;
+    }
+    
+    .nav-buttons-container {
+        gap: 12px;
+    }
+    
+    .nav-btn-secondary,
+    .nav-btn-primary {
+        padding: 12px 16px;
+        font-size: 14px;
+        border-radius: 12px;
+    }
+    
+    .header.gradient .logo.white-text {
+        font-size: 14px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content-modern {
+        padding: 20px 12px !important;
+    }
+    
+    .selected-category-title {
+        font-size: 14px;
+    }
+    
+    .question-title-modern {
+        font-size: 15px !important;
+    }
+    
+    .terms-title-modern {
+        font-size: 15px;
+    }
+    
+    .checkbox-container-modern {
+        gap: 8px;
+    }
+    
+    .term-text-modern {
+        font-size: 13px;
+    }
+    
+    .nav-btn-secondary,
+    .nav-btn-primary {
+        font-size: 13px;
+        padding: 10px 14px;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .checkbox-container-modern:hover {
+        background: rgba(255, 255, 255, 0.8);
+        border-color: rgba(226, 232, 240, 0.8);
+    }
+    
+    .checkbox-container-modern:active {
+        background: rgba(173, 52, 171, 0.05);
+        border-color: rgba(173, 52, 171, 0.2);
+    }
+}

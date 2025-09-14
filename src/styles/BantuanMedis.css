@@ -1,199 +1,235 @@
-
-/* Header */
-.header {
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+/* Progress Section - Match modern style */
+.progress-section-modern {
+    padding: 20px 20px 16px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
 }
 
-.back-arrow {
-    font-size: 20px;
-    color: white;
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 4px;
+/* Override ProgressSteps to match modern design */
+.progress-section-modern .progress-section {
+    padding: 0;
+    background: transparent;
+    margin: 0;
 }
 
-.header-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: white;
-    flex: 1;
-    text-align: center;
-    margin-right: 28px;
-}
-
-/* Progress Steps */
-.progress-section {
-    padding: 16px;
-    background: white;
+.progress-section-modern .progress-steps {
+    margin-bottom: 0;
     overflow-x: auto;
+    padding-bottom: 0;
 }
 
-.progress-steps {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    margin-bottom: 24px;
-    min-width: max-content;
+.progress-section-modern .step-number.active {
+    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px -3px rgba(173, 52, 171, 0.4);
+    font-weight: 700 !important;
 }
 
-.step {
-    display: flex;
-    align-items: center;
-    flex: none;
+.progress-section-modern .step-text.active {
+    color: #ad34ab !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
 }
 
-.step-number {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 600;
-    margin-right: 8px;
-    padding: 4px;
+.progress-section-modern .step-number.inactive {
+    background: rgba(248, 250, 252, 0.8) !important;
+    color: #94a3b8 !important;
+    border: 1px solid rgba(148, 163, 184, 0.5) !important;
+    font-weight: 600 !important;
 }
 
-.step-number.active {
-    background: #ad34ab;
-    color: white;
+.progress-section-modern .step-text.inactive {
+    color: #94a3b8 !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
 }
 
-.step-number.inactive {
-    background: white;
-    color: #989898;
-    border: 1px solid #989898;
+/* Main Content */
+.main-content-modern {
+    padding: 32px 20px !important;
+    min-height: calc(100vh - 200px);
+    background: transparent;
 }
 
-.step-text {
-    font-size: 14px;
-    margin-right: 8px;
+/* Modern Heading */
+.modern-heading {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1e293b;
+    text-align: center;
+    margin-bottom: 32px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
 }
 
-.step-text.active {
-    color: #ad34ab;
-    font-weight: 600;
-}
-
-.step-text.inactive {
-    color: #989898;
-}
-
-.step-divider {
-    width: 24px;
-    height: 2px;
-    background: #e5e5e5;
-    margin: 0 8px;
-    border: none;
-}
-
-/* Form Section */
-.form-section {
-    padding: 0 20px 40px;
-}
-
-.form-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 24px;
-}
-
-.radio-group {
+/* Patient Options */
+.modern-radio-group {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
 }
 
-.radio-option {
+.modern-option {
     display: flex;
     align-items: center;
-    padding: 16px;
-    border: 2px solid #e5e5e5;
-    border-radius: 8px;
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(226, 232, 240, 0.4);
+    border-radius: 20px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    background: white;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.08);
 }
 
-.radio-option:hover {
+.modern-option:hover {
+    border-color: rgba(173, 52, 171, 0.4);
+    background: rgba(173, 52, 171, 0.04);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px -12px rgba(173, 52, 171, 0.25);
+}
+
+.modern-option.selected {
+    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
     border-color: #ad34ab;
-    background: #fdf2fd;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px -8px rgba(173, 52, 171, 0.4);
 }
 
-.radio-option.selected {
-    border-color: #ad34ab;
-    background: #f3e8ff;
+.modern-option input {
+    display: none;
 }
 
-.radio-input {
-    margin-right: 12px;
-    width: 20px;
-    height: 20px;
-    accent-color: #ad34ab;
-}
-
-.radio-label {
-    font-size: 14px;
-    color: #333;
-    cursor: pointer;
+.modern-option-content {
     flex: 1;
 }
 
-/* Bottom Button */
-.bottom-section {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 450px;
-    background: white;
-    padding: 16px 20px;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-}
-
-.confirm-button {
-    width: 100%;
-    background: #e5e5e5;
-    color: #999;
-    border: none;
-    border-radius: 8px;
-    padding: 14px 20px;
+.modern-option-content h4 {
     font-size: 16px;
     font-weight: 600;
-    cursor: not-allowed;
-    transition: all 0.3s ease;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    letter-spacing: -0.01em;
 }
 
-.confirm-button.active {
-    background: #ad34ab;
+.modern-option.selected .modern-option-content h4 {
     color: white;
+}
+
+/* Confirm Button */
+.modern-btn {
+    width: 100%;
+    padding: 20px 24px;
+    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
     cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 6px 24px -6px rgba(173, 52, 171, 0.4);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    letter-spacing: -0.01em;
 }
 
-.confirm-button.active:hover {
-    background: #9c2a9a;
+.modern-btn:hover:not(.disabled) {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px -8px rgba(173, 52, 171, 0.6);
 }
 
-/* Responsive */
+.modern-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: 0 4px 20px -8px rgba(173, 52, 171, 0.2) !important;
+    pointer-events: none;
+}
+
+/* Header Logo Adjustment */
+.header.gradient .logo.white-text {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: white !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: white !important;
+    background-clip: unset !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .progress-section-modern {
+        padding: 16px 16px 12px 16px;
+        background: rgba(255, 255, 255, 0.98);
+    }
+    
+    .main-content-modern {
+        padding: 24px 16px !important;
+    }
+    
+    .modern-heading {
+        font-size: 18px;
+        margin-bottom: 24px;
+    }
+    
+    .modern-option {
+        padding: 18px 20px;
+    }
+    
+    .modern-option-content h4 {
+        font-size: 15px;
+    }
+    
+    .modern-btn {
+        padding: 18px 20px;
+        font-size: 14px;
+    }
+    
+    .header.gradient .logo.white-text {
+        font-size: 14px !important;
+    }
+}
+
 @media (max-width: 480px) {
-    .progress-steps {
-        gap: 8px;
+    .main-content-modern {
+        padding: 20px 12px !important;
     }
     
-    .step-text {
-        display: none;
+    .modern-heading {
+        font-size: 17px;
     }
     
-    .step-divider {
-        width: 12px;
+    .modern-option {
+        padding: 16px 18px;
+    }
+    
+    .modern-option-content h4 {
+        font-size: 14px;
+    }
+    
+    .modern-btn {
+        padding: 16px 18px;
+        font-size: 13px;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .modern-option:hover {
+        transform: none;
+        background: rgba(255, 255, 255, 0.8);
+        border-color: rgba(226, 232, 240, 0.4);
+        box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.08);
+    }
+    
+    .modern-btn:hover:not(.disabled) {
+        transform: none;
+        box-shadow: 0 6px 24px -6px rgba(173, 52, 171, 0.4);
     }
 }

@@ -1,0 +1,517 @@
+/* KelompokInfo.css - Modern glass morphism styling for group/organization form */
+
+.kelompok-form-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Section Dividers */
+.section-divider-modern {
+  margin: 32px 0 24px 0;
+  position: relative;
+}
+
+.section-divider-modern:first-of-type {
+  margin-top: 0;
+}
+
+.section-title-modern {
+  font-size: 18px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(173, 52, 171, 0.1);
+  letter-spacing: -0.01em;
+}
+
+.section-desc-modern {
+  font-size: 14px;
+  color: #6B7280;
+  margin: 8px 0 0 0;
+  line-height: 1.4;
+}
+
+/* Radio Group Styling */
+.radio-group-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.radio-option-modern {
+  position: relative;
+}
+
+.radio-input-modern {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-label-modern {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px solid rgba(173, 52, 171, 0.1);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+}
+
+.radio-label-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(173, 52, 171, 0.05) 0%, rgba(217, 70, 239, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.radio-input-modern:checked + .radio-label-modern {
+  border-color: #ad34ab;
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(173, 52, 171, 0.15);
+}
+
+.radio-input-modern:checked + .radio-label-modern::before {
+  opacity: 1;
+}
+
+.radio-label-modern:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(173, 52, 171, 0.1);
+}
+
+.radio-content-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.radio-title-modern {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1F2937;
+  letter-spacing: -0.01em;
+}
+
+.radio-desc-modern {
+  font-size: 14px;
+  color: #6B7280;
+  line-height: 1.4;
+}
+
+/* Form Row for Side-by-side Inputs */
+.form-row-modern {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 0;
+}
+
+/* Modern Textarea */
+.modern-textarea {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid rgba(173, 52, 171, 0.1);
+  border-radius: 16px;
+  font-size: 16px;
+  color: #1F2937;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.modern-textarea:focus {
+  outline: none;
+  border-color: #ad34ab;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 4px rgba(173, 52, 171, 0.1);
+  transform: translateY(-1px);
+}
+
+.modern-textarea::placeholder {
+  color: #9CA3AF;
+  line-height: 1.4;
+}
+
+.modern-textarea.error {
+  border-color: #EF4444;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+}
+
+/* Modern Select */
+.modern-select {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid rgba(173, 52, 171, 0.1);
+  border-radius: 16px;
+  font-size: 16px;
+  color: #1F2937;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 18px;
+  padding-right: 48px;
+}
+
+.modern-select:focus {
+  outline: none;
+  border-color: #ad34ab;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 4px rgba(173, 52, 171, 0.1);
+  transform: translateY(-1px);
+}
+
+.modern-select.error {
+  border-color: #EF4444;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+}
+
+.modern-select option {
+  background: white;
+  color: #1F2937;
+  padding: 12px;
+}
+
+/* Error Messages */
+.error-message-modern {
+  display: block;
+  font-size: 13px;
+  color: #EF4444;
+  margin-top: 8px;
+  font-weight: 500;
+  background: rgba(239, 68, 68, 0.05);
+  padding: 6px 12px;
+  border-radius: 8px;
+  border-left: 3px solid #EF4444;
+}
+
+/* Info Note Styling */
+.info-note-modern {
+  background: rgba(59, 130, 246, 0.05);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-left: 4px solid #3B82F6;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 24px 0;
+}
+
+.info-note-modern .modern-text.small {
+  font-size: 13px;
+  color: #475569;
+  margin: 0;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .form-row-modern {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .section-title-modern {
+    font-size: 16px;
+  }
+
+  .radio-label-modern {
+    padding: 14px 16px;
+  }
+
+  .radio-title-modern {
+    font-size: 15px;
+  }
+
+  .radio-desc-modern {
+    font-size: 13px;
+  }
+
+  .modern-textarea {
+    padding: 14px 16px;
+    min-height: 80px;
+  }
+
+  .modern-select {
+    padding: 14px 16px;
+    padding-right: 44px;
+    background-size: 16px;
+    background-position: right 14px center;
+  }
+
+  .section-divider-modern {
+    margin: 24px 0 20px 0;
+  }
+
+  .info-note-modern {
+    padding: 14px 16px;
+    margin: 20px 0;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .radio-label-modern:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .modern-input:hover,
+  .modern-textarea:hover,
+  .modern-select:hover {
+    transform: none;
+  }
+
+  /* Larger touch targets */
+  .radio-label-modern {
+    padding: 18px 20px;
+  }
+
+  .modern-input,
+  .modern-textarea,
+  .modern-select {
+    padding: 18px 20px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .radio-label-modern {
+    border-width: 3px;
+  }
+
+  .modern-input,
+  .modern-textarea,
+  .modern-select {
+    border-width: 3px;
+  }
+
+  .section-title-modern {
+    -webkit-text-fill-color: #ad34ab;
+    color: #ad34ab;
+  }
+}
+
+/* File Upload Styling */
+.upload-area-modern {
+  position: relative;
+  margin-top: 8px;
+}
+
+.upload-input-modern {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.upload-label-modern {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px dashed rgba(173, 52, 171, 0.3);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+  min-height: 80px;
+}
+
+.upload-label-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(173, 52, 171, 0.02) 0%, rgba(217, 70, 239, 0.02) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.upload-label-modern:hover {
+  border-color: #ad34ab;
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(173, 52, 171, 0.1);
+}
+
+.upload-label-modern:hover::before {
+  opacity: 1;
+}
+
+.upload-input-modern:focus + .upload-label-modern {
+  border-color: #ad34ab;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 4px rgba(173, 52, 171, 0.1);
+}
+
+.upload-icon-modern {
+  font-size: 24px;
+  opacity: 0.7;
+  z-index: 1;
+  position: relative;
+}
+
+.upload-content-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 1;
+  position: relative;
+  flex: 1;
+}
+
+.upload-text-modern {
+  font-size: 16px;
+  font-weight: 500;
+  color: #374151;
+  line-height: 1.2;
+}
+
+.upload-subtext-modern {
+  font-size: 13px;
+  color: #6B7280;
+  line-height: 1.2;
+}
+
+.uploaded-file-modern {
+  font-size: 15px;
+  font-weight: 600;
+  color: #059669;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Drag and Drop States */
+.upload-label-modern.drag-over {
+  border-color: #ad34ab;
+  background: rgba(173, 52, 171, 0.05);
+  transform: scale(1.02);
+}
+
+.upload-label-modern.has-file {
+  border-color: #059669;
+  border-style: solid;
+  background: rgba(5, 150, 105, 0.05);
+}
+
+.upload-label-modern.has-file:hover {
+  border-color: #047857;
+  background: rgba(5, 150, 105, 0.1);
+}
+
+.upload-label-modern.error {
+  border-color: #EF4444;
+  background: rgba(239, 68, 68, 0.05);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .radio-label-modern,
+  .modern-input,
+  .modern-textarea,
+  .modern-select,
+  .upload-label-modern {
+    transition: none;
+  }
+
+  .radio-label-modern:hover,
+  .radio-input-modern:checked + .radio-label-modern,
+  .upload-label-modern:hover {
+    transform: none;
+  }
+}
+
+/* Mobile Upload Styling */
+@media (max-width: 768px) {
+  .upload-label-modern {
+    padding: 16px 20px;
+    gap: 12px;
+    min-height: 70px;
+  }
+
+  .upload-icon-modern {
+    font-size: 20px;
+  }
+
+  .upload-text-modern {
+    font-size: 15px;
+  }
+
+  .upload-subtext-modern {
+    font-size: 12px;
+  }
+
+  .uploaded-file-modern {
+    font-size: 14px;
+  }
+}
+
+/* Touch device optimizations for uploads */
+@media (hover: none) and (pointer: coarse) {
+  .upload-label-modern:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .upload-label-modern {
+    padding: 18px 20px;
+    min-height: 75px;
+  }
+}
+
+/* High contrast mode support for uploads */
+@media (prefers-contrast: high) {
+  .upload-label-modern {
+    border-width: 3px;
+  }
+
+  .upload-label-modern.has-file {
+    border-width: 3px;
+  }
+
+  .upload-label-modern.error {
+    border-width: 3px;
+  }
+}

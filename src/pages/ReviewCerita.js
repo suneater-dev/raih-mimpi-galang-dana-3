@@ -24,6 +24,16 @@ const ReviewCerita = () => {
     console.log('Story saved for later');
   };
 
+  const steps = [
+    { number: 1, label: 'Pasien', active: false },
+    { number: 2, label: 'Data diri', active: false },
+    { number: 3, label: 'Penerima', active: false },
+    { number: 4, label: 'Target donasi', active: false },
+    { number: 5, label: 'Judul', active: false },
+    { number: 6, label: 'Cerita', active: true },
+    { number: 7, label: 'Ajakan', active: false }
+  ];
+
   return (
     <div className="container">
       {/* Header */}
@@ -35,7 +45,9 @@ const ReviewCerita = () => {
       </header>
 
       {/* Progress Steps */}
-      <ProgressSteps currentStep={7} />
+      <div className="progress-section-modern">
+        <ProgressSteps steps={steps} />
+      </div>
 
       {/* Story Section */}
       <div className="modern-card" style={{margin: '20px'}}>

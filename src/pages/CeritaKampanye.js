@@ -14,6 +14,16 @@ const CeritaKampanye = () => {
     navigate('/judul-kampanye');
   };
 
+  const steps = [
+    { number: 1, label: 'Pasien', active: false },
+    { number: 2, label: 'Data diri', active: false },
+    { number: 3, label: 'Penerima', active: false },
+    { number: 4, label: 'Target donasi', active: false },
+    { number: 5, label: 'Judul', active: false },
+    { number: 6, label: 'Cerita', active: true },
+    { number: 7, label: 'Ajakan', active: false }
+  ];
+
   return (
     <div className="container">
       {/* Header */}
@@ -24,8 +34,10 @@ const CeritaKampanye = () => {
         <div className="header-title white-text">Bantuan Medis & Kesehatan</div>
       </header>
 
-      {/* Progress Section */}
-      <ProgressSteps currentStep={7} />
+      {/* Progress Steps */}
+      <div className="progress-section-modern">
+        <ProgressSteps steps={steps} />
+      </div>
 
       {/* Form Section */}
       <div className="modern-card">

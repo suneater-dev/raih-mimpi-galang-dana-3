@@ -1,0 +1,210 @@
+/* Override main content to use your existing style */
+.main-content-modern {
+    padding: 20px !important;
+    min-height: calc(100vh - 120px);
+}
+
+/* Categories List */
+.categories-list-modern {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* Category Item - Match your modern card style */
+.category-item-modern {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 24px !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 
+        0 10px 40px -10px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.category-item-modern:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 
+        0 20px 60px -10px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.7) inset !important;
+    border-color: rgba(173, 52, 171, 0.2) !important;
+}
+
+.category-item-modern:active {
+    transform: translateY(-2px) !important;
+}
+
+/* Category Item Content */
+.category-item-content {
+    display: flex;
+    align-items: center;
+    padding: 24px;
+    gap: 16px;
+}
+
+/* Category Icon - No background box */
+.category-icon-large {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    flex-shrink: 0;
+}
+
+/* Category Info */
+.category-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.category-title-modern {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    margin: 0 0 8px 0 !important;
+    line-height: 1.3 !important;
+    letter-spacing: -0.01em !important;
+}
+
+.category-desc-modern {
+    font-size: 15px !important;
+    color: #64748b !important;
+    margin: 0 !important;
+    line-height: 1.5 !important;
+}
+
+/* Category Arrow - Match your modern style */
+.category-arrow {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    flex-shrink: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-item-modern:hover .category-arrow {
+    color: #ad34ab;
+    transform: translateX(4px);
+}
+
+/* Header Adjustments - Match your gradient style */
+.header.gradient .logo.white-text {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: white !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: white !important;
+    background-clip: unset !important;
+    max-width: none;
+    text-overflow: unset;
+    overflow: unset;
+    white-space: unset;
+}
+
+/* Mobile Responsive - Match your existing patterns */
+@media (max-width: 768px) {
+    .main-content-modern {
+        padding: 16px !important;
+    }
+    
+    .categories-list-modern {
+        gap: 12px;
+    }
+    
+    .category-item-modern {
+        border-radius: 16px !important;
+    }
+    
+    .category-item-content {
+        padding: 20px !important;
+        gap: 14px;
+    }
+    
+    .category-icon-large {
+        width: 56px !important;
+        height: 56px !important;
+        font-size: 36px !important;
+    }
+    
+    .category-title-modern {
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+    }
+    
+    .category-desc-modern {
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+    }
+    
+    .category-arrow {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .header.gradient .logo.white-text {
+        font-size: 16px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content-modern {
+        padding: 12px !important;
+    }
+    
+    .category-item-content {
+        padding: 16px !important;
+        gap: 12px;
+    }
+    
+    .category-icon-large {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 32px !important;
+    }
+    
+    .category-title-modern {
+        font-size: 15px !important;
+        margin-bottom: 6px !important;
+    }
+    
+    .category-desc-modern {
+        font-size: 13px !important;
+    }
+    
+    .header.gradient .logo.white-text {
+        font-size: 14px !important;
+    }
+}
+
+/* Touch Device Optimizations - Match your existing patterns */
+@media (hover: none) and (pointer: coarse) {
+    .category-item-modern {
+        min-height: 80px;
+    }
+    
+    .category-item-content {
+        min-height: 80px;
+        padding: 20px !important;
+    }
+    
+    .category-item-modern:hover {
+        transform: none !important;
+    }
+    
+    .category-item-modern:active {
+        transform: scale(0.98) !important;
+        transition: transform 0.1s ease !important;
+    }
+}

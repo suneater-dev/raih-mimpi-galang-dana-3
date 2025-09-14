@@ -7,7 +7,6 @@ const BantuanMedis = () => {
   const navigate = useNavigate();
   const [selectedPatient, setSelectedPatient] = useState('');
 
-
   const patientOptions = [
     { id: 'myself', value: 'myself', label: 'Saya sendiri' },
     { id: 'family-same-kk', value: 'family-same-kk', label: 'Keluarga yang satu KK dengan saya' },
@@ -29,6 +28,16 @@ const BantuanMedis = () => {
     navigate('/select-category');
   };
 
+  const steps = [
+    { number: 1, label: 'Pasien', active: true },
+    { number: 2, label: 'Data diri', active: false },
+    { number: 3, label: 'Penerima', active: false },
+    { number: 4, label: 'Target donasi', active: false },
+    { number: 5, label: 'Judul', active: false },
+    { number: 6, label: 'Cerita', active: false },
+    { number: 7, label: 'Ajakan', active: false }
+  ];
+
   return (
     <div className="container">
       {/* Header */}
@@ -36,14 +45,17 @@ const BantuanMedis = () => {
         <button className="back-arrow white-text" onClick={handleBack}>
           ←
         </button>
-        <div className="header-title white-text">Bantuan Medis & Kesehatan</div>
+        <div className="logo white-text">Bantuan Medis & Kesehatan</div>
+        <div className="header-spacer"></div>
       </header>
 
-      {/* Progress Section */}
-      <ProgressSteps currentStep={1} />
+      {/* Progress Steps */}
+      <div className="progress-section-modern">
+        <ProgressSteps steps={steps} />
+      </div>
 
-      {/* Form Section */}
-      <div className="modern-card">
+      {/* Main Content */}
+      <div className="main-content-modern">
         <h2 className="modern-heading">Siapa yang sakit?</h2>
         
         <div className="modern-radio-group">
@@ -71,10 +83,6 @@ const BantuanMedis = () => {
           className={`modern-btn full-width ${!selectedPatient ? 'disabled' : ''}`}
           onClick={handleConfirm}
           disabled={!selectedPatient}
-          style={{ 
-            marginTop: '32px',
-            opacity: !selectedPatient ? 0.5 : 1 
-          }}
         >
           Konfirmasi
         </button>

@@ -21,6 +21,16 @@ const RiwayatMedis = () => {
     alert('Hospital search functionality would open here');
   };
 
+  const steps = [
+    { number: 1, label: 'Pasien', active: false },
+    { number: 2, label: 'Data diri', active: false },
+    { number: 3, label: 'Penerima', active: false },
+    { number: 4, label: 'Target donasi', active: true },
+    { number: 5, label: 'Judul', active: false },
+    { number: 6, label: 'Cerita', active: false },
+    { number: 7, label: 'Ajakan', active: false }
+  ];
+
   return (
     <div className="container">
       {/* Header */}
@@ -31,8 +41,10 @@ const RiwayatMedis = () => {
         <div className="header-title white-text">Bantuan Medis & Kesehatan</div>
       </header>
 
-      {/* Progress Section */}
-      <ProgressSteps currentStep={4} />
+      {/* Progress Steps */}
+      <div className="progress-section-modern">
+        <ProgressSteps steps={steps} />
+      </div>
 
       {/* Form Section */}
       <div className="modern-card">
