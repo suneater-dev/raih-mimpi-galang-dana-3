@@ -194,14 +194,13 @@ const KelompokInfo = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (validateForm()) {
-      navigate('/select-category', {
-        state: {
-          userType: 'group',
-          groupData: formData
-        }
-      });
-    }
+    // For showcase purposes - skip validation and always navigate
+    navigate('/select-category', {
+      state: {
+        userType: 'group',
+        groupData: formData
+      }
+    });
   };
 
   // For showcase purposes - button is always enabled
