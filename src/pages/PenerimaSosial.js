@@ -9,9 +9,7 @@ const PenerimaSosial = () => {
   const [penerimaData, setPenerimaData] = useState({
     namaPenerima: '',
     hubungan: '',
-    alamat: '',
-    nomorRekening: '',
-    bankName: ''
+    alamat: ''
   });
 
   // Get data from previous steps
@@ -36,23 +34,20 @@ const PenerimaSosial = () => {
   };
 
   const handleBack = () => {
-    navigate('/data-diri-sosial', { state: previousData });
+    navigate('/tujuan-detail-sosial', { state: previousData });
   };
 
-  const isFormValid = penerimaData.namaPenerima.trim() && 
-                    penerimaData.hubungan.trim() && 
-                    penerimaData.alamat.trim() && 
-                    penerimaData.nomorRekening.trim() && 
-                    penerimaData.bankName.trim();
+  const isFormValid = penerimaData.namaPenerima.trim() &&
+                    penerimaData.hubungan.trim() &&
+                    penerimaData.alamat.trim();
 
   const steps = [
     { number: 1, label: 'Tujuan', active: false },
-    { number: 2, label: 'Data diri', active: false },
-    { number: 3, label: 'Penerima', active: true },
-    { number: 4, label: 'Target donasi', active: false },
-    { number: 5, label: 'Judul', active: false },
-    { number: 6, label: 'Cerita', active: false },
-    { number: 7, label: 'Ajakan', active: false }
+    { number: 2, label: 'Penerima', active: true },
+    { number: 3, label: 'Target donasi', active: false },
+    { number: 4, label: 'Judul', active: false },
+    { number: 5, label: 'Cerita', active: false },
+    { number: 6, label: 'Ajakan', active: false }
   ];
 
   return (
@@ -104,36 +99,12 @@ const PenerimaSosial = () => {
           {/* Alamat */}
           <div className="form-group-modern">
             <label className="form-label-modern">Alamat lengkap</label>
-            <textarea 
-              className="modern-textarea" 
+            <textarea
+              className="modern-textarea"
               placeholder="Alamat lengkap lokasi kegiatan sosial"
               value={penerimaData.alamat}
               onChange={(e) => handleInputChange('alamat', e.target.value)}
               rows="3"
-            />
-          </div>
-
-          {/* Nomor Rekening */}
-          <div className="form-group-modern">
-            <label className="form-label-modern">Nomor rekening</label>
-            <input 
-              type="text" 
-              className="modern-input" 
-              placeholder="Nomor rekening untuk pencairan dana"
-              value={penerimaData.nomorRekening}
-              onChange={(e) => handleInputChange('nomorRekening', e.target.value)}
-            />
-          </div>
-
-          {/* Bank */}
-          <div className="form-group-modern">
-            <label className="form-label-modern">Nama bank</label>
-            <input 
-              type="text" 
-              className="modern-input" 
-              placeholder="Contoh: BCA, BRI, Mandiri"
-              value={penerimaData.bankName}
-              onChange={(e) => handleInputChange('bankName', e.target.value)}
             />
           </div>
       </div>

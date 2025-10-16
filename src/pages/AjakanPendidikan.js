@@ -13,7 +13,7 @@ const AjakanPendidikan = () => {
 
   const handleNext = () => {
     if (ajakan.trim()) {
-      navigate('/ads-offering-pendidikan', {
+      navigate('/campaign-complete', {
         state: {
           ...previousData,
           ajakan,

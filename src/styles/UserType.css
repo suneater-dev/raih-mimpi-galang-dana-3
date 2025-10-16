@@ -91,8 +91,8 @@
 }
 
 .type-button:hover {
-  border-color: #ad34ab;
-  box-shadow: 0 4px 12px rgba(173, 52, 171, 0.15);
+  border-color: #983ced;
+  box-shadow: 0 4px 12px rgba(152, 60, 237, 0.15);
   transform: translateY(-2px);
 }
 
@@ -113,11 +113,11 @@
 }
 
 .individual:hover .type-icon {
-  background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+  background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
 }
 
 .group:hover .type-icon {
-  background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+  background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
 }
 
 .type-content {
@@ -156,7 +156,7 @@
 
 /* Hover animations */
 .type-button:hover .type-content h3 {
-  color: #ad34ab;
+  color: #983ced;
 }
 
 /* Disabled state for Kelompok */
@@ -246,8 +246,8 @@
 
 .type-button:focus {
   outline: none;
-  border-color: #ad34ab;
-  box-shadow: 0 0 0 3px rgba(173, 52, 171, 0.3);
+  border-color: #983ced;
+  box-shadow: 0 0 0 3px rgba(152, 60, 237, 0.3);
 }
 
 /* Animation for smooth transitions */

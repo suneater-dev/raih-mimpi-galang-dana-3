@@ -1,0 +1,362 @@
+/* Pembayaran Virtual Account Page Styles */
+
+/* Container */
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  background: #f5f5f5;
+  min-height: 100vh;
+  position: relative;
+  padding-top: 60px;
+}
+
+/* Content */
+.payment-content {
+  padding: 20px 16px;
+}
+
+.payment-info-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.payment-info-card h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 12px 0;
+}
+
+.payment-info-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Payment Modal */
+.payment-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 400px;
+  width: calc(100% - 32px);
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.fee-info-modal-content {
+  padding: 32px 24px 24px 24px;
+}
+
+/* Modal Text */
+.fee-info-message {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #4b5563;
+  text-align: center;
+  margin: 0 0 24px 0;
+}
+
+/* Payment Brand Names - Bold Purple */
+.payment-brand {
+  font-weight: 800;
+  color: #9333ea;
+  font-size: 16px;
+}
+
+/* Modal Buttons */
+.fee-info-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn-change-method {
+  width: 100%;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 16px rgba(147, 51, 234, 0.3);
+}
+
+.btn-change-method:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4);
+}
+
+.btn-change-method:active {
+  transform: translateY(0);
+}
+
+.btn-close-fee-info {
+  width: 100%;
+  padding: 14px 24px;
+  background: transparent;
+  color: #6b7280;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-close-fee-info:hover {
+  border-color: #9333ea;
+  color: #9333ea;
+  background: rgba(147, 51, 234, 0.05);
+}
+
+.btn-close-fee-info:active {
+  transform: scale(0.98);
+}
+
+/* Payment Selection Modal */
+.payment-selection-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 400px;
+  width: calc(100% - 32px);
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.payment-selection-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.payment-selection-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+}
+
+.close-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #1f2937;
+}
+
+.payment-options-list {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.payment-option-btn {
+  width: 100%;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.payment-option-btn:hover {
+  border-color: #9333ea;
+  background: rgba(147, 51, 234, 0.02);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.1);
+}
+
+.payment-option-btn:active {
+  transform: translateY(0);
+}
+
+.payment-option-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.chevron-arrow {
+  font-size: 32px;
+  color: #9ca3af;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.payment-logo-box {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.payment-logo-box.shopee {
+  background: #ee4d2d;
+}
+
+.payment-logo-box.gopay {
+  background: #00aed6;
+}
+
+.shopee-logo {
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.gopay-logo {
+  color: white;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: lowercase;
+}
+
+.payment-option-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* Mobile Responsive */
+@media (max-width: 450px) {
+  .payment-modal {
+    max-width: calc(100% - 24px);
+    width: calc(100% - 24px);
+  }
+
+  .fee-info-modal-content {
+    padding: 28px 20px 20px 20px;
+  }
+
+  .fee-info-message {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .payment-brand {
+    font-size: 15px;
+  }
+
+  .fee-info-actions {
+    gap: 10px;
+  }
+
+  .btn-change-method,
+  .btn-close-fee-info {
+    padding: 13px 20px;
+    font-size: 14px;
+  }
+
+  .payment-selection-modal {
+    max-width: calc(100% - 24px);
+    width: calc(100% - 24px);
+  }
+
+  .payment-selection-header {
+    padding: 18px 20px;
+  }
+
+  .payment-selection-header h3 {
+    font-size: 16px;
+  }
+
+  .close-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 24px;
+  }
+
+  .payment-options-list {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .payment-option-btn {
+    padding: 14px 16px;
+  }
+
+  .payment-logo-box {
+    width: 44px;
+    height: 44px;
+  }
+
+  .payment-option-name {
+    font-size: 15px;
+  }
+
+  .chevron-arrow {
+    font-size: 28px;
+  }
+}

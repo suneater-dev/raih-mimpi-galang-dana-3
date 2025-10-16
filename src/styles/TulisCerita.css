@@ -50,7 +50,7 @@
 }
 
 .progress-bar.active {
-    background: #ad34ab;
+    background: #983ced;
 }
 
 /* Story Content */
@@ -144,9 +144,9 @@
     display: flex;
     align-items: center;
     background: none;
-    border: 1px solid #ad34ab;
+    border: 1px solid #983ced;
     border-radius: 24px;
-    color: #ad34ab;
+    color: #983ced;
     padding: 8px 12px;
     font-size: 12px;
     font-weight: 600;
@@ -156,7 +156,7 @@
 }
 
 .example-btn:hover {
-    background: #ad34ab;
+    background: #983ced;
     color: white;
 }
 
@@ -206,7 +206,7 @@
 .write-without-guide {
     display: block;
     text-align: center;
-    color: #ad34ab;
+    color: #983ced;
     font-size: 14px;
     cursor: pointer;
     margin-bottom: 16px;
@@ -244,14 +244,14 @@
 }
 
 .nav-btn.next {
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
     color: white;
 }
 
 .nav-btn.next:hover:not(.disabled) {
     background: linear-gradient(135deg, #9c2a9a 0%, #c844ef 100%);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(173, 52, 171, 0.3);
+    box-shadow: 0 4px 12px rgba(152, 60, 237, 0.3);
 }
 
 .nav-btn.next.disabled {

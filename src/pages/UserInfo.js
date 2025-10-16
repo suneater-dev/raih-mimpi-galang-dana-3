@@ -57,11 +57,11 @@ const UserInfo = () => {
     
     if (validateForm()) {
       // Pass user data including userType to next page
-      navigate('/select-category', { 
-        state: { 
+      navigate('/bantuan-lainnya', {
+        state: {
           userType: userType,
           userData: formData
-        } 
+        }
       });
     }
   };

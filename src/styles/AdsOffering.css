@@ -16,7 +16,7 @@
   font-weight: 700;
   color: #1e293b;
   margin-bottom: 16px;
-  background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+  background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -88,7 +88,7 @@
 
 .ads-requirements-list li:before {
   content: "•";
-  color: #ad34ab;
+  color: #983ced;
   font-size: 20px;
   position: absolute;
   left: 0;
@@ -97,9 +97,9 @@
 
 .ads-signup-notice {
   font-size: 16px;
-  color: #ad34ab;
+  color: #983ced;
   font-weight: 500;
-  background: rgba(173, 52, 171, 0.08);
+  background: rgba(152, 60, 237, 0.08);
   border-radius: 12px;
   padding: 20px;
   margin: 0;
@@ -139,14 +139,14 @@
 }
 
 .ads-btn-primary {
-  background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+  background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
   color: white;
-  box-shadow: 0 4px 16px rgba(173, 52, 171, 0.25);
+  box-shadow: 0 4px 16px rgba(152, 60, 237, 0.25);
 }
 
 .ads-btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(173, 52, 171, 0.35);
+  box-shadow: 0 6px 20px rgba(152, 60, 237, 0.35);
 }
 
 .ads-btn-secondary {

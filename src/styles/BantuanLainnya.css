@@ -33,7 +33,7 @@
     box-shadow: 
         0 20px 60px -10px rgba(0, 0, 0, 0.15),
         0 0 0 1px rgba(255, 255, 255, 0.7) inset !important;
-    border-color: rgba(173, 52, 171, 0.2) !important;
+    border-color: rgba(152, 60, 237, 0.2) !important;
 }
 
 .category-item-modern:active {
@@ -94,7 +94,7 @@
 }
 
 .category-item-modern:hover .category-arrow {
-    color: #ad34ab;
+    color: #983ced;
     transform: translateX(4px);
 }
 

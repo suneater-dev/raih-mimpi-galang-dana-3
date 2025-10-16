@@ -13,7 +13,7 @@ const TujuanDetailSosial = () => {
 
   const handleNext = () => {
     if (tujuanDetail.trim()) {
-      navigate('/data-diri-sosial', {
+      navigate('/penerima-sosial', {
         state: {
           selectedCategory,
           tujuanDetail
@@ -30,12 +30,11 @@ const TujuanDetailSosial = () => {
 
   const steps = [
     { number: 1, label: 'Tujuan', active: true },
-    { number: 2, label: 'Data diri', active: false },
-    { number: 3, label: 'Penerima', active: false },
-    { number: 4, label: 'Target donasi', active: false },
-    { number: 5, label: 'Judul', active: false },
-    { number: 6, label: 'Cerita', active: false },
-    { number: 7, label: 'Ajakan', active: false }
+    { number: 2, label: 'Penerima', active: false },
+    { number: 3, label: 'Target donasi', active: false },
+    { number: 4, label: 'Judul', active: false },
+    { number: 5, label: 'Cerita', active: false },
+    { number: 6, label: 'Ajakan', active: false }
   ];
 
   return (
@@ -64,12 +63,12 @@ const TujuanDetailSosial = () => {
               alignItems: 'center',
               gap: '12px',
               padding: '12px 16px',
-              backgroundColor: 'rgba(173, 52, 171, 0.1)',
+              backgroundColor: 'rgba(152, 60, 237, 0.1)',
               borderRadius: '12px',
-              border: '1px solid rgba(173, 52, 171, 0.2)'
+              border: '1px solid rgba(152, 60, 237, 0.2)'
             }}>
               <span className="category-icon" style={{fontSize: '20px'}}>{selectedCategory.icon}</span>
-              <span className="category-text" style={{fontWeight: '600', color: '#ad34ab'}}>{selectedCategory.title}</span>
+              <span className="category-text" style={{fontWeight: '600', color: '#983ced'}}>{selectedCategory.title}</span>
             </div>
           </div>
         )}

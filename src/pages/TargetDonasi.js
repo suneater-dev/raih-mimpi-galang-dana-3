@@ -8,7 +8,6 @@ const TargetDonasi = () => {
   const location = useLocation();
   const [amount, setAmount] = useState('');
   const [duration, setDuration] = useState('');
-  const [fundUsage, setFundUsage] = useState('');
 
   // Get data from previous steps
   const previousData = location.state || {};
@@ -39,8 +38,7 @@ const TargetDonasi = () => {
           ...previousData,
           targetData: {
             amount,
-            duration,
-            fundUsage
+            duration
           }
         }
       });
@@ -56,7 +54,7 @@ const TargetDonasi = () => {
   };
 
   // Form validation
-  const isFormValid = amount.trim() !== '' && duration !== '' && fundUsage.trim() !== '';
+  const isFormValid = amount.trim() !== '' && duration !== '';
 
   const steps = [
     { number: 1, label: 'Pasien', active: false },
@@ -122,18 +120,6 @@ const TargetDonasi = () => {
               </label>
             ))}
           </div>
-        </div>
-
-        {/* Fund Usage Details */}
-        <div className="form-group-modern">
-          <label className="form-label-modern">Isi rincian penggunaan dana</label>
-          <p className="modern-text small" style={{marginBottom: '16px'}}>Ceritakan secara lengkap rencana penggunaan dana yang didapat dari galang dana ini</p>
-          <textarea 
-            className="modern-textarea" 
-            placeholder="Contoh: Biaya membeli vitamin Rp2.000.000, biaya rawat inap 10 hari Rp5.000.000, biaya operasi katup jantung Rp20.000.000"
-            value={fundUsage}
-            onChange={(e) => setFundUsage(e.target.value)}
-          />
         </div>
       </div>
 

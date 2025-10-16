@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 16px 20px;
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
     border-bottom: none;
 }
 
@@ -79,7 +79,7 @@
 
 .category-card:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(173, 52, 171, 0.15);
+    box-shadow: 0 4px 20px rgba(152, 60, 237, 0.15);
 }
 
 .category-header {
@@ -92,7 +92,7 @@
     flex-shrink: 0;
     width: 56px;
     height: 56px;
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -122,8 +122,8 @@
 .category-button {
     width: 100%;
     background: transparent;
-    color: #ad34ab;
-    border: 2px solid #ad34ab;
+    color: #983ced;
+    border: 2px solid #983ced;
     border-radius: 8px;
     padding: 12px 20px;
     font-size: 16px;
@@ -133,7 +133,7 @@
 }
 
 .category-button:hover {
-    background: #ad34ab;
+    background: #983ced;
     color: white;
     transform: translateY(-1px);
 }
@@ -196,7 +196,7 @@
 /* Info Box */
 .info-box {
     background: #E6F5FB;
-    border: 1px solid #ad34ab;
+    border: 1px solid #983ced;
     border-radius: 6px;
     padding: 12px;
     margin: 16px 0;
@@ -228,8 +228,8 @@
 .modal-btn-outline {
     width: 100%;
     background: transparent;
-    color: #ad34ab;
-    border: 1px solid #ad34ab;
+    color: #983ced;
+    border: 1px solid #983ced;
     border-radius: 6px;
     padding: 10px 16px;
     font-size: 14px;
@@ -244,7 +244,7 @@
 
 .modal-btn-primary {
     width: 100%;
-    background: #ad34ab;
+    background: #983ced;
     color: white;
     border: none;
     border-radius: 6px;

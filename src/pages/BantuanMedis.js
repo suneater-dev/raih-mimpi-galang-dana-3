@@ -25,7 +25,7 @@ const BantuanMedis = () => {
   };
 
   const handleBack = () => {
-    navigate('/select-category');
+    navigate('/bantuan-lainnya');
   };
 
   const steps = [

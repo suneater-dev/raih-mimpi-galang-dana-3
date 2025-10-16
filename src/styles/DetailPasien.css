@@ -21,14 +21,14 @@
 }
 
 .progress-section-modern .step-number.active {
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%) !important;
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%) !important;
     color: white !important;
-    box-shadow: 0 4px 15px -3px rgba(173, 52, 171, 0.4);
+    box-shadow: 0 4px 15px -3px rgba(152, 60, 237, 0.4);
     font-weight: 700 !important;
 }
 
 .progress-section-modern .step-text.active {
-    color: #ad34ab !important;
+    color: #983ced !important;
     font-weight: 700 !important;
     font-size: 14px !important;
 }
@@ -146,8 +146,8 @@
 
 .detail-input:focus {
     outline: none;
-    border-color: #ad34ab;
-    box-shadow: 0 0 0 4px rgba(173, 52, 171, 0.12), 0 8px 32px -12px rgba(173, 52, 171, 0.3);
+    border-color: #983ced;
+    box-shadow: 0 0 0 4px rgba(152, 60, 237, 0.12), 0 8px 32px -12px rgba(152, 60, 237, 0.3);
     background: rgba(255, 255, 255, 0.95);
     transform: translateY(-2px);
 }
@@ -184,17 +184,17 @@
 }
 
 .modern-checkbox-option:hover {
-    border-color: rgba(173, 52, 171, 0.4);
-    background: rgba(173, 52, 171, 0.04);
+    border-color: rgba(152, 60, 237, 0.4);
+    background: rgba(152, 60, 237, 0.04);
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px -12px rgba(173, 52, 171, 0.25);
+    box-shadow: 0 8px 32px -12px rgba(152, 60, 237, 0.25);
 }
 
 .modern-checkbox-option.selected {
-    border-color: #ad34ab;
-    background: rgba(173, 52, 171, 0.08);
+    border-color: #983ced;
+    background: rgba(152, 60, 237, 0.08);
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px -8px rgba(173, 52, 171, 0.3);
+    box-shadow: 0 8px 32px -8px rgba(152, 60, 237, 0.3);
 }
 
 .modern-checkbox-option input {
@@ -302,16 +302,16 @@
 }
 
 .nav-btn-secondary:hover {
-    border-color: rgba(173, 52, 171, 0.4);
-    color: #ad34ab;
+    border-color: rgba(152, 60, 237, 0.4);
+    color: #983ced;
     transform: translateY(-4px);
-    box-shadow: 0 8px 32px -12px rgba(173, 52, 171, 0.25);
-    background: rgba(173, 52, 171, 0.04);
+    box-shadow: 0 8px 32px -12px rgba(152, 60, 237, 0.25);
+    background: rgba(152, 60, 237, 0.04);
 }
 
 .nav-btn-primary {
     flex: 1;
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
     border: none;
     color: white;
     font-size: 15px;
@@ -320,7 +320,7 @@
     padding: 18px 20px;
     border-radius: 16px;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 6px 24px -6px rgba(173, 52, 171, 0.4);
+    box-shadow: 0 6px 24px -6px rgba(152, 60, 237, 0.4);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
     pointer-events: auto;
     position: relative;
@@ -330,7 +330,7 @@
 
 .nav-btn-primary:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 40px -8px rgba(173, 52, 171, 0.6);
+    box-shadow: 0 12px 40px -8px rgba(152, 60, 237, 0.6);
 }
 
 /* Header Logo Adjustment */
@@ -447,6 +447,6 @@
     
     .nav-btn-primary:hover {
         transform: none;
-        box-shadow: 0 6px 24px -6px rgba(173, 52, 171, 0.4);
+        box-shadow: 0 6px 24px -6px rgba(152, 60, 237, 0.4);
     }
 }

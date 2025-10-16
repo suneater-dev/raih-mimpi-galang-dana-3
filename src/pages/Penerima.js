@@ -83,7 +83,7 @@ const Penerima = () => {
             <label className="input-label-modern">Nama acara/gerakan/kegiatan/program</label>
             <textarea
               className="modern-textarea penerima-textarea"
-              placeholder="Dana abadi alumni teknik industri Universitas Cahaya tahun 2013"
+              placeholder="Contoh: Studio Desain Kreatif Indonesia, UMKM Kerajinan Tangan Nusantara, Proyek Film Dokumenter Budaya Lokal"
               value={formData.eventName}
               onChange={(e) => handleInputChange('eventName', e.target.value)}
               rows="4"
@@ -95,7 +95,7 @@ const Penerima = () => {
             <label className="input-label-modern">Tujuan penyelenggaraan kegiatan/gerakan/acara/program</label>
             <textarea
               className="modern-textarea penerima-textarea"
-              placeholder="Dana abadi untuk beasiswa biaya UKT adik-adik teknik industri Universitas Cahaya tahun 2020 dan seterusnya"
+              placeholder="Contoh: Membangun studio kreatif untuk membantu UMKM mengembangkan branding produk lokal dengan desain profesional yang terjangkau"
               value={formData.eventPurpose}
               onChange={(e) => handleInputChange('eventPurpose', e.target.value)}
               rows="5"

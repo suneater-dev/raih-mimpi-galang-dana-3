@@ -22,7 +22,7 @@
   font-weight: 700;
   color: #1e293b;
   margin-bottom: 12px;
-  background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+  background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -46,7 +46,7 @@
 }
 
 .registration-btn {
-  background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+  background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
   color: white;
   border: none;
   border-radius: 16px;
@@ -55,21 +55,21 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 16px rgba(173, 52, 171, 0.3);
+  box-shadow: 0 4px 16px rgba(152, 60, 237, 0.3);
   width: 100%;
   max-width: 300px;
 }
 
 .registration-btn:hover:not(.disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(173, 52, 171, 0.4);
+  box-shadow: 0 6px 24px rgba(152, 60, 237, 0.4);
 }
 
 .registration-btn.disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
-  box-shadow: 0 4px 16px rgba(173, 52, 171, 0.2);
+  box-shadow: 0 4px 16px rgba(152, 60, 237, 0.2);
 }
 
 /* Phone Input Styling */

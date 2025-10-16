@@ -37,12 +37,11 @@ const JudulKampanyeSosial = () => {
 
   const steps = [
     { number: 1, label: 'Tujuan', active: false },
-    { number: 2, label: 'Data diri', active: false },
-    { number: 3, label: 'Penerima', active: false },
-    { number: 4, label: 'Target donasi', active: false },
-    { number: 5, label: 'Judul', active: true },
-    { number: 6, label: 'Cerita', active: false },
-    { number: 7, label: 'Ajakan', active: false }
+    { number: 2, label: 'Penerima', active: false },
+    { number: 3, label: 'Target donasi', active: false },
+    { number: 4, label: 'Judul', active: true },
+    { number: 5, label: 'Cerita', active: false },
+    { number: 6, label: 'Ajakan', active: false }
   ];
 
   return (
@@ -111,24 +110,13 @@ const JudulKampanyeSosial = () => {
               Format: JPG, PNG, GIF (Max. 5MB)
             </span>
           </label>
-          <input 
-            type="file" 
-            id="photoUpload" 
-            className="upload-input-modern" 
+          <input
+            type="file"
+            id="photoUpload"
+            className="upload-input-modern"
             accept="image/*"
             onChange={handlePhotoUpload}
           />
-          
-          <div className="tips-section-modern">
-            <div className="tips-header-modern">
-              <span className="tips-icon-modern">💡</span>
-              <span className="modern-text small" style={{fontWeight: '600'}}>Tips</span>
-            </div>
-            <p className="modern-text small">Upload foto yang menggambarkan kondisi atau lokasi yang akan dibantu dalam kegiatan sosial ini.</p>
-            <button className="help-link-modern" style={{marginTop: '8px'}}>
-              📄 Lihat kriteria foto galang dana yang baik
-            </button>
-          </div>
         </div>
       </div>
 

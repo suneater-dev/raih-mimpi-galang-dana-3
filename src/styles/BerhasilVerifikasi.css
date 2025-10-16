@@ -1,0 +1,354 @@
+/* Berhasil Verifikasi Page Styles */
+
+/* Container */
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  min-height: 100vh;
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+/* Content */
+.berhasil-verification-content {
+  padding: 32px 16px;
+}
+
+.berhasil-success-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  padding: 40px 28px;
+  box-shadow:
+    0 8px 32px -8px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  text-align: center;
+}
+
+/* Success Icon */
+.berhasil-success-icon-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.berhasil-success-icon-circle {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 8px 32px -8px rgba(16, 185, 129, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+  animation: successPulse 2s ease-in-out infinite;
+}
+
+@keyframes successPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow:
+      0 8px 32px -8px rgba(16, 185, 129, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow:
+      0 12px 40px -8px rgba(16, 185, 129, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+  }
+}
+
+.berhasil-success-checkmark {
+  width: 50px;
+  height: 50px;
+  color: white;
+  stroke-width: 3;
+}
+
+/* Success Title */
+.berhasil-success-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Success Description */
+.berhasil-success-description {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.7;
+  margin: 0 0 28px 0;
+  font-weight: 500;
+}
+
+/* Info Box */
+.berhasil-info-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+  border: 1.5px solid rgba(251, 191, 36, 0.25);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+.berhasil-info-icon {
+  width: 24px;
+  height: 24px;
+  color: #f59e0b;
+  flex-shrink: 0;
+}
+
+.berhasil-info-text {
+  flex: 1;
+  font-size: 13px;
+  color: #78350f;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.berhasil-info-text strong {
+  font-weight: 700;
+  color: #92400e;
+}
+
+/* Next Steps */
+.berhasil-next-steps {
+  background: white;
+  border: 1.5px solid rgba(148, 163, 184, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.berhasil-steps-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 18px 0;
+  letter-spacing: -0.01em;
+}
+
+.berhasil-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.berhasil-step-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: white;
+  border-radius: 16px;
+  border: 1.5px solid rgba(148, 163, 184, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
+}
+
+.berhasil-step-item:hover {
+  background: white;
+  border-color: rgba(152, 60, 237, 0.3);
+  transform: translateX(4px);
+  box-shadow:
+    0 4px 16px -4px rgba(152, 60, 237, 0.15),
+    0 2px 8px -2px rgba(0, 0, 0, 0.08);
+}
+
+.berhasil-step-number {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  background: linear-gradient(135deg, #983ced 0%, #7c3aed 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 800;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px -4px rgba(152, 60, 237, 0.5);
+}
+
+.berhasil-step-text {
+  font-size: 14px;
+  color: #334155;
+  line-height: 1.6;
+  font-weight: 500;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Button */
+.berhasil-btn-dashboard {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #983ced 0%, #7c3aed 100%);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: -0.01em;
+  box-shadow:
+    0 8px 25px -5px rgba(152, 60, 237, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  position: relative;
+  overflow: hidden;
+}
+
+.berhasil-btn-dashboard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: left 0.5s;
+}
+
+.berhasil-btn-dashboard:hover::before {
+  left: 100%;
+}
+
+.berhasil-btn-dashboard:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 40px -10px rgba(152, 60, 237, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+.berhasil-btn-dashboard:active {
+  transform: translateY(0);
+}
+
+.berhasil-btn-icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2.5;
+}
+
+/* Mobile Responsive */
+@media (max-width: 450px) {
+  .container {
+    padding-bottom: 32px;
+  }
+
+  .berhasil-verification-content {
+    padding: 20px 12px;
+  }
+
+  .berhasil-success-card {
+    padding: 32px 20px;
+    border-radius: 20px;
+  }
+
+  .berhasil-success-icon-circle {
+    width: 85px;
+    height: 85px;
+  }
+
+  .berhasil-success-checkmark {
+    width: 42px;
+    height: 42px;
+  }
+
+  .berhasil-success-title {
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+
+  .berhasil-success-description {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .berhasil-info-box {
+    padding: 16px;
+    gap: 12px;
+    border-radius: 14px;
+    margin-bottom: 24px;
+  }
+
+  .berhasil-info-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .berhasil-info-text {
+    font-size: 12px;
+  }
+
+  .berhasil-next-steps {
+    padding: 20px;
+    border-radius: 14px;
+    margin-bottom: 28px;
+  }
+
+  .berhasil-steps-title {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .berhasil-steps-list {
+    gap: 12px;
+  }
+
+  .berhasil-step-item {
+    padding: 18px;
+    gap: 14px;
+    border-radius: 14px;
+  }
+
+  .berhasil-step-number {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    font-size: 16px;
+  }
+
+  .berhasil-step-text {
+    font-size: 13px;
+  }
+
+  .berhasil-btn-dashboard {
+    padding: 14px 20px;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+
+  .berhasil-btn-icon {
+    width: 18px;
+    height: 18px;
+  }
+}

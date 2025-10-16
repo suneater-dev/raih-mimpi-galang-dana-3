@@ -11,8 +11,12 @@ const KegiatanSosial = () => {
 
   const handleCategorySelect = (categoryId) => {
     const category = categories.find(cat => cat.id === categoryId);
-    setModalCategory(category);
-    setShowModal(true);
+    // Navigate directly to social activities flow
+    navigate('/tujuan-detail-sosial', {
+      state: {
+        selectedCategory: category
+      }
+    });
   };
 
   const handleModalConfirm = () => {
@@ -38,18 +42,6 @@ const KegiatanSosial = () => {
 
   const categories = [
     {
-      id: 'acara-kegiatan',
-      title: 'Acara/gerakan/kegiatan/program',
-      description: 'Contoh: Kegiatan sosial himpunan mahasiswa, gerakan sosial komunitas, dsb.',
-      icon: '📋',
-      requirements: [
-        'Profil penyelenggara',
-        'Nama acara/gerakan/kegiatan/program',
-        'Latar belakang',
-        'Teknis penyelenggaraan'
-      ]
-    },
-    {
       id: 'bantuan-santunan',
       title: 'Bantuan/santunan',
       description: 'Contoh: Bantuan untuk seorang duafa, kelompok tunawisma, ojek online, dsb.',
@@ -62,20 +54,8 @@ const KegiatanSosial = () => {
       ]
     },
     {
-      id: 'biaya-operasional',
-      title: 'Biaya operasional lembaga/yayasan',
-      description: 'Contoh: Biaya sewa tempat, pemeliharaan tempat, pembelian barang, dsb.',
-      icon: '🏢',
-      requirements: [
-        'Profil lembaga/yayasan',
-        'Rincian biaya operasional',
-        'Manfaat untuk masyarakat',
-        'Laporan keuangan (jika ada)'
-      ]
-    },
-    {
       id: 'pembangunan-infrastruktur',
-      title: 'Pembangunan/perbaikan/pembelian infrastruktur',
+      title: 'Pembangunan',
       description: 'Contoh: Pembangunan rumah masyarakat pra-sejahtera, perbaikan tempat tinggal lansia, dsb.',
       icon: '🏗️',
       requirements: [

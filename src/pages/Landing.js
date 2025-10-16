@@ -65,9 +65,9 @@ const Landing = () => {
         </div>
         <h1>Galang dana untuk semua yang membutuhkan!</h1>
         <p>Di Raih Mimpi ada jutaan #OrangBaik yang berdonasi ke segala jenis galang dana tiap harinya.</p>
-        <button 
-          className="cta-button" 
-          onClick={() => navigate('/user-type')}
+        <button
+          className="cta-button"
+          onClick={() => navigate('/user-journey')}
         >
           Galang dana sekarang!
         </button>
@@ -147,9 +147,9 @@ const Landing = () => {
       <section className="bottom-cta">
         <h2>Sudah tahu tata caranya, 'kan?</h2>
         <p>Yuk, buat galang dana kamu dan dapatkan donasi dari jutaan #OrangBaik di Raih Mimpi!</p>
-        <button 
+        <button
           className="cta-button-white"
-          onClick={() => navigate('/user-type')}
+          onClick={() => navigate('/user-journey')}
         >
           Galang Dana Sekarang
         </button>

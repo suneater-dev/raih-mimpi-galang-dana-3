@@ -9,8 +9,8 @@ const UserType = () => {
   const handleTypeSelection = (type) => {
     setSelectedType(type);
     if (type === 'group') {
-      // Navigate to KelompokInfo for group registration
-      navigate('/kelompok-info', { state: { userType: type } });
+      // Navigate to KelompokType to select organization type
+      navigate('/kelompok-type', { state: { userType: type } });
     } else {
       // Navigate to UserInfo after selection for individuals
       navigate('/user-info', { state: { userType: type } });

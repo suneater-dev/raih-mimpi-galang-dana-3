@@ -21,14 +21,14 @@
 }
 
 .progress-section-modern .step-number.active {
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%) !important;
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%) !important;
     color: white !important;
-    box-shadow: 0 4px 15px -3px rgba(173, 52, 171, 0.4);
+    box-shadow: 0 4px 15px -3px rgba(152, 60, 237, 0.4);
     font-weight: 700 !important;
 }
 
 .progress-section-modern .step-text.active {
-    color: #ad34ab !important;
+    color: #983ced !important;
     font-weight: 700 !important;
     font-size: 14px !important;
 }
@@ -87,18 +87,18 @@
 }
 
 .modern-option:hover {
-    border-color: rgba(173, 52, 171, 0.4);
-    background: rgba(173, 52, 171, 0.04);
+    border-color: rgba(152, 60, 237, 0.4);
+    background: rgba(152, 60, 237, 0.04);
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px -12px rgba(173, 52, 171, 0.25);
+    box-shadow: 0 8px 32px -12px rgba(152, 60, 237, 0.25);
 }
 
 .modern-option.selected {
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
-    border-color: #ad34ab;
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
+    border-color: #983ced;
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px -8px rgba(173, 52, 171, 0.4);
+    box-shadow: 0 8px 32px -8px rgba(152, 60, 237, 0.4);
 }
 
 .modern-option input {
@@ -125,7 +125,7 @@
 .modern-btn {
     width: 100%;
     padding: 20px 24px;
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
     border: none;
     border-radius: 20px;
     color: white;
@@ -133,21 +133,21 @@
     font-weight: 700;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 6px 24px -6px rgba(173, 52, 171, 0.4);
+    box-shadow: 0 6px 24px -6px rgba(152, 60, 237, 0.4);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
     letter-spacing: -0.01em;
 }
 
 .modern-btn:hover:not(.disabled) {
     transform: translateY(-6px);
-    box-shadow: 0 12px 40px -8px rgba(173, 52, 171, 0.6);
+    box-shadow: 0 12px 40px -8px rgba(152, 60, 237, 0.6);
 }
 
 .modern-btn.disabled {
     opacity: 0.4;
     cursor: not-allowed;
     transform: none !important;
-    box-shadow: 0 4px 20px -8px rgba(173, 52, 171, 0.2) !important;
+    box-shadow: 0 4px 20px -8px rgba(152, 60, 237, 0.2) !important;
     pointer-events: none;
 }
 
@@ -230,6 +230,6 @@
     
     .modern-btn:hover:not(.disabled) {
         transform: none;
-        box-shadow: 0 6px 24px -6px rgba(173, 52, 171, 0.4);
+        box-shadow: 0 6px 24px -6px rgba(152, 60, 237, 0.4);
     }
 }

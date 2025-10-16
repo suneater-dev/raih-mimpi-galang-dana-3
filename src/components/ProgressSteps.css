@@ -33,12 +33,12 @@
 }
 
 .step-number.completed {
-    background: #ad34ab;
+    background: #983ced;
     color: white;
 }
 
 .step-number.active {
-    background: #ad34ab;
+    background: #983ced;
     color: white;
 }
 
@@ -54,12 +54,12 @@
 }
 
 .step-text.completed {
-    color: #ad34ab;
+    color: #983ced;
     font-weight: 600;
 }
 
 .step-text.active {
-    color: #ad34ab;
+    color: #983ced;
     font-weight: 600;
 }
 

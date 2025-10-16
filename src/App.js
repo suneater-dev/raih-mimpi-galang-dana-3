@@ -1,9 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
+import UserJourney from './pages/UserJourney';
 import UserType from './pages/UserType';
+import KelompokType from './pages/KelompokType';
 import KelompokInfo from './pages/KelompokInfo';
+import MasjidProfile from './pages/MasjidProfile';
+import KotakAmalDigital from './pages/KotakAmalDigital';
+import MasjidPreview from './pages/MasjidPreview';
 import UserInfo from './pages/UserInfo';
 import SelectCategory from './pages/SelectCategory';
 import BantuanLainnya from './pages/BantuanLainnya';
@@ -66,13 +71,25 @@ import TulisCeritaPendidikan5 from './pages/TulisCeritaPendidikan5';
 import TulisCeritaPendidikan6 from './pages/TulisCeritaPendidikan6';
 import ReviewCeritaPendidikan from './pages/ReviewCeritaPendidikan';
 import AjakanPendidikan from './pages/AjakanPendidikan';
-import AdsOfferingPendidikan from './pages/AdsOfferingPendidikan';
 import AdsOfferingMedis from './pages/AdsOfferingMedis';
 import AdsOfferingKreatif from './pages/AdsOfferingKreatif';
-import AdsOfferingSosial from './pages/AdsOfferingSosial';
 import AccountRegistration from './pages/AccountRegistration';
 import CampaignComplete from './pages/CampaignComplete';
 import Dashboard from './pages/Dashboard';
+import SyaratKetentuanIklan from './pages/SyaratKetentuanIklan';
+import IklankanCampaign from './pages/IklankanCampaign';
+import PendaftaranOptimasiIklan from './pages/PendaftaranOptimasiIklan';
+import UploadDokumenMoU from './pages/UploadDokumenMoU';
+import PengajuanBerhasilIklan from './pages/PengajuanBerhasilIklan';
+import MasukkanDonasi from './pages/MasukkanDonasi';
+import PembayaranVirtualAccount from './pages/PembayaranVirtualAccount';
+import CaraPembayaran from './pages/CaraPembayaran';
+import Verifikasi from './pages/Verifikasi';
+import BerhasilVerifikasi from './pages/BerhasilVerifikasi';
+import PencairanDana from './pages/PencairanDana';
+import DetailPencairanDana from './pages/DetailPencairanDana';
+import PengajuanPencairan from './pages/PengajuanPencairan';
+import PengajuanPencairanBerhasil from './pages/PengajuanPencairanBerhasil';
 import './App.css';
 
 function App() {
@@ -82,10 +99,15 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/user-journey" element={<UserJourney />} />
           <Route path="/user-type" element={<UserType />} />
+          <Route path="/kelompok-type" element={<KelompokType />} />
           <Route path="/kelompok-info" element={<KelompokInfo />} />
+          <Route path="/masjid-profile" element={<MasjidProfile />} />
+          <Route path="/kotak-amal-digital" element={<KotakAmalDigital />} />
+          <Route path="/masjid-preview" element={<MasjidPreview />} />
           <Route path="/user-info" element={<UserInfo />} />
-          <Route path="/select-category" element={<SelectCategory />} />
+          <Route path="/select-category" element={<Navigate to="/bantuan-lainnya" replace />} />
           <Route path="/bantuan-lainnya" element={<BantuanLainnya />} />
           <Route path="/karya-kreatif" element={<KaryaKreatif />} />
           <Route path="/tujuan-detail" element={<TujuanDetail />} />
@@ -147,14 +169,26 @@ function App() {
           <Route path="/tulis-cerita-pendidikan-6" element={<TulisCeritaPendidikan6 />} />
           <Route path="/review-cerita-pendidikan" element={<ReviewCeritaPendidikan />} />
           <Route path="/ajakan-pendidikan" element={<AjakanPendidikan />} />
-          <Route path="/ads-offering-pendidikan" element={<AdsOfferingPendidikan />} />
           <Route path="/ads-offering-medis" element={<AdsOfferingMedis />} />
           <Route path="/ads-offering-kreatif" element={<AdsOfferingKreatif />} />
-          <Route path="/ads-offering-sosial" element={<AdsOfferingSosial />} />
           <Route path="/account-registration" element={<AccountRegistration />} />
           <Route path="/campaign-complete" element={<CampaignComplete />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          
+          <Route path="/syarat-ketentuan-iklan" element={<SyaratKetentuanIklan />} />
+          <Route path="/iklankan-campaign" element={<IklankanCampaign />} />
+          <Route path="/pendaftaran-optimasi-iklan" element={<PendaftaranOptimasiIklan />} />
+          <Route path="/upload-dokumen-mou" element={<UploadDokumenMoU />} />
+          <Route path="/pengajuan-berhasil-iklan" element={<PengajuanBerhasilIklan />} />
+          <Route path="/masukkan-donasi" element={<MasukkanDonasi />} />
+          <Route path="/pembayaran-virtual-account" element={<PembayaranVirtualAccount />} />
+          <Route path="/cara-pembayaran" element={<CaraPembayaran />} />
+          <Route path="/verifikasi" element={<Verifikasi />} />
+          <Route path="/berhasil-verifikasi" element={<BerhasilVerifikasi />} />
+          <Route path="/pencairan-dana" element={<PencairanDana />} />
+          <Route path="/detail-pencairan-dana" element={<DetailPencairanDana />} />
+          <Route path="/pengajuan-pencairan" element={<PengajuanPencairan />} />
+          <Route path="/pengajuan-pencairan-berhasil" element={<PengajuanPencairanBerhasil />} />
+
           {/* Placeholder routes */}
           <Route path="/general-form" element={<div>General Form Page (To be implemented)</div>} />
         </Routes>

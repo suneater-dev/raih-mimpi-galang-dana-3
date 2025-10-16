@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/Lenovo/Downloads/**)",
+      "Read(//d/Freelance/Raih-Mimpi/payment-workflow/donation-app/public/assets/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

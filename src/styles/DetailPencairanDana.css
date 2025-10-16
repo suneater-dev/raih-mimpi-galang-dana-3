@@ -1,0 +1,679 @@
+/* Detail Pencairan Dana Page Styles */
+
+/* Container */
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  min-height: 100vh;
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+/* Content */
+.detail-pencairan-content {
+  padding: 0;
+}
+
+/* Tabs */
+.tabs-container {
+  display: flex;
+  background: white;
+  border-bottom: 2px solid rgba(148, 163, 184, 0.15);
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.05);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 18px 20px;
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: -0.01em;
+}
+
+.tab-btn.active {
+  color: #983ced;
+  background: linear-gradient(180deg, rgba(152, 60, 237, 0.05) 0%, rgba(152, 60, 237, 0.02) 100%);
+}
+
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(135deg, #983ced 0%, #7c3aed 100%);
+  border-radius: 3px 3px 0 0;
+}
+
+.tab-btn:hover:not(.active) {
+  color: #475569;
+  background: rgba(148, 163, 184, 0.05);
+}
+
+/* Rincian Content */
+.rincian-content {
+  padding: 20px 16px 32px;
+}
+
+/* Total Donasi Card */
+.total-donasi-card {
+  background: white;
+  border: 1.5px solid rgba(148, 163, 184, 0.2);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.08);
+}
+
+.total-donasi-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.donasi-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  background: linear-gradient(135deg, rgba(152, 60, 237, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donasi-icon svg {
+  width: 26px;
+  height: 26px;
+  color: #983ced;
+}
+
+.total-donasi-info {
+  flex: 1;
+}
+
+.total-donasi-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+
+.total-donasi-subtitle {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.total-donasi-amount {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1e293b;
+  letter-spacing: -0.02em;
+}
+
+/* Dana Dapat Dicairkan Card */
+.dana-dicairkan-card {
+  background: linear-gradient(135deg, #983ced 0%, #7c3aed 100%);
+  border-radius: 20px;
+  padding: 32px 24px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px -8px rgba(152, 60, 237, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.dana-dicairkan-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-10%, -10%);
+  }
+}
+
+.dana-dicairkan-amount {
+  font-size: 28px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
+}
+
+.dana-dicairkan-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+/* Verifikasi Card */
+.verifikasi-card {
+  background: white;
+  border: 1.5px solid rgba(148, 163, 184, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 12px -4px rgba(0, 0, 0, 0.08);
+}
+
+.verifikasi-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.verifikasi-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.verifikasi-amount {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1e293b;
+  letter-spacing: -0.01em;
+}
+
+.lihat-detail-btn {
+  padding: 8px 18px;
+  background: transparent;
+  border: 1.5px solid #983ced;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #983ced;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lihat-detail-btn:hover {
+  background: linear-gradient(135deg, rgba(152, 60, 237, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+  border-color: #7c3aed;
+  transform: translateY(-1px);
+}
+
+/* Detail Dana Section */
+.detail-dana-section {
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 18px 0;
+  letter-spacing: -0.01em;
+}
+
+/* Detail Item */
+.detail-item {
+  background: white;
+  border: 1.5px solid rgba(148, 163, 184, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.detail-item:hover {
+  border-color: rgba(152, 60, 237, 0.2);
+  box-shadow: 0 4px 12px -4px rgba(152, 60, 237, 0.15);
+}
+
+.detail-item-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  margin-right: 12px;
+}
+
+.detail-item-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.4;
+}
+
+.keterangan-btn {
+  padding: 0;
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: #983ced;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.3s;
+}
+
+.keterangan-btn:hover {
+  color: #7c3aed;
+  text-decoration: underline;
+}
+
+.detail-item-amount {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1e293b;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+.detail-item-amount.negative {
+  color: #ef4444;
+}
+
+/* Cairkan Dana Button */
+.btn-cairkan-dana {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #983ced 0%, #7c3aed 100%);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: -0.01em;
+  box-shadow:
+    0 8px 25px -5px rgba(152, 60, 237, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-cairkan-dana::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: left 0.5s;
+}
+
+.btn-cairkan-dana:hover::before {
+  left: 100%;
+}
+
+.btn-cairkan-dana:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 40px -10px rgba(152, 60, 237, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+.btn-cairkan-dana:active {
+  transform: translateY(0);
+}
+
+/* Riwayat Content */
+.riwayat-content {
+  padding: 20px 16px 32px;
+}
+
+/* Riwayat Summary */
+.riwayat-summary {
+  background: white;
+  border: 1.5px solid rgba(148, 163, 184, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px -4px rgba(0, 0, 0, 0.08);
+}
+
+.riwayat-summary-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.riwayat-summary-amount {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1e293b;
+  letter-spacing: -0.01em;
+}
+
+/* Withdrawal History List */
+.withdrawal-history-list {
+  margin-bottom: 24px;
+}
+
+/* Withdrawal History Card */
+.withdrawal-history-card {
+  background: white;
+  border: 1.5px solid rgba(148, 163, 184, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px -4px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.withdrawal-history-card:hover {
+  border-color: rgba(152, 60, 237, 0.2);
+  box-shadow: 0 4px 16px -4px rgba(152, 60, 237, 0.15);
+}
+
+.withdrawal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.withdrawal-date {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.withdrawal-status {
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.withdrawal-status.berhasil {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.withdrawal-status.pending {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+  color: #f59e0b;
+  border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.withdrawal-status.gagal {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.1) 100%);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.withdrawal-amount {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.withdrawal-bank-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bank-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  letter-spacing: -0.01em;
+}
+
+.account-number {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.empty-icon {
+  width: 80px;
+  height: 80px;
+  color: #cbd5e1;
+  margin: 0 auto 24px;
+}
+
+.empty-state h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.01em;
+}
+
+.empty-state p {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.6;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* Mobile Responsive */
+@media (max-width: 450px) {
+  .container {
+    padding-bottom: 32px;
+  }
+
+  .detail-pencairan-content {
+    padding: 0;
+  }
+
+  .rincian-content {
+    padding: 16px 12px 28px;
+  }
+
+  .tab-btn {
+    padding: 16px 16px;
+    font-size: 14px;
+  }
+
+  .total-donasi-card {
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 16px;
+  }
+
+  .donasi-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 12px;
+  }
+
+  .donasi-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .total-donasi-label {
+    font-size: 14px;
+  }
+
+  .total-donasi-subtitle {
+    font-size: 11px;
+  }
+
+  .total-donasi-amount {
+    font-size: 20px;
+  }
+
+  .dana-dicairkan-card {
+    padding: 28px 20px;
+    border-radius: 16px;
+    margin-bottom: 16px;
+  }
+
+  .dana-dicairkan-amount {
+    font-size: 24px;
+  }
+
+  .dana-dicairkan-label {
+    font-size: 13px;
+  }
+
+  .verifikasi-card {
+    padding: 18px;
+    border-radius: 14px;
+    margin-bottom: 24px;
+  }
+
+  .verifikasi-label {
+    font-size: 13px;
+  }
+
+  .verifikasi-amount {
+    font-size: 15px;
+  }
+
+  .lihat-detail-btn {
+    padding: 7px 16px;
+    font-size: 12px;
+  }
+
+  .section-title {
+    font-size: 17px;
+    margin-bottom: 16px;
+  }
+
+  .detail-item {
+    padding: 18px;
+    border-radius: 14px;
+    margin-bottom: 10px;
+  }
+
+  .detail-item-label {
+    font-size: 13px;
+  }
+
+  .keterangan-btn {
+    font-size: 11px;
+  }
+
+  .detail-item-amount {
+    font-size: 15px;
+  }
+
+  .btn-cairkan-dana {
+    padding: 14px 20px;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+
+  .riwayat-content {
+    padding: 16px 12px 28px;
+  }
+
+  .riwayat-summary {
+    padding: 18px;
+    border-radius: 14px;
+    margin-bottom: 16px;
+  }
+
+  .riwayat-summary-label {
+    font-size: 13px;
+  }
+
+  .riwayat-summary-amount {
+    font-size: 16px;
+  }
+
+  .withdrawal-history-list {
+    margin-bottom: 20px;
+  }
+
+  .withdrawal-history-card {
+    padding: 18px;
+    border-radius: 14px;
+    margin-bottom: 12px;
+  }
+
+  .withdrawal-header {
+    margin-bottom: 10px;
+  }
+
+  .withdrawal-date {
+    font-size: 11px;
+  }
+
+  .withdrawal-status {
+    padding: 3px 10px;
+    font-size: 10px;
+  }
+
+  .withdrawal-amount {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .bank-name {
+    font-size: 13px;
+  }
+
+  .account-number {
+    font-size: 12px;
+  }
+
+  .empty-icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 20px;
+  }
+
+  .empty-state h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .empty-state p {
+    font-size: 13px;
+  }
+}

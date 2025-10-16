@@ -8,7 +8,7 @@
 
 /* Header */
 .header {
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
     padding: 16px 20px;
     display: flex;
     align-items: center;
@@ -68,12 +68,12 @@
 }
 
 .step-number.completed {
-    background: #ad34ab;
+    background: #983ced;
     color: white;
 }
 
 .step-number.active {
-    background: #ad34ab;
+    background: #983ced;
     color: white;
 }
 
@@ -89,12 +89,12 @@
 }
 
 .step-text.completed {
-    color: #ad34ab;
+    color: #983ced;
     font-weight: 600;
 }
 
 .step-text.active {
-    color: #ad34ab;
+    color: #983ced;
     font-weight: 600;
 }
 
@@ -148,7 +148,7 @@
     flex-shrink: 0;
     width: 40px;
     height: 40px;
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -173,7 +173,7 @@
 /* Info Alert */
 .info-alert {
     background: #e6f3ff;
-    border: 1px solid #ad34ab;
+    border: 1px solid #983ced;
     border-radius: 8px;
     padding: 16px;
     display: flex;
@@ -186,7 +186,7 @@
     flex-shrink: 0;
     width: 20px;
     height: 20px;
-    background: #ad34ab;
+    background: #983ced;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -205,7 +205,7 @@
 /* Create Story Button */
 .create-story-btn {
     width: 100%;
-    background: #ad34ab;
+    background: #983ced;
     color: white;
     border: none;
     border-radius: 8px;
@@ -261,7 +261,7 @@
 }
 
 .nav-btn.primary {
-    background: #ad34ab;
+    background: #983ced;
     color: white;
     border: none;
 }
@@ -277,7 +277,7 @@
 }
 
 .save-continue-text {
-    color: #ad34ab;
+    color: #983ced;
     font-size: 14px;
     text-align: center;
     margin-top: 8px;

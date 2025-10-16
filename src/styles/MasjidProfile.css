@@ -1,0 +1,588 @@
+/* MasjidProfile.css - Modern glass morphism design */
+
+.masjid-form-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Masjid Badge */
+.masjid-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(152, 60, 237, 0.15) 0%, rgba(152, 60, 237, 0.15) 100%);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(152, 60, 237, 0.3);
+  font-size: 16px;
+  font-weight: 700;
+  color: #983ced;
+  margin-bottom: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* Form Hint */
+.form-hint-modern {
+  font-size: 14px;
+  color: #64748b;
+  margin: -4px 0 12px 0;
+  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* Facility Selection Grid */
+.fasilitas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.fasilitas-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(226, 232, 240, 0.5);
+  border-radius: 12px;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.fasilitas-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(152, 60, 237, 0.08) 0%, rgba(152, 60, 237, 0.08) 100%);
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+
+.fasilitas-btn:hover {
+  border-color: rgba(152, 60, 237, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px -4px rgba(152, 60, 237, 0.2);
+}
+
+.fasilitas-btn:hover::before {
+  opacity: 1;
+}
+
+.fasilitas-btn.selected {
+  background: linear-gradient(135deg, rgba(152, 60, 237, 0.15) 0%, rgba(152, 60, 237, 0.15) 100%);
+  backdrop-filter: blur(20px);
+  border-color: #983ced;
+  color: #983ced;
+  font-weight: 600;
+  box-shadow: 0 4px 16px -4px rgba(152, 60, 237, 0.3);
+}
+
+.fasilitas-btn.selected::before {
+  opacity: 1;
+}
+
+.fasilitas-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: transparent;
+  border: 2px solid #cbd5e1;
+  color: transparent;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.fasilitas-btn.selected .fasilitas-check {
+  background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
+  border-color: #983ced;
+  color: white;
+}
+
+.fasilitas-btn:active {
+  transform: scale(0.98);
+}
+
+.fasilitas-count {
+  font-size: 14px;
+  color: #983ced;
+  font-weight: 600;
+  margin-top: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* Header Photo Upload */
+.upload-area-modern.header-photo {
+  min-height: 240px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.header-preview {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.header-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.preview-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.header-preview:hover .preview-overlay {
+  opacity: 1;
+}
+
+.preview-overlay span {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* Gallery Preview Grid */
+.gallery-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(248, 250, 252, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.gallery-preview-item {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* 1:1 Aspect Ratio */
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-preview-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-preview-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.remove-image-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.95);
+  backdrop-filter: blur(10px);
+  border: 2px solid white;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+  z-index: 10;
+}
+
+.remove-image-btn:hover {
+  background: rgba(220, 38, 38, 1);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.remove-image-btn:active {
+  transform: scale(0.95);
+}
+
+/* Document List */
+.document-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(248, 250, 252, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.document-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  border: 1px solid rgba(226, 232, 240, 0.5);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 12px;
+}
+
+.document-item:hover {
+  border-color: rgba(152, 60, 237, 0.3);
+  box-shadow: 0 4px 16px -4px rgba(152, 60, 237, 0.15);
+  transform: translateY(-2px);
+}
+
+.document-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.document-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.document-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1e293b;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.document-size {
+  font-size: 13px;
+  color: #94a3b8;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  flex-shrink: 0;
+}
+
+.remove-doc-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.1);
+  border: none;
+  color: #ef4444;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.remove-doc-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  transform: scale(1.1);
+}
+
+.remove-doc-btn:active {
+  transform: scale(0.95);
+}
+
+/* Info Note */
+.info-note-modern {
+  background: linear-gradient(135deg, rgba(253, 244, 255, 0.6) 0%, rgba(240, 249, 255, 0.6) 100%);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(152, 60, 237, 0.2);
+  border-radius: 20px;
+  padding: 24px;
+  margin-top: 8px;
+  box-shadow: 0 4px 24px -8px rgba(152, 60, 237, 0.15);
+}
+
+.info-note-modern .modern-text {
+  color: #64748b;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .masjid-badge {
+    font-size: 14px;
+    padding: 6px 16px;
+  }
+
+  .form-hint-modern {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  .fasilitas-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .fasilitas-btn {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+
+  .fasilitas-check {
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+  }
+
+  .fasilitas-count {
+    font-size: 13px;
+    margin-top: 14px;
+  }
+
+  .upload-area-modern.header-photo {
+    min-height: 200px;
+  }
+
+  .header-preview {
+    height: 200px;
+  }
+
+  .preview-overlay span {
+    font-size: 14px;
+  }
+
+  .gallery-preview-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .remove-image-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    top: 6px;
+    right: 6px;
+  }
+
+  .document-list {
+    padding: 16px;
+    gap: 10px;
+  }
+
+  .document-item {
+    padding: 12px 16px;
+  }
+
+  .document-icon {
+    font-size: 20px;
+  }
+
+  .document-name {
+    font-size: 14px;
+  }
+
+  .document-size {
+    font-size: 12px;
+  }
+
+  .remove-doc-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+  }
+
+  .info-note-modern {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .masjid-badge {
+    font-size: 13px;
+    padding: 6px 14px;
+  }
+
+  .form-hint-modern {
+    font-size: 12px;
+  }
+
+  .fasilitas-grid {
+    gap: 8px;
+  }
+
+  .fasilitas-btn {
+    padding: 10px 14px;
+    font-size: 12px;
+    gap: 8px;
+  }
+
+  .fasilitas-check {
+    width: 16px;
+    height: 16px;
+    font-size: 11px;
+  }
+
+  .fasilitas-count {
+    font-size: 12px;
+    margin-top: 12px;
+  }
+
+  .upload-area-modern.header-photo {
+    min-height: 160px;
+  }
+
+  .header-preview {
+    height: 160px;
+  }
+
+  .preview-overlay span {
+    font-size: 13px;
+  }
+
+  .gallery-preview-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .remove-image-btn {
+    width: 22px;
+    height: 22px;
+    font-size: 14px;
+    top: 4px;
+    right: 4px;
+  }
+
+  .document-list {
+    padding: 14px;
+    gap: 8px;
+  }
+
+  .document-item {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .document-icon {
+    font-size: 18px;
+  }
+
+  .document-name {
+    font-size: 13px;
+  }
+
+  .document-size {
+    font-size: 11px;
+  }
+
+  .remove-doc-btn {
+    width: 22px;
+    height: 22px;
+    font-size: 14px;
+  }
+
+  .info-note-modern {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .info-note-modern .modern-text {
+    font-size: 13px;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .fasilitas-btn:hover {
+    transform: none;
+  }
+
+  .fasilitas-btn:active {
+    transform: scale(0.96);
+  }
+
+  .fasilitas-btn {
+    min-height: 48px;
+  }
+
+  .gallery-preview-item:hover {
+    transform: none;
+  }
+
+  .gallery-preview-item:active {
+    transform: scale(0.95);
+  }
+
+  .document-item:hover {
+    transform: none;
+  }
+
+  .document-item:active {
+    transform: scale(0.98);
+  }
+
+  .remove-image-btn,
+  .remove-doc-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+
+  .preview-overlay {
+    opacity: 0.7;
+  }
+}

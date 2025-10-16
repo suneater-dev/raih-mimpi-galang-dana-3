@@ -12,7 +12,7 @@ const AjakanSosial = () => {
   };
 
   const handleNext = () => {
-    navigate('/ads-offering-sosial');
+    navigate('/campaign-complete');
   };
 
   const handleSaveAndContinueLater = () => {

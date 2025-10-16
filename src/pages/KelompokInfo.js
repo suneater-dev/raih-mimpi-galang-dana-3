@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/KelompokInfo.css';
 
 const KelompokInfo = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Get organization type from previous page
+  const organizationType = location.state?.organizationType || 'lembaga';
+
   const [formData, setFormData] = useState({
-    jenisKelompok: '',
+    jenisKelompok: organizationType,
     namaOrganisasi: '',
     alamatOrganisasi: '',
     emailOrganisasi: '',
@@ -33,24 +38,13 @@ const KelompokInfo = () => {
 
   const [errors, setErrors] = useState({});
 
-  const jenisKelompokOptions = [
-    { value: 'lembaga', label: 'Lembaga', desc: 'Institusi formal atau semi formal' },
-    { value: 'yayasan', label: 'Yayasan', desc: 'Organisasi nirlaba berbadan hukum' },
-    { value: 'komunitas', label: 'Komunitas', desc: 'Kelompok masyarakat dengan tujuan bersama' }
-  ];
-
-  const bidangKegiatanOptions = [
-    'Sosial & Kemanusiaan',
-    'Pendidikan',
-    'Kesehatan',
-    'Lingkungan',
-    'Ekonomi & Kewirausahaan',
-    'Budaya & Seni',
-    'Teknologi & Inovasi',
-    'Olahraga & Rekreasi',
-    'Agama & Spiritual',
-    'Lainnya'
-  ];
+  // Organization type labels
+  const organizationTypeLabels = {
+    masjid: 'Masjid',
+    lembaga: 'Lembaga',
+    yayasan: 'Yayasan',
+    komunitas: 'Komunitas'
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -133,10 +127,6 @@ const KelompokInfo = () => {
       newErrors.teleponOrganisasi = 'Format nomor telepon tidak valid';
     }
 
-    if (!formData.bidangKegiatan) {
-      newErrors.bidangKegiatan = 'Bidang kegiatan harus dipilih';
-    }
-
     if (!formData.tahunBerdiri.trim()) {
       newErrors.tahunBerdiri = 'Tahun berdiri harus diisi';
     } else if (!/^\d{4}$/.test(formData.tahunBerdiri) || parseInt(formData.tahunBerdiri) > new Date().getFullYear()) {
@@ -174,18 +164,23 @@ const KelompokInfo = () => {
       newErrors.alamatPenanggungJawab = 'Alamat penanggung jawab harus diisi';
     }
 
-    // Validasi dokumen verifikasi
-    if (!formData.aktePendirian) {
-      newErrors.aktePendirian = 'Akte pendirian harus diunggah';
-    }
-
-    if (!formData.suratIzinOperasional) {
-      newErrors.suratIzinOperasional = 'Surat izin operasional harus diunggah';
-    }
-
+    // Validasi dokumen verifikasi berdasarkan jenis organisasi
+    // KTP Penanggung Jawab - Required for all types
     if (!formData.ktpPenanggungJawab) {
       newErrors.ktpPenanggungJawab = 'KTP penanggung jawab harus diunggah';
     }
+
+    // Akte Pendirian - Required for Masjid and Yayasan
+    if ((organizationType === 'masjid' || organizationType === 'yayasan') && !formData.aktePendirian) {
+      newErrors.aktePendirian = 'Akte pendirian harus diunggah';
+    }
+
+    // Surat Izin Operasional - Required only for Lembaga
+    if (organizationType === 'lembaga' && !formData.suratIzinOperasional) {
+      newErrors.suratIzinOperasional = 'Surat izin operasional harus diunggah';
+    }
+
+    // NPWP and Surat Kuasa are optional for all types (no validation needed)
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -194,13 +189,24 @@ const KelompokInfo = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // For showcase purposes - skip validation and always navigate
-    navigate('/select-category', {
-      state: {
-        userType: 'group',
-        groupData: formData
-      }
-    });
+    // For showcase purposes - skip validation and navigate based on organization type
+    if (organizationType === 'masjid') {
+      // Masjid goes to profile page
+      navigate('/masjid-profile', {
+        state: {
+          userType: 'group',
+          groupData: formData
+        }
+      });
+    } else {
+      // Other organization types go to category selection
+      navigate('/bantuan-lainnya', {
+        state: {
+          userType: 'group',
+          groupData: formData
+        }
+      });
+    }
   };
 
   // For showcase purposes - button is always enabled
@@ -209,54 +215,38 @@ const KelompokInfo = () => {
   return (
     <div className="container">
       <header className="header gradient">
-        <div className="back-arrow white-text" onClick={() => navigate(-1)}>←</div>
+        <div className="back-arrow white-text" onClick={() => navigate('/kelompok-type')}>←</div>
         <div className="logo white-text">RaihMimpi</div>
         <div className="header-spacer"></div>
       </header>
 
       <div className="modern-card">
         <div className="form-header-modern">
-          <h1 className="modern-heading">Informasi Kelompok/Organisasi</h1>
-          <p className="modern-text">Lengkapi informasi organisasi dan penanggung jawab untuk memverifikasi kelompok Anda</p>
+          <div className="organization-type-badge">
+            {organizationTypeLabels[organizationType] || 'Lembaga'}
+          </div>
+          <h1 className="modern-heading">
+            {organizationType === 'masjid' ? 'Informasi Masjid' : 'Informasi Kelompok/Organisasi'}
+          </h1>
+          <p className="modern-text">
+            {organizationType === 'masjid'
+              ? 'Lengkapi informasi masjid dan penanggung jawab untuk memverifikasi masjid Anda'
+              : 'Lengkapi informasi organisasi dan penanggung jawab untuk memverifikasi kelompok Anda'
+            }
+          </p>
         </div>
 
         <form onSubmit={handleSubmit} className="kelompok-form-modern">
-          {/* Informasi Organisasi */}
+          {/* Informasi Organisasi/Masjid */}
           <div className="section-divider-modern">
-            <h2 className="section-title-modern">📋 Informasi Organisasi</h2>
-          </div>
-
-          <div className="form-group-modern">
-            <label className="form-label-modern">Jenis Kelompok *</label>
-            <div className="radio-group-modern">
-              {jenisKelompokOptions.map(option => (
-                <div key={option.value} className="radio-option-modern">
-                  <input
-                    type="radio"
-                    id={option.value}
-                    name="jenisKelompok"
-                    value={option.value}
-                    checked={formData.jenisKelompok === option.value}
-                    onChange={handleInputChange}
-                    className="radio-input-modern"
-                  />
-                  <label htmlFor={option.value} className="radio-label-modern">
-                    <div className="radio-content-modern">
-                      <span className="radio-title-modern">{option.label}</span>
-                      <span className="radio-desc-modern">{option.desc}</span>
-                    </div>
-                  </label>
-                </div>
-              ))}
-            </div>
-            {errors.jenisKelompok && (
-              <span className="error-message-modern">{errors.jenisKelompok}</span>
-            )}
+            <h2 className="section-title-modern">
+              📋 {organizationType === 'masjid' ? 'Informasi Masjid' : 'Informasi Organisasi'}
+            </h2>
           </div>
 
           <div className="form-group-modern">
             <label htmlFor="namaOrganisasi" className="form-label-modern">
-              Nama Organisasi *
+              {organizationType === 'masjid' ? 'Nama Masjid' : 'Nama Organisasi'} *
             </label>
             <input
               type="text"
@@ -265,7 +255,7 @@ const KelompokInfo = () => {
               value={formData.namaOrganisasi}
               onChange={handleInputChange}
               className={`modern-input ${errors.namaOrganisasi ? 'error' : ''}`}
-              placeholder="Contoh: Yayasan Harapan Bangsa"
+              placeholder={organizationType === 'masjid' ? 'Contoh: Masjid Al-Ikhlas' : 'Contoh: Yayasan Harapan Bangsa'}
             />
             {errors.namaOrganisasi && (
               <span className="error-message-modern">{errors.namaOrganisasi}</span>
@@ -274,7 +264,7 @@ const KelompokInfo = () => {
 
           <div className="form-group-modern">
             <label htmlFor="alamatOrganisasi" className="form-label-modern">
-              Alamat Organisasi *
+              {organizationType === 'masjid' ? 'Alamat Masjid' : 'Alamat Organisasi'} *
             </label>
             <textarea
               id="alamatOrganisasi"
@@ -282,7 +272,7 @@ const KelompokInfo = () => {
               value={formData.alamatOrganisasi}
               onChange={handleInputChange}
               className={`modern-textarea ${errors.alamatOrganisasi ? 'error' : ''}`}
-              placeholder="Alamat lengkap kantor/sekretariat organisasi"
+              placeholder={organizationType === 'masjid' ? 'Alamat lengkap masjid' : 'Alamat lengkap kantor/sekretariat organisasi'}
               rows="3"
             />
             {errors.alamatOrganisasi && (
@@ -293,7 +283,7 @@ const KelompokInfo = () => {
           <div className="form-row-modern">
             <div className="form-group-modern">
               <label htmlFor="emailOrganisasi" className="form-label-modern">
-                Email Organisasi *
+                {organizationType === 'masjid' ? 'Email Masjid' : 'Email Organisasi'} *
               </label>
               <input
                 type="email"
@@ -302,7 +292,7 @@ const KelompokInfo = () => {
                 value={formData.emailOrganisasi}
                 onChange={handleInputChange}
                 className={`modern-input ${errors.emailOrganisasi ? 'error' : ''}`}
-                placeholder="organisasi@email.com"
+                placeholder={organizationType === 'masjid' ? 'masjid@email.com' : 'organisasi@email.com'}
               />
               {errors.emailOrganisasi && (
                 <span className="error-message-modern">{errors.emailOrganisasi}</span>
@@ -311,7 +301,7 @@ const KelompokInfo = () => {
 
             <div className="form-group-modern">
               <label htmlFor="teleponOrganisasi" className="form-label-modern">
-                Telepon Organisasi *
+                {organizationType === 'masjid' ? 'Telepon Masjid' : 'Telepon Organisasi'} *
               </label>
               <input
                 type="tel"
@@ -339,32 +329,11 @@ const KelompokInfo = () => {
               value={formData.website}
               onChange={handleInputChange}
               className="modern-input"
-              placeholder="https://www.organisasi.com"
+              placeholder={organizationType === 'masjid' ? 'https://www.masjid.com' : 'https://www.organisasi.com'}
             />
           </div>
 
           <div className="form-row-modern">
-            <div className="form-group-modern">
-              <label htmlFor="bidangKegiatan" className="form-label-modern">
-                Bidang Kegiatan *
-              </label>
-              <select
-                id="bidangKegiatan"
-                name="bidangKegiatan"
-                value={formData.bidangKegiatan}
-                onChange={handleInputChange}
-                className={`modern-select ${errors.bidangKegiatan ? 'error' : ''}`}
-              >
-                <option value="">Pilih bidang kegiatan</option>
-                {bidangKegiatanOptions.map(option => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </select>
-              {errors.bidangKegiatan && (
-                <span className="error-message-modern">{errors.bidangKegiatan}</span>
-              )}
-            </div>
-
             <div className="form-group-modern">
               <label htmlFor="tahunBerdiri" className="form-label-modern">
                 Tahun Berdiri *
@@ -384,22 +353,22 @@ const KelompokInfo = () => {
                 <span className="error-message-modern">{errors.tahunBerdiri}</span>
               )}
             </div>
-          </div>
 
-          <div className="form-group-modern">
-            <label htmlFor="jumlahAnggota" className="form-label-modern">
-              Jumlah Anggota (Opsional)
-            </label>
-            <input
-              type="number"
-              id="jumlahAnggota"
-              name="jumlahAnggota"
-              value={formData.jumlahAnggota}
-              onChange={handleInputChange}
-              className="modern-input"
-              placeholder="50"
-              min="1"
-            />
+            <div className="form-group-modern">
+              <label htmlFor="jumlahAnggota" className="form-label-modern">
+                {organizationType === 'masjid' ? 'Kapasitas Jamaah (Opsional)' : 'Jumlah Anggota (Opsional)'}
+              </label>
+              <input
+                type="number"
+                id="jumlahAnggota"
+                name="jumlahAnggota"
+                value={formData.jumlahAnggota}
+                onChange={handleInputChange}
+                className="modern-input"
+                placeholder="50"
+                min="1"
+              />
+            </div>
           </div>
 
           {/* Informasi Penanggung Jawab */}
@@ -526,10 +495,12 @@ const KelompokInfo = () => {
             <p className="section-desc-modern">Unggah dokumen untuk memverifikasi keabsahan organisasi Anda</p>
           </div>
 
-          <div className="form-group-modern">
-            <label className="form-label-modern">
-              Akte Pendirian / Akta Notaris *
-            </label>
+          {/* Akte Pendirian - For Masjid and Yayasan */}
+          {(organizationType === 'masjid' || organizationType === 'yayasan') && (
+            <div className="form-group-modern">
+              <label className="form-label-modern">
+                Akte Pendirian / Akta Notaris *
+              </label>
             <div className="upload-area-modern">
               <input
                 type="file"
@@ -556,15 +527,18 @@ const KelompokInfo = () => {
                 </div>
               </label>
             </div>
-            {errors.aktePendirian && (
-              <span className="error-message-modern">{errors.aktePendirian}</span>
-            )}
-          </div>
+              {errors.aktePendirian && (
+                <span className="error-message-modern">{errors.aktePendirian}</span>
+              )}
+            </div>
+          )}
 
-          <div className="form-group-modern">
-            <label className="form-label-modern">
-              Surat Izin Operasional / SIUP / NIB *
-            </label>
+          {/* Surat Izin Operasional - Only for Lembaga */}
+          {organizationType === 'lembaga' && (
+            <div className="form-group-modern">
+              <label className="form-label-modern">
+                Surat Izin Operasional / SIUP / NIB *
+              </label>
             <div className="upload-area-modern">
               <input
                 type="file"
@@ -591,14 +565,16 @@ const KelompokInfo = () => {
                 </div>
               </label>
             </div>
-            {errors.suratIzinOperasional && (
-              <span className="error-message-modern">{errors.suratIzinOperasional}</span>
-            )}
-          </div>
+              {errors.suratIzinOperasional && (
+                <span className="error-message-modern">{errors.suratIzinOperasional}</span>
+              )}
+            </div>
+          )}
 
+          {/* NPWP - Optional for all types */}
           <div className="form-group-modern">
             <label className="form-label-modern">
-              NPWP Organisasi (Opsional)
+              {organizationType === 'masjid' ? 'NPWP Masjid (Opsional)' : 'NPWP Organisasi (Opsional)'}
             </label>
             <div className="upload-area-modern">
               <input
@@ -626,11 +602,12 @@ const KelompokInfo = () => {
                 </div>
               </label>
             </div>
-            {errors.npwpOrganisasi && (
-              <span className="error-message-modern">{errors.npwpOrganisasi}</span>
-            )}
+          {errors.npwpOrganisasi && (
+            <span className="error-message-modern">{errors.npwpOrganisasi}</span>
+          )}
           </div>
 
+          {/* KTP Penanggung Jawab - Required for all types */}
           <div className="form-group-modern">
             <label className="form-label-modern">
               KTP Penanggung Jawab *
@@ -661,11 +638,12 @@ const KelompokInfo = () => {
                 </div>
               </label>
             </div>
-            {errors.ktpPenanggungJawab && (
-              <span className="error-message-modern">{errors.ktpPenanggungJawab}</span>
-            )}
+          {errors.ktpPenanggungJawab && (
+            <span className="error-message-modern">{errors.ktpPenanggungJawab}</span>
+          )}
           </div>
 
+          {/* Surat Kuasa - Optional for all types */}
           <div className="form-group-modern">
             <label className="form-label-modern">
               Surat Kuasa (Opsional)
@@ -696,13 +674,19 @@ const KelompokInfo = () => {
                 </div>
               </label>
             </div>
-            {errors.suratKuasa && (
-              <span className="error-message-modern">{errors.suratKuasa}</span>
-            )}
+          {errors.suratKuasa && (
+            <span className="error-message-modern">{errors.suratKuasa}</span>
+          )}
           </div>
 
           <div className="info-note-modern">
-            <p className="modern-text small">* Dokumen wajib harus diunggah untuk verifikasi organisasi. Format yang diterima: PDF, JPG, PNG dengan ukuran maksimal 5MB per file.</p>
+            <p className="modern-text small">
+              * Dokumen wajib harus diunggah untuk verifikasi {organizationType === 'masjid' ? 'masjid' : 'organisasi'}. Format yang diterima: PDF, JPG, PNG dengan ukuran maksimal 5MB per file.
+              {organizationType === 'masjid' && ' Masjid memerlukan Akte Pendirian dan KTP Penanggung Jawab.'}
+              {organizationType === 'yayasan' && ' Yayasan memerlukan Akte Pendirian dan KTP Penanggung Jawab.'}
+              {organizationType === 'lembaga' && ' Lembaga memerlukan Izin Operasional/SIUP dan KTP Penanggung Jawab.'}
+              {organizationType === 'komunitas' && ' Komunitas hanya memerlukan KTP Penanggung Jawab.'}
+            </p>
           </div>
 
           <button

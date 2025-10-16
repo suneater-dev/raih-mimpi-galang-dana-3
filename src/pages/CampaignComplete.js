@@ -10,11 +10,15 @@ const CampaignComplete = () => {
   };
 
   const handleCreateAnother = () => {
-    navigate('/select-category');
+    navigate('/bantuan-lainnya');
   };
 
   const handleGoHome = () => {
     navigate('/');
+  };
+
+  const handleIklankanCampaign = () => {
+    navigate('/iklankan-campaign');
   };
 
   return (
@@ -72,6 +76,9 @@ const CampaignComplete = () => {
       {/* Action Buttons */}
       <div className="action-section-modern">
         <div className="action-buttons-vertical" style={{marginBottom: '20px'}}>
+          {/* <button className="modern-btn" onClick={handleIklankanCampaign} style={{marginBottom: '12px'}}>
+            📢 Iklankan Campaign
+          </button> */}
           <button className="modern-btn" onClick={handleViewCampaign} style={{marginBottom: '12px'}}>
             Lihat Galang Dana
           </button>
@@ -79,7 +86,7 @@ const CampaignComplete = () => {
             Buat Galang Dana Lain
           </button>
         </div>
-        
+
         <div className="save-later-modern">
           <button className="save-later-btn-modern" onClick={handleGoHome}>
             Kembali ke Beranda

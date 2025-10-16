@@ -8,7 +8,6 @@ const TargetDonasiSosial = () => {
   const location = useLocation();
   const [amount, setAmount] = useState('');
   const [duration, setDuration] = useState('');
-  const [fundUsage, setFundUsage] = useState('');
 
   // Get data from previous steps
   const previousData = location.state || {};
@@ -39,8 +38,7 @@ const TargetDonasiSosial = () => {
           ...previousData,
           targetData: {
             amount,
-            duration,
-            fundUsage
+            duration
           }
         }
       });
@@ -56,7 +54,7 @@ const TargetDonasiSosial = () => {
   };
 
   // Form validation
-  const isFormValid = amount.trim() !== '' && duration !== '' && fundUsage.trim() !== '';
+  const isFormValid = amount.trim() !== '' && duration !== '';
 
   const steps = [
     { number: 1, label: 'Tujuan', active: false },
@@ -122,21 +120,6 @@ const TargetDonasiSosial = () => {
                 </label>
               ))}
             </div>
-          </div>
-
-          {/* Fund Usage Details */}
-          <div className="form-group-modern">
-            <label className="form-label-modern">Isi rincian penggunaan dana</label>
-            <p className="form-description-modern">
-              Ceritakan secara lengkap rencana penggunaan dana yang didapat dari galang dana ini
-            </p>
-            <textarea 
-              className="modern-textarea fund-usage-textarea" 
-              placeholder="Contoh: Dana untuk pembelian 200 paket sembako @ Rp 50.000 = Rp 10.000.000, biaya transportasi dan akomodasi relawan Rp 2.000.000, biaya pengadaan tenda dan peralatan kegiatan Rp 3.000.000"
-              value={fundUsage}
-              onChange={(e) => setFundUsage(e.target.value)}
-              rows="6"
-            />
           </div>
       </div>
 

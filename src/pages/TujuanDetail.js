@@ -34,13 +34,13 @@ const TujuanDetail = () => {
   };
 
   const handleContinue = () => {
-    const isFormValid = beneficiaryCount.trim() !== '' && 
-                       acceptedTerms.responsibility && 
+    const isFormValid = beneficiaryCount.trim() !== '' &&
+                       acceptedTerms.responsibility &&
                        acceptedTerms.accountability;
-    
+
     if (isFormValid) {
-      // Navigate to next step (Data diri)
-      navigate('/data-diri', {
+      // Navigate to next step (Penerima)
+      navigate('/penerima', {
         state: {
           selectedCategory,
           beneficiaryCount,
@@ -65,12 +65,11 @@ const TujuanDetail = () => {
 
   const steps = [
     { number: 1, label: 'Tujuan', active: true },
-    { number: 2, label: 'Data diri', active: false },
-    { number: 3, label: 'Penerima', active: false },
-    { number: 4, label: 'Target donasi', active: false },
-    { number: 5, label: 'Judul', active: false },
-    { number: 6, label: 'Cerita', active: false },
-    { number: 7, label: 'Ajakan', active: false }
+    { number: 2, label: 'Penerima', active: false },
+    { number: 3, label: 'Target donasi', active: false },
+    { number: 4, label: 'Judul', active: false },
+    { number: 5, label: 'Cerita', active: false },
+    { number: 6, label: 'Ajakan', active: false }
   ];
 
   return (

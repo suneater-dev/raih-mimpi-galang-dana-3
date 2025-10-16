@@ -21,14 +21,14 @@
 }
 
 .progress-section-modern .step-number.active {
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%) !important;
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%) !important;
     color: white !important;
-    box-shadow: 0 4px 15px -3px rgba(173, 52, 171, 0.4);
+    box-shadow: 0 4px 15px -3px rgba(152, 60, 237, 0.4);
     font-weight: 700 !important;
 }
 
 .progress-section-modern .step-text.active {
-    color: #ad34ab !important;
+    color: #983ced !important;
     font-weight: 700 !important;
     font-size: 14px !important;
 }
@@ -106,7 +106,7 @@
     box-shadow: 
         0 20px 60px -10px rgba(0, 0, 0, 0.15),
         0 0 0 1px rgba(255, 255, 255, 0.7) inset !important;
-    border-color: rgba(173, 52, 171, 0.2) !important;
+    border-color: rgba(152, 60, 237, 0.2) !important;
 }
 
 /* Category Option Content - Modern layout */
@@ -145,7 +145,7 @@
 
 /* Pilih Button - Using RaihMimpi purple gradient */
 .pilih-btn-modern {
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
     border: none;
     color: white;
     font-size: 14px;
@@ -156,13 +156,13 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     flex-shrink: 0;
     margin-top: 4px;
-    box-shadow: 0 4px 15px -3px rgba(173, 52, 171, 0.4);
+    box-shadow: 0 4px 15px -3px rgba(152, 60, 237, 0.4);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif !important;
 }
 
 .pilih-btn-modern:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px -5px rgba(173, 52, 171, 0.5);
+    box-shadow: 0 8px 25px -5px rgba(152, 60, 237, 0.5);
 }
 
 .pilih-btn-modern:active {
@@ -253,7 +253,7 @@
 }
 
 .modal-btn-confirm {
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
     border: none;
     color: white;
     font-size: 14px;
@@ -263,19 +263,19 @@
     border-radius: 16px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     width: 100%;
-    box-shadow: 0 4px 15px -3px rgba(173, 52, 171, 0.4);
+    box-shadow: 0 4px 15px -3px rgba(152, 60, 237, 0.4);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif !important;
 }
 
 .modal-btn-confirm:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px -5px rgba(173, 52, 171, 0.5);
+    box-shadow: 0 8px 25px -5px rgba(152, 60, 237, 0.5);
 }
 
 .modal-btn-alternative {
     background: rgba(255, 255, 255, 0.9);
-    border: 2px solid #ad34ab;
-    color: #ad34ab;
+    border: 2px solid #983ced;
+    color: #983ced;
     font-size: 14px;
     font-weight: 700;
     cursor: pointer;
@@ -288,10 +288,10 @@
 }
 
 .modal-btn-alternative:hover {
-    background: #ad34ab;
+    background: #983ced;
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px -3px rgba(173, 52, 171, 0.4);
+    box-shadow: 0 4px 15px -3px rgba(152, 60, 237, 0.4);
 }
 
 /* Header Logo Adjustment */

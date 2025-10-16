@@ -12,12 +12,12 @@ const Login = () => {
 
   const handleLogin = () => {
     if (phoneEmail.trim().length > 0) {
-      navigate('/select-category');
+      navigate('/bantuan-lainnya');
     }
   };
 
   const handleSocialLogin = (provider) => {
-    navigate('/select-category');
+    navigate('/bantuan-lainnya');
   };
 
   return (
@@ -57,9 +57,9 @@ const Login = () => {
         
         <p className="modern-text text-center" style={{ marginTop: '24px' }}>
           Belum punya akun? {' '}
-          <button 
+          <button
             className="register-link-modern"
-            onClick={() => navigate('/select-category')}
+            onClick={() => navigate('/bantuan-lainnya')}
           >
             Daftar
           </button>

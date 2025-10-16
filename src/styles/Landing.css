@@ -23,10 +23,10 @@
 
 .back-arrow {
     font-size: 20px;
-    color: #ad34ab;
+    color: #983ced;
     cursor: pointer;
     padding: 10px;
-    background: rgba(173, 52, 171, 0.1);
+    background: rgba(152, 60, 237, 0.1);
     border: none;
     border-radius: 12px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -36,7 +36,7 @@
 }
 
 .back-arrow:hover {
-    background: rgba(173, 52, 171, 0.15);
+    background: rgba(152, 60, 237, 0.15);
     transform: translateX(-2px);
 }
 
@@ -71,7 +71,7 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #ad34ab, #d946ef, transparent);
+    background: linear-gradient(90deg, transparent, #983ced, #983ced, transparent);
     animation: shimmer 3s infinite;
 }
 
@@ -100,12 +100,12 @@
     height: 160px;
     object-fit: contain;
     transition: transform 0.3s ease;
-    filter: drop-shadow(0 4px 20px rgba(173, 52, 171, 0.15));
+    filter: drop-shadow(0 4px 20px rgba(152, 60, 237, 0.15));
 }
 
 .hero-illustration:hover img {
     transform: scale(1.05);
-    filter: drop-shadow(0 8px 30px rgba(173, 52, 171, 0.25));
+    filter: drop-shadow(0 8px 30px rgba(152, 60, 237, 0.25));
 }
 
 .hero h1 {
@@ -141,7 +141,7 @@ div.container section.hero p {
 }
 
 .cta-button {
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
     color: white;
     border: none;
     border-radius: 16px;
@@ -152,7 +152,7 @@ div.container section.hero p {
     max-width: 320px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 25px -5px rgba(173, 52, 171, 0.4);
+    box-shadow: 0 8px 25px -5px rgba(152, 60, 237, 0.4);
     margin: 0 auto;
     display: block;
     position: relative;
@@ -177,7 +177,7 @@ div.container section.hero p {
 
 .cta-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 40px -10px rgba(173, 52, 171, 0.5);
+    box-shadow: 0 12px 40px -10px rgba(152, 60, 237, 0.5);
 }
 
 .cta-button:active {
@@ -247,7 +247,7 @@ div.container section.hero p {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #ad34ab 0%, #d946ef 100%);
+    background: linear-gradient(90deg, #983ced 0%, #983ced 100%);
     opacity: 0.7;
 }
 
@@ -270,12 +270,12 @@ div.container section.hero p {
     height: 64px;
     object-fit: contain;
     transition: all 0.3s ease;
-    filter: drop-shadow(0 2px 8px rgba(173, 52, 171, 0.2));
+    filter: drop-shadow(0 2px 8px rgba(152, 60, 237, 0.2));
 }
 
 .step-icon:hover img {
     transform: scale(1.1);
-    filter: drop-shadow(0 4px 16px rgba(173, 52, 171, 0.3));
+    filter: drop-shadow(0 4px 16px rgba(152, 60, 237, 0.3));
 }
 
 .step-content h3 {
@@ -352,7 +352,7 @@ div.container section.hero p {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #ad34ab 0%, #d946ef 100%);
+    background: linear-gradient(90deg, #983ced 0%, #983ced 100%);
     opacity: 0.7;
 }
 
@@ -382,12 +382,12 @@ div.container section.hero p {
     height: 72px;
     object-fit: contain;
     transition: all 0.3s ease;
-    filter: drop-shadow(0 2px 8px rgba(173, 52, 171, 0.2));
+    filter: drop-shadow(0 2px 8px rgba(152, 60, 237, 0.2));
 }
 
 .tip-icon:hover img {
     transform: scale(1.1);
-    filter: drop-shadow(0 4px 16px rgba(173, 52, 171, 0.3));
+    filter: drop-shadow(0 4px 16px rgba(152, 60, 237, 0.3));
 }
 
 .tip-content h4 {
@@ -427,7 +427,7 @@ div.container section.hero p {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #ad34ab 0%, #d946ef 100%);
+    background: linear-gradient(90deg, #983ced 0%, #983ced 100%);
 }
 
 .bottom-cta h2 {
@@ -452,7 +452,7 @@ div.container section.hero p {
 }
 
 .cta-button-white {
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
     color: white;
     border: none;
     border-radius: 16px;
@@ -465,7 +465,7 @@ div.container section.hero p {
     margin: 0 auto 40px auto;
     display: block;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 25px -5px rgba(173, 52, 171, 0.4);
+    box-shadow: 0 8px 25px -5px rgba(152, 60, 237, 0.4);
     position: relative;
     overflow: hidden;
     letter-spacing: -0.01em;
@@ -488,7 +488,7 @@ div.container section.hero p {
 
 .cta-button-white:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 40px -10px rgba(173, 52, 171, 0.5);
+    box-shadow: 0 12px 40px -10px rgba(152, 60, 237, 0.5);
 }
 
 .cta-button-white:active {
@@ -535,7 +535,7 @@ div.container section.hero p {
     background: rgba(255, 255, 255, 0.95);
     transform: translateY(-2px);
     box-shadow: 0 8px 30px -8px rgba(0, 0, 0, 0.15);
-    border-color: rgba(173, 52, 171, 0.2);
+    border-color: rgba(152, 60, 237, 0.2);
 }
 
 .faq-question::after {
@@ -545,14 +545,14 @@ div.container section.hero p {
     top: 50%;
     transform: translateY(-50%);
     font-size: 14px;
-    color: #ad34ab;
+    color: #983ced;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: bold;
 }
 
 .faq-question.active::after {
     transform: translateY(-50%) rotate(180deg);
-    color: #d946ef;
+    color: #983ced;
 }
 
 .faq-answer {
@@ -581,7 +581,7 @@ div.container section.hero p {
 }
 
 .faq-answer p strong {
-    color: #ad34ab;
+    color: #983ced;
     font-weight: 700;
 }
 

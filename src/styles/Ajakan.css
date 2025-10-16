@@ -48,7 +48,7 @@
 }
 
 .step-number.active {
-  background: #ad34ab;
+  background: #983ced;
   color: white;
   border: none;
 }
@@ -67,7 +67,7 @@
 }
 
 .step-text.active {
-  color: #ad34ab;
+  color: #983ced;
   font-weight: 600;
 }
 
@@ -141,8 +141,8 @@
 
 .ajakan-textarea:focus {
   outline: none;
-  border-color: #ad34ab;
-  box-shadow: 0 0 0 3px rgba(173, 52, 171, 0.1);
+  border-color: #983ced;
+  box-shadow: 0 0 0 3px rgba(152, 60, 237, 0.1);
 }
 
 .ajakan-textarea::placeholder {
@@ -237,7 +237,7 @@
 
 .nav-btn.next {
   color: white;
-  background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+  background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
   border: none;
 }
 
@@ -276,7 +276,7 @@
   align-items: center;
   padding: 16px;
   background-color: #FCFCFC;
-  color: #ad34ab;
+  color: #983ced;
   border: none;
   font-size: 14px;
   font-weight: 600;

@@ -8,7 +8,7 @@
 
 /* Header */
 .header {
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
     padding: 16px 20px;
     display: flex;
     align-items: center;
@@ -68,12 +68,12 @@
 }
 
 .step-number.completed {
-    background: #ad34ab;
+    background: #983ced;
     color: white;
 }
 
 .step-number.active {
-    background: #ad34ab;
+    background: #983ced;
     color: white;
 }
 
@@ -89,12 +89,12 @@
 }
 
 .step-text.completed {
-    color: #ad34ab;
+    color: #983ced;
     font-weight: 600;
 }
 
 .step-text.active {
-    color: #ad34ab;
+    color: #983ced;
     font-weight: 600;
 }
 
@@ -138,8 +138,8 @@
 }
 
 .form-input:focus {
-    border-color: #ad34ab;
-    box-shadow: 0 0 0 2px rgba(173, 52, 171, 0.1);
+    border-color: #983ced;
+    box-shadow: 0 0 0 2px rgba(152, 60, 237, 0.1);
 }
 
 .form-input::placeholder {
@@ -173,7 +173,7 @@
 }
 
 .upload-area:hover {
-    border-color: #ad34ab;
+    border-color: #983ced;
     background: #fdf2fd;
 }
 
@@ -215,7 +215,7 @@
 }
 
 .upload-text {
-    color: #ad34ab;
+    color: #983ced;
     font-size: 16px;
     font-weight: 600;
 }
@@ -256,7 +256,7 @@
 }
 
 .tips-link {
-    color: #ad34ab;
+    color: #983ced;
     background: none;
     border: none;
     font-size: 14px;
@@ -311,7 +311,7 @@
 }
 
 .nav-btn.primary {
-    background: #ad34ab;
+    background: #983ced;
     color: white;
     border: none;
 }
@@ -321,7 +321,7 @@
 }
 
 .save-continue-text {
-    color: #ad34ab;
+    color: #983ced;
     font-size: 14px;
     text-align: center;
     margin-top: 8px;

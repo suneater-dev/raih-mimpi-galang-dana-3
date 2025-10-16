@@ -1,5 +1,21 @@
 /* KelompokInfo.css - Modern glass morphism styling for group/organization form */
 
+/* Organization Type Badge */
+.organization-type-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+  box-shadow: 0 4px 12px rgba(152, 60, 237, 0.3);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
 .kelompok-form-modern {
   display: flex;
   flex-direction: column;
@@ -19,13 +35,13 @@
 .section-title-modern {
   font-size: 18px;
   font-weight: 700;
-  background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+  background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin: 0;
   padding-bottom: 12px;
-  border-bottom: 2px solid rgba(173, 52, 171, 0.1);
+  border-bottom: 2px solid rgba(152, 60, 237, 0.1);
   letter-spacing: -0.01em;
 }
 
@@ -59,7 +75,7 @@
   align-items: center;
   padding: 16px 20px;
   background: rgba(255, 255, 255, 0.7);
-  border: 2px solid rgba(173, 52, 171, 0.1);
+  border: 2px solid rgba(152, 60, 237, 0.1);
   border-radius: 16px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -75,16 +91,16 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(173, 52, 171, 0.05) 0%, rgba(217, 70, 239, 0.05) 100%);
+  background: linear-gradient(135deg, rgba(152, 60, 237, 0.05) 0%, rgba(152, 60, 237, 0.05) 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .radio-input-modern:checked + .radio-label-modern {
-  border-color: #ad34ab;
+  border-color: #983ced;
   background: rgba(255, 255, 255, 0.9);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(173, 52, 171, 0.15);
+  box-shadow: 0 8px 25px rgba(152, 60, 237, 0.15);
 }
 
 .radio-input-modern:checked + .radio-label-modern::before {
@@ -93,7 +109,7 @@
 
 .radio-label-modern:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(173, 52, 171, 0.1);
+  box-shadow: 0 4px 15px rgba(152, 60, 237, 0.1);
 }
 
 .radio-content-modern {
@@ -130,7 +146,7 @@
 .modern-textarea {
   width: 100%;
   padding: 16px 20px;
-  border: 2px solid rgba(173, 52, 171, 0.1);
+  border: 2px solid rgba(152, 60, 237, 0.1);
   border-radius: 16px;
   font-size: 16px;
   color: #1F2937;
@@ -145,9 +161,9 @@
 
 .modern-textarea:focus {
   outline: none;
-  border-color: #ad34ab;
+  border-color: #983ced;
   background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 0 0 4px rgba(173, 52, 171, 0.1);
+  box-shadow: 0 0 0 4px rgba(152, 60, 237, 0.1);
   transform: translateY(-1px);
 }
 
@@ -166,7 +182,7 @@
 .modern-select {
   width: 100%;
   padding: 16px 20px;
-  border: 2px solid rgba(173, 52, 171, 0.1);
+  border: 2px solid rgba(152, 60, 237, 0.1);
   border-radius: 16px;
   font-size: 16px;
   color: #1F2937;
@@ -186,9 +202,9 @@
 
 .modern-select:focus {
   outline: none;
-  border-color: #ad34ab;
+  border-color: #983ced;
   background-color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 0 0 4px rgba(173, 52, 171, 0.1);
+  box-shadow: 0 0 0 4px rgba(152, 60, 237, 0.1);
   transform: translateY(-1px);
 }
 
@@ -319,8 +335,8 @@
   }
 
   .section-title-modern {
-    -webkit-text-fill-color: #ad34ab;
-    color: #ad34ab;
+    -webkit-text-fill-color: #983ced;
+    color: #983ced;
   }
 }
 
@@ -345,7 +361,7 @@
   gap: 16px;
   padding: 20px 24px;
   background: rgba(255, 255, 255, 0.7);
-  border: 2px dashed rgba(173, 52, 171, 0.3);
+  border: 2px dashed rgba(152, 60, 237, 0.3);
   border-radius: 16px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -362,16 +378,16 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(173, 52, 171, 0.02) 0%, rgba(217, 70, 239, 0.02) 100%);
+  background: linear-gradient(135deg, rgba(152, 60, 237, 0.02) 0%, rgba(152, 60, 237, 0.02) 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .upload-label-modern:hover {
-  border-color: #ad34ab;
+  border-color: #983ced;
   background: rgba(255, 255, 255, 0.9);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(173, 52, 171, 0.1);
+  box-shadow: 0 8px 25px rgba(152, 60, 237, 0.1);
 }
 
 .upload-label-modern:hover::before {
@@ -379,9 +395,9 @@
 }
 
 .upload-input-modern:focus + .upload-label-modern {
-  border-color: #ad34ab;
+  border-color: #983ced;
   background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 0 0 4px rgba(173, 52, 171, 0.1);
+  box-shadow: 0 0 0 4px rgba(152, 60, 237, 0.1);
 }
 
 .upload-icon-modern {
@@ -425,8 +441,8 @@
 
 /* Drag and Drop States */
 .upload-label-modern.drag-over {
-  border-color: #ad34ab;
-  background: rgba(173, 52, 171, 0.05);
+  border-color: #983ced;
+  background: rgba(152, 60, 237, 0.05);
   transform: scale(1.02);
 }
 

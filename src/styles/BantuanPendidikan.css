@@ -24,7 +24,7 @@
   color: #1e293b;
   margin-bottom: 12px;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+  background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -65,7 +65,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(173, 52, 171, 0.02) 0%, rgba(217, 70, 239, 0.02) 100%);
+  background: linear-gradient(135deg, rgba(152, 60, 237, 0.02) 0%, rgba(152, 60, 237, 0.02) 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -76,8 +76,8 @@
 
 .category-card-modern:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(173, 52, 171, 0.15);
-  border-color: rgba(173, 52, 171, 0.3);
+  box-shadow: 0 8px 32px rgba(152, 60, 237, 0.15);
+  border-color: rgba(152, 60, 237, 0.3);
 }
 
 .category-card-content {
@@ -96,15 +96,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(173, 52, 171, 0.1) 0%, rgba(217, 70, 239, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(152, 60, 237, 0.1) 0%, rgba(152, 60, 237, 0.1) 100%);
   border-radius: 16px;
-  border: 2px solid rgba(173, 52, 171, 0.2);
+  border: 2px solid rgba(152, 60, 237, 0.2);
   transition: all 0.3s ease;
 }
 
 .category-card-modern:hover .category-icon-modern {
-  background: linear-gradient(135deg, rgba(173, 52, 171, 0.2) 0%, rgba(217, 70, 239, 0.2) 100%);
-  border-color: rgba(173, 52, 171, 0.4);
+  background: linear-gradient(135deg, rgba(152, 60, 237, 0.2) 0%, rgba(152, 60, 237, 0.2) 100%);
+  border-color: rgba(152, 60, 237, 0.4);
   transform: scale(1.05);
 }
 
@@ -130,7 +130,7 @@
 }
 
 .category-select-btn-modern {
-  background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+  background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
   color: white;
   border: none;
   border-radius: 12px;
@@ -139,7 +139,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 12px rgba(173, 52, 171, 0.25);
+  box-shadow: 0 4px 12px rgba(152, 60, 237, 0.25);
   flex-shrink: 0;
   align-self: flex-start;
   margin-top: 4px;
@@ -147,7 +147,7 @@
 
 .category-select-btn-modern:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(173, 52, 171, 0.35);
+  box-shadow: 0 6px 20px rgba(152, 60, 237, 0.35);
 }
 
 .category-select-btn-modern:active {

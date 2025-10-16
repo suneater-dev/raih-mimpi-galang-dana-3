@@ -46,7 +46,7 @@
 }
 
 .step-number.active {
-  background: #ad34ab;
+  background: #983ced;
   color: white;
   border: none;
 }
@@ -65,7 +65,7 @@
 }
 
 .step-text.active {
-  color: #ad34ab;
+  color: #983ced;
   font-weight: 600;
 }
 
@@ -112,15 +112,15 @@
   align-items: center;
   padding: 8px 16px;
   border-radius: 6px;
-  color: #ad34ab;
+  color: #983ced;
   background: white;
-  border: 1px solid #ad34ab;
+  border: 1px solid #983ced;
   font-size: 14px;
   font-weight: 600;
 }
 
 .edit-btn:hover {
-  background: #ad34ab;
+  background: #983ced;
   color: white;
 }
 
@@ -158,7 +158,7 @@
 }
 
 .story-section-content p strong {
-  color: #ad34ab;
+  color: #983ced;
   font-weight: 600;
 }
 
@@ -220,7 +220,7 @@
 
 .nav-btn.next {
   color: white;
-  background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+  background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
   border: none;
 }
 

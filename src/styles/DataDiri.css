@@ -21,14 +21,14 @@
 }
 
 .progress-section-modern .step-number.active {
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%) !important;
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%) !important;
     color: white !important;
-    box-shadow: 0 4px 15px -3px rgba(173, 52, 171, 0.4);
+    box-shadow: 0 4px 15px -3px rgba(152, 60, 237, 0.4);
     font-weight: 700 !important;
 }
 
 .progress-section-modern .step-text.active {
-    color: #ad34ab !important;
+    color: #983ced !important;
     font-weight: 700 !important;
     font-size: 14px !important;
 }
@@ -101,8 +101,8 @@
 
 .data-diri-input:focus {
     outline: none;
-    border-color: #ad34ab;
-    box-shadow: 0 0 0 4px rgba(173, 52, 171, 0.12), 0 8px 32px -12px rgba(173, 52, 171, 0.3);
+    border-color: #983ced;
+    box-shadow: 0 0 0 4px rgba(152, 60, 237, 0.12), 0 8px 32px -12px rgba(152, 60, 237, 0.3);
     background: rgba(255, 255, 255, 0.95);
     transform: translateY(-2px);
 }
@@ -170,10 +170,10 @@
 }
 
 .social-media-option:hover {
-    border-color: rgba(173, 52, 171, 0.4);
-    background: rgba(173, 52, 171, 0.04);
+    border-color: rgba(152, 60, 237, 0.4);
+    background: rgba(152, 60, 237, 0.04);
     transform: translateY(-4px);
-    box-shadow: 0 8px 32px -12px rgba(173, 52, 171, 0.25);
+    box-shadow: 0 8px 32px -12px rgba(152, 60, 237, 0.25);
 }
 
 .social-media-option input {
@@ -183,7 +183,7 @@
 .checkmark-social {
     width: 24px;
     height: 24px;
-    border: 3px solid #ad34ab;
+    border: 3px solid #983ced;
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -191,14 +191,14 @@
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     flex-shrink: 0;
     background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 8px -4px rgba(173, 52, 171, 0.2);
+    box-shadow: 0 2px 8px -4px rgba(152, 60, 237, 0.2);
 }
 
 .social-media-option input:checked + .checkmark-social {
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
-    border-color: #ad34ab;
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
+    border-color: #983ced;
     transform: scale(1.1);
-    box-shadow: 0 4px 16px -4px rgba(173, 52, 171, 0.4);
+    box-shadow: 0 4px 16px -4px rgba(152, 60, 237, 0.4);
 }
 
 .social-media-option input:checked + .checkmark-social::after {
@@ -260,16 +260,16 @@
 }
 
 .nav-btn-secondary:hover {
-    border-color: rgba(173, 52, 171, 0.4);
-    color: #ad34ab;
+    border-color: rgba(152, 60, 237, 0.4);
+    color: #983ced;
     transform: translateY(-4px);
-    box-shadow: 0 8px 32px -12px rgba(173, 52, 171, 0.25);
-    background: rgba(173, 52, 171, 0.04);
+    box-shadow: 0 8px 32px -12px rgba(152, 60, 237, 0.25);
+    background: rgba(152, 60, 237, 0.04);
 }
 
 .nav-btn-primary {
     flex: 1;
-    background: linear-gradient(135deg, #ad34ab 0%, #d946ef 100%);
+    background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
     border: none;
     color: white;
     font-size: 15px;
@@ -278,7 +278,7 @@
     padding: 20px 24px;
     border-radius: 20px;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 6px 24px -6px rgba(173, 52, 171, 0.4);
+    box-shadow: 0 6px 24px -6px rgba(152, 60, 237, 0.4);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
     pointer-events: auto;
     position: relative;
@@ -288,21 +288,21 @@
 
 .nav-btn-primary:hover:not(.disabled) {
     transform: translateY(-6px);
-    box-shadow: 0 12px 40px -8px rgba(173, 52, 171, 0.6);
+    box-shadow: 0 12px 40px -8px rgba(152, 60, 237, 0.6);
 }
 
 .nav-btn-primary.disabled {
     opacity: 0.4;
     cursor: not-allowed;
     transform: none !important;
-    box-shadow: 0 4px 20px -8px rgba(173, 52, 171, 0.2) !important;
+    box-shadow: 0 4px 20px -8px rgba(152, 60, 237, 0.2) !important;
     pointer-events: none;
 }
 
 .save-continue-later-btn {
     background: none;
     border: none;
-    color: #ad34ab;
+    color: #983ced;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -314,7 +314,7 @@
 }
 
 .save-continue-later-btn:hover {
-    color: #d946ef;
+    color: #983ced;
     transform: translateY(-1px);
 }
 
@@ -415,7 +415,7 @@
     }
     
     .social-media-option:active {
-        background: rgba(173, 52, 171, 0.05);
-        border-color: rgba(173, 52, 171, 0.2);
+        background: rgba(152, 60, 237, 0.05);
+        border-color: rgba(152, 60, 237, 0.2);
     }
 }

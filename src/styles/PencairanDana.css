@@ -1,0 +1,471 @@
+/* Pencairan Dana Page Styles */
+
+/* Container */
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  min-height: 100vh;
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+/* Content */
+.pencairan-content {
+  padding: 32px 16px;
+}
+
+.pencairan-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  padding: 40px 28px;
+  box-shadow:
+    0 8px 32px -8px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+}
+
+/* Header */
+.pencairan-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.header-icon-pencairan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, rgba(152, 60, 237, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+  border-radius: 50%;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.header-icon-pencairan svg {
+  width: 64px;
+  height: 64px;
+  color: #983ced;
+  stroke-width: 1.5;
+}
+
+.pencairan-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #983ced 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pencairan-description {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.7;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Info Box */
+.info-box-pencairan {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
+  border: 1.5px solid rgba(59, 130, 246, 0.25);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 32px;
+}
+
+.info-icon-pencairan {
+  width: 24px;
+  height: 24px;
+  color: #3b82f6;
+  flex-shrink: 0;
+}
+
+.info-text-pencairan {
+  flex: 1;
+  font-size: 13px;
+  color: #1e3a8a;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.info-text-pencairan strong {
+  font-weight: 700;
+  color: #1e40af;
+}
+
+/* Campaigns Section */
+.campaigns-list {
+  margin-bottom: 32px;
+}
+
+.campaigns-section-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.01em;
+}
+
+/* Campaign Card */
+.campaign-card-pencairan {
+  background: white;
+  border: 1.5px solid rgba(148, 163, 184, 0.2);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.campaign-card-pencairan:hover {
+  border-color: rgba(152, 60, 237, 0.3);
+  box-shadow: 0 8px 24px -8px rgba(152, 60, 237, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Campaign Image */
+.campaign-image-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+}
+
+.campaign-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.campaign-card-pencairan:hover .campaign-image {
+  transform: scale(1.05);
+}
+
+.campaign-category-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 14px;
+  background: #983ced;
+  color: white;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.3);
+}
+
+/* Campaign Info */
+.campaign-info-pencairan {
+  padding: 24px;
+}
+
+.campaign-title-pencairan {
+  font-size: 17px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 16px 0;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+/* Stats Row */
+.campaign-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.stat-icon {
+  width: 16px;
+  height: 16px;
+  color: #983ced;
+  flex-shrink: 0;
+}
+
+/* Progress Info */
+.campaign-progress-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.progress-amounts {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.collected-amount {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1e293b;
+  letter-spacing: -0.01em;
+}
+
+.target-amount {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.progress-percentage {
+  font-size: 16px;
+  font-weight: 800;
+  color: #983ced;
+}
+
+/* Progress Bar */
+.progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background: rgba(148, 163, 184, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(135deg, #983ced 0%, #7c3aed 100%);
+  border-radius: 10px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Withdraw Button */
+.btn-withdraw {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #983ced 0%, #7c3aed 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: -0.01em;
+  box-shadow:
+    0 6px 20px -5px rgba(152, 60, 237, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-withdraw::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: left 0.5s;
+}
+
+.btn-withdraw:hover::before {
+  left: 100%;
+}
+
+.btn-withdraw:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 30px -8px rgba(152, 60, 237, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+.btn-withdraw:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.5;
+}
+
+/* Back Button */
+.btn-pencairan {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: -0.01em;
+  margin-top: 12px;
+}
+
+.btn-pencairan.secondary {
+  background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+  box-shadow:
+    0 6px 20px -5px rgba(100, 116, 139, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+.btn-pencairan.secondary:hover {
+  background: linear-gradient(135deg, #475569 0%, #334155 100%);
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 25px -5px rgba(100, 116, 139, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+/* Mobile Responsive */
+@media (max-width: 450px) {
+  .container {
+    padding-bottom: 32px;
+  }
+
+  .pencairan-content {
+    padding: 20px 12px;
+  }
+
+  .pencairan-card {
+    padding: 32px 20px;
+    border-radius: 20px;
+  }
+
+  .header-icon-pencairan {
+    width: 70px;
+    height: 70px;
+  }
+
+  .header-icon-pencairan svg {
+    width: 56px;
+    height: 56px;
+  }
+
+  .pencairan-title {
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+
+  .pencairan-description {
+    font-size: 14px;
+  }
+
+  .info-box-pencairan {
+    padding: 16px;
+    gap: 12px;
+    border-radius: 14px;
+    margin-bottom: 28px;
+  }
+
+  .info-icon-pencairan {
+    width: 22px;
+    height: 22px;
+  }
+
+  .info-text-pencairan {
+    font-size: 12px;
+  }
+
+  .campaigns-section-title {
+    font-size: 17px;
+    margin-bottom: 16px;
+  }
+
+  .campaign-card-pencairan {
+    border-radius: 16px;
+    margin-bottom: 16px;
+  }
+
+  .campaign-image-container {
+    height: 180px;
+  }
+
+  .campaign-info-pencairan {
+    padding: 20px;
+  }
+
+  .campaign-title-pencairan {
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+
+  .campaign-stats-row {
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .stat-item {
+    font-size: 12px;
+  }
+
+  .collected-amount {
+    font-size: 16px;
+  }
+
+  .target-amount {
+    font-size: 11px;
+  }
+
+  .progress-percentage {
+    font-size: 14px;
+  }
+
+  .progress-bar-container {
+    margin-bottom: 16px;
+  }
+
+  .btn-withdraw {
+    padding: 12px 20px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  .btn-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .btn-pencairan {
+    padding: 14px 20px;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+}

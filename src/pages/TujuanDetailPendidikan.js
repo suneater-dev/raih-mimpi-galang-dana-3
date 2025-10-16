@@ -64,12 +64,12 @@ const TujuanDetailPendidikan = () => {
               alignItems: 'center',
               gap: '12px',
               padding: '12px 16px',
-              backgroundColor: 'rgba(173, 52, 171, 0.1)',
+              backgroundColor: 'rgba(152, 60, 237, 0.1)',
               borderRadius: '12px',
-              border: '1px solid rgba(173, 52, 171, 0.2)'
+              border: '1px solid rgba(152, 60, 237, 0.2)'
             }}>
               <span className="category-icon" style={{fontSize: '20px'}}>🎓</span>
-              <span className="category-text" style={{fontWeight: '600', color: '#ad34ab'}}>Bantuan Pendidikan</span>
+              <span className="category-text" style={{fontWeight: '600', color: '#983ced'}}>Bantuan Pendidikan</span>
             </div>
           </div>
         )}
