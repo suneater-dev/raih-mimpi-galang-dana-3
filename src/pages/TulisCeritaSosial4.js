@@ -4,10 +4,17 @@ import '../styles/TulisCerita.css';
 
 const TulisCeritaSosial4 = () => {
   const navigate = useNavigate();
-  const [storyContent, setStoryContent] = useState('');
+  const [storyContent, setStoryContent] = useState(() => {
+    return localStorage.getItem('ceritaSosial_part4') || '';
+  });
+  const [showExampleModal, setShowExampleModal] = useState(false);
+
+  const exampleText = "Kondisi ini sangat memprihatinkan karena berdampak luas, tidak hanya pada para lansia tetapi juga pada keluarga dan masyarakat sekitar. Banyak keluarga yang merasa bersalah karena tidak dapat merawat orang tua mereka secara optimal di rumah, sementara biaya perawatan di tempat yang lebih baik sangat mahal.\n\nSecara finansial, pihak pengelola panti mengalami kesulitan besar dalam membiayai operasional harian. Biaya makanan bergizi, obat-obatan, dan perawatan kesehatan rutin membutuhkan dana yang tidak sedikit. Dengan donasi yang terbatas, mereka sering kali harus berkompromi dengan kualitas layanan.\n\nDampak sosial yang terlihat adalah menurunnya semangat hidup para lansia. Mereka yang seharusnya menikmati masa tua dengan tenang, kini harus menghadapi keterbatasan fasilitas dan perawatan. Ini juga mempengaruhi kesehatan mental mereka yang sudah rapuh di usia senja.";
 
   const handleNext = () => {
     if (storyContent.trim().length > 0) {
+      // Save to localStorage
+      localStorage.setItem('ceritaSosial_part4', storyContent);
       navigate('/tulis-cerita-sosial-5');
     }
   };
@@ -27,12 +34,11 @@ const TulisCeritaSosial4 = () => {
   };
 
   const showExample = () => {
-    const exampleText = "Kondisi ini sangat memprihatinkan karena berdampak luas, tidak hanya pada para lansia tetapi juga pada keluarga dan masyarakat sekitar. Banyak keluarga yang merasa bersalah karena tidak dapat merawat orang tua mereka secara optimal di rumah, sementara biaya perawatan di tempat yang lebih baik sangat mahal.\n\nSecara finansial, pihak pengelola panti mengalami kesulitan besar dalam membiayai operasional harian. Biaya makanan bergizi, obat-obatan, dan perawatan kesehatan rutin membutuhkan dana yang tidak sedikit. Dengan donasi yang terbatas, mereka sering kali harus berkompromi dengan kualitas layanan.\n\nDampak sosial yang terlihat adalah menurunnya semangat hidup para lansia. Mereka yang seharusnya menikmati masa tua dengan tenang, kini harus menghadapi keterbatasan fasilitas dan perawatan. Ini juga mempengaruhi kesehatan mental mereka yang sudah rapuh di usia senja.";
-    setStoryContent(exampleText);
+    setShowExampleModal(true);
   };
 
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas-sosial');
+  const closeExampleModal = () => {
+    setShowExampleModal(false);
   };
 
   return (
@@ -70,7 +76,7 @@ const TulisCeritaSosial4 = () => {
           <button className="modern-btn secondary example-btn-small" onClick={showExample} style={{marginBottom: '20px'}}>
             📄 Lihat contoh
           </button>
-          
+
           <textarea
             className="modern-textarea story-textarea-large"
             placeholder="Ceritakan dampak sosial dan finansial yang dialami oleh penerima bantuan dan masyarakat sekitar akibat kondisi yang ada."
@@ -82,16 +88,12 @@ const TulisCeritaSosial4 = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya
           </button>
-          
-          <button 
+
+          <button
             className={`modern-btn ${storyContent.trim().length === 0 ? 'disabled' : ''}`}
             onClick={handleNext}
             disabled={storyContent.trim().length === 0}
@@ -101,6 +103,24 @@ const TulisCeritaSosial4 = () => {
           </button>
         </div>
       </div>
+
+      {/* Example Modal */}
+      {showExampleModal && (
+        <div className="example-modal-overlay" onClick={closeExampleModal}>
+          <div className="example-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="example-modal-header">
+              <h3 className="modern-subheading">Contoh Cerita</h3>
+              <button className="example-modal-close" onClick={closeExampleModal}>✕</button>
+            </div>
+            <div className="example-modal-body">
+              <p className="example-text">{exampleText}</p>
+            </div>
+            <div className="example-modal-footer">
+              <button className="modern-btn" onClick={closeExampleModal}>Tutup</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

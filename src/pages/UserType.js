@@ -20,7 +20,7 @@ const UserType = () => {
   return (
     <div className="container">
       <header className="header gradient">
-        <div className="back-arrow white-text" onClick={() => navigate(-1)}>←</div>
+        <div className="back-arrow white-text" onClick={() => navigate('/')}>←</div>
         <div className="logo white-text">RaihMimpi</div>
         <div className="header-spacer"></div>
       </header>

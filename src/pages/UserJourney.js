@@ -24,30 +24,25 @@ function UserJourney() {
       <div className="content">
         {/* Header */}
         <div className="user-journey-header">
-          <h1 className="user-journey-title">Pilih Jalur Anda</h1>
-          <p className="user-journey-subtitle">
-            Apakah ini pertama kali Anda galang dana?
-          </p>
+          <h1 className="user-journey-title">Apakah ini pertama kali Anda menggunakan platform ini?</h1>
         </div>
 
         {/* Journey Options */}
         <div className="journey-options">
           {/* First Time User */}
           <button className="journey-card" onClick={handleFirstTime}>
-            <div className="journey-icon">🆕</div>
             <div className="journey-content">
-              <h3>Pertama Kali</h3>
-              <p>Mulai dengan panduan lengkap dari awal</p>
+              <h3>Galang Dana Pertama</h3>
+              <p>Panduan lengkap untuk kampanye pertama</p>
             </div>
             <div className="journey-arrow">→</div>
           </button>
 
           {/* Returning User */}
-          <button className="journey-card journey-card-highlight" onClick={handleReturning}>
-            <div className="journey-icon">⚡</div>
+          <button className="journey-card" onClick={handleReturning}>
             <div className="journey-content">
-              <h3>Sudah Pernah</h3>
-              <p>Lewati registrasi, langsung buat kampanye</p>
+              <h3>Lanjutkan Galang Dana</h3>
+              <p>Lewati panduan, mulai kampanye lagi</p>
             </div>
             <div className="journey-arrow">→</div>
           </button>
@@ -55,7 +50,7 @@ function UserJourney() {
 
         {/* Info Note */}
         <div className="journey-info">
-          <p>💡 Pilih "Sudah Pernah" jika Anda ingin membuat kampanye baru tanpa mengisi data ulang</p>
+          <p>💡 Pilih "Lanjutkan Galang Dana" untuk lewati panduan dan langsung mulai kampanye baru.</p>
         </div>
       </div>
     </div>

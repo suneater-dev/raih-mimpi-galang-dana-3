@@ -12,8 +12,8 @@ const Ajakan = () => {
   };
 
   const handleNext = () => {
-    // Navigate to ads offering page for medical campaigns
-    navigate('/ads-offering-medis');
+    // Navigate directly to campaign complete page
+    navigate('/campaign-complete');
   };
 
   const handleSaveAndContinueLater = () => {

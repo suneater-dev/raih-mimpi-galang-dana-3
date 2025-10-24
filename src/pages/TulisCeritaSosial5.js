@@ -4,10 +4,17 @@ import '../styles/TulisCerita.css';
 
 const TulisCeritaSosial5 = () => {
   const navigate = useNavigate();
-  const [storyContent, setStoryContent] = useState('');
+  const [storyContent, setStoryContent] = useState(() => {
+    return localStorage.getItem('ceritaSosial_part5') || '';
+  });
+  const [showExampleModal, setShowExampleModal] = useState(false);
+
+  const exampleText = "Untuk mengatasi masalah ini secara komprehensif, kami membutuhkan dana sebesar Rp 15.000.000. Rencana penggunaan dana tersebut adalah sebagai berikut:\n\n1. Renovasi kamar dan fasilitas panti (Rp 7.000.000): Memperbaiki ventilasi, cat ulang dinding, dan memperbaiki saluran air yang rusak.\n\n2. Pembelian peralatan medis dasar (Rp 3.000.000): Tensimeter digital, kursi roda, alat bantu jalan, dan kotak P3K lengkap.\n\n3. Program gizi dan kesehatan selama 6 bulan (Rp 4.000.000): Menyediakan makanan bergizi seimbang dan vitamin untuk semua penghuni panti.\n\n4. Pelatihan untuk pengasuh (Rp 1.000.000): Mengundang tenaga profesional untuk memberikan pelatihan perawatan lansia yang baik dan benar.\n\nDengan bantuan ini, kami yakin dapat meningkatkan kualitas hidup para lansia dan memberikan perawatan yang lebih layak bagi mereka.";
 
   const handleNext = () => {
     if (storyContent.trim().length > 0) {
+      // Save to localStorage
+      localStorage.setItem('ceritaSosial_part5', storyContent);
       navigate('/tulis-cerita-sosial-6');
     }
   };
@@ -27,12 +34,11 @@ const TulisCeritaSosial5 = () => {
   };
 
   const showExample = () => {
-    const exampleText = "Untuk mengatasi masalah ini secara komprehensif, kami membutuhkan dana sebesar Rp 15.000.000. Rencana penggunaan dana tersebut adalah sebagai berikut:\n\n1. Renovasi kamar dan fasilitas panti (Rp 7.000.000): Memperbaiki ventilasi, cat ulang dinding, dan memperbaiki saluran air yang rusak.\n\n2. Pembelian peralatan medis dasar (Rp 3.000.000): Tensimeter digital, kursi roda, alat bantu jalan, dan kotak P3K lengkap.\n\n3. Program gizi dan kesehatan selama 6 bulan (Rp 4.000.000): Menyediakan makanan bergizi seimbang dan vitamin untuk semua penghuni panti.\n\n4. Pelatihan untuk pengasuh (Rp 1.000.000): Mengundang tenaga profesional untuk memberikan pelatihan perawatan lansia yang baik dan benar.\n\nDengan bantuan ini, kami yakin dapat meningkatkan kualitas hidup para lansia dan memberikan perawatan yang lebih layak bagi mereka.";
-    setStoryContent(exampleText);
+    setShowExampleModal(true);
   };
 
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas-sosial');
+  const closeExampleModal = () => {
+    setShowExampleModal(false);
   };
 
   return (
@@ -70,7 +76,7 @@ const TulisCeritaSosial5 = () => {
           <button className="modern-btn secondary example-btn-small" onClick={showExample} style={{marginBottom: '20px'}}>
             📄 Lihat contoh
           </button>
-          
+
           <textarea
             className="modern-textarea story-textarea-large"
             placeholder="Jelaskan secara detail rencana penggunaan dana yang akan dikumpulkan dan alasan mengapa bantuan dari masyarakat sangat dibutuhkan untuk kegiatan sosial ini."
@@ -82,16 +88,12 @@ const TulisCeritaSosial5 = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya
           </button>
-          
-          <button 
+
+          <button
             className={`modern-btn ${storyContent.trim().length === 0 ? 'disabled' : ''}`}
             onClick={handleNext}
             disabled={storyContent.trim().length === 0}
@@ -101,6 +103,24 @@ const TulisCeritaSosial5 = () => {
           </button>
         </div>
       </div>
+
+      {/* Example Modal */}
+      {showExampleModal && (
+        <div className="example-modal-overlay" onClick={closeExampleModal}>
+          <div className="example-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="example-modal-header">
+              <h3 className="modern-subheading">Contoh Cerita</h3>
+              <button className="example-modal-close" onClick={closeExampleModal}>✕</button>
+            </div>
+            <div className="example-modal-body">
+              <p className="example-text">{exampleText}</p>
+            </div>
+            <div className="example-modal-footer">
+              <button className="modern-btn" onClick={closeExampleModal}>Tutup</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

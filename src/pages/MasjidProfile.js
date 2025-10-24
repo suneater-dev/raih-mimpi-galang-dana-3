@@ -15,7 +15,14 @@ const MasjidProfile = () => {
     fasilitasDisabilitas: [],
     headerFoto: null,
     galeri: [],
-    dokumen: []
+    dokumen: [],
+    // Statistics
+    jumlahJamaah: '',
+    jumlahPengurus: '',
+    jumlahImam: '',
+    jumlahKhatib: '',
+    jumlahMuadzin: '',
+    jumlahJamaahMasjid: ''
   });
 
   const fasilitasUmum = [
@@ -48,6 +55,7 @@ const MasjidProfile = () => {
   const [errors, setErrors] = useState({});
   const [previewHeader, setPreviewHeader] = useState(null);
   const [previewGaleri, setPreviewGaleri] = useState([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -236,6 +244,22 @@ const MasjidProfile = () => {
     }));
   };
 
+  const nextSlide = () => {
+    setCurrentSlide((prev) =>
+      prev === previewGaleri.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) =>
+      prev === 0 ? previewGaleri.length - 1 : prev - 1
+    );
+  };
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -312,6 +336,113 @@ const MasjidProfile = () => {
             {errors.sejarah && (
               <span className="error-message-modern">{errors.sejarah}</span>
             )}
+          </div>
+
+          {/* Data Masjid */}
+          <div className="section-divider-modern">
+            <h2 className="section-title-modern">📊 Data Masjid</h2>
+          </div>
+
+          <div className="form-row-modern">
+            <div className="form-group-modern">
+              <label htmlFor="jumlahJamaah" className="form-label-modern">
+                Jumlah Jamaah
+              </label>
+              <input
+                type="number"
+                id="jumlahJamaah"
+                name="jumlahJamaah"
+                value={formData.jumlahJamaah}
+                onChange={handleInputChange}
+                className="modern-input"
+                placeholder="1200"
+                min="0"
+              />
+            </div>
+
+            <div className="form-group-modern">
+              <label htmlFor="jumlahPengurus" className="form-label-modern">
+                Jumlah Pengurus
+              </label>
+              <input
+                type="number"
+                id="jumlahPengurus"
+                name="jumlahPengurus"
+                value={formData.jumlahPengurus}
+                onChange={handleInputChange}
+                className="modern-input"
+                placeholder="15"
+                min="0"
+              />
+            </div>
+          </div>
+
+          <div className="form-row-modern">
+            <div className="form-group-modern">
+              <label htmlFor="jumlahImam" className="form-label-modern">
+                Jumlah Imam
+              </label>
+              <input
+                type="number"
+                id="jumlahImam"
+                name="jumlahImam"
+                value={formData.jumlahImam}
+                onChange={handleInputChange}
+                className="modern-input"
+                placeholder="7"
+                min="0"
+              />
+            </div>
+
+            <div className="form-group-modern">
+              <label htmlFor="jumlahKhatib" className="form-label-modern">
+                Jumlah Khatib
+              </label>
+              <input
+                type="number"
+                id="jumlahKhatib"
+                name="jumlahKhatib"
+                value={formData.jumlahKhatib}
+                onChange={handleInputChange}
+                className="modern-input"
+                placeholder="52"
+                min="0"
+              />
+            </div>
+          </div>
+
+          <div className="form-row-modern">
+            <div className="form-group-modern">
+              <label htmlFor="jumlahMuadzin" className="form-label-modern">
+                Jumlah Muadzin
+              </label>
+              <input
+                type="number"
+                id="jumlahMuadzin"
+                name="jumlahMuadzin"
+                value={formData.jumlahMuadzin}
+                onChange={handleInputChange}
+                className="modern-input"
+                placeholder="8"
+                min="0"
+              />
+            </div>
+
+            <div className="form-group-modern">
+              <label htmlFor="jumlahJamaahMasjid" className="form-label-modern">
+                Jamaah Masjid
+              </label>
+              <input
+                type="number"
+                id="jumlahJamaahMasjid"
+                name="jumlahJamaahMasjid"
+                value={formData.jumlahJamaahMasjid}
+                onChange={handleInputChange}
+                className="modern-input"
+                placeholder="70"
+                min="0"
+              />
+            </div>
           </div>
 
           {/* Fasilitas */}
@@ -479,21 +610,63 @@ const MasjidProfile = () => {
               </label>
             </div>
 
-            {/* Gallery Preview */}
+            {/* Gallery Slider */}
             {previewGaleri.length > 0 && (
-              <div className="gallery-preview-grid">
-                {previewGaleri.map((preview, index) => (
-                  <div key={index} className="gallery-preview-item">
-                    <img src={preview} alt={`Gallery ${index + 1}`} />
+              <div className="gallery-slider-container">
+                <div className="gallery-slider">
+                  <div className="gallery-slide">
+                    <img src={previewGaleri[currentSlide]} alt={`Gallery ${currentSlide + 1}`} />
                     <button
                       type="button"
                       className="remove-image-btn"
-                      onClick={() => removeGaleriImage(index)}
+                      onClick={() => {
+                        removeGaleriImage(currentSlide);
+                        if (currentSlide >= previewGaleri.length - 1 && currentSlide > 0) {
+                          setCurrentSlide(currentSlide - 1);
+                        }
+                      }}
                     >
                       ×
                     </button>
                   </div>
-                ))}
+
+                  {previewGaleri.length > 1 && (
+                    <>
+                      <button
+                        type="button"
+                        className="slider-nav prev"
+                        onClick={prevSlide}
+                      >
+                        ❮
+                      </button>
+                      <button
+                        type="button"
+                        className="slider-nav next"
+                        onClick={nextSlide}
+                      >
+                        ❯
+                      </button>
+                    </>
+                  )}
+                </div>
+
+                {/* Slide Indicators */}
+                {previewGaleri.length > 1 && (
+                  <div className="slider-dots">
+                    {previewGaleri.map((_, index) => (
+                      <button
+                        key={index}
+                        type="button"
+                        className={`slider-dot ${index === currentSlide ? 'active' : ''}`}
+                        onClick={() => goToSlide(index)}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                <p className="gallery-counter">
+                  Foto {currentSlide + 1} dari {previewGaleri.length}
+                </p>
               </div>
             )}
 

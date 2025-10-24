@@ -20,12 +20,13 @@ const BantuanMedis = () => {
 
   const handleConfirm = () => {
     if (selectedPatient) {
-      navigate('/detail-pasien');
+      const selectedOption = patientOptions.find(opt => opt.value === selectedPatient);
+      navigate('/detail-pasien', {
+        state: {
+          selectedPatient: selectedOption
+        }
+      });
     }
-  };
-
-  const handleBack = () => {
-    navigate('/bantuan-lainnya');
   };
 
   const steps = [
@@ -42,11 +43,7 @@ const BantuanMedis = () => {
     <div className="container">
       {/* Header */}
       <header className="header gradient">
-        <button className="back-arrow white-text" onClick={handleBack}>
-          ←
-        </button>
         <div className="logo white-text">Bantuan Medis & Kesehatan</div>
-        <div className="header-spacer"></div>
       </header>
 
       {/* Progress Steps */}

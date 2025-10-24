@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/TulisCerita.css';
 
@@ -6,9 +6,26 @@ const TulisCerita5 = () => {
   const navigate = useNavigate();
   const [costPlanContent, setCostPlanContent] = useState('');
   const [reasonContent, setReasonContent] = useState('');
+  const [showExampleModal1, setShowExampleModal1] = useState(false);
+  const [showExampleModal2, setShowExampleModal2] = useState(false);
+
+  const exampleText1 = "Untuk pengobatan Andi, kami membutuhkan dana sebesar Rp 150.000.000. Rincian biayanya adalah sebagai berikut:\n\n1. Biaya kemoterapi selama 6 bulan: Rp 80.000.000\n2. Biaya rawat inap: Rp 30.000.000\n3. Obat-obatan dan suplemen: Rp 25.000.000\n4. Biaya pemeriksaan rutin dan lab: Rp 15.000.000\n\nDana ini akan digunakan secara bertahap sesuai dengan jadwal pengobatan yang telah ditetapkan oleh dokter.";
+
+  const exampleText2 = "Ayah Andi bekerja sebagai buruh harian dengan penghasilan tidak menentu, sekitar Rp 2.500.000 per bulan. Ibu Andi adalah ibu rumah tangga. Dengan kondisi ekonomi keluarga yang terbatas, sangat sulit bagi kami untuk membiayai pengobatan yang membutuhkan dana besar ini.\n\nSebelumnya, kami sudah menjual beberapa barang berharga dan meminjam dari kerabat, namun masih belum mencukupi. Kondisi Andi yang semakin memburuk membuat kami harus segera mendapatkan pengobatan intensif.";
+
+  useEffect(() => {
+    // Load saved content from localStorage
+    const saved1 = localStorage.getItem('cerita_part5_section1');
+    const saved2 = localStorage.getItem('cerita_part5_section2');
+    if (saved1) setCostPlanContent(saved1);
+    if (saved2) setReasonContent(saved2);
+  }, []);
 
   const handleNext = () => {
     if (costPlanContent.trim().length > 0 && reasonContent.trim().length > 0) {
+      // Save to localStorage
+      localStorage.setItem('cerita_part5_section1', costPlanContent);
+      localStorage.setItem('cerita_part5_section2', reasonContent);
       navigate('/tulis-cerita-6');
     }
   };
@@ -24,21 +41,26 @@ const TulisCerita5 = () => {
   };
 
   const handleSave = () => {
+    // Save to localStorage
+    localStorage.setItem('cerita_part5_section1', costPlanContent);
+    localStorage.setItem('cerita_part5_section2', reasonContent);
     alert('Cerita telah disimpan!');
   };
 
   const showExample1 = () => {
-    const exampleText = "Untuk pengobatan Andi, kami membutuhkan dana sebesar Rp 150.000.000. Rincian biayanya adalah sebagai berikut:\n\n1. Biaya kemoterapi selama 6 bulan: Rp 80.000.000\n2. Biaya rawat inap: Rp 30.000.000\n3. Obat-obatan dan suplemen: Rp 25.000.000\n4. Biaya pemeriksaan rutin dan lab: Rp 15.000.000\n\nDana ini akan digunakan secara bertahap sesuai dengan jadwal pengobatan yang telah ditetapkan oleh dokter.";
-    setCostPlanContent(exampleText);
+    setShowExampleModal1(true);
   };
 
   const showExample2 = () => {
-    const exampleText = "Ayah Andi bekerja sebagai buruh harian dengan penghasilan tidak menentu, sekitar Rp 2.500.000 per bulan. Ibu Andi adalah ibu rumah tangga. Dengan kondisi ekonomi keluarga yang terbatas, sangat sulit bagi kami untuk membiayai pengobatan yang membutuhkan dana besar ini.\n\nSebelumnya, kami sudah menjual beberapa barang berharga dan meminjam dari kerabat, namun masih belum mencukupi. Kondisi Andi yang semakin memburuk membuat kami harus segera mendapatkan pengobatan intensif.";
-    setReasonContent(exampleText);
+    setShowExampleModal2(true);
   };
 
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas');
+  const closeExampleModal1 = () => {
+    setShowExampleModal1(false);
+  };
+
+  const closeExampleModal2 = () => {
+    setShowExampleModal2(false);
   };
 
   return (
@@ -111,15 +133,11 @@ const TulisCerita5 = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya
           </button>
-          <button 
+          <button
             className="modern-btn"
             onClick={handleNext}
             disabled={costPlanContent.trim().length === 0 || reasonContent.trim().length === 0}
@@ -128,6 +146,42 @@ const TulisCerita5 = () => {
           </button>
         </div>
       </div>
+
+      {/* Example Modal 1 */}
+      {showExampleModal1 && (
+        <div className="example-modal-overlay" onClick={closeExampleModal1}>
+          <div className="example-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="example-modal-header">
+              <h3 className="modern-subheading">Contoh Cerita</h3>
+              <button className="example-modal-close" onClick={closeExampleModal1}>✕</button>
+            </div>
+            <div className="example-modal-body">
+              <p className="example-text">{exampleText1}</p>
+            </div>
+            <div className="example-modal-footer">
+              <button className="modern-btn" onClick={closeExampleModal1}>Tutup</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Example Modal 2 */}
+      {showExampleModal2 && (
+        <div className="example-modal-overlay" onClick={closeExampleModal2}>
+          <div className="example-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="example-modal-header">
+              <h3 className="modern-subheading">Contoh Cerita</h3>
+              <button className="example-modal-close" onClick={closeExampleModal2}>✕</button>
+            </div>
+            <div className="example-modal-body">
+              <p className="example-text">{exampleText2}</p>
+            </div>
+            <div className="example-modal-footer">
+              <button className="modern-btn" onClick={closeExampleModal2}>Tutup</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

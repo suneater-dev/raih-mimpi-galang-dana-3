@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/TulisCerita.css';
 
 const TulisCerita = () => {
   const navigate = useNavigate();
   const [storyContent, setStoryContent] = useState('');
+  const [showExampleModal, setShowExampleModal] = useState(false);
+
+  const exampleText = "Halo, nama saya Sarah dan saya adalah kakak dari Andi yang berusia 8 tahun. Andi adalah adik kesayangan saya yang sangat ceria dan pintar. Sejak kecil, Andi selalu menjadi anak yang aktif dan suka bermain bersama teman-temannya.\n\nNamun, beberapa bulan yang lalu, kami mendapat kabar yang sangat mengejutkan dari dokter bahwa Andi didiagnosis menderita leukemia. Sebagai keluarga, kami sangat terpukul mendengar kabar ini, tetapi kami berkomitmen untuk memberikan yang terbaik bagi kesembuhan Andi.";
+
+  useEffect(() => {
+    // Load saved content from localStorage
+    const saved = localStorage.getItem('cerita_part1');
+    if (saved) {
+      setStoryContent(saved);
+    }
+  }, []);
 
   const handleNext = () => {
     if (storyContent.trim().length > 0) {
+      // Save to localStorage
+      localStorage.setItem('cerita_part1', storyContent);
       navigate('/tulis-cerita-2');
     }
   };
@@ -23,18 +36,17 @@ const TulisCerita = () => {
   };
 
   const handleSave = () => {
-    // Save functionality - for now just show alert
+    // Save to localStorage
+    localStorage.setItem('cerita_part1', storyContent);
     alert('Cerita telah disimpan!');
   };
 
   const showExample = () => {
-    const exampleText = "Halo, nama saya Sarah dan saya adalah kakak dari Andi yang berusia 8 tahun. Andi adalah adik kesayangan saya yang sangat ceria dan pintar. Sejak kecil, Andi selalu menjadi anak yang aktif dan suka bermain bersama teman-temannya.\n\nNamun, beberapa bulan yang lalu, kami mendapat kabar yang sangat mengejutkan dari dokter bahwa Andi didiagnosis menderita leukemia. Sebagai keluarga, kami sangat terpukul mendengar kabar ini, tetapi kami berkomitmen untuk memberikan yang terbaik bagi kesembuhan Andi.";
-    setStoryContent(exampleText);
+    setShowExampleModal(true);
   };
 
-  const handleWriteWithoutGuide = () => {
-    // Navigate to free-form writing page
-    navigate('/tulis-cerita-bebas');
+  const closeExampleModal = () => {
+    setShowExampleModal(false);
   };
 
   return (
@@ -84,16 +96,12 @@ const TulisCerita = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" disabled style={{opacity: 0.5}}>
             ← Sebelumnya
           </button>
-          
-          <button 
+
+          <button
             className={`modern-btn ${storyContent.trim().length === 0 ? 'disabled' : ''}`}
             onClick={handleNext}
             disabled={storyContent.trim().length === 0}
@@ -103,6 +111,24 @@ const TulisCerita = () => {
           </button>
         </div>
       </div>
+
+      {/* Example Modal */}
+      {showExampleModal && (
+        <div className="example-modal-overlay" onClick={closeExampleModal}>
+          <div className="example-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="example-modal-header">
+              <h3 className="modern-subheading">Contoh Cerita</h3>
+              <button className="example-modal-close" onClick={closeExampleModal}>✕</button>
+            </div>
+            <div className="example-modal-body">
+              <p className="example-text">{exampleText}</p>
+            </div>
+            <div className="example-modal-footer">
+              <button className="modern-btn" onClick={closeExampleModal}>Tutup</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

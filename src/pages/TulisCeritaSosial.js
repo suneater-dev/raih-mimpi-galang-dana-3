@@ -4,10 +4,17 @@ import '../styles/TulisCerita.css';
 
 const TulisCeritaSosial = () => {
   const navigate = useNavigate();
-  const [storyContent, setStoryContent] = useState('');
+  const [storyContent, setStoryContent] = useState(() => {
+    return localStorage.getItem('ceritaSosial_part1') || '';
+  });
+  const [showExampleModal, setShowExampleModal] = useState(false);
+
+  const exampleText = "Halo, nama saya Ahmad dan saya adalah koordinator dari Komunitas Peduli Sesama. Kami adalah sekelompok relawan yang berkomitmen membantu masyarakat kurang mampu, terutama lansia di Panti Jompo Kasih Sayang.\n\nPanti Jompo Kasih Sayang merawat 45 lansia yang sebagian besar tidak memiliki keluarga atau ditinggalkan. Mereka sangat membutuhkan perhatian, makanan bergizi, dan perawatan kesehatan yang layak. Banyak dari mereka yang sudah lanjut usia dan memiliki kondisi kesehatan yang memerlukan perhatian khusus.\n\nSebagai relawan, saya sering melihat betapa terbatasnya fasilitas dan sumber daya di panti ini. Para pengurus panti bekerja dengan sangat terbatas, namun tetap berusaha memberikan yang terbaik untuk para lansia.";
 
   const handleNext = () => {
     if (storyContent.trim().length > 0) {
+      // Save to localStorage
+      localStorage.setItem('ceritaSosial_part1', storyContent);
       navigate('/tulis-cerita-sosial-2');
     }
   };
@@ -27,12 +34,11 @@ const TulisCeritaSosial = () => {
   };
 
   const showExample = () => {
-    const exampleText = "Halo, nama saya Ahmad dan saya adalah koordinator dari Komunitas Peduli Sesama. Kami adalah sekelompok relawan yang berkomitmen membantu masyarakat kurang mampu, terutama lansia di Panti Jompo Kasih Sayang.\n\nPanti Jompo Kasih Sayang merawat 45 lansia yang sebagian besar tidak memiliki keluarga atau ditinggalkan. Mereka sangat membutuhkan perhatian, makanan bergizi, dan perawatan kesehatan yang layak. Banyak dari mereka yang sudah lanjut usia dan memiliki kondisi kesehatan yang memerlukan perhatian khusus.\n\nSebagai relawan, saya sering melihat betapa terbatasnya fasilitas dan sumber daya di panti ini. Para pengurus panti bekerja dengan sangat terbatas, namun tetap berusaha memberikan yang terbaik untuk para lansia.";
-    setStoryContent(exampleText);
+    setShowExampleModal(true);
   };
 
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas-sosial');
+  const closeExampleModal = () => {
+    setShowExampleModal(false);
   };
 
   return (
@@ -82,16 +88,12 @@ const TulisCeritaSosial = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya
           </button>
-          
-          <button 
+
+          <button
             className={`modern-btn ${storyContent.trim().length === 0 ? 'disabled' : ''}`}
             onClick={handleNext}
             disabled={storyContent.trim().length === 0}
@@ -101,6 +103,24 @@ const TulisCeritaSosial = () => {
           </button>
         </div>
       </div>
+
+      {/* Example Modal */}
+      {showExampleModal && (
+        <div className="example-modal-overlay" onClick={closeExampleModal}>
+          <div className="example-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="example-modal-header">
+              <h3 className="modern-subheading">Contoh Cerita</h3>
+              <button className="example-modal-close" onClick={closeExampleModal}>✕</button>
+            </div>
+            <div className="example-modal-body">
+              <p className="example-text">{exampleText}</p>
+            </div>
+            <div className="example-modal-footer">
+              <button className="modern-btn" onClick={closeExampleModal}>Tutup</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

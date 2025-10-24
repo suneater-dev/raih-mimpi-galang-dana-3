@@ -54,21 +54,18 @@ const UserInfo = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    if (validateForm()) {
-      // Pass user data including userType to next page
-      navigate('/bantuan-lainnya', {
-        state: {
-          userType: userType,
-          userData: formData
-        }
-      });
-    }
+
+    // Skip validation and navigate directly
+    navigate('/bantuan-lainnya', {
+      state: {
+        userType: userType,
+        userData: formData
+      }
+    });
   };
 
-  const isFormValid = formData.namaLengkap.trim() && 
-                     formData.noTelpon.trim() && 
-                     formData.alamatEmail.trim();
+  // For showcase purposes - button is always enabled
+  const isFormValid = true;
 
   return (
     <div className="container">

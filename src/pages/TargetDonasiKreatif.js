@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ProgressSteps from '../components/ProgressSteps';
-import '../styles/TargetDonasi.css';
+import '../styles/TargetDonasiPendidikan.css';
 
-const TargetDonasiPendidikan = () => {
+const TargetDonasiKreatif = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [amount, setAmount] = useState('');
@@ -33,7 +33,7 @@ const TargetDonasiPendidikan = () => {
 
   const handleNext = () => {
     if (isFormValid) {
-      navigate('/judul-kampanye-pendidikan', {
+      navigate('/judul-kampanye-kreatif', {
         state: {
           ...previousData,
           targetData: {
@@ -46,7 +46,7 @@ const TargetDonasiPendidikan = () => {
   };
 
   const handleBack = () => {
-    navigate('/penerima-pendidikan', { state: previousData });
+    navigate('/penerima-kreatif', { state: previousData });
   };
 
   const handleSaveAndContinueLater = () => {
@@ -72,8 +72,7 @@ const TargetDonasiPendidikan = () => {
         <button className="back-arrow white-text" onClick={handleBack}>
           ←
         </button>
-        <div className="header-title white-text">Bantuan Pendidikan</div>
-        <div className="header-spacer"></div>
+        <div className="header-title white-text">Karya Kreatif & Modal Usaha</div>
       </header>
 
       {/* Progress Steps */}
@@ -88,9 +87,9 @@ const TargetDonasiPendidikan = () => {
             <h2 className="modern-subheading">Tentukan perkiraan biaya yang dibutuhkan</h2>
             <div className="amount-group-modern">
               <span className="currency-prefix-modern">Rp</span>
-              <input 
-                type="text" 
-                className="amount-input-modern" 
+              <input
+                type="text"
+                className="amount-input-modern"
                 placeholder="Masukkan jumlah kebutuhan biaya"
                 value={amount}
                 onChange={handleAmountChange}
@@ -101,17 +100,17 @@ const TargetDonasiPendidikan = () => {
           {/* Campaign Duration */}
           <div className="form-group-modern">
             <h2 className="modern-subheading">Tentukan lama galang dana berlangsung</h2>
-            
+
             <div className="duration-grid-modern">
               {durationOptions.map((option) => (
-                <label 
+                <label
                   key={option.id}
                   className={`duration-option-modern ${duration === option.value ? 'selected' : ''}`}
                   onClick={() => handleDurationChange(option.value)}
                 >
-                  <input 
-                    type="radio" 
-                    name="duration" 
+                  <input
+                    type="radio"
+                    name="duration"
                     value={option.value}
                     checked={duration === option.value}
                     onChange={() => handleDurationChange(option.value)}
@@ -128,7 +127,7 @@ const TargetDonasiPendidikan = () => {
         <button className="modern-btn secondary" onClick={handleBack}>
           ← Sebelumnya
         </button>
-        <button 
+        <button
           className={`modern-btn ${!isFormValid ? 'disabled' : ''}`}
           onClick={handleNext}
           disabled={!isFormValid}
@@ -141,4 +140,4 @@ const TargetDonasiPendidikan = () => {
   );
 };
 
-export default TargetDonasiPendidikan;
+export default TargetDonasiKreatif;

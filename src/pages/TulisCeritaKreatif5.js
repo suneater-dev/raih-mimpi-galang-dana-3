@@ -4,10 +4,16 @@ import '../styles/TulisCerita.css';
 
 const TulisCeritaKreatif5 = () => {
   const navigate = useNavigate();
-  const [storyContent, setStoryContent] = useState('');
+  const [storyContent, setStoryContent] = useState(() => {
+    return localStorage.getItem('ceritaKreatif_part5') || '';
+  });
+  const [showExampleModal, setShowExampleModal] = useState(false);
+
+  const exampleText = "Untuk mewujudkan studio kreatif ini, saya membutuhkan dana sebesar Rp 150.000.000 dengan rincian sebagai berikut:\n\n1. Sewa tempat dan renovasi ruangan (24 bulan): Rp 60.000.000\n2. Peralatan desain dan teknologi:\n   - 3 unit komputer high-spec dengan software desain: Rp 45.000.000\n   - Printer profesional dan peralatan pendukung: Rp 15.000.000\n   - Furniture dan interior ruang kerja: Rp 10.000.000\n3. Marketing dan promosi awal: Rp 8.000.000\n4. Modal kerja operasional 6 bulan: Rp 12.000.000\n\nDana ini sangat penting karena sebagai fresh graduate, saya belum memiliki modal yang cukup untuk memulai bisnis ini. Meskipun saya sudah memiliki beberapa klien tetap dari pengalaman freelance, namun income tersebut masih belum mencukupi untuk investasi awal yang besar ini.\n\nSaya telah mencoba mengajukan pinjaman ke bank, namun sebagai fresh graduate tanpa jaminan yang memadai, pengajuan tersebut sulit untuk disetujui. Oleh karena itu, galang dana ini menjadi harapan saya untuk dapat mewujudkan mimpi membangun studio kreatif yang dapat bermanfaat bagi banyak UMKM.";
 
   const handleNext = () => {
     if (storyContent.trim().length > 0) {
+      localStorage.setItem('ceritaKreatif_part5', storyContent);
       navigate('/tulis-cerita-kreatif-6');
     }
   };
@@ -27,12 +33,11 @@ const TulisCeritaKreatif5 = () => {
   };
 
   const showExample = () => {
-    const exampleText = "Untuk mewujudkan studio kreatif ini, saya membutuhkan dana sebesar Rp 150.000.000 dengan rincian sebagai berikut:\n\n1. Sewa tempat dan renovasi ruangan (24 bulan): Rp 60.000.000\n2. Peralatan desain dan teknologi:\n   - 3 unit komputer high-spec dengan software desain: Rp 45.000.000\n   - Printer profesional dan peralatan pendukung: Rp 15.000.000\n   - Furniture dan interior ruang kerja: Rp 10.000.000\n3. Marketing dan promosi awal: Rp 8.000.000\n4. Modal kerja operasional 6 bulan: Rp 12.000.000\n\nDana ini sangat penting karena sebagai fresh graduate, saya belum memiliki modal yang cukup untuk memulai bisnis ini. Meskipun saya sudah memiliki beberapa klien tetap dari pengalaman freelance, namun income tersebut masih belum mencukupi untuk investasi awal yang besar ini.\n\nSaya telah mencoba mengajukan pinjaman ke bank, namun sebagai fresh graduate tanpa jaminan yang memadai, pengajuan tersebut sulit untuk disetujui. Oleh karena itu, galang dana ini menjadi harapan saya untuk dapat mewujudkan mimpi membangun studio kreatif yang dapat bermanfaat bagi banyak UMKM.";
-    setStoryContent(exampleText);
+    setShowExampleModal(true);
   };
 
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas-kreatif');
+  const closeExampleModal = () => {
+    setShowExampleModal(false);
   };
 
   return (
@@ -82,16 +87,12 @@ const TulisCeritaKreatif5 = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya
           </button>
-          
-          <button 
+
+          <button
             className={`modern-btn ${storyContent.trim().length === 0 ? 'disabled' : ''}`}
             onClick={handleNext}
             disabled={storyContent.trim().length === 0}
@@ -101,6 +102,24 @@ const TulisCeritaKreatif5 = () => {
           </button>
         </div>
       </div>
+
+      {/* Example Modal */}
+      {showExampleModal && (
+        <div className="example-modal-overlay" onClick={closeExampleModal}>
+          <div className="example-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="example-modal-header">
+              <h3 className="modern-subheading">Contoh Cerita</h3>
+              <button className="example-modal-close" onClick={closeExampleModal}>✕</button>
+            </div>
+            <div className="example-modal-body">
+              <p className="example-text">{exampleText}</p>
+            </div>
+            <div className="example-modal-footer">
+              <button className="modern-btn" onClick={closeExampleModal}>Tutup</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

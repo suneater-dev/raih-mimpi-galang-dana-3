@@ -81,11 +81,7 @@ const KegiatanSosial = () => {
     <div className="container">
       {/* Header */}
       <header className="header gradient">
-        <button className="back-arrow white-text" onClick={() => navigate('/bantuan-lainnya')}>
-          ←
-        </button>
         <div className="logo white-text">Kegiatan Sosial</div>
-        <div className="header-spacer"></div>
       </header>
 
       {/* Progress Steps */}

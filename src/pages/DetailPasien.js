@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ProgressSteps from '../components/ProgressSteps';
 import '../styles/DetailPasien.css';
 
 const DetailPasien = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const selectedPatient = location.state?.selectedPatient;
   const [phoneNumber, setPhoneNumber] = useState('628312412312');
   const [selectedBankOptions, setSelectedBankOptions] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -97,15 +99,17 @@ const DetailPasien = () => {
       <div className="main-content-modern">
         <div className="form-section-modern">
           {/* Selected Patient */}
-          <div className="form-group-modern">
-            <h2 className="modern-subheading">Siapa yang sakit?</h2>
-            <div className="selected-option-modern">
-              <span className="selected-text-modern">Saya sendiri</span>
-              <button className="change-btn-modern" onClick={() => navigate('/bantuan-medis')}>
-                Ubah
-              </button>
+          {selectedPatient && (
+            <div className="form-group-modern">
+              <h2 className="modern-subheading">Siapa yang sakit?</h2>
+              <div className="selected-option-modern">
+                <span className="selected-text-modern">{selectedPatient.label}</span>
+                <button className="change-btn-modern" onClick={() => navigate('/bantuan-medis')}>
+                  Ubah
+                </button>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Phone Number */}
           <div className="form-group-modern">
@@ -118,35 +122,6 @@ const DetailPasien = () => {
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
-          </div>
-
-          {/* Bank Account Selection */}
-          <div className="form-group-modern">
-            <label className="form-label-modern">Pilih rekening bank penggalangan dana</label>
-            <p className="form-description-modern">Donasi hanya bisa dicairkan ke rekening ini.</p>
-            
-            <div className="modern-checkbox-group">
-              {bankOptions.map((option) => (
-                <div key={option.id} className="checkbox-option-modern">
-                  <label className={`modern-checkbox-option ${selectedBankOptions.includes(option.id) ? 'selected' : ''}`}>
-                    <input 
-                      type="checkbox"
-                      checked={selectedBankOptions.includes(option.id)}
-                      onChange={() => handleCheckboxChange(option.id)}
-                    />
-                    <span className="checkmark-modern"></span>
-                    <div className="checkbox-content">
-                      <h4>{option.label}</h4>
-                    </div>
-                  </label>
-                  {option.info && selectedBankOptions.includes(option.id) && (
-                    <div className="checkbox-info-modern">
-                      <p className="info-text-modern">{option.info}</p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>

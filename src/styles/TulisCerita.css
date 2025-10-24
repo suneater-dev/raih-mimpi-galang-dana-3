@@ -271,17 +271,156 @@
     height: 16px;
 }
 
+/* Example Modal Styles */
+.example-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 16px;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.example-modal-content {
+    background: white;
+    border-radius: 16px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.example-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.example-modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.example-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #6B7280;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.example-modal-close:hover {
+    background: #F3F4F6;
+    color: #111827;
+}
+
+.example-modal-body {
+    padding: 24px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.example-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #374151;
+    white-space: pre-wrap;
+    margin: 0;
+}
+
+.example-modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid #E5E7EB;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.example-modal-footer .modern-btn {
+    min-width: 120px;
+}
+
 /* Mobile Responsive */
 @media (max-width: 450px) {
     .progress-section {
         padding: 12px 16px;
     }
-    
+
     .story-section {
         padding: 12px 16px;
     }
-    
+
     .bottom-actions {
         padding: 12px 16px;
+    }
+
+    .example-modal-overlay {
+        padding: 12px;
+    }
+
+    .example-modal-content {
+        max-height: 85vh;
+        border-radius: 12px;
+    }
+
+    .example-modal-header {
+        padding: 16px 20px;
+    }
+
+    .example-modal-header h3 {
+        font-size: 16px;
+    }
+
+    .example-modal-body {
+        padding: 20px;
+    }
+
+    .example-text {
+        font-size: 14px;
+    }
+
+    .example-modal-footer {
+        padding: 12px 20px;
     }
 }

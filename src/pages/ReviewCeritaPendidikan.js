@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProgressSteps from '../components/ProgressSteps';
 import '../styles/ReviewCerita.css';
 
 const ReviewCeritaPendidikan = () => {
   const navigate = useNavigate();
+  const [storyData, setStoryData] = useState({
+    part1: '',
+    part2: '',
+    part3: '',
+    part4: '',
+    part5: '',
+    part6: ''
+  });
+
+  useEffect(() => {
+    setStoryData({
+      part1: localStorage.getItem('ceritaPendidikan_part1') || '',
+      part2: localStorage.getItem('ceritaPendidikan_part2') || '',
+      part3: localStorage.getItem('ceritaPendidikan_part3') || '',
+      part4: localStorage.getItem('ceritaPendidikan_part4') || '',
+      part5: localStorage.getItem('ceritaPendidikan_part5') || '',
+      part6: localStorage.getItem('ceritaPendidikan_part6') || ''
+    });
+  }, []);
 
   const handleEdit = () => {
     navigate('/tulis-cerita-pendidikan');
@@ -24,12 +43,11 @@ const ReviewCeritaPendidikan = () => {
 
   const steps = [
     { number: 1, label: 'Tujuan', active: false },
-    { number: 2, label: 'Data diri', active: false },
-    { number: 3, label: 'Penerima', active: false },
-    { number: 4, label: 'Target donasi', active: false },
-    { number: 5, label: 'Judul', active: false },
-    { number: 6, label: 'Cerita', active: true },
-    { number: 7, label: 'Ajakan', active: false }
+    { number: 2, label: 'Penerima', active: false },
+    { number: 3, label: 'Target donasi', active: false },
+    { number: 4, label: 'Judul', active: false },
+    { number: 5, label: 'Cerita', active: true },
+    { number: 6, label: 'Ajakan', active: false }
   ];
 
   return (
@@ -58,22 +76,57 @@ const ReviewCeritaPendidikan = () => {
 
         <div className="story-content-modern">
           {/* Story Content */}
-          <div className="story-section-content">
-            <p className="modern-text">Halo, nama saya Ibu Sri Rahayu dan saya adalah kepala sekolah di SDN 01 Sukamaju, sebuah sekolah dasar yang terletak di daerah pelosok Kabupaten Garut, Jawa Barat. Kami melayani 120 siswa dari keluarga petani dengan kondisi ekonomi yang sangat terbatas.</p>
-            <p className="modern-text">Saat ini, kondisi siswa-siswa di sekolah kami sangat memprihatinkan. Dari 120 siswa, 40% berasal dari keluarga dengan penghasilan di bawah garis kemiskinan. Banyak siswa datang tanpa sarapan dan fasilitas sekolah sangat terbatas.</p>
-            
-            <img src="/dashboard/wujudkan-mimpi-anak-pelosok-1756351894-334.webp" alt="Siswa sekolah di daerah terpencil" className="story-image-modern" />
-            
-            <p className="modern-text">Kami telah melakukan berbagai upaya dengan keterbatasan yang ada, seperti mengajukan proposal ke Dinas Pendidikan dan menggalang dana mandiri melalui gotong royong masyarakat desa. Namun bantuan yang diperoleh masih sangat terbatas.</p>
-            
-            <p className="modern-text" style={{fontWeight: '600', fontSize: '16px', marginTop: '20px', marginBottom: '12px'}}>Target dan Sasaran:</p>
-            <p className="modern-text">Program bantuan pendidikan ini akan membantu 30 siswa kurang mampu untuk mendapatkan beasiswa penuh, perbaikan fasilitas sekolah, dan program pendampingan belajar yang komprehensif.</p>
-            
-            <img src="/dashboard/temani-mimpi-pejuang-pelosok-1756798332-465.webp" alt="Kegiatan belajar siswa" className="story-image-modern" />
-            
-            <p className="modern-text" style={{fontWeight: '600', fontSize: '16px', marginTop: '20px', marginBottom: '12px'}}>Rencana Penggunaan Dana:</p>
-            <p className="modern-text">Dana Rp 60.000.000 akan digunakan untuk beasiswa 30 siswa (Rp 35.000.000), perbaikan fasilitas sekolah (Rp 20.000.000), dan program pendampingan (Rp 5.000.000). Semua rincian telah disusun dengan detail untuk transparansi.</p>
-          </div>
+          {!storyData.part1 && !storyData.part2 && !storyData.part3 && !storyData.part4 && !storyData.part5 && !storyData.part6 ? (
+            <div className="empty-story-modern">
+              <p className="modern-text" style={{textAlign: 'center', color: '#666'}}>
+                Belum ada cerita yang ditulis. Silakan tulis cerita kampanye Anda terlebih dahulu.
+              </p>
+            </div>
+          ) : (
+            <div className="story-section-content">
+              {storyData.part1 && (
+                <div className="story-section-modern">
+                  <h4 className="section-header-modern">Perkenalan Diri dan Hubungan dengan Penerima</h4>
+                  <p className="modern-text" style={{whiteSpace: 'pre-wrap'}}>{storyData.part1}</p>
+                </div>
+              )}
+
+              {storyData.part2 && (
+                <div className="story-section-modern">
+                  <h4 className="section-header-modern">Kondisi Siswa/Penerima Bantuan Saat Ini</h4>
+                  <p className="modern-text" style={{whiteSpace: 'pre-wrap'}}>{storyData.part2}</p>
+                </div>
+              )}
+
+              {storyData.part3 && (
+                <div className="story-section-modern">
+                  <h4 className="section-header-modern">Upaya yang Sudah Dilakukan Sebelumnya</h4>
+                  <p className="modern-text" style={{whiteSpace: 'pre-wrap'}}>{storyData.part3}</p>
+                </div>
+              )}
+
+              {storyData.part4 && (
+                <div className="story-section-modern">
+                  <h4 className="section-header-modern">Dampak Jika Tidak Mendapat Bantuan</h4>
+                  <p className="modern-text" style={{whiteSpace: 'pre-wrap'}}>{storyData.part4}</p>
+                </div>
+              )}
+
+              {storyData.part5 && (
+                <div className="story-section-modern">
+                  <h4 className="section-header-modern">Rencana Penggunaan Dana Secara Detail</h4>
+                  <p className="modern-text" style={{whiteSpace: 'pre-wrap'}}>{storyData.part5}</p>
+                </div>
+              )}
+
+              {storyData.part6 && (
+                <div className="story-section-modern">
+                  <h4 className="section-header-modern">Harapan dan Doa untuk Masa Depan</h4>
+                  <p className="modern-text" style={{whiteSpace: 'pre-wrap'}}>{storyData.part6}</p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
 

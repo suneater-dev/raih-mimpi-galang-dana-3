@@ -4,10 +4,17 @@ import '../styles/TulisCerita.css';
 
 const TulisCeritaKreatif = () => {
   const navigate = useNavigate();
-  const [storyContent, setStoryContent] = useState('');
+  const [storyContent, setStoryContent] = useState(() => {
+    return localStorage.getItem('ceritaKreatif_part1') || '';
+  });
+  const [showExampleModal, setShowExampleModal] = useState(false);
+
+  const exampleText = "Halo, nama saya Andi dan saya adalah seorang lulusan desain grafis yang baru menyelesaikan kuliah tahun ini. Sejak kecil, saya memiliki passion yang besar dalam dunia desain dan seni visual. Impian saya adalah membuka studio kreatif yang dapat membantu UMKM dan startup lokal mengembangkan branding mereka dengan desain yang menarik dan profesional.\n\nSaya telah berpengalaman mengerjakan berbagai proyek freelance selama kuliah, mulai dari desain logo, kemasan produk, hingga kampanye visual untuk media sosial. Melalui pengalaman ini, saya melihat betapa banyak UMKM yang memiliki produk berkualitas namun kesulitan dalam hal branding dan pemasaran visual.\n\nStudio kreatif yang ingin saya bangun akan fokus pada pelayanan desain grafis, branding, dan konsultasi visual untuk bisnis skala kecil menengah. Saya percaya bahwa dengan desain yang tepat, bisnis lokal dapat bersaing di pasar yang semakin kompetitif.";
 
   const handleNext = () => {
     if (storyContent.trim().length > 0) {
+      // Save to localStorage
+      localStorage.setItem('ceritaKreatif_part1', storyContent);
       navigate('/tulis-cerita-kreatif-2');
     }
   };
@@ -27,12 +34,11 @@ const TulisCeritaKreatif = () => {
   };
 
   const showExample = () => {
-    const exampleText = "Halo, nama saya Andi dan saya adalah seorang lulusan desain grafis yang baru menyelesaikan kuliah tahun ini. Sejak kecil, saya memiliki passion yang besar dalam dunia desain dan seni visual. Impian saya adalah membuka studio kreatif yang dapat membantu UMKM dan startup lokal mengembangkan branding mereka dengan desain yang menarik dan profesional.\n\nSaya telah berpengalaman mengerjakan berbagai proyek freelance selama kuliah, mulai dari desain logo, kemasan produk, hingga kampanye visual untuk media sosial. Melalui pengalaman ini, saya melihat betapa banyak UMKM yang memiliki produk berkualitas namun kesulitan dalam hal branding dan pemasaran visual.\n\nStudio kreatif yang ingin saya bangun akan fokus pada pelayanan desain grafis, branding, dan konsultasi visual untuk bisnis skala kecil menengah. Saya percaya bahwa dengan desain yang tepat, bisnis lokal dapat bersaing di pasar yang semakin kompetitif.";
-    setStoryContent(exampleText);
+    setShowExampleModal(true);
   };
 
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas-kreatif');
+  const closeExampleModal = () => {
+    setShowExampleModal(false);
   };
 
   return (
@@ -82,16 +88,12 @@ const TulisCeritaKreatif = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
-          <button className="modern-btn secondary" disabled style={{opacity: 0.5}}>
+          <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya
           </button>
-          
-          <button 
+
+          <button
             className={`modern-btn ${storyContent.trim().length === 0 ? 'disabled' : ''}`}
             onClick={handleNext}
             disabled={storyContent.trim().length === 0}
@@ -101,6 +103,24 @@ const TulisCeritaKreatif = () => {
           </button>
         </div>
       </div>
+
+      {/* Example Modal */}
+      {showExampleModal && (
+        <div className="example-modal-overlay" onClick={closeExampleModal}>
+          <div className="example-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="example-modal-header">
+              <h3 className="modern-subheading">Contoh Cerita</h3>
+              <button className="example-modal-close" onClick={closeExampleModal}>✕</button>
+            </div>
+            <div className="example-modal-body">
+              <p className="example-text">{exampleText}</p>
+            </div>
+            <div className="example-modal-footer">
+              <button className="modern-btn" onClick={closeExampleModal}>Tutup</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

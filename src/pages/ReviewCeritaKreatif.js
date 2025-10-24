@@ -1,10 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProgressSteps from '../components/ProgressSteps';
 import '../styles/ReviewCerita.css';
 
 const ReviewCeritaKreatif = () => {
   const navigate = useNavigate();
+  const [storyData, setStoryData] = useState({
+    part1: '',
+    part2: '',
+    part3: '',
+    part4: '',
+    part5: '',
+    part6: '',
+    photos: []
+  });
+
+  useEffect(() => {
+    // Load story data from localStorage
+    setStoryData({
+      part1: localStorage.getItem('ceritaKreatif_part1') || '',
+      part2: localStorage.getItem('ceritaKreatif_part2') || '',
+      part3: localStorage.getItem('ceritaKreatif_part3') || '',
+      part4: localStorage.getItem('ceritaKreatif_part4') || '',
+      part5: localStorage.getItem('ceritaKreatif_part5') || '',
+      part6: localStorage.getItem('ceritaKreatif_part6') || '',
+      photos: JSON.parse(localStorage.getItem('ceritaKreatif_photos') || '[]')
+    });
+  }, []);
 
   const handleEdit = () => {
     navigate('/tulis-cerita-kreatif');
@@ -24,12 +46,11 @@ const ReviewCeritaKreatif = () => {
 
   const steps = [
     { number: 1, label: 'Tujuan', active: false },
-    { number: 2, label: 'Data diri', active: false },
-    { number: 3, label: 'Penerima', active: false },
-    { number: 4, label: 'Target donasi', active: false },
-    { number: 5, label: 'Judul', active: false },
-    { number: 6, label: 'Cerita', active: true },
-    { number: 7, label: 'Ajakan', active: false }
+    { number: 2, label: 'Penerima', active: false },
+    { number: 3, label: 'Target donasi', active: false },
+    { number: 4, label: 'Judul', active: false },
+    { number: 5, label: 'Cerita', active: true },
+    { number: 6, label: 'Ajakan', active: false }
   ];
 
   return (
@@ -57,53 +78,75 @@ const ReviewCeritaKreatif = () => {
         </div>
 
         <div className="story-content-modern">
-          {/* Section 1: About You and Project */}
           <div className="story-section-content">
-            <p className="modern-text" style={{fontWeight: '600', fontSize: '16px', marginBottom: '12px'}}>Tentang Kami dan Proyek:</p>
-            <p className="modern-text">Halo, nama saya Andi dan saya adalah seorang lulusan desain grafis yang baru menyelesaikan kuliah tahun ini. Sejak kecil, saya memiliki passion yang besar dalam dunia desain dan seni visual. Impian saya adalah membuka studio kreatif yang dapat membantu UMKM dan startup lokal mengembangkan branding mereka dengan desain yang menarik dan profesional.</p>
-            <p className="modern-text">Saya telah berpengalaman mengerjakan berbagai proyek freelance selama kuliah, mulai dari desain logo, kemasan produk, hingga kampanye visual untuk media sosial. Melalui pengalaman ini, saya melihat betapa banyak UMKM yang memiliki produk berkualitas namun kesulitan dalam hal branding dan pemasaran visual.</p>
-          </div>
-          
-          {/* Section 2: Project Details */}
-          <div className="story-section-content">
-            <p className="modern-text" style={{fontWeight: '600', fontSize: '16px', marginBottom: '12px'}}>Detail Proyek:</p>
-            <p className="modern-text">Proyek studio kreatif ini akan menawarkan layanan desain grafis terpadu untuk UMKM dan startup lokal. Kami akan menyediakan jasa pembuatan logo, identitas visual, kemasan produk, desain website, dan kampanye media sosial yang profesional namun terjangkau.</p>
-            <p className="modern-text">Target utama kami adalah UMKM yang memiliki produk berkualitas namun kesulitan dalam hal branding dan pemasaran visual. Studio ini akan berlokasi di kawasan kreatif Bandung dan akan dilengkapi dengan peralatan desain modern.</p>
-            
-            <img src="/dashboard/temani-mimpi-pejuang-pelosok-1756798332-465.webp" alt="Rencana studio kreatif" className="story-image-modern" />
-          </div>
-          
-          {/* Section 3: Experience and Skills */}
-          <div className="story-section-content">
-            <p className="modern-text" style={{fontWeight: '600', fontSize: '16px', marginBottom: '12px'}}>Pengalaman dan Keahlian:</p>
-            <p className="modern-text">Sebagai lulusan desain grafis dengan IPK 3.7 dari Universitas Padjadjaran, saya telah mengembangkan keahlian dalam berbagai software desain seperti Adobe Creative Suite, Figma, dan Sketch. Selama kuliah, saya aktif mengikuti berbagai kompetisi desain dan berhasil meraih juara 2 dalam Lomba Desain Logo Kota Bandung 2023.</p>
-            <p className="modern-text">Pengalaman freelance saya dimulai sejak semester 4, dimana saya telah menangani lebih dari 30 proyek dari berbagai klien, mulai dari UMKM kuliner, fashion, hingga startup teknologi.</p>
-          </div>
-          
-          {/* Section 4: Impact and Benefits */}
-          <div className="story-section-content">
-            <p className="modern-text" style={{fontWeight: '600', fontSize: '16px', marginBottom: '12px'}}>Dampak Positif:</p>
-            <p className="modern-text">Studio kreatif yang akan saya bangun akan memberikan solusi dengan menyediakan layanan desain profesional dengan harga yang terjangkau untuk UMKM. Kami akan membantu mereka meningkatkan nilai jual produk melalui kemasan dan branding yang menarik.</p>
-            <p className="modern-text">Dampak positif yang diharapkan adalah meningkatnya daya saing UMKM lokal, terciptanya lapangan kerja baru untuk desainer muda, dan berkembangnya ekosistem kreatif di kota Bandung.</p>
-            
-            <img src="/dashboard/wujudkan-mimpi-anak-pelosok-1756351894-334.webp" alt="Dampak positif proyek" className="story-image-modern" />
-          </div>
-          
-          {/* Section 5: Funding Plan */}
-          <div className="story-section-content">
-            <p className="modern-text" style={{fontWeight: '600', fontSize: '16px', marginBottom: '12px'}}>Rencana Penggunaan Dana:</p>
-            <p className="modern-text">Untuk mewujudkan studio kreatif ini, saya membutuhkan dana sebesar Rp 150.000.000 dengan rincian sebagai berikut:</p>
-            <p className="modern-text">1. Sewa tempat dan renovasi ruangan (24 bulan): Rp 60.000.000<br/>
-            2. Peralatan desain dan teknologi: Rp 60.000.000<br/>
-            3. Marketing dan promosi awal: Rp 8.000.000<br/>
-            4. Modal kerja operasional 6 bulan: Rp 22.000.000</p>
-          </div>
-          
-          {/* Section 6: Hopes and Commitment */}
-          <div className="story-section-content">
-            <p className="modern-text" style={{fontWeight: '600', fontSize: '16px', marginBottom: '12px'}}>Harapan dan Komitmen:</p>
-            <p className="modern-text">Harapan terbesar saya adalah dapat mewujudkan studio kreatif yang tidak hanya menjadi tempat kerja, tetapi juga menjadi pusat pengembangan kreativitas dan inovasi di bidang desain grafis. Saya bermimpi bahwa studio ini akan menjadi jembatan yang menghubungkan dunia desain profesional dengan UMKM yang membutuhkan.</p>
-            <p className="modern-text">Terima kasih kepada semua pihak yang telah memberikan dukungan, baik dalam bentuk doa maupun donasi. Saya berkomitmen untuk menjadikan studio ini sebagai wadah yang bermanfaat dan berkelanjutan untuk kemajuan industri kreatif Indonesia.</p>
+            {/* Part 1: Perkenalan */}
+            {storyData.part1 && (
+              <>
+                <h4 className="modern-text" style={{fontWeight: '600', fontSize: '16px', marginBottom: '12px', color: '#983ced'}}>Perkenalan Diri dan Proyek</h4>
+                <p className="modern-text" style={{whiteSpace: 'pre-wrap'}}>{storyData.part1}</p>
+              </>
+            )}
+
+            {/* Part 2: Detail Proyek + Photos */}
+            {storyData.part2 && (
+              <>
+                <h4 className="modern-text" style={{fontWeight: '600', fontSize: '16px', marginTop: '24px', marginBottom: '12px', color: '#983ced'}}>Detail Proyek atau Bisnis</h4>
+                <p className="modern-text" style={{whiteSpace: 'pre-wrap'}}>{storyData.part2}</p>
+
+                {/* Display uploaded photos */}
+                {storyData.photos && storyData.photos.length > 0 && (
+                  <div style={{margin: '20px 0', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px'}}>
+                    {storyData.photos.map((photo, index) => (
+                      <img
+                        key={index}
+                        src={photo}
+                        alt={`Proyek kreatif ${index + 1}`}
+                        className="story-image-modern"
+                      />
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
+
+            {/* Part 3: Pengalaman dan Keahlian */}
+            {storyData.part3 && (
+              <>
+                <h4 className="modern-text" style={{fontWeight: '600', fontSize: '16px', marginTop: '24px', marginBottom: '12px', color: '#983ced'}}>Pengalaman dan Keahlian</h4>
+                <p className="modern-text" style={{whiteSpace: 'pre-wrap'}}>{storyData.part3}</p>
+              </>
+            )}
+
+            {/* Part 4: Dampak Positif */}
+            {storyData.part4 && (
+              <>
+                <h4 className="modern-text" style={{fontWeight: '600', fontSize: '16px', marginTop: '24px', marginBottom: '12px', color: '#983ced'}}>Dampak Positif dan Manfaat</h4>
+                <p className="modern-text" style={{whiteSpace: 'pre-wrap'}}>{storyData.part4}</p>
+              </>
+            )}
+
+            {/* Part 5: Rencana Dana */}
+            {storyData.part5 && (
+              <>
+                <h4 className="modern-text" style={{fontWeight: '600', fontSize: '16px', marginTop: '24px', marginBottom: '12px', color: '#983ced'}}>Rencana Penggunaan Dana</h4>
+                <p className="modern-text" style={{whiteSpace: 'pre-wrap'}}>{storyData.part5}</p>
+              </>
+            )}
+
+            {/* Part 6: Harapan */}
+            {storyData.part6 && (
+              <>
+                <h4 className="modern-text" style={{fontWeight: '600', fontSize: '16px', marginTop: '24px', marginBottom: '12px', color: '#983ced'}}>Harapan dan Komitmen</h4>
+                <p className="modern-text" style={{whiteSpace: 'pre-wrap'}}>{storyData.part6}</p>
+              </>
+            )}
+
+            {/* Show message if no content */}
+            {!storyData.part1 && !storyData.part2 && !storyData.part3 && !storyData.part4 && !storyData.part5 && !storyData.part6 && (
+              <p className="modern-text" style={{textAlign: 'center', color: '#6B7280', padding: '40px 20px'}}>
+                Belum ada cerita yang ditulis. Silakan klik "✏️ Ubah Cerita" untuk menulis cerita galang dana Anda.
+              </p>
+            )}
           </div>
         </div>
       </div>

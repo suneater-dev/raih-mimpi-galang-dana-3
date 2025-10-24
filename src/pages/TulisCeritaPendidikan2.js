@@ -4,10 +4,13 @@ import '../styles/TulisCerita.css';
 
 const TulisCeritaPendidikan2 = () => {
   const navigate = useNavigate();
-  const [storyContent, setStoryContent] = useState('');
+  const [storyContent, setStoryContent] = useState(() => {
+    return localStorage.getItem('ceritaPendidikan_part2') || '';
+  });
 
   const handleNext = () => {
     if (storyContent.trim().length > 0) {
+      localStorage.setItem('ceritaPendidikan_part2', storyContent);
       navigate('/tulis-cerita-pendidikan-3');
     }
   };
@@ -29,10 +32,6 @@ const TulisCeritaPendidikan2 = () => {
   const showExample = () => {
     const exampleText = "Saat ini, kondisi siswa-siswa di sekolah kami sangat memprihatinkan dari segi ekonomi dan akses pendidikan. Dari 120 siswa yang terdaftar, sekitar 40% dari mereka berasal dari keluarga dengan penghasilan di bawah garis kemiskinan. Banyak siswa yang datang ke sekolah tanpa sarapan dan hanya membawa bekal seadanya.\n\nFasilitas sekolah kami juga sangat terbatas. Kami kekurangan buku pelajaran yang memadai, dengan ratio 1 buku untuk 3-4 siswa. Perpustakaan sekolah hanya memiliki 200 buku yang sebagian besar sudah rusak dan ketinggalan zaman. Laboratorium komputer tidak ada, sehingga siswa tidak mendapat pengenalan teknologi yang sangat penting di era digital ini.\n\nYang paling mengkhawatirkan adalah tingkat putus sekolah yang terus meningkat. Tahun lalu, 15 siswa terpaksa berhenti sekolah karena orang tua mereka tidak mampu membiayai kebutuhan sekolah seperti seragam, sepatu, tas, dan alat tulis. Beberapa anak bahkan harus membantu orang tua bekerja di sawah untuk memenuhi kebutuhan sehari-hari keluarga.";
     setStoryContent(exampleText);
-  };
-
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas-pendidikan');
   };
 
   return (
@@ -82,10 +81,6 @@ const TulisCeritaPendidikan2 = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya

@@ -18,7 +18,6 @@ const KelompokInfo = () => {
     website: '',
     bidangKegiatan: '',
     tahunBerdiri: '',
-    jumlahAnggota: '',
 
     // Penanggung Jawab
     namaPenanggungJawab: '',
@@ -45,6 +44,9 @@ const KelompokInfo = () => {
     yayasan: 'Yayasan',
     komunitas: 'Komunitas'
   };
+
+  // Get the display label for current organization type
+  const orgLabel = organizationTypeLabels[organizationType] || 'Lembaga';
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -104,25 +106,25 @@ const KelompokInfo = () => {
 
     // Validasi data organisasi
     if (!formData.jenisKelompok) {
-      newErrors.jenisKelompok = 'Jenis kelompok harus dipilih';
+      newErrors.jenisKelompok = `Jenis ${orgLabel.toLowerCase()} harus dipilih`;
     }
 
     if (!formData.namaOrganisasi.trim()) {
-      newErrors.namaOrganisasi = 'Nama organisasi harus diisi';
+      newErrors.namaOrganisasi = `Nama ${orgLabel.toLowerCase()} harus diisi`;
     }
 
     if (!formData.alamatOrganisasi.trim()) {
-      newErrors.alamatOrganisasi = 'Alamat organisasi harus diisi';
+      newErrors.alamatOrganisasi = `Alamat ${orgLabel.toLowerCase()} harus diisi`;
     }
 
     if (!formData.emailOrganisasi.trim()) {
-      newErrors.emailOrganisasi = 'Email organisasi harus diisi';
+      newErrors.emailOrganisasi = `Email ${orgLabel.toLowerCase()} harus diisi`;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.emailOrganisasi)) {
       newErrors.emailOrganisasi = 'Format email tidak valid';
     }
 
     if (!formData.teleponOrganisasi.trim()) {
-      newErrors.teleponOrganisasi = 'Nomor telepon organisasi harus diisi';
+      newErrors.teleponOrganisasi = `Nomor telepon ${orgLabel.toLowerCase()} harus diisi`;
     } else if (!/^[\d\s\-\+\(\)]+$/.test(formData.teleponOrganisasi)) {
       newErrors.teleponOrganisasi = 'Format nomor telepon tidak valid';
     }
@@ -223,30 +225,27 @@ const KelompokInfo = () => {
       <div className="modern-card">
         <div className="form-header-modern">
           <div className="organization-type-badge">
-            {organizationTypeLabels[organizationType] || 'Lembaga'}
+            {orgLabel}
           </div>
           <h1 className="modern-heading">
-            {organizationType === 'masjid' ? 'Informasi Masjid' : 'Informasi Kelompok/Organisasi'}
+            Informasi {orgLabel}
           </h1>
           <p className="modern-text">
-            {organizationType === 'masjid'
-              ? 'Lengkapi informasi masjid dan penanggung jawab untuk memverifikasi masjid Anda'
-              : 'Lengkapi informasi organisasi dan penanggung jawab untuk memverifikasi kelompok Anda'
-            }
+            Lengkapi informasi {orgLabel.toLowerCase()} dan penanggung jawab untuk memverifikasi {orgLabel.toLowerCase()} Anda
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="kelompok-form-modern">
-          {/* Informasi Organisasi/Masjid */}
+          {/* Informasi Organisasi */}
           <div className="section-divider-modern">
             <h2 className="section-title-modern">
-              📋 {organizationType === 'masjid' ? 'Informasi Masjid' : 'Informasi Organisasi'}
+              📋 Informasi {orgLabel}
             </h2>
           </div>
 
           <div className="form-group-modern">
             <label htmlFor="namaOrganisasi" className="form-label-modern">
-              {organizationType === 'masjid' ? 'Nama Masjid' : 'Nama Organisasi'} *
+              Nama {orgLabel} *
             </label>
             <input
               type="text"
@@ -264,7 +263,7 @@ const KelompokInfo = () => {
 
           <div className="form-group-modern">
             <label htmlFor="alamatOrganisasi" className="form-label-modern">
-              {organizationType === 'masjid' ? 'Alamat Masjid' : 'Alamat Organisasi'} *
+              Alamat {orgLabel} *
             </label>
             <textarea
               id="alamatOrganisasi"
@@ -272,7 +271,7 @@ const KelompokInfo = () => {
               value={formData.alamatOrganisasi}
               onChange={handleInputChange}
               className={`modern-textarea ${errors.alamatOrganisasi ? 'error' : ''}`}
-              placeholder={organizationType === 'masjid' ? 'Alamat lengkap masjid' : 'Alamat lengkap kantor/sekretariat organisasi'}
+              placeholder={`Alamat lengkap ${organizationType === 'masjid' ? 'masjid' : 'kantor/sekretariat ' + orgLabel.toLowerCase()}`}
               rows="3"
             />
             {errors.alamatOrganisasi && (
@@ -283,7 +282,7 @@ const KelompokInfo = () => {
           <div className="form-row-modern">
             <div className="form-group-modern">
               <label htmlFor="emailOrganisasi" className="form-label-modern">
-                {organizationType === 'masjid' ? 'Email Masjid' : 'Email Organisasi'} *
+                Email {orgLabel} *
               </label>
               <input
                 type="email"
@@ -292,7 +291,7 @@ const KelompokInfo = () => {
                 value={formData.emailOrganisasi}
                 onChange={handleInputChange}
                 className={`modern-input ${errors.emailOrganisasi ? 'error' : ''}`}
-                placeholder={organizationType === 'masjid' ? 'masjid@email.com' : 'organisasi@email.com'}
+                placeholder={`${orgLabel.toLowerCase()}@email.com`}
               />
               {errors.emailOrganisasi && (
                 <span className="error-message-modern">{errors.emailOrganisasi}</span>
@@ -301,7 +300,7 @@ const KelompokInfo = () => {
 
             <div className="form-group-modern">
               <label htmlFor="teleponOrganisasi" className="form-label-modern">
-                {organizationType === 'masjid' ? 'Telepon Masjid' : 'Telepon Organisasi'} *
+                Telepon {orgLabel} *
               </label>
               <input
                 type="tel"
@@ -329,46 +328,28 @@ const KelompokInfo = () => {
               value={formData.website}
               onChange={handleInputChange}
               className="modern-input"
-              placeholder={organizationType === 'masjid' ? 'https://www.masjid.com' : 'https://www.organisasi.com'}
+              placeholder={`https://www.${orgLabel.toLowerCase()}.com`}
             />
           </div>
 
-          <div className="form-row-modern">
-            <div className="form-group-modern">
-              <label htmlFor="tahunBerdiri" className="form-label-modern">
-                Tahun Berdiri *
-              </label>
-              <input
-                type="number"
-                id="tahunBerdiri"
-                name="tahunBerdiri"
-                value={formData.tahunBerdiri}
-                onChange={handleInputChange}
-                className={`modern-input ${errors.tahunBerdiri ? 'error' : ''}`}
-                placeholder="2020"
-                min="1945"
-                max={new Date().getFullYear()}
-              />
-              {errors.tahunBerdiri && (
-                <span className="error-message-modern">{errors.tahunBerdiri}</span>
-              )}
-            </div>
-
-            <div className="form-group-modern">
-              <label htmlFor="jumlahAnggota" className="form-label-modern">
-                {organizationType === 'masjid' ? 'Kapasitas Jamaah (Opsional)' : 'Jumlah Anggota (Opsional)'}
-              </label>
-              <input
-                type="number"
-                id="jumlahAnggota"
-                name="jumlahAnggota"
-                value={formData.jumlahAnggota}
-                onChange={handleInputChange}
-                className="modern-input"
-                placeholder="50"
-                min="1"
-              />
-            </div>
+          <div className="form-group-modern">
+            <label htmlFor="tahunBerdiri" className="form-label-modern">
+              Tahun Berdiri *
+            </label>
+            <input
+              type="number"
+              id="tahunBerdiri"
+              name="tahunBerdiri"
+              value={formData.tahunBerdiri}
+              onChange={handleInputChange}
+              className={`modern-input ${errors.tahunBerdiri ? 'error' : ''}`}
+              placeholder="2020"
+              min="1945"
+              max={new Date().getFullYear()}
+            />
+            {errors.tahunBerdiri && (
+              <span className="error-message-modern">{errors.tahunBerdiri}</span>
+            )}
           </div>
 
           {/* Informasi Penanggung Jawab */}
@@ -492,7 +473,7 @@ const KelompokInfo = () => {
           {/* Dokumen Verifikasi */}
           <div className="section-divider-modern">
             <h2 className="section-title-modern">📄 Dokumen Verifikasi</h2>
-            <p className="section-desc-modern">Unggah dokumen untuk memverifikasi keabsahan organisasi Anda</p>
+            <p className="section-desc-modern">Unggah dokumen untuk memverifikasi keabsahan {orgLabel.toLowerCase()} Anda</p>
           </div>
 
           {/* Akte Pendirian - For Masjid and Yayasan */}
@@ -574,7 +555,7 @@ const KelompokInfo = () => {
           {/* NPWP - Optional for all types */}
           <div className="form-group-modern">
             <label className="form-label-modern">
-              {organizationType === 'masjid' ? 'NPWP Masjid (Opsional)' : 'NPWP Organisasi (Opsional)'}
+              NPWP {orgLabel} (Opsional)
             </label>
             <div className="upload-area-modern">
               <input
@@ -681,7 +662,7 @@ const KelompokInfo = () => {
 
           <div className="info-note-modern">
             <p className="modern-text small">
-              * Dokumen wajib harus diunggah untuk verifikasi {organizationType === 'masjid' ? 'masjid' : 'organisasi'}. Format yang diterima: PDF, JPG, PNG dengan ukuran maksimal 5MB per file.
+              * Dokumen wajib harus diunggah untuk verifikasi {orgLabel.toLowerCase()}. Format yang diterima: PDF, JPG, PNG dengan ukuran maksimal 5MB per file.
               {organizationType === 'masjid' && ' Masjid memerlukan Akte Pendirian dan KTP Penanggung Jawab.'}
               {organizationType === 'yayasan' && ' Yayasan memerlukan Akte Pendirian dan KTP Penanggung Jawab.'}
               {organizationType === 'lembaga' && ' Lembaga memerlukan Izin Operasional/SIUP dan KTP Penanggung Jawab.'}

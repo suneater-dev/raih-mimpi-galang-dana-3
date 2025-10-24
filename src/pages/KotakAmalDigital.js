@@ -12,25 +12,25 @@ const KotakAmalDigital = () => {
     {
       id: 'infaq-pembangunan',
       title: 'Infaq Pembangunan',
-      icon: '🏗️',
+      icon: '',
       description: 'Galang dana untuk pembangunan, renovasi, dan pengembangan fisik masjid'
     },
     {
       id: 'operasional-masjid',
       title: 'Operasional Masjid',
-      icon: '💰',
+      icon: '',
       description: 'Dana untuk kebutuhan operasional sehari-hari masjid seperti listrik, air, dan kebersihan'
     },
     {
       id: 'santunan-yatim',
       title: 'Santunan Yatim & Lansia',
-      icon: '🤲',
+      icon: '',
       description: 'Program santunan dan bantuan untuk anak yatim dan lansia di lingkungan masjid'
     },
     {
       id: 'pemberdayaan-masjid',
       title: 'Program Pemberdayaan Masjid',
-      icon: '📚',
+      icon: '',
       description: 'Program pendidikan, pelatihan, dan pemberdayaan masyarakat berbasis masjid'
     }
   ];
@@ -51,7 +51,7 @@ const KotakAmalDigital = () => {
         {/* Page Header */}
         <div className="kotak-amal-header">
           <div className="kotak-amal-badge">
-            🕌 Kotak Amal Digital
+            Kotak Amal Digital
           </div>
           <h1 className="kotak-amal-title">Kotak Amal Digital</h1>
           <p className="kotak-amal-subtitle">
@@ -84,7 +84,7 @@ const KotakAmalDigital = () => {
         {/* Info Note */}
         <div className="kotak-amal-info">
           <p className="info-text-kotak-amal">
-            💡 <strong>Kotak Amal Digital</strong> memudahkan jamaah dan donatur untuk berinfaq secara online ke masjid Anda dengan kategori yang jelas dan transparan
+            <strong>Kotak Amal Digital</strong> memudahkan jamaah dan donatur untuk berinfaq secara online ke masjid Anda dengan kategori yang jelas dan transparan
           </p>
         </div>
 

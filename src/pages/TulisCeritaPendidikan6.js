@@ -4,10 +4,13 @@ import '../styles/TulisCerita.css';
 
 const TulisCeritaPendidikan6 = () => {
   const navigate = useNavigate();
-  const [storyContent, setStoryContent] = useState('');
+  const [storyContent, setStoryContent] = useState(() => {
+    return localStorage.getItem('ceritaPendidikan_part6') || '';
+  });
 
   const handleNext = () => {
     if (storyContent.trim().length > 0) {
+      localStorage.setItem('ceritaPendidikan_part6', storyContent);
       navigate('/review-cerita-pendidikan');
     }
   };
@@ -29,10 +32,6 @@ const TulisCeritaPendidikan6 = () => {
   const showExample = () => {
     const exampleText = "Kami berharap dan berdoa agar program bantuan pendidikan ini dapat berjalan dengan lancar dan memberikan dampak positif yang berkelanjutan bagi masa depan anak-anak di desa kami. Semoga dengan bantuan dari para donatur yang mulia hati, anak-anak ini dapat merasakan kebahagiaan belajar tanpa terbebani masalah ekonomi keluarga.\n\nHarapan terbesar kami adalah melihat senyuman ceria di wajah anak-anak ketika mereka dapat bersekolah dengan layak. Mereka berhak mendapatkan pendidikan yang berkualitas sama seperti anak-anak di kota. Dengan fasilitas yang lebih baik dan tanpa beban biaya, kami yakin prestasi akademik mereka akan meningkat pesat.\n\nKami bermimpi suatu hari nanti, anak-anak lulusan sekolah kami dapat melanjutkan pendidikan ke jenjang yang lebih tinggi, bahkan ada di antaranya yang bisa menjadi dokter, guru, atau profesi lain yang dapat membangun daerah ini menjadi lebih maju. Pendidikan adalah kunci untuk memutus rantai kemiskinan.\n\nTerima kasih kepada semua pihak yang telah memberikan dukungan dan kepercayaan. Semoga kebaikan yang diberikan mendapat balasan yang berlipat ganda dari Yang Maha Kuasa.";
     setStoryContent(exampleText);
-  };
-
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas-pendidikan');
   };
 
   return (
@@ -82,10 +81,6 @@ const TulisCeritaPendidikan6 = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya

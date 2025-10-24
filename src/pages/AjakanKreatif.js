@@ -12,7 +12,7 @@ const AjakanKreatif = () => {
   };
 
   const handleNext = () => {
-    navigate('/ads-offering-kreatif');
+    navigate('/campaign-complete');
   };
 
   const handleSaveAndContinueLater = () => {
@@ -25,12 +25,11 @@ const AjakanKreatif = () => {
 
   const steps = [
     { number: 1, label: 'Tujuan', active: false },
-    { number: 2, label: 'Data diri', active: false },
-    { number: 3, label: 'Penerima', active: false },
-    { number: 4, label: 'Target donasi', active: false },
-    { number: 5, label: 'Judul', active: false },
-    { number: 6, label: 'Cerita', active: false },
-    { number: 7, label: 'Ajakan', active: true }
+    { number: 2, label: 'Penerima', active: false },
+    { number: 3, label: 'Target donasi', active: false },
+    { number: 4, label: 'Judul', active: false },
+    { number: 5, label: 'Cerita', active: false },
+    { number: 6, label: 'Ajakan', active: true }
   ];
 
   return (

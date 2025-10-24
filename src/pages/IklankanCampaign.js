@@ -6,6 +6,7 @@ const IklankanCampaign = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('Semua');
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const [campaigns] = useState([
     // Sangat Buruk - Priority at top
@@ -168,7 +169,16 @@ const IklankanCampaign = () => {
     }
   };
 
-  // Filter campaigns based on search query and active filter
+  // Get search results for dropdown
+  const getSearchResults = () => {
+    if (!searchQuery.trim()) return [];
+
+    return campaigns.filter(campaign =>
+      campaign.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  };
+
+  // Filter campaigns based on active filter (for main list)
   const getFilteredCampaigns = () => {
     let filtered = campaigns;
 
@@ -177,17 +187,36 @@ const IklankanCampaign = () => {
       filtered = filtered.filter(campaign => campaign.status === activeFilter);
     }
 
-    // Filter by search query
-    if (searchQuery.trim()) {
-      filtered = filtered.filter(campaign =>
-        campaign.title.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
-
     return filtered;
   };
 
+  const searchResults = getSearchResults();
   const displayedCampaigns = getFilteredCampaigns();
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    setShowDropdown(value.trim().length > 0);
+  };
+
+  const handleSearchClear = () => {
+    setSearchQuery('');
+    setShowDropdown(false);
+  };
+
+  const handleSelectCampaign = (campaign) => {
+    setSearchQuery('');
+    setShowDropdown(false);
+    // Scroll to the campaign card
+    const element = document.getElementById(`campaign-${campaign.id}`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      element.style.animation = 'highlightPulse 2s ease';
+      setTimeout(() => {
+        element.style.animation = '';
+      }, 2000);
+    }
+  };
 
   return (
     <div className="container">
@@ -219,25 +248,71 @@ const IklankanCampaign = () => {
 
         {/* Search Bar */}
         <div className="promote-search-section">
-          <div className="promote-search-container">
-            <svg className="promote-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8"/>
-              <path d="m21 21-4.35-4.35"/>
-            </svg>
-            <input
-              type="text"
-              placeholder="Cari campaign berdasarkan judul..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="promote-search-input"
-            />
-            {searchQuery && (
-              <button
-                className="promote-search-clear"
-                onClick={() => setSearchQuery('')}
-              >
-                ×
-              </button>
+          <div className="promote-search-wrapper">
+            <div className="promote-search-container">
+              <svg className="promote-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+              </svg>
+              <input
+                type="text"
+                placeholder="Cari campaign berdasarkan judul..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+                onFocus={() => searchQuery.trim() && setShowDropdown(true)}
+                className="promote-search-input"
+              />
+              {searchQuery && (
+                <button
+                  className="promote-search-clear"
+                  onClick={handleSearchClear}
+                >
+                  ×
+                </button>
+              )}
+            </div>
+
+            {/* Search Dropdown */}
+            {showDropdown && searchResults.length > 0 && (
+              <div className="search-dropdown">
+                {searchResults.map((campaign) => (
+                  <div
+                    key={campaign.id}
+                    className="search-dropdown-item"
+                    onClick={() => handleSelectCampaign(campaign)}
+                  >
+                    <img
+                      src={campaign.image}
+                      alt={campaign.title}
+                      className="search-dropdown-image"
+                    />
+                    <div className="search-dropdown-content">
+                      <div className="search-dropdown-category">{campaign.category}</div>
+                      <div className="search-dropdown-title">{campaign.title}</div>
+                      <div className="search-dropdown-status">
+                        <span className={`search-status-badge ${campaign.status.toLowerCase().replace(' ', '-')}`}>
+                          {campaign.status}
+                        </span>
+                        <span className="search-dropdown-collected">
+                          {formatCurrency(campaign.collected)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {showDropdown && searchQuery.trim() && searchResults.length === 0 && (
+              <div className="search-dropdown">
+                <div className="search-no-results">
+                  <svg className="search-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                  </svg>
+                  <p>Tidak ada campaign ditemukan</p>
+                </div>
+              </div>
             )}
           </div>
         </div>
@@ -258,7 +333,7 @@ const IklankanCampaign = () => {
         <div className="promote-campaigns-list">
           {displayedCampaigns.length > 0 ? (
             displayedCampaigns.map((campaign) => (
-            <div key={campaign.id} className="promote-campaign-card">
+            <div key={campaign.id} id={`campaign-${campaign.id}`} className="promote-campaign-card">
               <div className="promote-card-content">
                 {/* Campaign Header with Image */}
                 <div className="promote-campaign-header">

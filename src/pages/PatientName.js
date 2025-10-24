@@ -46,49 +46,59 @@ const PatientName = () => {
       </div>
 
       {/* Main Content */}
-      <div className="main-content-modern">
-        <div className="form-section-modern">
-          {/* Patient Name */}
-          <div className="form-group-modern">
-            <label className="form-label-modern">Nama pasien</label>
-            <input 
-              type="text" 
-              className="modern-input patient-input" 
-              placeholder="Nama pasien sesuai KK & dokumen medis"
-              value={patientName}
-              onChange={(e) => setPatientName(e.target.value)}
-            />
-          </div>
+      <div className="modern-card" style={{margin: '20px', marginBottom: '100px'}}>
+        <h2 className="modern-subheading" style={{marginBottom: '24px'}}>Data Pasien</h2>
 
-          {/* Disease/Condition */}
-          <div className="form-group-modern">
-            <label className="form-label-modern">Penyakit atau kondisi yang diderita</label>
-            <p className="form-description-modern">Pastikan nama penyakit sesuai dengan yang tertera di dokumen medis</p>
-            <input 
-              type="text" 
-              className="modern-input patient-input" 
-              placeholder="Nama penyakit sesuai dokumen medis"
-              value={disease}
-              onChange={(e) => setDisease(e.target.value)}
-            />
-          </div>
+        {/* Patient Name */}
+        <div className="form-group-modern">
+          <label className="form-label-modern">Nama pasien</label>
+          <input
+            type="text"
+            className="modern-input"
+            placeholder="Nama lengkap sesuai dokumen"
+            value={patientName}
+            onChange={(e) => setPatientName(e.target.value)}
+          />
+        </div>
+
+        {/* Disease/Condition */}
+        <div className="form-group-modern">
+          <label className="form-label-modern">Diagnosis penyakit</label>
+          <input
+            type="text"
+            className="modern-input"
+            placeholder="Nama penyakit sesuai dokumen medis"
+            value={disease}
+            onChange={(e) => setDisease(e.target.value)}
+          />
+        </div>
+
+        {/* Info Note */}
+        <div style={{
+          marginTop: '20px',
+          padding: '12px 16px',
+          backgroundColor: '#F9FAFB',
+          borderLeft: '3px solid #983ced',
+          borderRadius: '4px'
+        }}>
+          <p className="modern-text" style={{fontSize: '13px', color: '#6B7280', margin: 0}}>
+            💡 Pastikan nama dan penyakit sesuai dengan dokumen medis resmi
+          </p>
         </div>
       </div>
 
       {/* Bottom Navigation */}
       <div className="bottom-nav-modern">
-        <div className="nav-buttons-container">
-          <button className="nav-btn-secondary" onClick={handlePrevious}>
-            Sebelumnya
-          </button>
-          <button 
-            className={`nav-btn-primary ${(!patientName.trim() || !disease.trim()) ? 'disabled' : ''}`}
-            onClick={handleNext}
-            disabled={!patientName.trim() || !disease.trim()}
-          >
-            Selanjutnya
-          </button>
-        </div>
+        <button className="modern-btn secondary" onClick={handlePrevious}>
+          ← Sebelumnya
+        </button>
+        <button
+          className={`modern-btn ${(!patientName.trim() || !disease.trim()) ? 'disabled' : ''}`}
+          onClick={handleNext}
+          disabled={!patientName.trim() || !disease.trim()}
+        >
+          Selanjutnya →
+        </button>
       </div>
     </div>
   );

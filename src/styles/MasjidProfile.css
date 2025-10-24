@@ -179,6 +179,141 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
 }
 
+/* Gallery Slider */
+.gallery-slider-container {
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(248, 250, 252, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.gallery-slider {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-slide {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* 4:3 Aspect Ratio */
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.gallery-slide img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Slider Navigation Arrows */
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(152, 60, 237, 0.3);
+  color: #983ced;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  padding: 0;
+}
+
+.slider-nav:hover {
+  background: #983ced;
+  color: white;
+  border-color: #983ced;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 4px 16px rgba(152, 60, 237, 0.4);
+}
+
+.slider-nav:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.slider-nav.prev {
+  left: 16px;
+}
+
+.slider-nav.next {
+  right: 16px;
+}
+
+/* Slider Dots */
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 0;
+}
+
+.slider-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(152, 60, 237, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+}
+
+.slider-dot:hover {
+  background: rgba(152, 60, 237, 0.4);
+  transform: scale(1.2);
+}
+
+.slider-dot.active {
+  background: #983ced;
+  width: 32px;
+  border-radius: 6px;
+}
+
+/* Gallery Counter */
+.gallery-counter {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #983ced;
+  margin-top: 12px;
+  margin-bottom: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
 /* Gallery Preview Grid */
 .gallery-preview-grid {
   display: grid;
@@ -404,6 +539,44 @@
     font-size: 14px;
   }
 
+  /* Slider Mobile */
+  .gallery-slider-container {
+    padding: 16px;
+  }
+
+  .slider-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .slider-nav.prev {
+    left: 12px;
+  }
+
+  .slider-nav.next {
+    right: 12px;
+  }
+
+  .slider-dots {
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .slider-dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .slider-dot.active {
+    width: 28px;
+  }
+
+  .gallery-counter {
+    font-size: 13px;
+    margin-top: 10px;
+  }
+
   .gallery-preview-grid {
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
     gap: 12px;
@@ -491,6 +664,44 @@
 
   .preview-overlay span {
     font-size: 13px;
+  }
+
+  /* Slider Mobile Small */
+  .gallery-slider-container {
+    padding: 14px;
+  }
+
+  .slider-nav {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  .slider-nav.prev {
+    left: 8px;
+  }
+
+  .slider-nav.next {
+    right: 8px;
+  }
+
+  .slider-dots {
+    gap: 6px;
+    margin-top: 14px;
+  }
+
+  .slider-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .slider-dot.active {
+    width: 24px;
+  }
+
+  .gallery-counter {
+    font-size: 12px;
+    margin-top: 8px;
   }
 
   .gallery-preview-grid {
@@ -584,5 +795,37 @@
 
   .preview-overlay {
     opacity: 0.7;
+  }
+
+  /* Slider Touch Optimization */
+  .slider-nav {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+
+  .slider-nav:hover {
+    transform: translateY(-50%);
+  }
+
+  .slider-nav:active {
+    transform: translateY(-50%) scale(0.9);
+  }
+
+  .slider-dot {
+    width: 14px;
+    height: 14px;
+  }
+
+  .slider-dot:hover {
+    transform: none;
+  }
+
+  .slider-dot:active {
+    transform: scale(0.9);
+  }
+
+  .slider-dot.active {
+    width: 36px;
   }
 }

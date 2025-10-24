@@ -4,10 +4,16 @@ import '../styles/TulisCerita.css';
 
 const TulisCeritaKreatif3 = () => {
   const navigate = useNavigate();
-  const [storyContent, setStoryContent] = useState('');
+  const [storyContent, setStoryContent] = useState(() => {
+    return localStorage.getItem('ceritaKreatif_part3') || '';
+  });
+  const [showExampleModal, setShowExampleModal] = useState(false);
+
+  const exampleText = "Sebagai lulusan desain grafis dengan IPK 3.7 dari Universitas Padjadjaran, saya telah mengembangkan keahlian dalam berbagai software desain seperti Adobe Creative Suite, Figma, dan Sketch. Selama kuliah, saya aktif mengikuti berbagai kompetisi desain dan berhasil meraih juara 2 dalam Lomba Desain Logo Kota Bandung 2023.\n\nPengalaman freelance saya dimulai sejak semester 4, dimana saya telah menangani lebih dari 30 proyek dari berbagai klien, mulai dari UMKM kuliner, fashion, hingga startup teknologi. Beberapa achievement yang saya raih antara lain:\n- Desain logo dan branding untuk 15+ UMKM lokal\n- Menciptakan kemasan produk yang meningkatkan penjualan klien hingga 40%\n- Mengelola media sosial visual untuk 5 brand dengan total followers 50K+";
 
   const handleNext = () => {
     if (storyContent.trim().length > 0) {
+      localStorage.setItem('ceritaKreatif_part3', storyContent);
       navigate('/tulis-cerita-kreatif-4');
     }
   };
@@ -27,12 +33,11 @@ const TulisCeritaKreatif3 = () => {
   };
 
   const showExample = () => {
-    const exampleText = "Sebagai lulusan desain grafis dengan IPK 3.7 dari Universitas Padjadjaran, saya telah mengembangkan keahlian dalam berbagai software desain seperti Adobe Creative Suite, Figma, dan Sketch. Selama kuliah, saya aktif mengikuti berbagai kompetisi desain dan berhasil meraih juara 2 dalam Lomba Desain Logo Kota Bandung 2023.\n\nPengalaman freelance saya dimulai sejak semester 4, dimana saya telah menangani lebih dari 30 proyek dari berbagai klien, mulai dari UMKM kuliner, fashion, hingga startup teknologi. Beberapa achievement yang saya raih antara lain:\n- Desain logo dan branding untuk 15+ UMKM lokal\n- Menciptakan kemasan produk yang meningkatkan penjualan klien hingga 40%\n- Mengelola media sosial visual untuk 5 brand dengan total followers 50K+";
-    setStoryContent(exampleText);
+    setShowExampleModal(true);
   };
 
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas-kreatif');
+  const closeExampleModal = () => {
+    setShowExampleModal(false);
   };
 
   return (
@@ -82,16 +87,12 @@ const TulisCeritaKreatif3 = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya
           </button>
-          
-          <button 
+
+          <button
             className={`modern-btn ${storyContent.trim().length === 0 ? 'disabled' : ''}`}
             onClick={handleNext}
             disabled={storyContent.trim().length === 0}
@@ -101,6 +102,24 @@ const TulisCeritaKreatif3 = () => {
           </button>
         </div>
       </div>
+
+      {/* Example Modal */}
+      {showExampleModal && (
+        <div className="example-modal-overlay" onClick={closeExampleModal}>
+          <div className="example-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="example-modal-header">
+              <h3 className="modern-subheading">Contoh Cerita</h3>
+              <button className="example-modal-close" onClick={closeExampleModal}>✕</button>
+            </div>
+            <div className="example-modal-body">
+              <p className="example-text">{exampleText}</p>
+            </div>
+            <div className="example-modal-footer">
+              <button className="modern-btn" onClick={closeExampleModal}>Tutup</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

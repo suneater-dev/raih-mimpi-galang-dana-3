@@ -9,9 +9,7 @@ const PenerimaPendidikan = () => {
   const [penerimaData, setPenerimaData] = useState({
     namaPenerima: '',
     hubungan: '',
-    alamat: '',
-    nomorRekening: '',
-    bankName: ''
+    alamat: ''
   });
 
   // Get data from previous steps
@@ -36,23 +34,20 @@ const PenerimaPendidikan = () => {
   };
 
   const handleBack = () => {
-    navigate('/data-diri-pendidikan', { state: previousData });
+    navigate('/tujuan-detail-pendidikan', { state: previousData });
   };
 
-  const isFormValid = penerimaData.namaPenerima.trim() && 
-                    penerimaData.hubungan.trim() && 
-                    penerimaData.alamat.trim() && 
-                    penerimaData.nomorRekening.trim() && 
-                    penerimaData.bankName.trim();
+  const isFormValid = penerimaData.namaPenerima.trim() &&
+                    penerimaData.hubungan.trim() &&
+                    penerimaData.alamat.trim();
 
   const steps = [
     { number: 1, label: 'Tujuan', active: false },
-    { number: 2, label: 'Data diri', active: false },
-    { number: 3, label: 'Penerima', active: true },
-    { number: 4, label: 'Target donasi', active: false },
-    { number: 5, label: 'Judul', active: false },
-    { number: 6, label: 'Cerita', active: false },
-    { number: 7, label: 'Ajakan', active: false }
+    { number: 2, label: 'Penerima', active: true },
+    { number: 3, label: 'Target donasi', active: false },
+    { number: 4, label: 'Judul', active: false },
+    { number: 5, label: 'Cerita', active: false },
+    { number: 6, label: 'Ajakan', active: false }
   ];
 
   return (
@@ -72,18 +67,18 @@ const PenerimaPendidikan = () => {
 
       {/* Form Section */}
       <div className="modern-card">
-        <h2 className="modern-subheading">Data penerima bantuan pendidikan</h2>
+        <h2 className="modern-subheading">Data penerima bantuan</h2>
         <p className="modern-text" style={{marginBottom: '24px', color: '#6B7280'}}>
-          Masukkan data lengkap penerima bantuan pendidikan atau penanggung jawab program pendidikan.
+          Masukkan data lengkap penerima bantuan pendidikan.
         </p>
 
           {/* Nama Penerima */}
           <div className="form-group-modern">
-            <label className="form-label-modern">Nama penerima bantuan / Siswa</label>
-            <input 
-              type="text" 
-              className="modern-input" 
-              placeholder="Nama lengkap siswa penerima bantuan"
+            <label className="form-label-modern">Nama penerima bantuan</label>
+            <input
+              type="text"
+              className="modern-input"
+              placeholder="Nama lengkap penerima bantuan pendidikan"
               value={penerimaData.namaPenerima}
               onChange={(e) => handleInputChange('namaPenerima', e.target.value)}
             />
@@ -92,10 +87,10 @@ const PenerimaPendidikan = () => {
           {/* Hubungan */}
           <div className="form-group-modern">
             <label className="form-label-modern">Hubungan dengan Anda</label>
-            <input 
-              type="text" 
-              className="modern-input" 
-              placeholder="Contoh: Anak, Orang tua, Guru, Kepala Sekolah, dll"
+            <input
+              type="text"
+              className="modern-input"
+              placeholder="Contoh: Kepala Sekolah, Ketua Yayasan, Koordinator Program, dll"
               value={penerimaData.hubungan}
               onChange={(e) => handleInputChange('hubungan', e.target.value)}
             />
@@ -103,37 +98,13 @@ const PenerimaPendidikan = () => {
 
           {/* Alamat */}
           <div className="form-group-modern">
-            <label className="form-label-modern">Alamat lengkap sekolah/institusi</label>
-            <textarea 
-              className="modern-textarea" 
-              placeholder="Alamat lengkap sekolah atau institusi pendidikan"
+            <label className="form-label-modern">Alamat lengkap</label>
+            <textarea
+              className="modern-textarea"
+              placeholder="Alamat lengkap lembaga pendidikan atau penerima bantuan"
               value={penerimaData.alamat}
               onChange={(e) => handleInputChange('alamat', e.target.value)}
               rows="3"
-            />
-          </div>
-
-          {/* Nomor Rekening */}
-          <div className="form-group-modern">
-            <label className="form-label-modern">Nomor rekening</label>
-            <input 
-              type="text" 
-              className="modern-input" 
-              placeholder="Nomor rekening untuk pencairan dana bantuan"
-              value={penerimaData.nomorRekening}
-              onChange={(e) => handleInputChange('nomorRekening', e.target.value)}
-            />
-          </div>
-
-          {/* Bank */}
-          <div className="form-group-modern">
-            <label className="form-label-modern">Nama bank</label>
-            <input 
-              type="text" 
-              className="modern-input" 
-              placeholder="Contoh: BCA, BRI, Mandiri"
-              value={penerimaData.bankName}
-              onChange={(e) => handleInputChange('bankName', e.target.value)}
             />
           </div>
       </div>

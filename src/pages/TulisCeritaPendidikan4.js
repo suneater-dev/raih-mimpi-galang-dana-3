@@ -4,10 +4,13 @@ import '../styles/TulisCerita.css';
 
 const TulisCeritaPendidikan4 = () => {
   const navigate = useNavigate();
-  const [storyContent, setStoryContent] = useState('');
+  const [storyContent, setStoryContent] = useState(() => {
+    return localStorage.getItem('ceritaPendidikan_part4') || '';
+  });
 
   const handleNext = () => {
     if (storyContent.trim().length > 0) {
+      localStorage.setItem('ceritaPendidikan_part4', storyContent);
       navigate('/tulis-cerita-pendidikan-5');
     }
   };
@@ -29,10 +32,6 @@ const TulisCeritaPendidikan4 = () => {
   const showExample = () => {
     const exampleText = "Jika kondisi ini terus berlanjut tanpa ada bantuan yang memadai, dampaknya akan sangat serius bagi masa depan anak-anak di desa kami. Tingkat putus sekolah yang sudah tinggi diprediksi akan terus meningkat, dan banyak anak cerdas akan kehilangan kesempatan untuk mengembangkan potensi mereka.\n\nDari segi ekonomi, keluarga-keluarga di desa kami semakin terbebani dengan biaya pendidikan yang terus meningkat, sementara penghasilan mereka sebagai petani sangat tergantung pada hasil panen yang tidak menentu. Banyak orang tua yang terpaksa berhutang untuk membiayai sekolah anak-anak mereka, yang justru menambah beban ekonomi keluarga.\n\nDampak jangka panjangnya adalah terciptanya lingkaran kemiskinan yang sulit diputus. Anak-anak yang tidak mendapat pendidikan yang layak akan sulit mendapatkan pekerjaan yang baik di masa depan, sehingga mereka akan tetap hidup dalam kemiskinan seperti orang tua mereka. Hal ini akan berdampak pada kemajuan desa secara keseluruhan.\n\nSelain itu, kesenjangan pendidikan antara anak-anak di desa dengan anak-anak di kota akan semakin melebar, membuat mereka sulit bersaing di era globalisasi ini.";
     setStoryContent(exampleText);
-  };
-
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas-pendidikan');
   };
 
   return (
@@ -82,10 +81,6 @@ const TulisCeritaPendidikan4 = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya

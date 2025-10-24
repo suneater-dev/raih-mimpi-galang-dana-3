@@ -4,10 +4,13 @@ import '../styles/TulisCerita.css';
 
 const TulisCeritaPendidikan3 = () => {
   const navigate = useNavigate();
-  const [storyContent, setStoryContent] = useState('');
+  const [storyContent, setStoryContent] = useState(() => {
+    return localStorage.getItem('ceritaPendidikan_part3') || '';
+  });
 
   const handleNext = () => {
     if (storyContent.trim().length > 0) {
+      localStorage.setItem('ceritaPendidikan_part3', storyContent);
       navigate('/tulis-cerita-pendidikan-4');
     }
   };
@@ -29,10 +32,6 @@ const TulisCeritaPendidikan3 = () => {
   const showExample = () => {
     const exampleText = "Dalam upaya mengatasi permasalahan ini, pihak sekolah dan komite sekolah telah melakukan berbagai usaha dengan keterbatasan yang ada. Kami telah mengajukan proposal bantuan ke Dinas Pendidikan setempat dan berhasil mendapatkan bantuan berupa 50 buah buku pelajaran baru tahun lalu.\n\nKami juga menggalang dana mandiri melalui kerja sama dengan masyarakat desa. Para orang tua siswa bergotong-royong mengumpulkan dana untuk perbaikan atap sekolah yang bocor dan pengadaan meja belajar sederhana. Hasilnya, kami berhasil memperbaiki 2 ruang kelas dan membeli 20 set meja-kursi bekas dengan kondisi layak pakai.\n\nSelain itu, saya dan beberapa guru senior memberikan les gratis setiap sore untuk siswa-siswa yang tertinggal dalam pelajaran. Kami juga menjalin kerja sama dengan mahasiswa KKN dari universitas terdekat untuk membantu kegiatan belajar mengajar, terutama dalam bidang bahasa Inggris dan komputer dasar.\n\nNamun, semua upaya yang telah kami lakukan masih belum cukup untuk mengatasi permasalahan mendasar seperti biaya sekolah, seragam, dan alat tulis untuk siswa-siswa dari keluarga kurang mampu.";
     setStoryContent(exampleText);
-  };
-
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas-pendidikan');
   };
 
   return (
@@ -82,10 +81,6 @@ const TulisCeritaPendidikan3 = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya

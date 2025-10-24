@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/TulisCerita.css';
 
@@ -7,9 +7,25 @@ const TulisCerita4 = () => {
   const [conditionContent, setConditionContent] = useState('');
   const [uploadedPhoto, setUploadedPhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState(null);
+  const [showExampleModal, setShowExampleModal] = useState(false);
+
+  const exampleText = "Sejak Andi didiagnosis leukemia, banyak perubahan yang terjadi dalam kehidupan keluarga kami. Kondisi kesehatan Andi yang semakin menurun membuat kami sebagai keluarga harus lebih waspada dan memberikan perhatian ekstra kepadanya.\n\nSebelumnya, Andi adalah anak yang sangat aktif dan ceria. Ia selalu bermain dengan teman-temannya di lingkungan rumah dan rajin bersekolah. Namun sekarang, aktivitas Andi sangat terbatas karena kondisi tubuhnya yang lemah dan mudah lelah.\n\nDampak terbesar yang kami rasakan adalah dari segi finansial. Ayah harus sering izin atau bahkan cuti dari pekerjaan untuk menemani Andi berobat. Penghasilan keluarga menurun drastis, sementara biaya pengobatan terus bertambah setiap bulannya.";
+
+  useEffect(() => {
+    // Load saved content from localStorage
+    const saved = localStorage.getItem('cerita_part4');
+    const savedPhoto = localStorage.getItem('cerita_part4_photo');
+    if (saved) setConditionContent(saved);
+    if (savedPhoto) setPhotoPreview(savedPhoto);
+  }, []);
 
   const handleNext = () => {
     if (conditionContent.trim().length > 0) {
+      // Save to localStorage
+      localStorage.setItem('cerita_part4', conditionContent);
+      if (photoPreview) {
+        localStorage.setItem('cerita_part4_photo', photoPreview);
+      }
       navigate('/tulis-cerita-5');
     }
   };
@@ -25,12 +41,20 @@ const TulisCerita4 = () => {
   };
 
   const handleSave = () => {
+    // Save to localStorage
+    localStorage.setItem('cerita_part4', conditionContent);
+    if (photoPreview) {
+      localStorage.setItem('cerita_part4_photo', photoPreview);
+    }
     alert('Cerita telah disimpan!');
   };
 
   const showExample = () => {
-    const exampleText = "Sejak Andi didiagnosis leukemia, banyak perubahan yang terjadi dalam kehidupan keluarga kami. Kondisi kesehatan Andi yang semakin menurun membuat kami sebagai keluarga harus lebih waspada dan memberikan perhatian ekstra kepadanya.\n\nSebelumnya, Andi adalah anak yang sangat aktif dan ceria. Ia selalu bermain dengan teman-temannya di lingkungan rumah dan rajin bersekolah. Namun sekarang, aktivitas Andi sangat terbatas karena kondisi tubuhnya yang lemah dan mudah lelah.\n\nDampak terbesar yang kami rasakan adalah dari segi finansial. Ayah harus sering izin atau bahkan cuti dari pekerjaan untuk menemani Andi berobat. Penghasilan keluarga menurun drastis, sementara biaya pengobatan terus bertambah setiap bulannya.";
-    setConditionContent(exampleText);
+    setShowExampleModal(true);
+  };
+
+  const closeExampleModal = () => {
+    setShowExampleModal(false);
   };
 
   const handlePhotoUpload = (event) => {
@@ -63,10 +87,6 @@ const TulisCerita4 = () => {
         reader.readAsDataURL(file);
       }
     }
-  };
-
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas');
   };
 
   return (
@@ -122,17 +142,16 @@ const TulisCerita4 = () => {
               Ceritamu bisa lebih meyakinkan donatur jika dilengkapi foto pendukung di bagian ini.
             </p>
             
-            <label 
-              htmlFor="photoUpload" 
+            <label
+              htmlFor="photoUpload"
               className="photo-upload-area-modern"
               onDragOver={handleDragOver}
               onDrop={handleDrop}
             >
               <div className="photo-upload-icon-modern">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-                  <path d="M14.2 11.8L12 9.6L9.8 11.8L8.4 10.4L12 6.8L15.6 10.4L14.2 11.8Z" fill="currentColor"/>
-                  <path d="M12 8V16H10V8H12Z" fill="currentColor"/>
-                  <path d="M6 18V20H18V18H20V20C20 21.1 19.1 22 18 22H6C4.9 22 4 21.1 4 20V18H6Z" fill="currentColor"/>
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                  <path d="M20 4h-3.17L15 2H9L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" fill="currentColor"/>
+                  <circle cx="12" cy="12" r="3" fill="currentColor"/>
                 </svg>
               </div>
               <span className="photo-upload-text-modern">
@@ -176,15 +195,11 @@ const TulisCerita4 = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya
           </button>
-          <button 
+          <button
             className="modern-btn"
             onClick={handleNext}
             disabled={conditionContent.trim().length === 0}
@@ -193,6 +208,24 @@ const TulisCerita4 = () => {
           </button>
         </div>
       </div>
+
+      {/* Example Modal */}
+      {showExampleModal && (
+        <div className="example-modal-overlay" onClick={closeExampleModal}>
+          <div className="example-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="example-modal-header">
+              <h3 className="modern-subheading">Contoh Cerita</h3>
+              <button className="example-modal-close" onClick={closeExampleModal}>✕</button>
+            </div>
+            <div className="example-modal-body">
+              <p className="example-text">{exampleText}</p>
+            </div>
+            <div className="example-modal-footer">
+              <button className="modern-btn" onClick={closeExampleModal}>Tutup</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

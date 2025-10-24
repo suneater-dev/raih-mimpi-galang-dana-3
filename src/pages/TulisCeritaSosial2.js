@@ -4,11 +4,19 @@ import '../styles/TulisCerita.css';
 
 const TulisCeritaSosial2 = () => {
   const navigate = useNavigate();
-  const [storyContent, setStoryContent] = useState('');
+  const [storyContent, setStoryContent] = useState(() => {
+    return localStorage.getItem('ceritaSosial_part2') || '';
+  });
   const [uploadedPhotos, setUploadedPhotos] = useState([]);
+  const [showExampleModal, setShowExampleModal] = useState(false);
+
+  const exampleText = "Saat ini, para lansia di Panti Jompo Kasih Sayang menghadapi berbagai tantangan serius yang membutuhkan perhatian segera. Sebagian besar dari mereka mengalami masalah kesehatan seperti diabetes, hipertensi, dan gangguan mobilitas yang memerlukan perawatan khusus.\n\nKondisi fisik panti yang sudah berusia puluhan tahun membuat fasilitas menjadi terbatas. Kamar-kamar yang sempit dan kurangnya ventilasi membuat lingkungan kurang nyaman bagi para penghuni. Selain itu, peralatan medis yang tersedia juga sangat minim.\n\nPara pengasuh bekerja dengan dedikasi tinggi namun terbatas dengan jumlah staf yang tidak sebanding dengan kebutuhan 45 lansia. Setiap hari mereka harus mengatur jadwal makan, minum obat, dan kegiatan rutin dengan sumber daya yang sangat terbatas.";
 
   const handleNext = () => {
     if (storyContent.trim().length > 0) {
+      // Save to localStorage
+      localStorage.setItem('ceritaSosial_part2', storyContent);
+      localStorage.setItem('ceritaSosial_photos', JSON.stringify(uploadedPhotos.map(p => p.preview)));
       navigate('/tulis-cerita-sosial-3');
     }
   };
@@ -28,12 +36,11 @@ const TulisCeritaSosial2 = () => {
   };
 
   const showExample = () => {
-    const exampleText = "Saat ini, para lansia di Panti Jompo Kasih Sayang menghadapi berbagai tantangan serius yang membutuhkan perhatian segera. Sebagian besar dari mereka mengalami masalah kesehatan seperti diabetes, hipertensi, dan gangguan mobilitas yang memerlukan perawatan khusus.\n\nKondisi fisik panti yang sudah berusia puluhan tahun membuat fasilitas menjadi terbatas. Kamar-kamar yang sempit dan kurangnya ventilasi membuat lingkungan kurang nyaman bagi para penghuni. Selain itu, peralatan medis yang tersedia juga sangat minim.\n\nPara pengasuh bekerja dengan dedikasi tinggi namun terbatas dengan jumlah staf yang tidak sebanding dengan kebutuhan 45 lansia. Setiap hari mereka harus mengatur jadwal makan, minum obat, dan kegiatan rutin dengan sumber daya yang sangat terbatas.";
-    setStoryContent(exampleText);
+    setShowExampleModal(true);
   };
 
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas-sosial');
+  const closeExampleModal = () => {
+    setShowExampleModal(false);
   };
 
   const handlePhotoUpload = (e) => {
@@ -121,9 +128,8 @@ const TulisCeritaSosial2 = () => {
             >
               <div className="photo-upload-icon-modern">
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-                  <path d="M14.2 11.8L12 9.6L9.8 11.8L8.4 10.4L12 6.8L15.6 10.4L14.2 11.8Z" fill="currentColor"/>
-                  <path d="M12 8V16H10V8H12Z" fill="currentColor"/>
-                  <path d="M6 18V20H18V18H20V20C20 21.1 19.1 22 18 22H6C4.9 22 4 21.1 4 20V18H6Z" fill="currentColor"/>
+                  <path d="M20 4h-3.17L15 2H9L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" fill="currentColor"/>
+                  <circle cx="12" cy="12" r="3" fill="currentColor"/>
                 </svg>
               </div>
               <span className="photo-upload-text-modern">
@@ -195,16 +201,12 @@ const TulisCeritaSosial2 = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya
           </button>
-          
-          <button 
+
+          <button
             className={`modern-btn ${storyContent.trim().length === 0 ? 'disabled' : ''}`}
             onClick={handleNext}
             disabled={storyContent.trim().length === 0}
@@ -214,6 +216,24 @@ const TulisCeritaSosial2 = () => {
           </button>
         </div>
       </div>
+
+      {/* Example Modal */}
+      {showExampleModal && (
+        <div className="example-modal-overlay" onClick={closeExampleModal}>
+          <div className="example-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="example-modal-header">
+              <h3 className="modern-subheading">Contoh Cerita</h3>
+              <button className="example-modal-close" onClick={closeExampleModal}>✕</button>
+            </div>
+            <div className="example-modal-body">
+              <p className="example-text">{exampleText}</p>
+            </div>
+            <div className="example-modal-footer">
+              <button className="modern-btn" onClick={closeExampleModal}>Tutup</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

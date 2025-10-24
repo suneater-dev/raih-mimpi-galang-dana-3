@@ -4,10 +4,16 @@ import '../styles/TulisCerita.css';
 
 const TulisCeritaKreatif4 = () => {
   const navigate = useNavigate();
-  const [storyContent, setStoryContent] = useState('');
+  const [storyContent, setStoryContent] = useState(() => {
+    return localStorage.getItem('ceritaKreatif_part4') || '';
+  });
+  const [showExampleModal, setShowExampleModal] = useState(false);
+
+  const exampleText = "Kondisi UMKM di Indonesia saat ini sangat membutuhkan dukungan dalam hal branding dan pemasaran visual. Berdasarkan survey yang saya lakukan, 78% UMKM mengaku kesulitan dalam membuat desain yang menarik untuk produk mereka. Hal ini berdampak pada daya saing produk di pasar yang semakin kompetitif.\n\nStudio kreatif yang akan saya bangun akan memberikan solusi dengan menyediakan layanan desain profesional dengan harga yang terjangkau untuk UMKM. Kami akan membantu mereka meningkatkan nilai jual produk melalui kemasan dan branding yang menarik.\n\nSelain itu, studio ini juga akan menjadi tempat edukasi bagi para pelaku UMKM tentang pentingnya branding dalam bisnis. Kami akan mengadakan workshop dan seminar gratis setiap bulannya untuk berbagi ilmu tentang desain dan pemasaran visual.\n\nDampak positif yang diharapkan adalah meningkatnya daya saing UMKM lokal, terciptanya lapangan kerja baru untuk desainer muda, dan berkembangnya ekosistem kreatif di kota Bandung.";
 
   const handleNext = () => {
     if (storyContent.trim().length > 0) {
+      localStorage.setItem('ceritaKreatif_part4', storyContent);
       navigate('/tulis-cerita-kreatif-5');
     }
   };
@@ -27,12 +33,11 @@ const TulisCeritaKreatif4 = () => {
   };
 
   const showExample = () => {
-    const exampleText = "Kondisi UMKM di Indonesia saat ini sangat membutuhkan dukungan dalam hal branding dan pemasaran visual. Berdasarkan survey yang saya lakukan, 78% UMKM mengaku kesulitan dalam membuat desain yang menarik untuk produk mereka. Hal ini berdampak pada daya saing produk di pasar yang semakin kompetitif.\n\nStudio kreatif yang akan saya bangun akan memberikan solusi dengan menyediakan layanan desain profesional dengan harga yang terjangkau untuk UMKM. Kami akan membantu mereka meningkatkan nilai jual produk melalui kemasan dan branding yang menarik.\n\nSelain itu, studio ini juga akan menjadi tempat edukasi bagi para pelaku UMKM tentang pentingnya branding dalam bisnis. Kami akan mengadakan workshop dan seminar gratis setiap bulannya untuk berbagi ilmu tentang desain dan pemasaran visual.\n\nDampak positif yang diharapkan adalah meningkatnya daya saing UMKM lokal, terciptanya lapangan kerja baru untuk desainer muda, dan berkembangnya ekosistem kreatif di kota Bandung.";
-    setStoryContent(exampleText);
+    setShowExampleModal(true);
   };
 
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas-kreatif');
+  const closeExampleModal = () => {
+    setShowExampleModal(false);
   };
 
   return (
@@ -82,16 +87,12 @@ const TulisCeritaKreatif4 = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya
           </button>
-          
-          <button 
+
+          <button
             className={`modern-btn ${storyContent.trim().length === 0 ? 'disabled' : ''}`}
             onClick={handleNext}
             disabled={storyContent.trim().length === 0}
@@ -101,6 +102,24 @@ const TulisCeritaKreatif4 = () => {
           </button>
         </div>
       </div>
+
+      {/* Example Modal */}
+      {showExampleModal && (
+        <div className="example-modal-overlay" onClick={closeExampleModal}>
+          <div className="example-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="example-modal-header">
+              <h3 className="modern-subheading">Contoh Cerita</h3>
+              <button className="example-modal-close" onClick={closeExampleModal}>✕</button>
+            </div>
+            <div className="example-modal-body">
+              <p className="example-text">{exampleText}</p>
+            </div>
+            <div className="example-modal-footer">
+              <button className="modern-btn" onClick={closeExampleModal}>Tutup</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

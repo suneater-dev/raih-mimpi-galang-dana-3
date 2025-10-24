@@ -4,10 +4,17 @@ import '../styles/TulisCerita.css';
 
 const TulisCeritaSosial3 = () => {
   const navigate = useNavigate();
-  const [storyContent, setStoryContent] = useState('');
+  const [storyContent, setStoryContent] = useState(() => {
+    return localStorage.getItem('ceritaSosial_part3') || '';
+  });
+  const [showExampleModal, setShowExampleModal] = useState(false);
+
+  const exampleText = "Sebagai respons terhadap kondisi tersebut, Komunitas Peduli Sesama telah melakukan berbagai upaya untuk membantu para lansia di Panti Jompo Kasih Sayang. Selama 6 bulan terakhir, kami rutin mengunjungi panti setiap minggu untuk memberikan bantuan makanan bergizi dan pendampingan.\n\nKami telah mengorganisir kegiatan pemeriksaan kesehatan gratis dengan mengundang dokter dan perawat volunteer. Hasilnya, kami berhasil mengidentifikasi beberapa lansia yang membutuhkan perawatan khusus dan membantu mereka mendapatkan akses ke layanan kesehatan yang tepat.\n\nSelain itu, kami juga mengadakan kegiatan rekreasi seperti senam lansia, membaca bersama, dan berbagi cerita untuk meningkatkan kesejahteraan mental mereka. Para relawan kami yang berprofesi sebagai terapis fisik juga membantu memberikan latihan-latihan sederhana untuk menjaga mobilitas para lansia.";
 
   const handleNext = () => {
     if (storyContent.trim().length > 0) {
+      // Save to localStorage
+      localStorage.setItem('ceritaSosial_part3', storyContent);
       navigate('/tulis-cerita-sosial-4');
     }
   };
@@ -27,12 +34,11 @@ const TulisCeritaSosial3 = () => {
   };
 
   const showExample = () => {
-    const exampleText = "Sebagai respons terhadap kondisi tersebut, Komunitas Peduli Sesama telah melakukan berbagai upaya untuk membantu para lansia di Panti Jompo Kasih Sayang. Selama 6 bulan terakhir, kami rutin mengunjungi panti setiap minggu untuk memberikan bantuan makanan bergizi dan pendampingan.\n\nKami telah mengorganisir kegiatan pemeriksaan kesehatan gratis dengan mengundang dokter dan perawat volunteer. Hasilnya, kami berhasil mengidentifikasi beberapa lansia yang membutuhkan perawatan khusus dan membantu mereka mendapatkan akses ke layanan kesehatan yang tepat.\n\nSelain itu, kami juga mengadakan kegiatan rekreasi seperti senam lansia, membaca bersama, dan berbagi cerita untuk meningkatkan kesejahteraan mental mereka. Para relawan kami yang berprofesi sebagai terapis fisik juga membantu memberikan latihan-latihan sederhana untuk menjaga mobilitas para lansia.";
-    setStoryContent(exampleText);
+    setShowExampleModal(true);
   };
 
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas-sosial');
+  const closeExampleModal = () => {
+    setShowExampleModal(false);
   };
 
   return (
@@ -70,7 +76,7 @@ const TulisCeritaSosial3 = () => {
           <button className="modern-btn secondary example-btn-small" onClick={showExample} style={{marginBottom: '20px'}}>
             📄 Lihat contoh
           </button>
-          
+
           <textarea
             className="modern-textarea story-textarea-large"
             placeholder="Jelaskan upaya dan bantuan apa saja yang sudah pernah diberikan untuk penerima bantuan, baik oleh Anda, komunitas, atau pihak lain."
@@ -82,16 +88,12 @@ const TulisCeritaSosial3 = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya
           </button>
-          
-          <button 
+
+          <button
             className={`modern-btn ${storyContent.trim().length === 0 ? 'disabled' : ''}`}
             onClick={handleNext}
             disabled={storyContent.trim().length === 0}
@@ -101,6 +103,24 @@ const TulisCeritaSosial3 = () => {
           </button>
         </div>
       </div>
+
+      {/* Example Modal */}
+      {showExampleModal && (
+        <div className="example-modal-overlay" onClick={closeExampleModal}>
+          <div className="example-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="example-modal-header">
+              <h3 className="modern-subheading">Contoh Cerita</h3>
+              <button className="example-modal-close" onClick={closeExampleModal}>✕</button>
+            </div>
+            <div className="example-modal-body">
+              <p className="example-text">{exampleText}</p>
+            </div>
+            <div className="example-modal-footer">
+              <button className="modern-btn" onClick={closeExampleModal}>Tutup</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

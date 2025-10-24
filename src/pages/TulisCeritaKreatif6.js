@@ -4,10 +4,16 @@ import '../styles/TulisCerita.css';
 
 const TulisCeritaKreatif6 = () => {
   const navigate = useNavigate();
-  const [storyContent, setStoryContent] = useState('');
+  const [storyContent, setStoryContent] = useState(() => {
+    return localStorage.getItem('ceritaKreatif_part6') || '';
+  });
+  const [showExampleModal, setShowExampleModal] = useState(false);
+
+  const exampleText = "Harapan terbesar saya adalah dapat mewujudkan studio kreatif yang tidak hanya menjadi tempat kerja, tetapi juga menjadi pusat pengembangan kreativitas dan inovasi di bidang desain grafis. Saya bermimpi bahwa studio ini akan menjadi jembatan yang menghubungkan dunia desain profesional dengan UMKM yang membutuhkan.\n\nVisi jangka panjang saya adalah menjadikan studio ini sebagai inkubator bagi desainer muda Indonesia. Saya ingin menciptakan lapangan kerja dan memberikan kesempatan kepada fresh graduate untuk mengembangkan karir mereka di industri kreatif. Selain itu, saya juga berharap dapat berkontribusi dalam mengangkat citra produk-produk lokal melalui desain yang berkualitas internasional.\n\nSaya yakin bahwa dengan dukungan dari para donatur, mimpi ini dapat terwujud. Setiap kontribusi yang diberikan tidak hanya membantu saya secara personal, tetapi juga akan memberikan dampak positif bagi ekosistem kreatif dan ekonomi lokal.\n\nTerima kasih kepada semua pihak yang telah memberikan dukungan, baik dalam bentuk doa maupun donasi. Saya berkomitmen untuk menjadikan studio ini sebagai wadah yang bermanfaat dan berkelanjutan untuk kemajuan industri kreatif Indonesia.";
 
   const handleNext = () => {
     if (storyContent.trim().length > 0) {
+      localStorage.setItem('ceritaKreatif_part6', storyContent);
       navigate('/review-cerita-kreatif');
     }
   };
@@ -27,12 +33,11 @@ const TulisCeritaKreatif6 = () => {
   };
 
   const showExample = () => {
-    const exampleText = "Harapan terbesar saya adalah dapat mewujudkan studio kreatif yang tidak hanya menjadi tempat kerja, tetapi juga menjadi pusat pengembangan kreativitas dan inovasi di bidang desain grafis. Saya bermimpi bahwa studio ini akan menjadi jembatan yang menghubungkan dunia desain profesional dengan UMKM yang membutuhkan.\n\nVisi jangka panjang saya adalah menjadikan studio ini sebagai inkubator bagi desainer muda Indonesia. Saya ingin menciptakan lapangan kerja dan memberikan kesempatan kepada fresh graduate untuk mengembangkan karir mereka di industri kreatif. Selain itu, saya juga berharap dapat berkontribusi dalam mengangkat citra produk-produk lokal melalui desain yang berkualitas internasional.\n\nSaya yakin bahwa dengan dukungan dari para donatur, mimpi ini dapat terwujud. Setiap kontribusi yang diberikan tidak hanya membantu saya secara personal, tetapi juga akan memberikan dampak positif bagi ekosistem kreatif dan ekonomi lokal.\n\nTerima kasih kepada semua pihak yang telah memberikan dukungan, baik dalam bentuk doa maupun donasi. Saya berkomitmen untuk menjadikan studio ini sebagai wadah yang bermanfaat dan berkelanjutan untuk kemajuan industri kreatif Indonesia.";
-    setStoryContent(exampleText);
+    setShowExampleModal(true);
   };
 
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas-kreatif');
+  const closeExampleModal = () => {
+    setShowExampleModal(false);
   };
 
   return (
@@ -82,16 +87,12 @@ const TulisCeritaKreatif6 = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya
           </button>
-          
-          <button 
+
+          <button
             className={`modern-btn ${storyContent.trim().length === 0 ? 'disabled' : ''}`}
             onClick={handleNext}
             disabled={storyContent.trim().length === 0}
@@ -101,6 +102,24 @@ const TulisCeritaKreatif6 = () => {
           </button>
         </div>
       </div>
+
+      {/* Example Modal */}
+      {showExampleModal && (
+        <div className="example-modal-overlay" onClick={closeExampleModal}>
+          <div className="example-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="example-modal-header">
+              <h3 className="modern-subheading">Contoh Cerita</h3>
+              <button className="example-modal-close" onClick={closeExampleModal}>✕</button>
+            </div>
+            <div className="example-modal-body">
+              <p className="example-text">{exampleText}</p>
+            </div>
+            <div className="example-modal-footer">
+              <button className="modern-btn" onClick={closeExampleModal}>Tutup</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

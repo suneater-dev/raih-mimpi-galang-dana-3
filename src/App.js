@@ -13,6 +13,9 @@ import UserInfo from './pages/UserInfo';
 import SelectCategory from './pages/SelectCategory';
 import BantuanLainnya from './pages/BantuanLainnya';
 import KaryaKreatif from './pages/KaryaKreatif';
+import TujuanDetailKreatif from './pages/TujuanDetailKreatif';
+import PenerimaKreatif from './pages/PenerimaKreatif';
+import TargetDonasiKreatif from './pages/TargetDonasiKreatif';
 import TujuanDetail from './pages/TujuanDetail';
 import DataDiri from './pages/DataDiri';
 import Penerima from './pages/Penerima';
@@ -71,7 +74,6 @@ import TulisCeritaPendidikan5 from './pages/TulisCeritaPendidikan5';
 import TulisCeritaPendidikan6 from './pages/TulisCeritaPendidikan6';
 import ReviewCeritaPendidikan from './pages/ReviewCeritaPendidikan';
 import AjakanPendidikan from './pages/AjakanPendidikan';
-import AdsOfferingMedis from './pages/AdsOfferingMedis';
 import AdsOfferingKreatif from './pages/AdsOfferingKreatif';
 import AccountRegistration from './pages/AccountRegistration';
 import CampaignComplete from './pages/CampaignComplete';
@@ -110,6 +112,9 @@ function App() {
           <Route path="/select-category" element={<Navigate to="/bantuan-lainnya" replace />} />
           <Route path="/bantuan-lainnya" element={<BantuanLainnya />} />
           <Route path="/karya-kreatif" element={<KaryaKreatif />} />
+          <Route path="/tujuan-detail-kreatif" element={<TujuanDetailKreatif />} />
+          <Route path="/penerima-kreatif" element={<PenerimaKreatif />} />
+          <Route path="/target-donasi-kreatif" element={<TargetDonasiKreatif />} />
           <Route path="/tujuan-detail" element={<TujuanDetail />} />
           <Route path="/data-diri" element={<DataDiri />} />
           <Route path="/penerima" element={<Penerima />} />
@@ -169,7 +174,6 @@ function App() {
           <Route path="/tulis-cerita-pendidikan-6" element={<TulisCeritaPendidikan6 />} />
           <Route path="/review-cerita-pendidikan" element={<ReviewCeritaPendidikan />} />
           <Route path="/ajakan-pendidikan" element={<AjakanPendidikan />} />
-          <Route path="/ads-offering-medis" element={<AdsOfferingMedis />} />
           <Route path="/ads-offering-kreatif" element={<AdsOfferingKreatif />} />
           <Route path="/account-registration" element={<AccountRegistration />} />
           <Route path="/campaign-complete" element={<CampaignComplete />} />

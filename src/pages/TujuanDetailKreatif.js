@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import ProgressSteps from '../components/ProgressSteps';
 import '../styles/TujuanDetail.css';
 
-const TujuanDetailPendidikan = () => {
+const TujuanDetailKreatif = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [tujuanDetail, setTujuanDetail] = useState('');
@@ -13,7 +13,7 @@ const TujuanDetailPendidikan = () => {
 
   const handleNext = () => {
     if (tujuanDetail.trim()) {
-      navigate('/penerima-pendidikan', {
+      navigate('/penerima-kreatif', {
         state: {
           selectedCategory,
           tujuanDetail
@@ -23,7 +23,7 @@ const TujuanDetailPendidikan = () => {
   };
 
   const handleBack = () => {
-    navigate('/bantuan-pendidikan');
+    navigate('/karya-kreatif');
   };
 
   const isFormValid = tujuanDetail.trim().length > 0;
@@ -44,7 +44,7 @@ const TujuanDetailPendidikan = () => {
         <button className="back-arrow white-text" onClick={handleBack}>
           ←
         </button>
-        <div className="header-title white-text">Bantuan Pendidikan</div>
+        <div className="header-title white-text">Karya Kreatif & Modal Usaha</div>
       </header>
 
       {/* Progress Steps */}
@@ -75,13 +75,13 @@ const TujuanDetailPendidikan = () => {
 
         {/* Tujuan Detail Form */}
         <div className="form-group-modern">
-          <h2 className="modern-subheading">Jelaskan tujuan bantuan pendidikan secara detail</h2>
+          <h2 className="modern-subheading">Jelaskan tujuan karya kreatif atau modal usaha secara detail</h2>
           <p className="modern-text" style={{marginBottom: '16px', color: '#6B7280'}}>
-            Ceritakan dengan jelas tujuan, sasaran, dan manfaat dari bantuan pendidikan yang akan diberikan.
+            Ceritakan dengan jelas tujuan, sasaran, dan manfaat dari karya kreatif atau modal usaha yang akan dijalankan.
           </p>
-          <textarea 
-            className="modern-textarea" 
-            placeholder="Contoh: Bantuan pendidikan ini bertujuan untuk membantu anak-anak kurang mampu di daerah terpencil agar dapat melanjutkan pendidikan ke jenjang yang lebih tinggi. Target bantuan adalah biaya sekolah, buku, seragam, dan transportasi untuk 50 siswa..."
+          <textarea
+            className="modern-textarea"
+            placeholder="Contoh: Proyek ini bertujuan untuk mengembangkan usaha kecil kerajinan tangan lokal yang mempekerjakan ibu-ibu di desa. Dengan modal usaha ini, kami bisa membeli bahan baku berkualitas dan meningkatkan produksi untuk memenuhi permintaan pasar..."
             value={tujuanDetail}
             onChange={(e) => setTujuanDetail(e.target.value)}
             rows="8"
@@ -94,7 +94,7 @@ const TujuanDetailPendidikan = () => {
         <button className="modern-btn secondary" onClick={handleBack}>
           ← Sebelumnya
         </button>
-        <button 
+        <button
           className={`modern-btn ${!isFormValid ? 'disabled' : ''}`}
           onClick={handleNext}
           disabled={!isFormValid}
@@ -106,4 +106,4 @@ const TujuanDetailPendidikan = () => {
   );
 };
 
-export default TujuanDetailPendidikan;
+export default TujuanDetailKreatif;

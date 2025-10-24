@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/TulisCerita.css';
 
@@ -6,9 +6,26 @@ const TulisCerita2 = () => {
   const navigate = useNavigate();
   const [section1Content, setSection1Content] = useState('');
   const [section2Content, setSection2Content] = useState('');
+  const [showExampleModal1, setShowExampleModal1] = useState(false);
+  const [showExampleModal2, setShowExampleModal2] = useState(false);
+
+  const exampleText1 = "Andi didiagnosis menderita leukemia limfoblastik akut (ALL) pada bulan Maret 2024. Sejak diagnosis ini, kondisinya sangat mengkhawatirkan. Andi yang dulu sangat aktif dan ceria sekarang terlihat pucat dan lemah.\n\nGejala yang dialami Andi sangat beragam. Ia sering mengalami demam tinggi yang tidak kunjung turun, mudah memar meski hanya terbentur ringan, dan nafsu makannya menurun drastis. Berat badannya turun dari 25 kg menjadi 20 kg dalam waktu 2 bulan.\n\nSebagai kakak, saya sangat sedih melihat Andi yang dulu suka berlari-larian sekarang lebih banyak berbaring lemah di tempat tidur. Ia sering mengeluh pusing dan mual, terutama setelah menjalani kemoterapi.";
+
+  const exampleText2 = "Sejak diagnosis di bulan Maret, Andi sudah menjalani berbagai upaya pengobatan. Pertama, ia menjalani biopsi sumsum tulang untuk memastikan jenis leukemia yang dideritanya.\n\nAndi telah menjalani 3 siklus kemoterapi di RSUP Dr. Sardjito Yogyakarta. Setiap siklus kemoterapi membutuhkan rawat inap selama 1-2 minggu. Selain kemoterapi, Andi juga rutin mendapat transfusi darah dan trombosit karena kadar dalam tubuhnya yang rendah.\n\nDokter juga memberikan obat-obatan pendukung untuk mengatasi efek samping kemoterapi seperti mual dan muntah. Keluarga kami juga berusaha memberikan nutrisi terbaik dan suplemen untuk menjaga daya tahan tubuh Andi.";
+
+  useEffect(() => {
+    // Load saved content from localStorage
+    const saved1 = localStorage.getItem('cerita_part2_section1');
+    const saved2 = localStorage.getItem('cerita_part2_section2');
+    if (saved1) setSection1Content(saved1);
+    if (saved2) setSection2Content(saved2);
+  }, []);
 
   const handleNext = () => {
     if (section1Content.trim().length > 0 || section2Content.trim().length > 0) {
+      // Save to localStorage
+      localStorage.setItem('cerita_part2_section1', section1Content);
+      localStorage.setItem('cerita_part2_section2', section2Content);
       navigate('/tulis-cerita-3');
     }
   };
@@ -24,21 +41,26 @@ const TulisCerita2 = () => {
   };
 
   const handleSave = () => {
+    // Save to localStorage
+    localStorage.setItem('cerita_part2_section1', section1Content);
+    localStorage.setItem('cerita_part2_section2', section2Content);
     alert('Cerita telah disimpan!');
   };
 
   const showExample1 = () => {
-    const exampleText = "Andi didiagnosis menderita leukemia limfoblastik akut (ALL) pada bulan Maret 2024. Sejak diagnosis ini, kondisinya sangat mengkhawatirkan. Andi yang dulu sangat aktif dan ceria sekarang terlihat pucat dan lemah.\n\nGejala yang dialami Andi sangat beragam. Ia sering mengalami demam tinggi yang tidak kunjung turun, mudah memar meski hanya terbentur ringan, dan nafsu makannya menurun drastis. Berat badannya turun dari 25 kg menjadi 20 kg dalam waktu 2 bulan.\n\nSebagai kakak, saya sangat sedih melihat Andi yang dulu suka berlari-larian sekarang lebih banyak berbaring lemah di tempat tidur. Ia sering mengeluh pusing dan mual, terutama setelah menjalani kemoterapi.";
-    setSection1Content(exampleText);
+    setShowExampleModal1(true);
   };
 
   const showExample2 = () => {
-    const exampleText = "Sejak diagnosis di bulan Maret, Andi sudah menjalani berbagai upaya pengobatan. Pertama, ia menjalani biopsi sumsum tulang untuk memastikan jenis leukemia yang dideritanya.\n\nAndi telah menjalani 3 siklus kemoterapi di RSUP Dr. Sardjito Yogyakarta. Setiap siklus kemoterapi membutuhkan rawat inap selama 1-2 minggu. Selain kemoterapi, Andi juga rutin mendapat transfusi darah dan trombosit karena kadar dalam tubuhnya yang rendah.\n\nDokter juga memberikan obat-obatan pendukung untuk mengatasi efek samping kemoterapi seperti mual dan muntah. Keluarga kami juga berusaha memberikan nutrisi terbaik dan suplemen untuk menjaga daya tahan tubuh Andi.";
-    setSection2Content(exampleText);
+    setShowExampleModal2(true);
   };
 
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas');
+  const closeExampleModal1 = () => {
+    setShowExampleModal1(false);
+  };
+
+  const closeExampleModal2 = () => {
+    setShowExampleModal2(false);
   };
 
   return (
@@ -108,16 +130,12 @@ const TulisCerita2 = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya
           </button>
-          
-          <button 
+
+          <button
             className={`modern-btn ${(section1Content.trim().length === 0 && section2Content.trim().length === 0) ? 'disabled' : ''}`}
             onClick={handleNext}
             disabled={section1Content.trim().length === 0 && section2Content.trim().length === 0}
@@ -127,6 +145,42 @@ const TulisCerita2 = () => {
           </button>
         </div>
       </div>
+
+      {/* Example Modal 1 */}
+      {showExampleModal1 && (
+        <div className="example-modal-overlay" onClick={closeExampleModal1}>
+          <div className="example-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="example-modal-header">
+              <h3 className="modern-subheading">Contoh Cerita</h3>
+              <button className="example-modal-close" onClick={closeExampleModal1}>✕</button>
+            </div>
+            <div className="example-modal-body">
+              <p className="example-text">{exampleText1}</p>
+            </div>
+            <div className="example-modal-footer">
+              <button className="modern-btn" onClick={closeExampleModal1}>Tutup</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Example Modal 2 */}
+      {showExampleModal2 && (
+        <div className="example-modal-overlay" onClick={closeExampleModal2}>
+          <div className="example-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="example-modal-header">
+              <h3 className="modern-subheading">Contoh Cerita</h3>
+              <button className="example-modal-close" onClick={closeExampleModal2}>✕</button>
+            </div>
+            <div className="example-modal-body">
+              <p className="example-text">{exampleText2}</p>
+            </div>
+            <div className="example-modal-footer">
+              <button className="modern-btn" onClick={closeExampleModal2}>Tutup</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

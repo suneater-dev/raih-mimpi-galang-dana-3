@@ -4,10 +4,13 @@ import '../styles/TulisCerita.css';
 
 const TulisCeritaPendidikan = () => {
   const navigate = useNavigate();
-  const [storyContent, setStoryContent] = useState('');
+  const [storyContent, setStoryContent] = useState(() => {
+    return localStorage.getItem('ceritaPendidikan_part1') || '';
+  });
 
   const handleNext = () => {
     if (storyContent.trim().length > 0) {
+      localStorage.setItem('ceritaPendidikan_part1', storyContent);
       navigate('/tulis-cerita-pendidikan-2');
     }
   };
@@ -29,10 +32,6 @@ const TulisCeritaPendidikan = () => {
   const showExample = () => {
     const exampleText = "Halo, nama saya Ibu Sri Rahayu dan saya adalah kepala sekolah di SDN 01 Sukamaju, sebuah sekolah dasar yang terletak di daerah pelosok Kabupaten Garut, Jawa Barat. Kami adalah sekolah kecil yang melayani 120 siswa dari keluarga petani dan buruh tani yang kondisi ekonominya sangat terbatas.\n\nSekolah kami telah berdiri sejak tahun 1985 dan menjadi satu-satunya sekolah dasar di desa ini. Sebagian besar siswa harus berjalan kaki sejauh 3-5 kilometer untuk sampai ke sekolah karena tidak ada transportasi umum yang menjangkau daerah kami.\n\nSebagai pendidik, saya sangat prihatin melihat banyak anak-anak cerdas di desa ini yang terancam putus sekolah karena keterbatasan ekonomi keluarga. Banyak orang tua yang terpaksa memprioritaskan kebutuhan makan sehari-hari daripada biaya pendidikan anak-anak mereka.";
     setStoryContent(exampleText);
-  };
-
-  const handleWriteWithoutGuide = () => {
-    navigate('/tulis-cerita-bebas-pendidikan');
   };
 
   return (
@@ -82,10 +81,6 @@ const TulisCeritaPendidikan = () => {
 
       {/* Bottom Action Section */}
       <div className="story-actions-modern">
-        <button className="write-without-guide-modern" onClick={handleWriteWithoutGuide}>
-          Saya ingin menulis cerita sendiri tanpa panduan
-        </button>
-        
         <div className="bottom-nav-modern">
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya

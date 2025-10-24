@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import ProgressSteps from '../components/ProgressSteps';
 import '../styles/Penerima.css';
 
-const PenerimaSosial = () => {
+const PenerimaKreatif = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [penerimaData, setPenerimaData] = useState({
@@ -24,7 +24,7 @@ const PenerimaSosial = () => {
 
   const handleNext = () => {
     if (isFormValid) {
-      navigate('/target-donasi-sosial', {
+      navigate('/target-donasi-kreatif', {
         state: {
           ...previousData,
           penerimaData
@@ -34,7 +34,7 @@ const PenerimaSosial = () => {
   };
 
   const handleBack = () => {
-    navigate('/tujuan-detail-sosial', { state: previousData });
+    navigate('/tujuan-detail-kreatif', { state: previousData });
   };
 
   const isFormValid = penerimaData.namaPenerima.trim() &&
@@ -57,7 +57,7 @@ const PenerimaSosial = () => {
         <button className="back-arrow white-text" onClick={handleBack}>
           ←
         </button>
-        <div className="header-title white-text">Kegiatan Sosial</div>
+        <div className="header-title white-text">Karya Kreatif & Modal Usaha</div>
       </header>
 
       {/* Progress Steps */}
@@ -69,7 +69,7 @@ const PenerimaSosial = () => {
       <div className="modern-card">
         <h2 className="modern-subheading">Data penerima bantuan</h2>
         <p className="modern-text" style={{marginBottom: '24px', color: '#6B7280'}}>
-          Masukkan data lengkap penerima bantuan.
+          Masukkan data lengkap penerima modal usaha atau penanggung jawab proyek.
         </p>
 
           {/* Nama Penerima */}
@@ -78,7 +78,7 @@ const PenerimaSosial = () => {
             <input
               type="text"
               className="modern-input"
-              placeholder="Nama lengkap penerima bantuan"
+              placeholder="Nama lengkap penerima modal usaha atau penanggung jawab proyek"
               value={penerimaData.namaPenerima}
               onChange={(e) => handleInputChange('namaPenerima', e.target.value)}
             />
@@ -87,10 +87,10 @@ const PenerimaSosial = () => {
           {/* Hubungan */}
           <div className="form-group-modern">
             <label className="form-label-modern">Hubungan dengan Anda</label>
-            <input 
-              type="text" 
-              className="modern-input" 
-              placeholder="Contoh: Ketua RT, Koordinator Kegiatan, dll"
+            <input
+              type="text"
+              className="modern-input"
+              placeholder="Contoh: Pemilik Usaha, Koordinator Proyek, Ketua Kelompok, dll"
               value={penerimaData.hubungan}
               onChange={(e) => handleInputChange('hubungan', e.target.value)}
             />
@@ -101,7 +101,7 @@ const PenerimaSosial = () => {
             <label className="form-label-modern">Alamat lengkap</label>
             <textarea
               className="modern-textarea"
-              placeholder="Alamat lengkap lokasi kegiatan sosial"
+              placeholder="Alamat lengkap lokasi usaha atau pelaksanaan proyek"
               value={penerimaData.alamat}
               onChange={(e) => handleInputChange('alamat', e.target.value)}
               rows="3"
@@ -114,7 +114,7 @@ const PenerimaSosial = () => {
         <button className="modern-btn secondary" onClick={handleBack}>
           ← Sebelumnya
         </button>
-        <button 
+        <button
           className={`modern-btn ${!isFormValid ? 'disabled' : ''}`}
           onClick={handleNext}
           disabled={!isFormValid}
@@ -126,4 +126,4 @@ const PenerimaSosial = () => {
   );
 };
 
-export default PenerimaSosial;
+export default PenerimaKreatif;
