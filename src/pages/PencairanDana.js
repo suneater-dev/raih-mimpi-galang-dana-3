@@ -5,50 +5,367 @@ import '../styles/PencairanDana.css';
 const PencairanDana = () => {
   const navigate = useNavigate();
 
-  // Sample active campaigns data
+  // Filter and search state
+  const [activeFilter, setActiveFilter] = useState('Semua');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Modal state for blocking withdrawal
+  const [showBlockModal, setShowBlockModal] = useState(false);
+  const [blockingCampaignData, setBlockingCampaignData] = useState(null);
+
+  // Filter options
+  const filters = [
+    'Semua',
+    'Perlu Laporan',
+    'Siap Dicairkan',
+    'Sudah Dicairkan'
+  ];
+
+  // Campaign data matching Dashboard with report status
   const [campaigns] = useState([
+    // Berakhir campaigns with different report statuses
+    // Campaign 1: Already withdrawn and reported (completed)
+    {
+      id: 8,
+      title: 'Bantuan untuk Korban Bencana Alam',
+      image: '/dashboard/temani-mimpi-pejuang-pelosok-1756798332-465.webp',
+      collected: 50000000,
+      target: 50000000,
+      donors: 278,
+      status: 'Berakhir',
+      daysLeft: 0,
+      category: 'Sosial',
+      reportStatus: 'Dilaporkan',
+      canWithdraw: true,
+      hasReport: true,
+      withdrawn: true,
+      withdrawnDate: '2025-01-15T10:30:00',
+      withdrawalReported: true,
+      withdrawalOrder: 1
+    },
+    // Campaign 2: Withdrawn but NOT reported (blocking Campaign 4)
+    {
+      id: 9,
+      title: 'Wujudkan Mimpi Anak Pelosok - Bantuan Pendidikan',
+      image: '/dashboard/wujudkan-mimpi-anak-pelosok-1756351894-334.webp',
+      collected: 30000000,
+      target: 30000000,
+      donors: 198,
+      status: 'Berakhir',
+      daysLeft: 0,
+      category: 'Pendidikan',
+      reportStatus: 'Belum Lapor',
+      canWithdraw: false,
+      hasReport: false,
+      withdrawn: true,
+      withdrawnDate: '2025-01-20T14:20:00',
+      withdrawalReported: false,
+      withdrawalOrder: 2
+    },
+    // Campaign 3: Ready to withdraw but BLOCKED (needs Campaign 2 report first)
+    {
+      id: 10,
+      title: 'Renovasi Masjid Al-Ikhlas',
+      image: '/dashboard/hawari-berjuang-dengan-selang-di-hidung-1756370366-572.webp',
+      collected: 25000000,
+      target: 25000000,
+      donors: 156,
+      status: 'Berakhir',
+      daysLeft: 0,
+      category: 'Sosial',
+      reportStatus: 'Disetujui',
+      canWithdraw: true,
+      hasReport: true,
+      withdrawn: false,
+      withdrawnDate: null,
+      withdrawalReported: false,
+      withdrawalOrder: 3
+    },
+    // NEW Campaign 4: Ready to withdraw - DIRECT ACCESS (no blocking, withdrawalOrder comes before unreported withdrawal)
+    {
+      id: 11,
+      title: 'Operasi Jantung untuk Bayi Raffa',
+      image: '/dashboard/hawari-berjuang-dengan-selang-di-hidung-1756370366-572.webp',
+      collected: 75000000,
+      target: 75000000,
+      donors: 523,
+      status: 'Berakhir',
+      daysLeft: 0,
+      category: 'Medis',
+      reportStatus: 'Disetujui',
+      canWithdraw: true,
+      hasReport: true,
+      withdrawn: false,
+      withdrawnDate: null,
+      withdrawalReported: false,
+      withdrawalOrder: 1.5
+    },
+    // Aktif campaigns
     {
       id: 1,
-      title: 'Hawari Berjuang dengan Selang di Hidung - Butuh Operasi Segera',
+      title: 'Renovasi Sekolah Dasar di Daerah Terpencil',
       image: '/dashboard/hawari-berjuang-dengan-selang-di-hidung-1756370366-572.webp',
-      collected: 45000000,
+      collected: 3500000,
       target: 50000000,
-      donors: 1234,
+      donors: 42,
       status: 'Aktif',
-      daysLeft: 15,
-      category: 'Medis'
+      daysLeft: 45,
+      category: 'Sosial',
+      reportStatus: null,
+      canWithdraw: false,
+      hasReport: false
     },
     {
       id: 2,
-      title: 'Wujudkan Mimpi Anak Pelosok - Bantuan Pendidikan',
+      title: 'Bantu Anak Yatim untuk Melanjutkan Sekolah',
       image: '/dashboard/wujudkan-mimpi-anak-pelosok-1756351894-334.webp',
-      collected: 28500000,
-      target: 35000000,
-      donors: 892,
+      collected: 2000000,
+      target: 40000000,
+      donors: 28,
       status: 'Aktif',
-      daysLeft: 22,
-      category: 'Pendidikan'
+      daysLeft: 38,
+      category: 'Pendidikan',
+      reportStatus: null,
+      canWithdraw: false,
+      hasReport: false
     },
     {
       id: 3,
-      title: 'Temani Mimpi Pejuang Pelosok - Program Beasiswa',
-      image: '/dashboard/temani-mimpi-pejuang-pelosok-1756798332-465.webp',
-      collected: 62000000,
-      target: 75000000,
-      donors: 2156,
+      title: 'Hawari Berjuang dengan Selang di Hidung - Butuh Operasi Segera',
+      image: '/dashboard/hawari-berjuang-dengan-selang-di-hidung-1756370366-572.webp',
+      collected: 15750000,
+      target: 50000000,
+      donors: 127,
       status: 'Aktif',
-      daysLeft: 8,
-      category: 'Pendidikan'
+      daysLeft: 42,
+      category: 'Medis',
+      reportStatus: null,
+      canWithdraw: false,
+      hasReport: false
+    },
+    {
+      id: 4,
+      title: 'Bantuan Operasi untuk Kakek Aminuddin',
+      image: '/dashboard/temani-mimpi-pejuang-pelosok-1756798332-465.webp',
+      collected: 18000000,
+      target: 60000000,
+      donors: 145,
+      status: 'Aktif',
+      daysLeft: 40,
+      category: 'Medis',
+      reportStatus: null,
+      canWithdraw: false,
+      hasReport: false
+    },
+    {
+      id: 5,
+      title: 'Program Beasiswa Anak Berprestasi',
+      image: '/dashboard/wujudkan-mimpi-anak-pelosok-1756351894-334.webp',
+      collected: 22000000,
+      target: 35000000,
+      donors: 167,
+      status: 'Aktif',
+      daysLeft: 30,
+      category: 'Pendidikan',
+      reportStatus: null,
+      canWithdraw: false,
+      hasReport: false
+    },
+    {
+      id: 6,
+      title: 'Pembangunan Perpustakaan Desa',
+      image: '/dashboard/hawari-berjuang-dengan-selang-di-hidung-1756370366-572.webp',
+      collected: 28000000,
+      target: 45000000,
+      donors: 198,
+      status: 'Aktif',
+      daysLeft: 33,
+      category: 'Sosial',
+      reportStatus: null,
+      canWithdraw: false,
+      hasReport: false
+    },
+    {
+      id: 7,
+      title: 'Bantu Ibu Siti Melawan Kanker Payudara Stadium 3',
+      image: '/dashboard/temani-mimpi-pejuang-pelosok-1756798332-465.webp',
+      collected: 68000000,
+      target: 80000000,
+      donors: 342,
+      status: 'Aktif',
+      daysLeft: 25,
+      category: 'Medis',
+      reportStatus: null,
+      canWithdraw: false,
+      hasReport: false
     }
   ]);
+
+  // Filter campaigns for dropdown (real-time search)
+  const dropdownFilteredCampaigns = searchQuery
+    ? campaigns.filter(c =>
+        c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        c.category.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
+
+  // Check if we have any search results for dropdown
+  const hasDropdownResults = dropdownFilteredCampaigns.length > 0;
+
+  // Filter campaigns based on active filter and search query
+  const getFilteredCampaigns = () => {
+    let filtered = campaigns;
+
+    // Apply filter
+    if (activeFilter === 'Perlu Laporan') {
+      filtered = filtered.filter(c => c.reportStatus === 'Belum Lapor');
+    } else if (activeFilter === 'Siap Dicairkan') {
+      filtered = filtered.filter(c => c.reportStatus === 'Disetujui' && !c.withdrawn);
+    } else if (activeFilter === 'Sudah Dicairkan') {
+      filtered = filtered.filter(c => c.withdrawn === true);
+    }
+
+    // Apply search query
+    if (searchQuery) {
+      filtered = filtered.filter(c =>
+        c.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    return filtered;
+  };
+
+  const filteredCampaigns = getFilteredCampaigns();
+
+  // Check if there are unreported withdrawals blocking new withdrawals
+  const checkUnreportedWithdrawals = (currentCampaign) => {
+    // Find all campaigns that were withdrawn before this one
+    const previousWithdrawals = campaigns.filter(c =>
+      c.withdrawn &&
+      c.withdrawalOrder < currentCampaign.withdrawalOrder &&
+      !c.withdrawalReported
+    );
+
+    if (previousWithdrawals.length > 0) {
+      // Sort by order and return the first unreported one
+      const blockingCampaign = previousWithdrawals.sort((a, b) => a.withdrawalOrder - b.withdrawalOrder)[0];
+      return {
+        canWithdraw: false,
+        blockingCampaign: blockingCampaign
+      };
+    }
+
+    return {
+      canWithdraw: true,
+      blockingCampaign: null
+    };
+  };
 
   const handleBack = () => {
     navigate('/dashboard');
   };
 
+  const handleCreateReport = (campaign) => {
+    // Navigate to report creation page
+    navigate('/laporan-pencairan', { state: { campaign } });
+  };
+
+  const handleViewReport = (campaign) => {
+    // Navigate to view report page
+    navigate('/detail-laporan-pencairan', { state: { campaign } });
+  };
+
   const handleWithdraw = (campaign) => {
-    // Navigate to detail page with campaign data
-    navigate('/detail-pencairan-dana', { state: { campaign } });
+    // Only accessible if report is approved
+    if (campaign.reportStatus === 'Disetujui') {
+      // Check if there are unreported withdrawals blocking this one
+      const blockCheck = checkUnreportedWithdrawals(campaign);
+
+      if (!blockCheck.canWithdraw) {
+        // Show modal with blocking campaign info
+        setBlockingCampaignData(blockCheck.blockingCampaign);
+        setShowBlockModal(true);
+      } else {
+        // Allow withdrawal
+        navigate('/detail-pencairan-dana', { state: { campaign } });
+      }
+    }
+  };
+
+  const getReportStatusBadge = (reportStatus) => {
+    const badges = {
+      'Belum Lapor': { text: 'Belum Lapor', class: 'report-status-not-reported' },
+      'Dalam Review': { text: 'Dalam Review', class: 'report-status-reviewing' },
+      'Disetujui': { text: 'Laporan Disetujui', class: 'report-status-approved' },
+      'Ditolak': { text: 'Laporan Ditolak', class: 'report-status-rejected' },
+      'Dilaporkan': { text: 'Sudah Dilaporkan', class: 'report-status-reported' }
+    };
+    return badges[reportStatus] || null;
+  };
+
+  const getActionButton = (campaign) => {
+    if (campaign.status === 'Aktif') {
+      return {
+        text: 'Buat Laporan',
+        disabled: true,
+        className: 'btn-report-disabled',
+        tooltip: 'Campaign masih berjalan',
+        onClick: null
+      };
+    }
+
+    // Campaign has ended (Berakhir)
+    if (campaign.reportStatus === 'Belum Lapor') {
+      return {
+        text: 'Buat Laporan',
+        disabled: false,
+        className: 'btn-create-report',
+        tooltip: null,
+        onClick: () => handleCreateReport(campaign)
+      };
+    }
+
+    if (campaign.reportStatus === 'Dalam Review') {
+      return {
+        text: 'Lihat Laporan',
+        disabled: false,
+        className: 'btn-view-report',
+        tooltip: 'Laporan sedang direview admin',
+        onClick: () => handleViewReport(campaign)
+      };
+    }
+
+    if (campaign.reportStatus === 'Ditolak') {
+      return {
+        text: 'Revisi Laporan',
+        disabled: false,
+        className: 'btn-revise-report',
+        tooltip: 'Perbaiki laporan berdasarkan catatan admin',
+        onClick: () => handleCreateReport(campaign)
+      };
+    }
+
+    if (campaign.reportStatus === 'Disetujui') {
+      return {
+        text: 'Cairkan Dana',
+        disabled: false,
+        className: 'btn-withdraw-approved',
+        tooltip: null,
+        onClick: () => handleWithdraw(campaign)
+      };
+    }
+
+    if (campaign.reportStatus === 'Dilaporkan') {
+      return {
+        text: 'Lihat Berita',
+        disabled: false,
+        className: 'btn-view-news',
+        tooltip: null,
+        onClick: () => navigate('/berita-pencairan', { state: { campaign } })
+      };
+    }
+
+    return null;
   };
 
   const formatCurrency = (amount) => {
@@ -95,7 +412,7 @@ const PencairanDana = () => {
             </div>
             <h2 className="pencairan-title">Pencairan Dana Campaign</h2>
             <p className="pencairan-description">
-              Berikut adalah daftar campaign aktif Anda. Anda dapat mencairkan dana yang telah terkumpul untuk setiap campaign.
+              Untuk mencairkan dana campaign yang telah berakhir, Anda harus melaporkan penggunaan dana terlebih dahulu. Laporan akan direview oleh admin sebelum pencairan dapat dilakukan.
             </p>
           </div>
 
@@ -105,15 +422,121 @@ const PencairanDana = () => {
               <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
             <div className="info-text-pencairan">
-              <strong>Informasi:</strong> Dana akan ditransfer ke rekening yang Anda daftarkan dalam waktu 2-3 hari kerja setelah pengajuan pencairan disetujui.
+              <strong>Alur Pencairan:</strong> Campaign Berakhir → Buat Laporan → Review Admin → Pencairan Dana. Dana akan ditransfer dalam waktu 2-3 hari kerja setelah pengajuan pencairan disetujui.
             </div>
+          </div>
+
+          {/* Search Bar */}
+          <div className="search-wrapper-pencairan">
+            <div className="search-container-pencairan">
+              <svg className="search-icon-pencairan" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <input
+                type="text"
+                className="search-input-pencairan"
+                placeholder="Cari campaign..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              {searchQuery && (
+                <button
+                  className="search-clear-pencairan"
+                  onClick={() => setSearchQuery('')}
+                  aria-label="Clear search"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+
+            {/* Search Results Dropdown */}
+            {searchQuery && (
+              <div className="search-dropdown-pencairan">
+                {hasDropdownResults ? (
+                  <>
+                    {/* Campaign Results */}
+                    <div className="search-results-section-pencairan">
+                      <div className="search-section-title-pencairan">Campaign ({dropdownFilteredCampaigns.length})</div>
+                      {dropdownFilteredCampaigns.slice(0, 5).map((campaign) => (
+                        <button
+                          key={campaign.id}
+                          className="search-result-item-pencairan"
+                          onClick={() => {
+                            setSearchQuery(campaign.title);
+                          }}
+                        >
+                          <div className="search-result-campaign-icon-pencairan">
+                            <img
+                              src={campaign.image}
+                              alt={campaign.title}
+                              onError={(e) => {
+                                e.target.style.display = 'none';
+                              }}
+                            />
+                          </div>
+                          <div className="search-result-info-pencairan">
+                            <div className="search-result-title-pencairan">{campaign.title}</div>
+                            <div className="search-result-meta-pencairan">
+                              <span className="search-result-category-pencairan" style={{ color: getCategoryColor(campaign.category) }}>
+                                {campaign.category}
+                              </span>
+                              <span className="search-result-separator-pencairan">•</span>
+                              <span className="search-result-status-pencairan">{campaign.status}</span>
+                            </div>
+                          </div>
+                          <svg className="search-result-arrow-pencairan" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </button>
+                      ))}
+                      {dropdownFilteredCampaigns.length > 5 && (
+                        <div className="search-more-results-pencairan">
+                          +{dropdownFilteredCampaigns.length - 5} campaign lainnya
+                        </div>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <div className="search-no-results-pencairan">
+                    <svg className="search-no-results-icon-pencairan" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <p className="search-no-results-text-pencairan">Tidak ada campaign yang cocok</p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Filter Pills */}
+          <div className="filters-container-pencairan">
+            {filters.map((filter) => (
+              <button
+                key={filter}
+                className={`filter-pill-pencairan ${activeFilter === filter ? 'active' : ''}`}
+                onClick={() => setActiveFilter(filter)}
+              >
+                {filter}
+              </button>
+            ))}
           </div>
 
           {/* Campaign List */}
           <div className="campaigns-list">
-            <h3 className="campaigns-section-title">Campaign Aktif ({campaigns.length})</h3>
+            <h3 className="campaigns-section-title">
+              {activeFilter === 'Semua' ? 'Semua Campaign' : activeFilter} ({filteredCampaigns.length})
+            </h3>
 
-            {campaigns.map((campaign) => (
+            {filteredCampaigns.length === 0 ? (
+              <div className="empty-state-pencairan">
+                <svg className="empty-icon-pencairan" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <p className="empty-text-pencairan">Tidak ada campaign yang sesuai dengan filter</p>
+              </div>
+            ) : (
+              filteredCampaigns.map((campaign) => (
               <div key={campaign.id} className="campaign-card-pencairan">
                 {/* Campaign Image */}
                 <div className="campaign-image-container">
@@ -132,7 +555,28 @@ const PencairanDana = () => {
 
                 {/* Campaign Info */}
                 <div className="campaign-info-pencairan">
-                  <h4 className="campaign-title-pencairan">{campaign.title}</h4>
+                  <div className="campaign-header-row">
+                    <h4 className="campaign-title-pencairan">{campaign.title}</h4>
+                    {/* Status Badges */}
+                    <div className="status-badges-row">
+                      {campaign.withdrawn ? (
+                        <span className="withdrawal-badge withdrawn">
+                          Dana Sudah Dicairkan
+                        </span>
+                      ) : (
+                        campaign.status === 'Berakhir' && (
+                          <span className="withdrawal-badge not-withdrawn">
+                            Dana Belum Dicairkan
+                          </span>
+                        )
+                      )}
+                      {campaign.reportStatus && (
+                        <span className={`report-badge ${getReportStatusBadge(campaign.reportStatus)?.class}`}>
+                          {getReportStatusBadge(campaign.reportStatus)?.text}
+                        </span>
+                      )}
+                    </div>
+                  </div>
 
                   {/* Stats Row */}
                   <div className="campaign-stats-row">
@@ -146,7 +590,7 @@ const PencairanDana = () => {
                       <svg className="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
-                      <span>{campaign.daysLeft} hari lagi</span>
+                      <span>{campaign.status === 'Berakhir' ? 'Telah berakhir' : `${campaign.daysLeft} hari lagi`}</span>
                     </div>
                   </div>
 
@@ -167,19 +611,50 @@ const PencairanDana = () => {
                     ></div>
                   </div>
 
-                  {/* Withdraw Button */}
-                  <button
-                    className="btn-withdraw"
-                    onClick={() => handleWithdraw(campaign)}
-                  >
-                    <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    Cairkan Dana
-                  </button>
+                  {/* Action Button (Dynamic based on status) */}
+                  {(() => {
+                    const actionBtn = getActionButton(campaign);
+                    if (!actionBtn) return null;
+
+                    return actionBtn.tooltip ? (
+                      <div className="btn-wrapper">
+                        <button
+                          className={actionBtn.className}
+                          onClick={actionBtn.onClick}
+                          disabled={actionBtn.disabled}
+                        >
+                          <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            {actionBtn.className.includes('report') ? (
+                              <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" strokeLinecap="round" strokeLinejoin="round"/>
+                            ) : (
+                              <path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" strokeLinecap="round" strokeLinejoin="round"/>
+                            )}
+                          </svg>
+                          {actionBtn.text}
+                        </button>
+                        {actionBtn.tooltip && <div className="btn-tooltip">{actionBtn.tooltip}</div>}
+                      </div>
+                    ) : (
+                      <button
+                        className={actionBtn.className}
+                        onClick={actionBtn.onClick}
+                        disabled={actionBtn.disabled}
+                      >
+                        <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          {actionBtn.className.includes('report') ? (
+                            <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" strokeLinecap="round" strokeLinejoin="round"/>
+                          ) : (
+                            <path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" strokeLinecap="round" strokeLinejoin="round"/>
+                          )}
+                        </svg>
+                        {actionBtn.text}
+                      </button>
+                    );
+                  })()}
                 </div>
               </div>
-            ))}
+              ))
+            )}
           </div>
 
           {/* Back Button */}
@@ -188,6 +663,55 @@ const PencairanDana = () => {
           </button>
         </div>
       </div>
+
+      {/* Blocking Modal */}
+      {showBlockModal && blockingCampaignData && (
+        <div className="modal-overlay" onClick={() => setShowBlockModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            {/* Modal Icon */}
+            <div className="modal-icon-warning">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+
+            {/* Modal Title */}
+            <h3 className="modal-title">Laporan Campaign Diperlukan</h3>
+
+            {/* Modal Message */}
+            <p className="modal-message">
+              Sebelum dapat mencairkan dana campaign ini, Anda harus melaporkan penggunaan dana dari campaign sebelumnya:
+            </p>
+
+            {/* Blocking Campaign Info */}
+            <div className="blocking-campaign-info">
+              <div className="blocking-campaign-name">{blockingCampaignData.title}</div>
+              <div className="blocking-campaign-meta">
+                Campaign #{blockingCampaignData.withdrawalOrder} • Dicairkan pada {new Date(blockingCampaignData.withdrawnDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+              </div>
+            </div>
+
+            {/* Modal Buttons */}
+            <div className="modal-buttons">
+              <button
+                className="btn-modal-primary"
+                onClick={() => {
+                  setShowBlockModal(false);
+                  navigate('/laporan-pencairan', { state: { campaign: blockingCampaignData } });
+                }}
+              >
+                <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Buat Laporan Sekarang
+              </button>
+              <button className="btn-modal-secondary" onClick={() => setShowBlockModal(false)}>
+                Tutup
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

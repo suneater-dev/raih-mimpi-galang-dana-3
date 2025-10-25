@@ -162,10 +162,6 @@ const UserInfo = () => {
           >
             Lanjutkan
           </button>
-
-          <div className="login-option-modern">
-            <p className="modern-text text-center">Sudah punya akun? <button className="register-link-modern" onClick={() => navigate('/login')}>Masuk</button></p>
-          </div>
         </form>
       </div>
     </div>

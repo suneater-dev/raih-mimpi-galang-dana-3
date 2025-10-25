@@ -8,6 +8,7 @@ const TargetDonasiKreatif = () => {
   const location = useLocation();
   const [amount, setAmount] = useState('');
   const [duration, setDuration] = useState('');
+  const [customDate, setCustomDate] = useState('');
 
   // Get data from previous steps
   const previousData = location.state || {};
@@ -16,7 +17,7 @@ const TargetDonasiKreatif = () => {
     { id: 'duration-30', value: '30', label: '30 hari' },
     { id: 'duration-60', value: '60', label: '60 hari' },
     { id: 'duration-120', value: '120', label: '120 hari' },
-    { id: 'duration-custom', value: 'custom', label: 'pilih tanggal' }
+    { id: 'duration-custom', value: 'custom', label: 'Pilih Tanggal' }
   ];
 
   const handleAmountChange = (e) => {
@@ -29,16 +30,33 @@ const TargetDonasiKreatif = () => {
 
   const handleDurationChange = (value) => {
     setDuration(value);
+    if (value !== 'custom') {
+      setCustomDate('');
+    }
+  };
+
+  const handleCustomDateChange = (e) => {
+    setCustomDate(e.target.value);
+  };
+
+  const calculateDaysFromDate = (endDate) => {
+    const today = new Date();
+    const end = new Date(endDate);
+    const diffTime = end - today;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays > 0 ? diffDays : 0;
   };
 
   const handleNext = () => {
     if (isFormValid) {
+      const finalDuration = duration === 'custom' ? calculateDaysFromDate(customDate).toString() : duration;
       navigate('/judul-kampanye-kreatif', {
         state: {
           ...previousData,
           targetData: {
             amount,
-            duration
+            duration: finalDuration,
+            customDate: duration === 'custom' ? customDate : null
           }
         }
       });
@@ -49,12 +67,17 @@ const TargetDonasiKreatif = () => {
     navigate('/penerima-kreatif', { state: previousData });
   };
 
-  const handleSaveAndContinueLater = () => {
-    navigate('/dashboard');
+
+  // Get minimum date (tomorrow)
+  const getMinDate = () => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return tomorrow.toISOString().split('T')[0];
   };
 
   // Form validation
-  const isFormValid = amount.trim() !== '' && duration !== '';
+  const isFormValid = amount.trim() !== '' && duration !== '' &&
+    (duration !== 'custom' || (duration === 'custom' && customDate !== ''));
 
   const steps = [
     { number: 1, label: 'Tujuan', active: false },
@@ -119,6 +142,25 @@ const TargetDonasiKreatif = () => {
                 </label>
               ))}
             </div>
+
+            {/* Custom Date Picker - Only show when "Pilih Tanggal" is selected */}
+            {duration === 'custom' && (
+              <div className="custom-date-picker-modern">
+                <label className="date-label-modern">Pilih tanggal berakhir kampanye</label>
+                <input
+                  type="date"
+                  className="date-input-modern"
+                  value={customDate}
+                  onChange={handleCustomDateChange}
+                  min={getMinDate()}
+                />
+                {customDate && (
+                  <p className="date-info-modern">
+                    Kampanye akan berlangsung selama <strong>{calculateDaysFromDate(customDate)} hari</strong>
+                  </p>
+                )}
+              </div>
+            )}
           </div>
       </div>
 
@@ -135,7 +177,6 @@ const TargetDonasiKreatif = () => {
           Selanjutnya →
         </button>
       </div>
-      <button className="save-continue-modern">Simpan dan lanjutkan nanti</button>
     </div>
   );
 };

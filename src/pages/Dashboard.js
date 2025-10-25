@@ -12,7 +12,8 @@ const Dashboard = () => {
     'Belum Jadi',
     'Dalam Review',
     'Aktif',
-    'Berakhir'
+    'Berakhir',
+    'Diiklankan'
   ];
 
   // Menu items data
@@ -37,10 +38,40 @@ const Dashboard = () => {
     }
   ];
 
-  // Sample campaign data with real images
+  // Sample campaign data with real images - matching IklankanCampaign
   const campaigns = [
+    // Sangat Buruk - Priority campaigns
     {
       id: 1,
+      title: 'Renovasi Sekolah Dasar di Daerah Terpencil',
+      image: '/dashboard/hawari-berjuang-dengan-selang-di-hidung-1756370366-572.webp',
+      status: 'Aktif',
+      progress: 100,
+      steps: '7 dari 7 tahap',
+      lastUpdated: '05 September 2025',
+      hasImage: true,
+      collected: 3500000,
+      target: 50000000,
+      daysLeft: 45,
+      donors: 42
+    },
+    {
+      id: 2,
+      title: 'Bantu Anak Yatim untuk Melanjutkan Sekolah',
+      image: '/dashboard/wujudkan-mimpi-anak-pelosok-1756351894-334.webp',
+      status: 'Aktif',
+      progress: 100,
+      steps: '7 dari 7 tahap',
+      lastUpdated: '04 September 2025',
+      hasImage: true,
+      collected: 2000000,
+      target: 40000000,
+      daysLeft: 38,
+      donors: 28
+    },
+    // Buruk
+    {
+      id: 3,
       title: 'Hawari Berjuang dengan Selang di Hidung - Butuh Operasi Segera',
       image: '/dashboard/hawari-berjuang-dengan-selang-di-hidung-1756370366-572.webp',
       status: 'Aktif',
@@ -51,105 +82,144 @@ const Dashboard = () => {
       collected: 15750000,
       target: 50000000,
       daysLeft: 42,
-      donors: 127
+      donors: 127,
+      isPromoted: true
     },
     {
-      id: 2,
-      title: 'Wujudkan Mimpi Anak Pelosok - Bantuan Pendidikan',
-      image: '/dashboard/wujudkan-mimpi-anak-pelosok-1756351894-334.webp',
-      status: 'Dalam Review',
-      progress: 85,
-      steps: '6 dari 7 tahap',
-      lastUpdated: '04 September 2025',
+      id: 4,
+      title: 'Bantuan Operasi untuk Kakek Aminuddin',
+      image: '/dashboard/temani-mimpi-pejuang-pelosok-1756798332-465.webp',
+      status: 'Aktif',
+      progress: 100,
+      steps: '7 dari 7 tahap',
+      lastUpdated: '06 September 2025',
       hasImage: true,
-      collected: 0,
-      target: 0,
-      daysLeft: 0,
-      donors: 0
+      collected: 18000000,
+      target: 60000000,
+      daysLeft: 40,
+      donors: 145
+    },
+    // Baik
+    {
+      id: 5,
+      title: 'Program Beasiswa Anak Berprestasi',
+      image: '/dashboard/wujudkan-mimpi-anak-pelosok-1756351894-334.webp',
+      status: 'Aktif',
+      progress: 100,
+      steps: '7 dari 7 tahap',
+      lastUpdated: '07 September 2025',
+      hasImage: true,
+      collected: 22000000,
+      target: 35000000,
+      daysLeft: 30,
+      donors: 167
     },
     {
-      id: 3,
-      title: 'Temani Mimpi Pejuang Pelosok - Program Beasiswa',
+      id: 6,
+      title: 'Pembangunan Perpustakaan Desa',
+      image: '/dashboard/hawari-berjuang-dengan-selang-di-hidung-1756370366-572.webp',
+      status: 'Aktif',
+      progress: 100,
+      steps: '7 dari 7 tahap',
+      lastUpdated: '08 September 2025',
+      hasImage: true,
+      collected: 28000000,
+      target: 45000000,
+      daysLeft: 33,
+      donors: 198
+    },
+    // Sangat Baik
+    {
+      id: 7,
+      title: 'Bantu Ibu Siti Melawan Kanker Payudara Stadium 3',
+      image: '/dashboard/temani-mimpi-pejuang-pelosok-1756798332-465.webp',
+      status: 'Aktif',
+      progress: 100,
+      steps: '7 dari 7 tahap',
+      lastUpdated: '09 September 2025',
+      hasImage: true,
+      collected: 68000000,
+      target: 80000000,
+      daysLeft: 25,
+      donors: 342,
+      isPromoted: true
+    },
+    {
+      id: 8,
+      title: 'Bantuan untuk Korban Bencana Alam',
       image: '/dashboard/temani-mimpi-pejuang-pelosok-1756798332-465.webp',
       status: 'Berakhir',
       progress: 100,
       steps: '7 dari 7 tahap',
       lastUpdated: '04 September 2025',
       hasImage: true,
-      collected: 25000000,
-      target: 25000000,
+      collected: 50000000,
+      target: 50000000,
       daysLeft: 0,
-      donors: 89
+      donors: 278
+    },
+    // Belum Jadi (Drafts with different completion levels)
+    {
+      id: 9,
+      title: 'Bantuan Biaya Sekolah Anak Yatim',
+      image: '/dashboard/wujudkan-mimpi-anak-pelosok-1756351894-334.webp',
+      status: 'Belum Jadi',
+      progress: 14,
+      steps: '1 dari 7 tahap',
+      lastUpdated: '12 September 2025',
+      hasImage: false,
+      lastStep: '/bantuan-lainnya'
     },
     {
-      id: 4,
-      title: '[Penggalangan belum ada judul]',
-      image: null,
+      id: 10,
+      title: 'Renovasi Sekolah Rusak Pasca Banjir',
+      image: '/dashboard/hawari-berjuang-dengan-selang-di-hidung-1756370366-572.webp',
       status: 'Belum Jadi',
-      progress: 45,
+      progress: 43,
       steps: '3 dari 7 tahap',
-      lastUpdated: '29 Agustus 2025',
-      hasImage: false,
-      collected: 0,
-      target: 0,
-      daysLeft: 0,
-      donors: 0
+      lastUpdated: '11 September 2025',
+      hasImage: true,
+      lastStep: '/judul-kampanye'
     },
     {
-      id: 5,
-      title: '[Penggalangan belum ada judul]',
-      image: null,
+      id: 11,
+      title: 'Bantu Operasi Tumor Otak Ibu Siti',
+      image: '/dashboard/temani-mimpi-pejuang-pelosok-1756798332-465.webp',
       status: 'Belum Jadi',
-      progress: 0,
-      steps: '0 dari 7 tahap',
-      lastUpdated: '29 Agustus 2025',
-      hasImage: false,
-      collected: 0,
-      target: 0,
-      daysLeft: 0,
-      donors: 0
-    },
-    {
-      id: 6,
-      title: 'Bantu Pembangunan Masjid Al-Ikhlas - Kampung Harapan',
-      image: '/masjid cover.webp',
-      status: 'Aktif',
-      progress: 100,
-      steps: '7 dari 7 tahap',
+      progress: 71,
+      steps: '5 dari 7 tahap',
       lastUpdated: '10 September 2025',
       hasImage: true,
-      collected: 45000000,
-      target: 150000000,
-      daysLeft: 58,
-      donors: 234
+      lastStep: '/tulis-cerita-3'
     },
+    // Dalam Review
     {
-      id: 7,
-      title: 'Operasi Jantung untuk Adik Kecil Kami - Bantu Zahira Sembuh',
-      image: '/dashboard/hawari-berjuang-dengan-selang-di-hidung-1756370366-572.webp',
-      status: 'Aktif',
+      id: 12,
+      title: 'Wujudkan Mimpi Anak Pelosok - Bantuan Pendidikan',
+      image: '/dashboard/wujudkan-mimpi-anak-pelosok-1756351894-334.webp',
+      status: 'Dalam Review',
       progress: 100,
       steps: '7 dari 7 tahap',
-      lastUpdated: '12 September 2025',
+      lastUpdated: '09 September 2025',
       hasImage: true,
-      collected: 32500000,
-      target: 75000000,
-      daysLeft: 35,
-      donors: 178
+      collected: 0,
+      target: 30000000,
+      daysLeft: 28,
+      donors: 0
     },
     {
-      id: 8,
-      title: 'Santuni Anak Yatim & Dhuafa - Program Ramadan Berkah',
-      image: '/dashboard/temani-mimpi-pejuang-pelosok-1756798332-465.webp',
-      status: 'Aktif',
+      id: 13,
+      title: 'Renovasi Masjid Al-Ikhlas',
+      image: '/dashboard/hawari-berjuang-dengan-selang-di-hidung-1756370366-572.webp',
+      status: 'Dalam Review',
       progress: 100,
       steps: '7 dari 7 tahap',
       lastUpdated: '08 September 2025',
       hasImage: true,
-      collected: 18750000,
-      target: 30000000,
-      daysLeft: 21,
-      donors: 156
+      collected: 0,
+      target: 25000000,
+      daysLeft: 35,
+      donors: 0
     }
   ];
 
@@ -157,13 +227,80 @@ const Dashboard = () => {
     navigate('/bantuan-lainnya');
   };
 
-  const handleContinueDraft = (campaignId) => {
-    // Navigate to appropriate step based on campaign progress
-    navigate('/bantuan-lainnya');
+  const handleContinueDraft = (campaign) => {
+    // Navigate to last saved step for drafts
+    if (campaign.lastStep) {
+      navigate(campaign.lastStep);
+    } else {
+      navigate('/bantuan-lainnya');
+    }
+  };
+
+  const handleViewCampaign = (campaign) => {
+    // Navigate to campaign detail page
+    navigate(`/campaign/${campaign.id}`, { state: { campaign } });
+  };
+
+  const handlePreviewDraft = (campaign) => {
+    // Navigate to preview mode with isPreview flag
+    navigate(`/campaign/${campaign.id}`, {
+      state: {
+        campaign,
+        isPreview: true
+      }
+    });
   };
 
   const handleDeleteDraft = (campaignId) => {
     alert(`Menghapus draft campaign ${campaignId}`);
+  };
+
+  // Get appropriate action button based on campaign status
+  const getActionButton = (campaign) => {
+    switch (campaign.status) {
+      case 'Aktif':
+        return {
+          text: 'Lihat Campaign',
+          icon: 'eye',
+          className: 'view-btn-modern',
+          onClick: () => handleViewCampaign(campaign.id)
+        };
+      case 'Belum Jadi':
+        return {
+          text: 'Lanjutkan',
+          icon: 'arrow',
+          className: 'continue-btn-modern',
+          onClick: () => handleContinueDraft(campaign)
+        };
+      case 'Dalam Review':
+        return {
+          text: 'Pratinjau',
+          icon: 'eye',
+          className: 'preview-btn-modern',
+          onClick: () => handlePreviewDraft(campaign)
+        };
+      case 'Berakhir':
+        return {
+          text: 'Lihat Campaign',
+          icon: 'eye',
+          className: 'view-btn-modern',
+          onClick: () => handleViewCampaign(campaign.id)
+        };
+      case 'Diiklankan':
+        return {
+          text: 'Lihat Campaign',
+          icon: 'eye',
+          className: 'view-btn-modern',
+          onClick: () => handleViewCampaign(campaign.id)
+        };
+      default:
+        return {
+          text: 'Lanjutkan',
+          icon: 'arrow',
+          className: 'continue-btn-modern',
+          onClick: () => handleContinueDraft(campaign)
+        };
+    }
   };
 
   const getProgressBarWidth = (progress) => {
@@ -240,8 +377,14 @@ const Dashboard = () => {
     if (activeFilter === 'Semua') {
       return campaigns;
     }
+    if (activeFilter === 'Diiklankan') {
+      return campaigns.filter(campaign => campaign.isPromoted === true);
+    }
     return campaigns.filter(campaign => campaign.status === activeFilter);
   };
+
+  // Count active campaigns
+  const activeCampaignsCount = campaigns.filter(campaign => campaign.status === 'Aktif').length;
 
   const displayedCampaigns = getFilteredCampaigns();
 
@@ -399,24 +542,12 @@ const Dashboard = () => {
       <section className="create-section">
         <div className="create-header">
           <h2 className="section-title">Buat galang dana</h2>
-          <span className="quota-text">Kuota galang dana aktif: 1</span>
+          <span className="quota-text">Kuota galang dana aktif: {activeCampaignsCount}</span>
         </div>
         
         <button className="create-button" onClick={handleCreateNew}>
           Buat baru galang dana +
         </button>
-        
-        <div className="info-banner">
-          <div className="info-icon">ℹ️</div>
-          <div className="info-text">
-            <p>
-              Ingin galang danamu lebih sukses? 
-              <a href="#" className="info-link" target="_blank" rel="noopener noreferrer">
-                Lihat panduan galang dana
-              </a>
-            </p>
-          </div>
-        </div>
       </section>
 
       {/* Divider */}
@@ -467,10 +598,20 @@ const Dashboard = () => {
                       <h3 className="campaign-title-modern">
                         {campaign.title}
                       </h3>
-                      <span className={`status-badge-modern ${getStatusClassesModern(campaign.status)}`}>
-                        <div className="status-indicator"></div>
-                        {campaign.status}
-                      </span>
+                      <div className="badges-container">
+                        <span className={`status-badge-modern ${getStatusClassesModern(campaign.status)}`}>
+                          <div className="status-indicator"></div>
+                          {campaign.status}
+                        </span>
+                        {campaign.isPromoted && (
+                          <span className="promoted-badge-modern">
+                            <svg className="megaphone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            Diiklankan
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -524,26 +665,41 @@ const Dashboard = () => {
                 ) : null}
 
                 <div className="actions-section-modern">
-                  <button 
-                    className="continue-btn-modern"
-                    onClick={() => handleContinueDraft(campaign.id)}
-                  >
-                    <div className="btn-content">
-                      <svg className="btn-icon" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  {(() => {
+                    const actionBtn = getActionButton(campaign);
+                    return (
+                      <button
+                        className={actionBtn.className}
+                        onClick={actionBtn.onClick}
+                      >
+                        <div className="btn-content">
+                          {actionBtn.icon === 'arrow' && (
+                            <svg className="btn-icon" viewBox="0 0 20 20" fill="currentColor">
+                              <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                          )}
+                          {actionBtn.icon === 'eye' && (
+                            <svg className="btn-icon" viewBox="0 0 20 20" fill="currentColor">
+                              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                              <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd"/>
+                            </svg>
+                          )}
+                          {actionBtn.text}
+                        </div>
+                      </button>
+                    );
+                  })()}
+
+                  {campaign.status === 'Belum Jadi' && (
+                    <button
+                      className="delete-btn-modern"
+                      onClick={() => handleDeleteDraft(campaign.id)}
+                    >
+                      <svg className="delete-icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
                       </svg>
-                      Lanjutkan
-                    </div>
-                  </button>
-                  
-                  <button 
-                    className="delete-btn-modern"
-                    onClick={() => handleDeleteDraft(campaign.id)}
-                  >
-                    <svg className="delete-icon" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
-                    </svg>
-                  </button>
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

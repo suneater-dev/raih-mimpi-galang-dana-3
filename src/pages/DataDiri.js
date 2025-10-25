@@ -215,10 +215,6 @@ const DataDiri = () => {
             Selanjutnya
           </button>
         </div>
-        
-        <button className="save-continue-later-btn" onClick={handleSaveAndContinueLater}>
-          Simpan dan lanjutkan nanti
-        </button>
       </div>
     </div>
   );

@@ -85,7 +85,7 @@ const CeritaKampanye = () => {
           Selanjutnya →
         </button>
       </div>
-      <button className="save-continue-modern">Simpan dan lanjutkan nanti</button>
+      
     </div>
   );
 };

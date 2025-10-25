@@ -139,14 +139,7 @@ const ReviewCeritaPendidikan = () => {
         <button className="modern-btn" onClick={handleNext}>
           Selanjutnya →
         </button>
-      </div>
-      
-      <div className="save-later-modern">
-        <button className="save-later-btn-modern" onClick={handleSaveAndContinueLater}>
-          Simpan dan lanjutkan nanti
-        </button>
-      </div>
-    </div>
+      </div></div>
   );
 };
 

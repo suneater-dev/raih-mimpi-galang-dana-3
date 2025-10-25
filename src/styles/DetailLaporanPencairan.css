@@ -1,0 +1,484 @@
+/* Detail Laporan Pencairan Page Styles */
+
+/* Container */
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  min-height: 100vh;
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+/* Content */
+.detail-laporan-content {
+  padding: 32px 16px;
+}
+
+.detail-laporan-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  padding: 32px 24px;
+  box-shadow:
+    0 8px 32px -8px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Status Section */
+.status-section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 28px;
+  border-bottom: 1.5px solid rgba(148, 163, 184, 0.15);
+}
+
+.status-badge-large {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 24px;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.15);
+}
+
+.status-badge-large.status-reviewing {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(37, 99, 235, 0.15) 100%);
+  color: #2563eb;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+}
+
+.status-badge-large.status-approved {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.15) 100%);
+  color: #059669;
+  border: 2px solid rgba(16, 185, 129, 0.3);
+}
+
+.status-badge-large.status-rejected {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.15) 100%);
+  color: #dc2626;
+  border: 2px solid rgba(239, 68, 68, 0.3);
+}
+
+.status-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.status-text {
+  font-size: 16px;
+}
+
+.status-description {
+  max-width: 400px;
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.6;
+  font-weight: 500;
+  margin: 0;
+}
+
+.status-description.success {
+  color: #059669;
+  font-weight: 600;
+}
+
+.status-description.error {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+/* Info Section */
+.info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Info Card */
+.info-card {
+  background: white;
+  border: 1.5px solid rgba(148, 163, 184, 0.2);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.info-label {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.info-value {
+  font-size: 13px;
+  color: #1e293b;
+  font-weight: 700;
+  text-align: right;
+  word-break: break-word;
+}
+
+/* Content Card */
+.content-card {
+  background: white;
+  border: 1.5px solid rgba(148, 163, 184, 0.2);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
+}
+
+.content-text {
+  font-size: 13px;
+  color: #1e293b;
+  line-height: 1.7;
+  margin: 0;
+  font-weight: 500;
+  white-space: pre-wrap;
+}
+
+/* Files Summary */
+.files-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.file-summary-item {
+  background: white;
+  border: 1.5px solid rgba(148, 163, 184, 0.2);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.file-summary-item:hover {
+  border-color: rgba(152, 60, 237, 0.3);
+  box-shadow: 0 4px 12px -4px rgba(152, 60, 237, 0.15);
+}
+
+.summary-icon {
+  width: 32px;
+  height: 32px;
+  color: #983ced;
+  flex-shrink: 0;
+}
+
+.summary-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summary-count {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1e293b;
+  letter-spacing: -0.01em;
+}
+
+.summary-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* Admin Notes Card */
+.admin-notes-card {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(220, 38, 38, 0.08) 100%);
+  border: 1.5px solid rgba(239, 68, 68, 0.25);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  gap: 14px;
+  box-shadow: 0 2px 8px -2px rgba(239, 68, 68, 0.15);
+}
+
+.notes-icon {
+  width: 24px;
+  height: 24px;
+  color: #dc2626;
+  flex-shrink: 0;
+}
+
+.notes-content {
+  flex: 1;
+}
+
+.notes-text {
+  font-size: 13px;
+  color: #991b1b;
+  line-height: 1.7;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 12px;
+}
+
+.btn-revise,
+.btn-withdraw-now,
+.btn-back {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: -0.01em;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Revise Button (Orange) */
+.btn-revise {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+  box-shadow:
+    0 6px 20px -5px rgba(245, 158, 11, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+.btn-revise::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: left 0.5s;
+}
+
+.btn-revise:hover::before {
+  left: 100%;
+}
+
+.btn-revise:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 30px -8px rgba(245, 158, 11, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+.btn-revise:active {
+  transform: translateY(0);
+}
+
+/* Withdraw Now Button (Green) */
+.btn-withdraw-now {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  box-shadow:
+    0 6px 20px -5px rgba(16, 185, 129, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+.btn-withdraw-now::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: left 0.5s;
+}
+
+.btn-withdraw-now:hover::before {
+  left: 100%;
+}
+
+.btn-withdraw-now:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 30px -8px rgba(16, 185, 129, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+.btn-withdraw-now:active {
+  transform: translateY(0);
+}
+
+/* Back Button (Gray) */
+.btn-back {
+  background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+  color: white;
+  box-shadow:
+    0 6px 20px -5px rgba(100, 116, 139, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+.btn-back:hover {
+  background: linear-gradient(135deg, #475569 0%, #334155 100%);
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 25px -5px rgba(100, 116, 139, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+.btn-back:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.5;
+}
+
+/* Mobile Responsive */
+@media (max-width: 450px) {
+  .container {
+    padding-bottom: 32px;
+  }
+
+  .detail-laporan-content {
+    padding: 20px 12px;
+  }
+
+  .detail-laporan-card {
+    padding: 28px 20px;
+    border-radius: 20px;
+    gap: 24px;
+  }
+
+  .status-section {
+    padding-bottom: 24px;
+  }
+
+  .status-badge-large {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  .status-icon {
+    font-size: 18px;
+  }
+
+  .status-text {
+    font-size: 14px;
+  }
+
+  .status-description {
+    font-size: 12px;
+  }
+
+  .section-title {
+    font-size: 15px;
+  }
+
+  .info-card {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .info-label,
+  .info-value {
+    font-size: 12px;
+  }
+
+  .content-card {
+    padding: 16px;
+  }
+
+  .content-text {
+    font-size: 12px;
+  }
+
+  .files-summary {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .file-summary-item {
+    padding: 16px;
+  }
+
+  .summary-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .summary-count {
+    font-size: 18px;
+  }
+
+  .summary-label {
+    font-size: 11px;
+  }
+
+  .admin-notes-card {
+    padding: 16px;
+  }
+
+  .notes-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .notes-text {
+    font-size: 12px;
+  }
+
+  .action-buttons {
+    gap: 10px;
+  }
+
+  .btn-revise,
+  .btn-withdraw-now,
+  .btn-back {
+    padding: 14px 20px;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+
+  .btn-icon {
+    width: 16px;
+    height: 16px;
+  }
+}

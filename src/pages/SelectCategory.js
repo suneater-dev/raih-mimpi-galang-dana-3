@@ -28,7 +28,7 @@ const SelectCategory = () => {
     <div className="container">
       {/* Header */}
       <header className="header gradient">
-        <button className="back-arrow white-text" onClick={() => navigate('/login')}>
+        <button className="back-arrow white-text" onClick={() => navigate('/user-info')}>
           ←
         </button>
         <div className="logo white-text">RaihMimpi</div>

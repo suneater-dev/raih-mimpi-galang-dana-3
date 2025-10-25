@@ -1,0 +1,595 @@
+/* Berita Pencairan Page Styles */
+
+/* Container */
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  min-height: 100vh;
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+/* Content */
+.berita-content {
+  padding: 32px 16px;
+}
+
+.berita-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  padding: 32px 24px;
+  box-shadow:
+    0 8px 32px -8px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Header */
+.berita-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 28px;
+  border-bottom: 1.5px solid rgba(148, 163, 184, 0.15);
+}
+
+.header-icon-berita {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, rgba(152, 60, 237, 0.15) 0%, rgba(124, 58, 237, 0.15) 100%);
+  border: 2px solid rgba(152, 60, 237, 0.3);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #983ced;
+  box-shadow: 0 4px 16px -4px rgba(152, 60, 237, 0.2);
+}
+
+.header-icon-berita svg {
+  width: 32px;
+  height: 32px;
+}
+
+.berita-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.berita-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.meta-icon {
+  width: 18px;
+  height: 18px;
+  color: #983ced;
+}
+
+/* Section */
+.berita-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 8px;
+}
+
+.section-icon {
+  width: 24px;
+  height: 24px;
+  color: #983ced;
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Summary Card */
+.summary-card {
+  background: white;
+  border: 1.5px solid rgba(148, 163, 184, 0.2);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
+}
+
+.summary-text {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.7;
+  margin: 0;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.summary-text:last-child {
+  margin-bottom: 0;
+}
+
+.summary-text strong {
+  color: #983ced;
+  font-weight: 700;
+}
+
+/* Expense List */
+.expense-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.expense-item {
+  background: white;
+  border: 1.5px solid rgba(148, 163, 184, 0.2);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.expense-item:hover {
+  border-color: rgba(152, 60, 237, 0.3);
+  box-shadow: 0 4px 12px -4px rgba(152, 60, 237, 0.15);
+}
+
+.expense-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.expense-number {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #983ced 0%, #7c3aed 100%);
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px -4px rgba(152, 60, 237, 0.4);
+}
+
+.expense-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.expense-category {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.01em;
+}
+
+.expense-description {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 500;
+}
+
+.expense-amount {
+  font-size: 16px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #983ced 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+}
+
+/* Expense Total */
+.expense-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(152, 60, 237, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%);
+  border: 1.5px solid rgba(152, 60, 237, 0.25);
+  border-radius: 14px;
+  margin-top: 8px;
+}
+
+.total-label {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1e293b;
+  letter-spacing: -0.01em;
+}
+
+.total-amount {
+  font-size: 18px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #983ced 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.01em;
+}
+
+/* Photo Gallery */
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.photo-item {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: white;
+  border: 1.5px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.photo-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px -6px rgba(152, 60, 237, 0.3);
+  border-color: rgba(152, 60, 237, 0.4);
+}
+
+.photo-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-caption {
+  padding: 12px;
+  font-size: 12px;
+  color: #475569;
+  line-height: 1.5;
+  font-weight: 600;
+  background: white;
+}
+
+/* Impact Grid */
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.impact-card {
+  background: white;
+  border: 1.5px solid rgba(148, 163, 184, 0.2);
+  border-radius: 14px;
+  padding: 24px 16px;
+  text-align: center;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.impact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px -6px rgba(152, 60, 237, 0.25);
+  border-color: rgba(152, 60, 237, 0.3);
+}
+
+.impact-number {
+  font-size: 32px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #983ced 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.impact-label {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* Thank You Card */
+.thankyou-card {
+  background: linear-gradient(135deg, rgba(152, 60, 237, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%);
+  border: 1.5px solid rgba(152, 60, 237, 0.25);
+  border-radius: 14px;
+  padding: 28px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 4px 16px -4px rgba(152, 60, 237, 0.15);
+}
+
+.thankyou-icon {
+  width: 48px;
+  height: 48px;
+  color: #983ced;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.thankyou-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.thankyou-text {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.7;
+  margin: 0;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.thankyou-text:last-child {
+  margin-bottom: 0;
+}
+
+/* Back Button */
+.btn-back-berita {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: -0.01em;
+  box-shadow:
+    0 6px 20px -5px rgba(100, 116, 139, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+.btn-back-berita:hover {
+  background: linear-gradient(135deg, #475569 0%, #334155 100%);
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 25px -5px rgba(100, 116, 139, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+.btn-back-berita:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.5;
+}
+
+/* Mobile Responsive */
+@media (max-width: 450px) {
+  .container {
+    padding-bottom: 32px;
+  }
+
+  .berita-content {
+    padding: 20px 12px;
+  }
+
+  .berita-card {
+    padding: 28px 20px;
+    border-radius: 20px;
+    gap: 28px;
+  }
+
+  .berita-header {
+    padding-bottom: 24px;
+    gap: 12px;
+  }
+
+  .header-icon-berita {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+  }
+
+  .header-icon-berita svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .berita-title {
+    font-size: 19px;
+  }
+
+  .meta-item {
+    font-size: 12px;
+  }
+
+  .meta-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .section-header {
+    gap: 10px;
+  }
+
+  .section-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .section-title {
+    font-size: 16px;
+  }
+
+  .summary-card {
+    padding: 18px;
+  }
+
+  .summary-text {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  .expense-list {
+    gap: 10px;
+  }
+
+  .expense-item {
+    padding: 16px;
+  }
+
+  .expense-header {
+    gap: 12px;
+  }
+
+  .expense-number {
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+    border-radius: 8px;
+  }
+
+  .expense-category {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .expense-description {
+    font-size: 12px;
+  }
+
+  .expense-amount {
+    font-size: 14px;
+  }
+
+  .expense-total {
+    padding: 16px;
+  }
+
+  .total-label {
+    font-size: 14px;
+  }
+
+  .total-amount {
+    font-size: 16px;
+  }
+
+  .photo-gallery {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .photo-image {
+    height: 180px;
+  }
+
+  .photo-caption {
+    padding: 10px;
+    font-size: 11px;
+  }
+
+  .impact-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .impact-card {
+    padding: 20px 14px;
+  }
+
+  .impact-number {
+    font-size: 28px;
+  }
+
+  .impact-label {
+    font-size: 12px;
+  }
+
+  .thankyou-card {
+    padding: 24px 20px;
+    gap: 14px;
+  }
+
+  .thankyou-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .thankyou-title {
+    font-size: 16px;
+  }
+
+  .thankyou-text {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  .btn-back-berita {
+    padding: 14px 20px;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+
+  .btn-icon {
+    width: 16px;
+    height: 16px;
+  }
+}

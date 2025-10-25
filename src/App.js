@@ -90,8 +90,12 @@ import Verifikasi from './pages/Verifikasi';
 import BerhasilVerifikasi from './pages/BerhasilVerifikasi';
 import PencairanDana from './pages/PencairanDana';
 import DetailPencairanDana from './pages/DetailPencairanDana';
+import LaporanPencairan from './pages/LaporanPencairan';
+import DetailLaporanPencairan from './pages/DetailLaporanPencairan';
+import BeritaPencairan from './pages/BeritaPencairan';
 import PengajuanPencairan from './pages/PengajuanPencairan';
 import PengajuanPencairanBerhasil from './pages/PengajuanPencairanBerhasil';
+import CampaignDetail from './pages/CampaignDetail';
 import './App.css';
 
 function App() {
@@ -100,7 +104,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/login" element={<Login />} />
+          {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/user-journey" element={<UserJourney />} />
           <Route path="/user-type" element={<UserType />} />
           <Route path="/kelompok-type" element={<KelompokType />} />
@@ -189,9 +193,13 @@ function App() {
           <Route path="/verifikasi" element={<Verifikasi />} />
           <Route path="/berhasil-verifikasi" element={<BerhasilVerifikasi />} />
           <Route path="/pencairan-dana" element={<PencairanDana />} />
+          <Route path="/laporan-pencairan" element={<LaporanPencairan />} />
+          <Route path="/detail-laporan-pencairan" element={<DetailLaporanPencairan />} />
+          <Route path="/berita-pencairan" element={<BeritaPencairan />} />
           <Route path="/detail-pencairan-dana" element={<DetailPencairanDana />} />
           <Route path="/pengajuan-pencairan" element={<PengajuanPencairan />} />
           <Route path="/pengajuan-pencairan-berhasil" element={<PengajuanPencairanBerhasil />} />
+          <Route path="/campaign/:id" element={<CampaignDetail />} />
 
           {/* Placeholder routes */}
           <Route path="/general-form" element={<div>General Form Page (To be implemented)</div>} />
