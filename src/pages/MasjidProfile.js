@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/MasjidProfile.css';
 
@@ -6,6 +6,11 @@ const MasjidProfile = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const kelompokData = location.state?.groupData || {};
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const [formData, setFormData] = useState({
     namaMasjid: '',

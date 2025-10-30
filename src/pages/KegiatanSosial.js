@@ -77,10 +77,17 @@ const KegiatanSosial = () => {
     { number: 7, label: 'Ajakan', active: false }
   ];
 
+  const handleBack = () => {
+    navigate('/bantuan-lainnya');
+  };
+
   return (
     <div className="container">
       {/* Header */}
       <header className="header gradient">
+        <button className="back-arrow white-text" onClick={handleBack}>
+          ←
+        </button>
         <div className="logo white-text">Kegiatan Sosial</div>
       </header>
 

@@ -2002,4 +2002,76 @@ body {
 .p-0 { padding: 0; }
 .hidden { display: none; }
 
+/* Draft Save Button Section */
+.draft-save-section {
+  padding: 20px;
+  margin-top: 16px;
+  margin-bottom: 100px;
+  text-align: center;
+}
+
+.draft-save-btn {
+  width: 100%;
+  padding: 16px 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 2px solid #983ced;
+  border-radius: 12px;
+  color: #983ced;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 16px rgba(152, 60, 237, 0.1);
+}
+
+.draft-save-btn:hover {
+  background: linear-gradient(135deg, #983ced 0%, #7c3aed 100%);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(152, 60, 237, 0.25);
+}
+
+.draft-save-btn:active {
+  transform: translateY(0);
+}
+
+.draft-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.draft-save-hint {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .draft-save-section {
+    padding: 16px;
+    margin-bottom: 80px;
+  }
+
+  .draft-save-btn {
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+
+  .draft-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .draft-save-hint {
+    font-size: 12px;
+  }
+}
+
 /* Remove extra padding since container now has padding-top */

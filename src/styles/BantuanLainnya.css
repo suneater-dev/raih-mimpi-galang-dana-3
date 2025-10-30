@@ -188,23 +188,61 @@
     }
 }
 
+/* Back to Home Button */
+.back-to-home-btn {
+    width: 100%;
+    max-width: 480px;
+    margin: 24px auto 0;
+    padding: 16px 32px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(152, 60, 237, 0.2);
+    border-radius: 16px;
+    color: #983ced;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.1);
+}
+
+.back-to-home-btn:hover {
+    background: #983ced;
+    color: white;
+    border-color: #983ced;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -4px rgba(152, 60, 237, 0.3);
+}
+
+.back-to-home-btn:active {
+    transform: translateY(0);
+}
+
 /* Touch Device Optimizations - Match your existing patterns */
 @media (hover: none) and (pointer: coarse) {
     .category-item-modern {
         min-height: 80px;
     }
-    
+
     .category-item-content {
         min-height: 80px;
         padding: 20px !important;
     }
-    
+
     .category-item-modern:hover {
         transform: none !important;
     }
-    
+
     .category-item-modern:active {
         transform: scale(0.98) !important;
         transition: transform 0.1s ease !important;
+    }
+
+    .back-to-home-btn:hover {
+        transform: none;
+    }
+
+    .back-to-home-btn:active {
+        transform: scale(0.98);
     }
 }

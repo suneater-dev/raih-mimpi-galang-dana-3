@@ -1,12 +1,29 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/TulisCerita.css';
+import { saveDraft, generateDraftId, getCurrentPageData } from '../utils/draftManager';
 
 const TulisCeritaPendidikan2 = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [storyContent, setStoryContent] = useState(() => {
     return localStorage.getItem('ceritaPendidikan_part2') || '';
   });
+  const [showExampleModal, setShowExampleModal] = useState(false);
+  const [draftId, setDraftId] = useState(null);
+
+  const previousData = location.state || {};
+
+  useEffect(() => {
+    const currentDraftId = sessionStorage.getItem('current_draft_id');
+    if (currentDraftId) {
+      setDraftId(currentDraftId);
+    } else {
+      const newDraftId = generateDraftId();
+      setDraftId(newDraftId);
+      sessionStorage.setItem('current_draft_id', newDraftId);
+    }
+  }, []);
 
   const handleNext = () => {
     if (storyContent.trim().length > 0) {
@@ -30,9 +47,45 @@ const TulisCeritaPendidikan2 = () => {
   };
 
   const showExample = () => {
-    const exampleText = "Saat ini, kondisi siswa-siswa di sekolah kami sangat memprihatinkan dari segi ekonomi dan akses pendidikan. Dari 120 siswa yang terdaftar, sekitar 40% dari mereka berasal dari keluarga dengan penghasilan di bawah garis kemiskinan. Banyak siswa yang datang ke sekolah tanpa sarapan dan hanya membawa bekal seadanya.\n\nFasilitas sekolah kami juga sangat terbatas. Kami kekurangan buku pelajaran yang memadai, dengan ratio 1 buku untuk 3-4 siswa. Perpustakaan sekolah hanya memiliki 200 buku yang sebagian besar sudah rusak dan ketinggalan zaman. Laboratorium komputer tidak ada, sehingga siswa tidak mendapat pengenalan teknologi yang sangat penting di era digital ini.\n\nYang paling mengkhawatirkan adalah tingkat putus sekolah yang terus meningkat. Tahun lalu, 15 siswa terpaksa berhenti sekolah karena orang tua mereka tidak mampu membiayai kebutuhan sekolah seperti seragam, sepatu, tas, dan alat tulis. Beberapa anak bahkan harus membantu orang tua bekerja di sawah untuk memenuhi kebutuhan sehari-hari keluarga.";
-    setStoryContent(exampleText);
+    setShowExampleModal(true);
   };
+
+  const closeExampleModal = () => {
+    setShowExampleModal(false);
+  };
+
+  const handleSaveAsDraft = () => {
+    if (!draftId) return;
+
+    localStorage.setItem('ceritaPendidikan_part2', storyContent);
+
+    const draftData = {
+      id: draftId,
+      category: 'pendidikan',
+      title: previousData.campaignTitle || previousData.selectedCategory?.title || 'Draft Bantuan Pendidikan',
+      image: previousData.photoPreview || null,
+      progress: 83,
+      steps: '5 dari 6 tahap',
+      lastStep: '/tulis-cerita-pendidikan-2',
+      target: previousData.targetData?.amount ? parseInt(previousData.targetData.amount.replace(/\./g, '')) : 0,
+      daysLeft: previousData.targetData?.duration ? parseInt(previousData.targetData.duration) : 0,
+      formData: {
+        ...previousData,
+        storyPart2: storyContent
+      },
+      storyData: getCurrentPageData('pendidikan')
+    };
+
+    const saved = saveDraft(draftData);
+    if (saved) {
+      alert('Draft berhasil disimpan! Anda dapat melanjutkannya nanti dari Dashboard.');
+      navigate('/dashboard');
+    } else {
+      alert('Gagal menyimpan draft. Silakan coba lagi.');
+    }
+  };
+
+  const exampleText = "Saat ini, kondisi siswa-siswa di sekolah kami sangat memprihatinkan dari segi ekonomi dan akses pendidikan. Dari 120 siswa yang terdaftar, sekitar 40% dari mereka berasal dari keluarga dengan penghasilan di bawah garis kemiskinan. Banyak siswa yang datang ke sekolah tanpa sarapan dan hanya membawa bekal seadanya.\n\nFasilitas sekolah kami juga sangat terbatas. Kami kekurangan buku pelajaran yang memadai, dengan ratio 1 buku untuk 3-4 siswa. Perpustakaan sekolah hanya memiliki 200 buku yang sebagian besar sudah rusak dan ketinggalan zaman. Laboratorium komputer tidak ada, sehingga siswa tidak mendapat pengenalan teknologi yang sangat penting di era digital ini.\n\nYang paling mengkhawatirkan adalah tingkat putus sekolah yang terus meningkat. Tahun lalu, 15 siswa terpaksa berhenti sekolah karena orang tua mereka tidak mampu membiayai kebutuhan sekolah seperti seragam, sepatu, tas, dan alat tulis. Beberapa anak bahkan harus membantu orang tua bekerja di sawah untuk memenuhi kebutuhan sehari-hari keluarga.";
 
   return (
     <div className="container">
@@ -40,9 +93,6 @@ const TulisCeritaPendidikan2 = () => {
       <header className="header white">
         <button className="close-btn" onClick={handleClose}>
           ✕
-        </button>
-        <button className="save-btn" onClick={handleSave}>
-          Simpan cerita
         </button>
       </header>
 
@@ -85,8 +135,8 @@ const TulisCeritaPendidikan2 = () => {
           <button className="modern-btn secondary" onClick={handleBack}>
             ← Sebelumnya
           </button>
-          
-          <button 
+
+          <button
             className={`modern-btn ${storyContent.trim().length === 0 ? 'disabled' : ''}`}
             onClick={handleNext}
             disabled={storyContent.trim().length === 0}
@@ -95,7 +145,38 @@ const TulisCeritaPendidikan2 = () => {
             Selanjutnya →
           </button>
         </div>
+
+        {/* Save as Draft Button */}
+        <div className="draft-save-section">
+          <button className="draft-save-btn" onClick={handleSaveAsDraft}>
+            <svg className="draft-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" strokeLinecap="round" strokeLinejoin="round"/>
+              <polyline points="17 21 17 13 7 13 7 21" strokeLinecap="round" strokeLinejoin="round"/>
+              <polyline points="7 3 7 8 15 8" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Simpan Sebagai Draft
+          </button>
+          <p className="draft-save-hint">Simpan progress Anda dan lanjutkan nanti dari Dashboard</p>
+        </div>
       </div>
+
+      {/* Example Modal */}
+      {showExampleModal && (
+        <div className="example-modal-overlay" onClick={closeExampleModal}>
+          <div className="example-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="example-modal-header">
+              <h3 className="example-modal-title">Contoh Cerita - Bagian 2</h3>
+              <button className="example-modal-close" onClick={closeExampleModal}>✕</button>
+            </div>
+            <div className="example-modal-body">
+              <p className="example-modal-text">{exampleText}</p>
+            </div>
+            <div className="example-modal-footer">
+              <button className="modern-btn" onClick={closeExampleModal}>Mengerti</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

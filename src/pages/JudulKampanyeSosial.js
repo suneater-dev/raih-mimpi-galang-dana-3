@@ -1,17 +1,40 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ProgressSteps from '../components/ProgressSteps';
 import '../styles/JudulKampanye.css';
+import { saveDraft, generateDraftId, getCurrentPageData } from '../utils/draftManager';
 
 const JudulKampanyeSosial = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [campaignTitle, setCampaignTitle] = useState('');
   const [campaignUrl, setCampaignUrl] = useState('');
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [draftId, setDraftId] = useState(null);
+
+  const previousData = location.state || {};
+
+  useEffect(() => {
+    const currentDraftId = sessionStorage.getItem('current_draft_id');
+    if (currentDraftId) {
+      setDraftId(currentDraftId);
+    } else {
+      const newDraftId = generateDraftId();
+      setDraftId(newDraftId);
+      sessionStorage.setItem('current_draft_id', newDraftId);
+    }
+  }, []);
 
   const handlePhotoUpload = (e) => {
     if (e.target.files.length > 0) {
-      setSelectedPhoto(e.target.files[0]);
+      const file = e.target.files[0];
+      setSelectedPhoto(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPhotoPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -23,16 +46,60 @@ const JudulKampanyeSosial = () => {
     e.preventDefault();
     const files = e.dataTransfer.files;
     if (files.length > 0) {
-      setSelectedPhoto(files[0]);
+      const file = files[0];
+      setSelectedPhoto(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPhotoPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
   const handleNext = () => {
-    navigate('/cerita-kampanye-sosial');
+    navigate('/cerita-kampanye-sosial', {
+      state: {
+        ...previousData,
+        campaignTitle,
+        campaignUrl,
+        photoPreview
+      }
+    });
   };
 
   const handleBack = () => {
-    navigate('/target-donasi-sosial');
+    navigate('/target-donasi-sosial', { state: previousData });
+  };
+
+  const handleSaveAsDraft = () => {
+    if (!draftId) return;
+
+    const draftData = {
+      id: draftId,
+      category: 'sosial',
+      title: campaignTitle || previousData.selectedCategory?.title || 'Draft Kegiatan Sosial',
+      image: photoPreview || null,
+      progress: 67,
+      steps: '4 dari 6 tahap',
+      lastStep: '/judul-kampanye-sosial',
+      target: previousData.targetData?.amount ? parseInt(previousData.targetData.amount.replace(/\./g, '')) : 0,
+      daysLeft: previousData.targetData?.duration ? parseInt(previousData.targetData.duration) : 0,
+      formData: {
+        ...previousData,
+        campaignTitle,
+        campaignUrl,
+        photoPreview
+      },
+      storyData: getCurrentPageData('sosial')
+    };
+
+    const saved = saveDraft(draftData);
+    if (saved) {
+      alert('Draft berhasil disimpan! Anda dapat melanjutkannya nanti dari Dashboard.');
+      navigate('/dashboard');
+    } else {
+      alert('Gagal menyimpan draft. Silakan coba lagi.');
+    }
   };
 
   const steps = [
@@ -116,6 +183,80 @@ const JudulKampanyeSosial = () => {
             accept="image/*"
             onChange={handlePhotoUpload}
           />
+
+          {/* Photo Preview */}
+          {photoPreview && (
+            <div style={{
+              marginTop: '20px',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              border: '2px solid #983ced',
+              position: 'relative'
+            }}>
+              <img
+                src={photoPreview}
+                alt="Preview"
+                style={{
+                  width: '100%',
+                  maxHeight: '400px',
+                  objectFit: 'cover',
+                  display: 'block'
+                }}
+              />
+              <button
+                onClick={() => {
+                  setPhotoPreview(null);
+                  setSelectedPhoto(null);
+                }}
+                style={{
+                  position: 'absolute',
+                  top: '12px',
+                  right: '12px',
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                  border: '2px solid #983ced',
+                  color: '#983ced',
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: 0,
+                  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+                  transition: 'all 0.2s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = '#983ced';
+                  e.target.style.color = 'white';
+                  e.target.style.transform = 'scale(1.1)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                  e.target.style.color = '#983ced';
+                  e.target.style.transform = 'scale(1)';
+                }}
+              >
+                ✕
+              </button>
+              <div style={{
+                position: 'absolute',
+                bottom: '12px',
+                left: '12px',
+                backgroundColor: 'rgba(152, 60, 237, 0.9)',
+                color: 'white',
+                padding: '8px 16px',
+                borderRadius: '8px',
+                fontSize: '14px',
+                fontWeight: '600',
+                backdropFilter: 'blur(4px)'
+              }}>
+                📷 {selectedPhoto?.name}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -128,7 +269,19 @@ const JudulKampanyeSosial = () => {
           Selanjutnya →
         </button>
       </div>
-      
+
+      {/* Save as Draft Button */}
+      <div className="draft-save-section">
+        <button className="draft-save-btn" onClick={handleSaveAsDraft}>
+          <svg className="draft-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" strokeLinecap="round" strokeLinejoin="round"/>
+            <polyline points="17 21 17 13 7 13 7 21" strokeLinecap="round" strokeLinejoin="round"/>
+            <polyline points="7 3 7 8 15 8" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Simpan Sebagai Draft
+        </button>
+        <p className="draft-save-hint">Simpan progress Anda dan lanjutkan nanti dari Dashboard</p>
+      </div>
     </div>
   );
 };

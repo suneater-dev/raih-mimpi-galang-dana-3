@@ -263,17 +263,80 @@ const LaporanPencairan = () => {
 
               {/* Photo Grid */}
               {photos.length > 0 && (
-                <div className="photo-grid">
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+                  gap: '16px',
+                  marginTop: '20px'
+                }}>
                   {photos.map((photo, index) => (
-                    <div key={index} className="photo-item">
+                    <div key={index} style={{
+                      position: 'relative',
+                      borderRadius: '12px',
+                      overflow: 'hidden',
+                      border: '2px solid #983ced',
+                      boxShadow: '0 4px 8px rgba(152, 60, 237, 0.1)'
+                    }}>
                       <img
                         src={URL.createObjectURL(photo)}
                         alt={`Foto ${index + 1}`}
-                        className="photo-preview"
+                        style={{
+                          width: '100%',
+                          height: '200px',
+                          objectFit: 'cover',
+                          display: 'block'
+                        }}
                       />
-                      <button type="button" className="remove-photo-btn" onClick={() => removePhoto(index)}>
-                        ×
+                      <button
+                        type="button"
+                        onClick={() => removePhoto(index)}
+                        style={{
+                          position: 'absolute',
+                          top: '8px',
+                          right: '8px',
+                          width: '32px',
+                          height: '32px',
+                          borderRadius: '50%',
+                          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                          border: '2px solid #983ced',
+                          color: '#983ced',
+                          fontSize: '18px',
+                          fontWeight: 'bold',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          padding: 0,
+                          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.target.style.backgroundColor = '#983ced';
+                          e.target.style.color = 'white';
+                          e.target.style.transform = 'scale(1.1)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                          e.target.style.color = '#983ced';
+                          e.target.style.transform = 'scale(1)';
+                        }}
+                      >
+                        ✕
                       </button>
+                      <div style={{
+                        position: 'absolute',
+                        bottom: '8px',
+                        left: '8px',
+                        backgroundColor: 'rgba(152, 60, 237, 0.9)',
+                        color: 'white',
+                        padding: '6px 12px',
+                        borderRadius: '6px',
+                        fontSize: '12px',
+                        fontWeight: '600',
+                        backdropFilter: 'blur(4px)'
+                      }}>
+                        📷 Foto {index + 1}
+                      </div>
                     </div>
                   ))}
                 </div>

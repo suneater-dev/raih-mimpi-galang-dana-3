@@ -94,9 +94,9 @@
 }
 
 .modern-option.selected {
-    background: linear-gradient(135deg, #983ced 0%, #983ced 100%);
-    border-color: #983ced;
-    color: white;
+    background: #983ced !important;
+    border-color: #983ced !important;
+    color: white !important;
     transform: translateY(-2px);
     box-shadow: 0 8px 32px -8px rgba(152, 60, 237, 0.4);
 }
@@ -113,12 +113,65 @@
     font-size: 16px;
     font-weight: 600;
     margin: 0;
+    color: #1e293b;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
     letter-spacing: -0.01em;
 }
 
 .modern-option.selected .modern-option-content h4 {
-    color: white;
+    color: white !important;
+}
+
+/* Other Relationship Input */
+.other-relationship-input {
+    margin-bottom: 24px;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.other-relationship-input .input-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 12px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    letter-spacing: -0.01em;
+}
+
+.other-relationship-input .modern-input {
+    width: 100%;
+    padding: 18px 20px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(226, 232, 240, 0.6);
+    border-radius: 16px;
+    font-size: 15px;
+    color: #1e293b;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 12px -4px rgba(0, 0, 0, 0.08);
+}
+
+.other-relationship-input .modern-input:focus {
+    outline: none;
+    border-color: #983ced;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 4px 20px -4px rgba(152, 60, 237, 0.25);
+}
+
+.other-relationship-input .modern-input::placeholder {
+    color: #94a3b8;
 }
 
 /* Confirm Button */
@@ -168,29 +221,43 @@
         padding: 16px 16px 12px 16px;
         background: rgba(255, 255, 255, 0.98);
     }
-    
+
     .main-content-modern {
         padding: 24px 16px !important;
     }
-    
+
     .modern-heading {
         font-size: 18px;
         margin-bottom: 24px;
     }
-    
+
     .modern-option {
         padding: 18px 20px;
     }
-    
+
     .modern-option-content h4 {
         font-size: 15px;
     }
-    
+
+    .other-relationship-input {
+        margin-bottom: 20px;
+    }
+
+    .other-relationship-input .input-label {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+    .other-relationship-input .modern-input {
+        padding: 16px 18px;
+        font-size: 14px;
+    }
+
     .modern-btn {
         padding: 18px 20px;
         font-size: 14px;
     }
-    
+
     .header.gradient .logo.white-text {
         font-size: 14px !important;
     }
@@ -200,19 +267,33 @@
     .main-content-modern {
         padding: 20px 12px !important;
     }
-    
+
     .modern-heading {
         font-size: 17px;
     }
-    
+
     .modern-option {
         padding: 16px 18px;
     }
-    
+
     .modern-option-content h4 {
         font-size: 14px;
     }
-    
+
+    .other-relationship-input {
+        margin-bottom: 18px;
+    }
+
+    .other-relationship-input .input-label {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+
+    .other-relationship-input .modern-input {
+        padding: 14px 16px;
+        font-size: 13px;
+    }
+
     .modern-btn {
         padding: 16px 18px;
         font-size: 13px;

@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Dashboard.css';
+import { getAllDrafts, deleteDraft, formatDraftDate } from '../utils/draftManager';
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('Semua');
   const [searchQuery, setSearchQuery] = useState('');
+  const [draftCampaigns, setDraftCampaigns] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [campaignToDelete, setCampaignToDelete] = useState(null);
 
   const filters = [
     'Semua',
@@ -15,6 +19,16 @@ const Dashboard = () => {
     'Berakhir',
     'Diiklankan'
   ];
+
+  // Load drafts from localStorage on component mount
+  useEffect(() => {
+    loadDrafts();
+  }, []);
+
+  const loadDrafts = () => {
+    const drafts = getAllDrafts();
+    setDraftCampaigns(drafts);
+  };
 
   // Menu items data
   const menuItems = [
@@ -211,15 +225,62 @@ const Dashboard = () => {
       id: 13,
       title: 'Renovasi Masjid Al-Ikhlas',
       image: '/dashboard/hawari-berjuang-dengan-selang-di-hidung-1756370366-572.webp',
-      status: 'Dalam Review',
+      status: 'Berakhir',
       progress: 100,
       steps: '7 dari 7 tahap',
       lastUpdated: '08 September 2025',
       hasImage: true,
-      collected: 0,
+      collected: 25000000,
       target: 25000000,
-      daysLeft: 35,
-      donors: 0
+      daysLeft: 0,
+      donors: 156,
+      canWithdraw: true,
+      category: 'Sosial',
+      reportStatus: 'Disetujui',
+      hasReport: true,
+      withdrawn: false,
+      withdrawnDate: null,
+      withdrawalReported: false,
+      withdrawalOrder: 3
+    },
+    // New campaign ready for withdrawal - NO MODAL
+    {
+      id: 14,
+      title: 'Bantuan Operasi Tumor untuk Ibu Sari',
+      image: '/dashboard/temani-mimpi-pejuang-pelosok-1756798332-465.webp',
+      status: 'Berakhir',
+      progress: 100,
+      steps: '7 dari 7 tahap',
+      lastUpdated: '15 September 2025',
+      hasImage: true,
+      collected: 85000000,
+      target: 85000000,
+      daysLeft: 0,
+      donors: 523,
+      canWithdraw: true,
+      category: 'Medis',
+      reportStatus: 'Disetujui',
+      hasReport: true,
+      withdrawn: false,
+      withdrawnDate: null,
+      withdrawalReported: false,
+      withdrawalOrder: 1
+    },
+    // Kotak Amal Digital Campaign
+    {
+      id: 15,
+      title: 'Kotak Amal Digital Masjid Nurul Huda',
+      image: '/dashboard/wujudkan-mimpi-anak-pelosok-1756351894-334.webp',
+      status: 'Aktif',
+      progress: 100,
+      steps: '7 dari 7 tahap',
+      lastUpdated: '10 September 2025',
+      hasImage: true,
+      category: 'Kotak Amal Digital',
+      collected: 8500000,
+      target: 25000000,
+      daysLeft: 50,
+      donors: 87
     }
   ];
 
@@ -230,6 +291,8 @@ const Dashboard = () => {
   const handleContinueDraft = (campaign) => {
     // Navigate to last saved step for drafts
     if (campaign.lastStep) {
+      // Store draft ID in sessionStorage for continuation
+      sessionStorage.setItem('current_draft_id', campaign.id);
       navigate(campaign.lastStep);
     } else {
       navigate('/bantuan-lainnya');
@@ -237,8 +300,13 @@ const Dashboard = () => {
   };
 
   const handleViewCampaign = (campaign) => {
-    // Navigate to campaign detail page
-    navigate(`/campaign/${campaign.id}`, { state: { campaign } });
+    // If it's a Kotak Amal Digital campaign, navigate to Masjid campaign view
+    if (campaign.category === 'Kotak Amal Digital') {
+      navigate(`/masjid-campaign/${campaign.id}`, { state: { campaign } });
+    } else {
+      // Navigate to regular campaign detail page
+      navigate(`/campaign/${campaign.id}`, { state: { campaign } });
+    }
   };
 
   const handlePreviewDraft = (campaign) => {
@@ -251,19 +319,50 @@ const Dashboard = () => {
     });
   };
 
-  const handleDeleteDraft = (campaignId) => {
-    alert(`Menghapus draft campaign ${campaignId}`);
+  const handleDeleteDraft = (campaign) => {
+    setCampaignToDelete(campaign);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = () => {
+    if (campaignToDelete) {
+      deleteDraft(campaignToDelete.id);
+      loadDrafts(); // Reload drafts after deletion
+      setShowDeleteModal(false);
+      setCampaignToDelete(null);
+    }
+  };
+
+  const cancelDelete = () => {
+    setShowDeleteModal(false);
+    setCampaignToDelete(null);
   };
 
   // Get appropriate action button based on campaign status
   const getActionButton = (campaign) => {
+    // Check if campaign can withdraw
+    if (campaign.canWithdraw) {
+      return {
+        text: 'Cairkan Dana',
+        icon: 'money',
+        className: 'withdraw-btn-modern',
+        onClick: () => navigate('/detail-pencairan-dana', {
+          state: {
+            campaign,
+            fromDashboard: true,
+            bypassModal: true
+          }
+        })
+      };
+    }
+
     switch (campaign.status) {
       case 'Aktif':
         return {
           text: 'Lihat Campaign',
           icon: 'eye',
           className: 'view-btn-modern',
-          onClick: () => handleViewCampaign(campaign.id)
+          onClick: () => handleViewCampaign(campaign)
         };
       case 'Belum Jadi':
         return {
@@ -284,14 +383,14 @@ const Dashboard = () => {
           text: 'Lihat Campaign',
           icon: 'eye',
           className: 'view-btn-modern',
-          onClick: () => handleViewCampaign(campaign.id)
+          onClick: () => handleViewCampaign(campaign)
         };
       case 'Diiklankan':
         return {
           text: 'Lihat Campaign',
           icon: 'eye',
           className: 'view-btn-modern',
-          onClick: () => handleViewCampaign(campaign.id)
+          onClick: () => handleViewCampaign(campaign)
         };
       default:
         return {
@@ -354,6 +453,28 @@ const Dashboard = () => {
     }
   };
 
+  // Merge static campaigns with draft campaigns
+  const allCampaigns = [
+    ...campaigns,
+    ...draftCampaigns.map(draft => ({
+      id: draft.id,
+      title: draft.title || 'Draft Tanpa Judul',
+      image: draft.image || '/dashboard/default-campaign.webp',
+      status: 'Belum Jadi',
+      progress: draft.progress || 0,
+      steps: draft.steps || '0 dari 7 tahap',
+      lastUpdated: formatDraftDate(draft.lastModified),
+      hasImage: !!draft.image,
+      collected: 0,
+      target: draft.target || 0,
+      daysLeft: draft.daysLeft || 0,
+      donors: 0,
+      lastStep: draft.lastStep || '/bantuan-lainnya',
+      category: draft.category || 'unknown',
+      isDraft: true
+    }))
+  ];
+
   // Filter menu items based on search query
   const filteredMenuItems = searchQuery
     ? menuItems.filter(item =>
@@ -363,7 +484,7 @@ const Dashboard = () => {
 
   // Filter campaigns based on search query
   const filteredCampaigns = searchQuery
-    ? campaigns.filter(campaign =>
+    ? allCampaigns.filter(campaign =>
         campaign.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         campaign.status.toLowerCase().includes(searchQuery.toLowerCase())
       )
@@ -375,16 +496,16 @@ const Dashboard = () => {
   // Filter campaigns by active filter
   const getFilteredCampaigns = () => {
     if (activeFilter === 'Semua') {
-      return campaigns;
+      return allCampaigns;
     }
     if (activeFilter === 'Diiklankan') {
-      return campaigns.filter(campaign => campaign.isPromoted === true);
+      return allCampaigns.filter(campaign => campaign.isPromoted === true);
     }
-    return campaigns.filter(campaign => campaign.status === activeFilter);
+    return allCampaigns.filter(campaign => campaign.status === activeFilter);
   };
 
   // Count active campaigns
-  const activeCampaignsCount = campaigns.filter(campaign => campaign.status === 'Aktif').length;
+  const activeCampaignsCount = allCampaigns.filter(campaign => campaign.status === 'Aktif').length;
 
   const displayedCampaigns = getFilteredCampaigns();
 
@@ -684,6 +805,12 @@ const Dashboard = () => {
                               <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd"/>
                             </svg>
                           )}
+                          {actionBtn.icon === 'money' && (
+                            <svg className="btn-icon" viewBox="0 0 20 20" fill="currentColor">
+                              <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clipRule="evenodd"/>
+                            </svg>
+                          )}
                           {actionBtn.text}
                         </div>
                       </button>
@@ -693,7 +820,7 @@ const Dashboard = () => {
                   {campaign.status === 'Belum Jadi' && (
                     <button
                       className="delete-btn-modern"
-                      onClick={() => handleDeleteDraft(campaign.id)}
+                      onClick={() => handleDeleteDraft(campaign)}
                     >
                       <svg className="delete-icon" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
@@ -718,7 +845,7 @@ const Dashboard = () => {
 
       {/* Back to Menu Button */}
       <div className="back-to-menu-section">
-        <button 
+        <button
           className="back-to-menu-btn"
           onClick={() => navigate('/')}
         >
@@ -728,6 +855,42 @@ const Dashboard = () => {
           Kembali Ke Menu
         </button>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && (
+        <div className="modal-overlay" onClick={cancelDelete}>
+          <div className="modal-content-delete" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header-delete">
+              <div className="modal-icon-delete">
+                <svg viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <h3 className="modal-title-delete">Hapus Draft?</h3>
+              <button className="modal-close-delete" onClick={cancelDelete}>✕</button>
+            </div>
+            <div className="modal-body-delete">
+              <p className="modal-text-delete">
+                Apakah Anda yakin ingin menghapus draft <strong>"{campaignToDelete?.title}"</strong>?
+              </p>
+              <p className="modal-subtext-delete">
+                Draft yang dihapus tidak dapat dikembalikan.
+              </p>
+            </div>
+            <div className="modal-footer-delete">
+              <button className="modal-btn-cancel" onClick={cancelDelete}>
+                Batal
+              </button>
+              <button className="modal-btn-delete" onClick={confirmDelete}>
+                <svg viewBox="0 0 20 20" fill="currentColor" style={{width: '18px', height: '18px', marginRight: '8px'}}>
+                  <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                </svg>
+                Hapus Draft
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

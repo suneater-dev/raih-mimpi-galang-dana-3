@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/TulisCerita.css';
+import { saveDraft, generateDraftId, getCurrentPageData } from '../utils/draftManager';
 
 const TulisCeritaKreatif6 = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [storyContent, setStoryContent] = useState(() => {
     return localStorage.getItem('ceritaKreatif_part6') || '';
   });
   const [showExampleModal, setShowExampleModal] = useState(false);
+  const [draftId, setDraftId] = useState(null);
+
+  const previousData = location.state || {};
+
+  useEffect(() => {
+    const currentDraftId = sessionStorage.getItem('current_draft_id');
+    if (currentDraftId) {
+      setDraftId(currentDraftId);
+    } else {
+      const newDraftId = generateDraftId();
+      setDraftId(newDraftId);
+      sessionStorage.setItem('current_draft_id', newDraftId);
+    }
+  }, []);
 
   const exampleText = "Harapan terbesar saya adalah dapat mewujudkan studio kreatif yang tidak hanya menjadi tempat kerja, tetapi juga menjadi pusat pengembangan kreativitas dan inovasi di bidang desain grafis. Saya bermimpi bahwa studio ini akan menjadi jembatan yang menghubungkan dunia desain profesional dengan UMKM yang membutuhkan.\n\nVisi jangka panjang saya adalah menjadikan studio ini sebagai inkubator bagi desainer muda Indonesia. Saya ingin menciptakan lapangan kerja dan memberikan kesempatan kepada fresh graduate untuk mengembangkan karir mereka di industri kreatif. Selain itu, saya juga berharap dapat berkontribusi dalam mengangkat citra produk-produk lokal melalui desain yang berkualitas internasional.\n\nSaya yakin bahwa dengan dukungan dari para donatur, mimpi ini dapat terwujud. Setiap kontribusi yang diberikan tidak hanya membantu saya secara personal, tetapi juga akan memberikan dampak positif bagi ekosistem kreatif dan ekonomi lokal.\n\nTerima kasih kepada semua pihak yang telah memberikan dukungan, baik dalam bentuk doa maupun donasi. Saya berkomitmen untuk menjadikan studio ini sebagai wadah yang bermanfaat dan berkelanjutan untuk kemajuan industri kreatif Indonesia.";
 
@@ -32,6 +48,37 @@ const TulisCeritaKreatif6 = () => {
     alert('Cerita telah disimpan!');
   };
 
+  const handleSaveAsDraft = () => {
+    if (!draftId) return;
+
+    localStorage.setItem('ceritaKreatif_part6', storyContent);
+
+    const draftData = {
+      id: draftId,
+      category: 'kreatif',
+      title: previousData.campaignTitle || previousData.selectedCategory?.title || 'Draft Karya Kreatif',
+      image: previousData.photoPreview || null,
+      progress: 86,
+      steps: '6 dari 6 tahap',
+      lastStep: '/tulis-cerita-kreatif-6',
+      target: previousData.targetData?.amount ? parseInt(previousData.targetData.amount.replace(/\./g, '')) : 0,
+      daysLeft: previousData.targetData?.duration ? parseInt(previousData.targetData.duration) : 0,
+      formData: {
+        ...previousData,
+        storyPart6: storyContent
+      },
+      storyData: getCurrentPageData('kreatif')
+    };
+
+    const saved = saveDraft(draftData);
+    if (saved) {
+      alert('Draft berhasil disimpan! Anda dapat melanjutkannya nanti dari Dashboard.');
+      navigate('/dashboard');
+    } else {
+      alert('Gagal menyimpan draft. Silakan coba lagi.');
+    }
+  };
+
   const showExample = () => {
     setShowExampleModal(true);
   };
@@ -46,9 +93,6 @@ const TulisCeritaKreatif6 = () => {
       <header className="header white">
         <button className="close-btn" onClick={handleClose}>
           ✕
-        </button>
-        <button className="save-btn" onClick={handleSave}>
-          Simpan cerita
         </button>
       </header>
 
@@ -100,6 +144,19 @@ const TulisCeritaKreatif6 = () => {
           >
             Selanjutnya →
           </button>
+        </div>
+
+        {/* Save as Draft Button */}
+        <div className="draft-save-section">
+          <button className="draft-save-btn" onClick={handleSaveAsDraft}>
+            <svg className="draft-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" strokeLinecap="round" strokeLinejoin="round"/>
+              <polyline points="17 21 17 13 7 13 7 21" strokeLinecap="round" strokeLinejoin="round"/>
+              <polyline points="7 3 7 8 15 8" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Simpan Sebagai Draft
+          </button>
+          <p className="draft-save-hint">Simpan progress Anda dan lanjutkan nanti dari Dashboard</p>
         </div>
       </div>
 

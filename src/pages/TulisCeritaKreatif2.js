@@ -1,14 +1,30 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/TulisCerita.css';
+import { saveDraft, generateDraftId, getCurrentPageData } from '../utils/draftManager';
 
 const TulisCeritaKreatif2 = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [storyContent, setStoryContent] = useState(() => {
     return localStorage.getItem('ceritaKreatif_part2') || '';
   });
   const [uploadedPhotos, setUploadedPhotos] = useState([]);
   const [showExampleModal, setShowExampleModal] = useState(false);
+  const [draftId, setDraftId] = useState(null);
+
+  const previousData = location.state || {};
+
+  useEffect(() => {
+    const currentDraftId = sessionStorage.getItem('current_draft_id');
+    if (currentDraftId) {
+      setDraftId(currentDraftId);
+    } else {
+      const newDraftId = generateDraftId();
+      setDraftId(newDraftId);
+      sessionStorage.setItem('current_draft_id', newDraftId);
+    }
+  }, []);
 
   const exampleText = "Proyek studio kreatif ini akan menawarkan layanan desain grafis terpadu untuk UMKM dan startup lokal. Kami akan menyediakan jasa pembuatan logo, identitas visual, kemasan produk, desain website, dan kampanye media sosial yang profesional namun terjangkau.\n\nTarget utama kami adalah UMKM yang memiliki produk berkualitas namun kesulitan dalam hal branding dan pemasaran visual. Banyak usaha kecil yang memiliki potensi besar namun terhambat karena tampilan visual produk mereka kurang menarik atau tidak konsisten.\n\nStudio ini akan berlokasi di kawasan kreatif Bandung dan akan dilengkapi dengan peralatan desain modern seperti komputer high-spec, tablet grafis, printer profesional, dan ruang meeting untuk konsultasi dengan klien.";
 
@@ -33,6 +49,39 @@ const TulisCeritaKreatif2 = () => {
 
   const handleSave = () => {
     alert('Cerita telah disimpan!');
+  };
+
+  const handleSaveAsDraft = () => {
+    if (!draftId) return;
+
+    localStorage.setItem('ceritaKreatif_part2', storyContent);
+    localStorage.setItem('ceritaKreatif_photos', JSON.stringify(uploadedPhotos.map(p => p.preview)));
+
+    const draftData = {
+      id: draftId,
+      category: 'kreatif',
+      title: previousData.campaignTitle || previousData.selectedCategory?.title || 'Draft Karya Kreatif',
+      image: previousData.photoPreview || null,
+      progress: 83,
+      steps: '5 dari 6 tahap',
+      lastStep: '/tulis-cerita-kreatif-2',
+      target: previousData.targetData?.amount ? parseInt(previousData.targetData.amount.replace(/\./g, '')) : 0,
+      daysLeft: previousData.targetData?.duration ? parseInt(previousData.targetData.duration) : 0,
+      formData: {
+        ...previousData,
+        storyPart2: storyContent,
+        uploadedPhotos: uploadedPhotos.map(p => p.preview)
+      },
+      storyData: getCurrentPageData('kreatif')
+    };
+
+    const saved = saveDraft(draftData);
+    if (saved) {
+      alert('Draft berhasil disimpan! Anda dapat melanjutkannya nanti dari Dashboard.');
+      navigate('/dashboard');
+    } else {
+      alert('Gagal menyimpan draft. Silakan coba lagi.');
+    }
   };
 
   const showExample = () => {
@@ -76,9 +125,6 @@ const TulisCeritaKreatif2 = () => {
       <header className="header white">
         <button className="close-btn" onClick={handleClose}>
           ✕
-        </button>
-        <button className="save-btn" onClick={handleSave}>
-          Simpan cerita
         </button>
       </header>
 
@@ -214,6 +260,19 @@ const TulisCeritaKreatif2 = () => {
           >
             Selanjutnya →
           </button>
+        </div>
+
+        {/* Save as Draft Button */}
+        <div className="draft-save-section">
+          <button className="draft-save-btn" onClick={handleSaveAsDraft}>
+            <svg className="draft-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" strokeLinecap="round" strokeLinejoin="round"/>
+              <polyline points="17 21 17 13 7 13 7 21" strokeLinecap="round" strokeLinejoin="round"/>
+              <polyline points="7 3 7 8 15 8" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Simpan Sebagai Draft
+          </button>
+          <p className="draft-save-hint">Simpan progress Anda dan lanjutkan nanti dari Dashboard</p>
         </div>
       </div>
 

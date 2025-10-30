@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/TulisCerita.css';
+import { saveDraft, generateDraftId, getCurrentPageData } from '../utils/draftManager';
 
 const TulisCeritaSosial3 = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [storyContent, setStoryContent] = useState(() => {
     return localStorage.getItem('ceritaSosial_part3') || '';
   });
   const [showExampleModal, setShowExampleModal] = useState(false);
+  const [draftId, setDraftId] = useState(null);
+
+  const previousData = location.state || {};
+
+  useEffect(() => {
+    const currentDraftId = sessionStorage.getItem('current_draft_id');
+    if (currentDraftId) {
+      setDraftId(currentDraftId);
+    } else {
+      const newDraftId = generateDraftId();
+      setDraftId(newDraftId);
+      sessionStorage.setItem('current_draft_id', newDraftId);
+    }
+  }, []);
 
   const exampleText = "Sebagai respons terhadap kondisi tersebut, Komunitas Peduli Sesama telah melakukan berbagai upaya untuk membantu para lansia di Panti Jompo Kasih Sayang. Selama 6 bulan terakhir, kami rutin mengunjungi panti setiap minggu untuk memberikan bantuan makanan bergizi dan pendampingan.\n\nKami telah mengorganisir kegiatan pemeriksaan kesehatan gratis dengan mengundang dokter dan perawat volunteer. Hasilnya, kami berhasil mengidentifikasi beberapa lansia yang membutuhkan perawatan khusus dan membantu mereka mendapatkan akses ke layanan kesehatan yang tepat.\n\nSelain itu, kami juga mengadakan kegiatan rekreasi seperti senam lansia, membaca bersama, dan berbagi cerita untuk meningkatkan kesejahteraan mental mereka. Para relawan kami yang berprofesi sebagai terapis fisik juga membantu memberikan latihan-latihan sederhana untuk menjaga mobilitas para lansia.";
 
@@ -41,15 +57,43 @@ const TulisCeritaSosial3 = () => {
     setShowExampleModal(false);
   };
 
+  const handleSaveAsDraft = () => {
+    if (!draftId) return;
+
+    localStorage.setItem('ceritaSosial_part3', storyContent);
+
+    const draftData = {
+      id: draftId,
+      category: 'sosial',
+      title: previousData.campaignTitle || previousData.selectedCategory?.title || 'Draft Kegiatan Sosial',
+      image: previousData.photoPreview || null,
+      progress: 83,
+      steps: '5 dari 6 tahap',
+      lastStep: '/tulis-cerita-sosial-3',
+      target: previousData.targetData?.amount ? parseInt(previousData.targetData.amount.replace(/\./g, '')) : 0,
+      daysLeft: previousData.targetData?.duration ? parseInt(previousData.targetData.duration) : 0,
+      formData: {
+        ...previousData,
+        storyPart3: storyContent
+      },
+      storyData: getCurrentPageData('sosial')
+    };
+
+    const saved = saveDraft(draftData);
+    if (saved) {
+      alert('Draft berhasil disimpan! Anda dapat melanjutkannya nanti dari Dashboard.');
+      navigate('/dashboard');
+    } else {
+      alert('Gagal menyimpan draft. Silakan coba lagi.');
+    }
+  };
+
   return (
     <div className="container">
       {/* Header */}
       <header className="header white">
         <button className="close-btn" onClick={handleClose}>
           ✕
-        </button>
-        <button className="save-btn" onClick={handleSave}>
-          Simpan cerita
         </button>
       </header>
 
@@ -101,6 +145,19 @@ const TulisCeritaSosial3 = () => {
           >
             Selanjutnya →
           </button>
+        </div>
+
+        {/* Save as Draft Button */}
+        <div className="draft-save-section">
+          <button className="draft-save-btn" onClick={handleSaveAsDraft}>
+            <svg className="draft-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" strokeLinecap="round" strokeLinejoin="round"/>
+              <polyline points="17 21 17 13 7 13 7 21" strokeLinecap="round" strokeLinejoin="round"/>
+              <polyline points="7 3 7 8 15 8" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Simpan Sebagai Draft
+          </button>
+          <p className="draft-save-hint">Simpan progress Anda dan lanjutkan nanti dari Dashboard</p>
         </div>
       </div>
 

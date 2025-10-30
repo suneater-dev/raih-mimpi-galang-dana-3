@@ -12,6 +12,7 @@ const PencairanDana = () => {
   // Modal state for blocking withdrawal
   const [showBlockModal, setShowBlockModal] = useState(false);
   const [blockingCampaignData, setBlockingCampaignData] = useState(null);
+  const [unreportedCampaigns, setUnreportedCampaigns] = useState([]);
 
   // Filter options
   const filters = [
@@ -23,6 +24,25 @@ const PencairanDana = () => {
 
   // Campaign data matching Dashboard with report status
   const [campaigns] = useState([
+    // NEW Campaign: Ready to withdraw - NO BLOCKING (withdrawalOrder: 0.5)
+    {
+      id: 14,
+      title: 'Bantuan Operasi Tumor untuk Ibu Sari',
+      image: '/dashboard/temani-mimpi-pejuang-pelosok-1756798332-465.webp',
+      collected: 85000000,
+      target: 85000000,
+      donors: 523,
+      status: 'Berakhir',
+      daysLeft: 0,
+      category: 'Medis',
+      reportStatus: 'Disetujui',
+      canWithdraw: true,
+      hasReport: true,
+      withdrawn: false,
+      withdrawnDate: null,
+      withdrawalReported: false,
+      withdrawalOrder: 0.5
+    },
     // Berakhir campaigns with different report statuses
     // Campaign 1: Already withdrawn and reported (completed)
     {
@@ -99,6 +119,120 @@ const PencairanDana = () => {
       withdrawnDate: null,
       withdrawalReported: false,
       withdrawalOrder: 1.5
+    },
+    // Campaign 5: Ready to withdraw - Need to submit report first
+    {
+      id: 12,
+      title: 'Bantu Adik Zahra Melawan Leukemia',
+      image: '/dashboard/temani-mimpi-pejuang-pelosok-1756798332-465.webp',
+      collected: 120000000,
+      target: 120000000,
+      donors: 687,
+      status: 'Berakhir',
+      daysLeft: 0,
+      category: 'Medis',
+      reportStatus: 'Belum Lapor',
+      canWithdraw: false,
+      hasReport: false,
+      withdrawn: false,
+      withdrawnDate: null,
+      withdrawalReported: false,
+      withdrawalOrder: 4
+    },
+    // Campaign 6: Ready to withdraw - Need to submit report first
+    {
+      id: 13,
+      title: 'Beasiswa S1 untuk Anak Yatim Berprestasi',
+      image: '/dashboard/wujudkan-mimpi-anak-pelosok-1756351894-334.webp',
+      collected: 45000000,
+      target: 45000000,
+      donors: 298,
+      status: 'Berakhir',
+      daysLeft: 0,
+      category: 'Pendidikan',
+      reportStatus: 'Belum Lapor',
+      canWithdraw: false,
+      hasReport: false,
+      withdrawn: false,
+      withdrawnDate: null,
+      withdrawalReported: false,
+      withdrawalOrder: 5
+    },
+    // Campaign 7: Ready to withdraw - Need to submit report first
+    {
+      id: 14,
+      title: 'Pembangunan Sumur Bor untuk Desa Terpencil',
+      image: '/dashboard/hawari-berjuang-dengan-selang-di-hidung-1756370366-572.webp',
+      collected: 35000000,
+      target: 35000000,
+      donors: 234,
+      status: 'Berakhir',
+      daysLeft: 0,
+      category: 'Sosial',
+      reportStatus: 'Belum Lapor',
+      canWithdraw: false,
+      hasReport: false,
+      withdrawn: false,
+      withdrawnDate: null,
+      withdrawalReported: false,
+      withdrawalOrder: 6
+    },
+    // Campaign 8: Ready to withdraw - Need to submit report first
+    {
+      id: 15,
+      title: 'Operasi Tulang Belakang Pak Ahmad',
+      image: '/dashboard/temani-mimpi-pejuang-pelosok-1756798332-465.webp',
+      collected: 95000000,
+      target: 95000000,
+      donors: 512,
+      status: 'Berakhir',
+      daysLeft: 0,
+      category: 'Medis',
+      reportStatus: 'Belum Lapor',
+      canWithdraw: false,
+      hasReport: false,
+      withdrawn: false,
+      withdrawnDate: null,
+      withdrawalReported: false,
+      withdrawalOrder: 7
+    },
+    // Campaign 9: Ready to withdraw - Need to submit report first
+    {
+      id: 16,
+      title: 'Renovasi Gedung Sekolah Dasar Negeri 05',
+      image: '/dashboard/wujudkan-mimpi-anak-pelosok-1756351894-334.webp',
+      collected: 80000000,
+      target: 80000000,
+      donors: 445,
+      status: 'Berakhir',
+      daysLeft: 0,
+      category: 'Pendidikan',
+      reportStatus: 'Belum Lapor',
+      canWithdraw: false,
+      hasReport: false,
+      withdrawn: false,
+      withdrawnDate: null,
+      withdrawalReported: false,
+      withdrawalOrder: 8
+    },
+    // Campaign 10: Ready to withdraw - Need to submit report first
+    {
+      id: 17,
+      title: 'Santunan untuk Keluarga Korban Kebakaran',
+      image: '/dashboard/hawari-berjuang-dengan-selang-di-hidung-1756370366-572.webp',
+      collected: 55000000,
+      target: 55000000,
+      donors: 367,
+      status: 'Berakhir',
+      daysLeft: 0,
+      category: 'Sosial',
+      reportStatus: 'Belum Lapor',
+      canWithdraw: false,
+      hasReport: false,
+      withdrawn: false,
+      withdrawnDate: null,
+      withdrawalReported: false,
+      withdrawalOrder: 9
     },
     // Aktif campaigns
     {
@@ -232,6 +366,32 @@ const PencairanDana = () => {
       );
     }
 
+    // Sort campaigns by priority:
+    // 1. Cairkan Dana (reportStatus === 'Disetujui' && !withdrawn)
+    // 2. Buat Laporan (reportStatus === 'Belum Lapor')
+    // 3. Others (Lihat Berita, etc.)
+    filtered.sort((a, b) => {
+      const getPriority = (campaign) => {
+        // Priority 1: Can withdraw (Disetujui and not withdrawn)
+        if (campaign.reportStatus === 'Disetujui' && !campaign.withdrawn) return 1;
+        // Priority 2: Needs report (Belum Lapor)
+        if (campaign.reportStatus === 'Belum Lapor') return 2;
+        // Priority 3: Others (already withdrawn, in review, etc.)
+        return 3;
+      };
+
+      const priorityA = getPriority(a);
+      const priorityB = getPriority(b);
+
+      // Sort by priority first
+      if (priorityA !== priorityB) {
+        return priorityA - priorityB;
+      }
+
+      // If same priority, sort by withdrawalOrder
+      return (a.withdrawalOrder || 999) - (b.withdrawalOrder || 999);
+    });
+
     return filtered;
   };
 
@@ -278,12 +438,22 @@ const PencairanDana = () => {
   const handleWithdraw = (campaign) => {
     // Only accessible if report is approved
     if (campaign.reportStatus === 'Disetujui') {
-      // Check if there are unreported withdrawals blocking this one
-      const blockCheck = checkUnreportedWithdrawals(campaign);
+      // Special case: Campaign with withdrawalOrder < 1 can withdraw without checking
+      if (campaign.withdrawalOrder < 1) {
+        // Allow direct withdrawal for priority campaigns
+        navigate('/detail-pencairan-dana', { state: { campaign } });
+        return;
+      }
 
-      if (!blockCheck.canWithdraw) {
-        // Show modal with blocking campaign info
-        setBlockingCampaignData(blockCheck.blockingCampaign);
+      // For other campaigns, check if there are ANY unreported campaigns
+      const allUnreported = campaigns.filter(c =>
+        c.status === 'Berakhir' &&
+        c.reportStatus === 'Belum Lapor'
+      ).sort((a, b) => a.withdrawalOrder - b.withdrawalOrder);
+
+      if (allUnreported.length > 0) {
+        // Show modal with ALL unreported campaigns that need reports first
+        setUnreportedCampaigns(allUnreported);
         setShowBlockModal(true);
       } else {
         // Allow withdrawal
@@ -664,48 +834,70 @@ const PencairanDana = () => {
         </div>
       </div>
 
-      {/* Blocking Modal */}
-      {showBlockModal && blockingCampaignData && (
+      {/* Blocking Modal - Shows ALL Unreported Campaigns */}
+      {showBlockModal && unreportedCampaigns.length > 0 && (
         <div className="modal-overlay" onClick={() => setShowBlockModal(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            {/* Modal Icon */}
-            <div className="modal-icon-warning">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+          <div className="modal-content-unreported" onClick={(e) => e.stopPropagation()}>
+            {/* Modal Header */}
+            <div className="modal-header-unreported">
+              <div className="modal-icon-warning">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h3 className="modal-title">Laporan Campaign Diperlukan</h3>
+              <button className="modal-close-btn" onClick={() => setShowBlockModal(false)}>✕</button>
             </div>
 
-            {/* Modal Title */}
-            <h3 className="modal-title">Laporan Campaign Diperlukan</h3>
-
             {/* Modal Message */}
-            <p className="modal-message">
-              Sebelum dapat mencairkan dana campaign ini, Anda harus melaporkan penggunaan dana dari campaign sebelumnya:
-            </p>
+            <div className="modal-body-unreported">
+              <p className="modal-message-unreported">
+                Anda memiliki <strong>{unreportedCampaigns.length} campaign</strong> yang belum dilaporkan. Harap buat laporan untuk campaign berikut sebelum melakukan pencairan dana:
+              </p>
 
-            {/* Blocking Campaign Info */}
-            <div className="blocking-campaign-info">
-              <div className="blocking-campaign-name">{blockingCampaignData.title}</div>
-              <div className="blocking-campaign-meta">
-                Campaign #{blockingCampaignData.withdrawalOrder} • Dicairkan pada {new Date(blockingCampaignData.withdrawnDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+              {/* Unreported Campaigns List */}
+              <div className="unreported-campaigns-list">
+                {unreportedCampaigns.map((campaign, index) => (
+                  <div key={campaign.id} className="unreported-campaign-item">
+                    <div className="unreported-item-left">
+                      <div className="unreported-item-number">{index + 1}</div>
+                      <img
+                        src={campaign.image}
+                        alt={campaign.title}
+                        className="unreported-item-image"
+                      />
+                      <div className="unreported-item-info">
+                        <div className="unreported-item-title">{campaign.title}</div>
+                        <div className="unreported-item-meta">
+                          <span className={`category-badge-${campaign.category.toLowerCase()}`}>
+                            {campaign.category}
+                          </span>
+                          <span className="unreported-item-amount">
+                            Rp {campaign.collected.toLocaleString('id-ID')}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      className="btn-create-report-modal"
+                      onClick={() => {
+                        setShowBlockModal(false);
+                        navigate('/laporan-pencairan', { state: { campaign } });
+                      }}
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{width: '18px', height: '18px'}}>
+                        <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      Buat Laporan
+                    </button>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Modal Buttons */}
-            <div className="modal-buttons">
-              <button
-                className="btn-modal-primary"
-                onClick={() => {
-                  setShowBlockModal(false);
-                  navigate('/laporan-pencairan', { state: { campaign: blockingCampaignData } });
-                }}
-              >
-                <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                Buat Laporan Sekarang
-              </button>
-              <button className="btn-modal-secondary" onClick={() => setShowBlockModal(false)}>
+            {/* Modal Footer */}
+            <div className="modal-footer-unreported">
+              <button className="btn-modal-close" onClick={() => setShowBlockModal(false)}>
                 Tutup
               </button>
             </div>

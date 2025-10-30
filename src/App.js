@@ -96,6 +96,7 @@ import BeritaPencairan from './pages/BeritaPencairan';
 import PengajuanPencairan from './pages/PengajuanPencairan';
 import PengajuanPencairanBerhasil from './pages/PengajuanPencairanBerhasil';
 import CampaignDetail from './pages/CampaignDetail';
+import MasjidCampaignView from './pages/MasjidCampaignView';
 import './App.css';
 
 function App() {
@@ -200,6 +201,7 @@ function App() {
           <Route path="/pengajuan-pencairan" element={<PengajuanPencairan />} />
           <Route path="/pengajuan-pencairan-berhasil" element={<PengajuanPencairanBerhasil />} />
           <Route path="/campaign/:id" element={<CampaignDetail />} />
+          <Route path="/masjid-campaign/:id" element={<MasjidCampaignView />} />
 
           {/* Placeholder routes */}
           <Route path="/general-form" element={<div>General Form Page (To be implemented)</div>} />

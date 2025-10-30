@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProgressSteps from '../components/ProgressSteps';
 import '../styles/RiwayatMedis.css';
+import { saveDraft, generateDraftId, getCurrentPageData } from '../utils/draftManager';
 
 const RiwayatMedis = () => {
   const navigate = useNavigate();
   const [hospitalStatus, setHospitalStatus] = useState('');
   const [treatmentHistory, setTreatmentHistory] = useState('');
   const [fundingSource, setFundingSource] = useState('');
+  const [draftId, setDraftId] = useState(null);
+
+  useEffect(() => {
+    const currentDraftId = sessionStorage.getItem('current_draft_id');
+    if (currentDraftId) {
+      setDraftId(currentDraftId);
+    } else {
+      const newDraftId = generateDraftId();
+      setDraftId(newDraftId);
+      sessionStorage.setItem('current_draft_id', newDraftId);
+    }
+  }, []);
 
   const handleNext = () => {
     navigate('/target-donasi');
@@ -19,6 +32,40 @@ const RiwayatMedis = () => {
 
   const handleHospitalSearch = () => {
     alert('Hospital search functionality would open here');
+  };
+
+  const handleSaveAsDraft = () => {
+    if (!draftId) return;
+
+    // Get previous data from sessionStorage or state
+    const previousData = JSON.parse(sessionStorage.getItem('riwayat_medis_data') || '{}');
+
+    const draftData = {
+      id: draftId,
+      category: 'medis',
+      title: previousData.patientName || 'Draft Bantuan Medis',
+      image: null,
+      progress: 43,
+      steps: '3 dari 7 tahap',
+      lastStep: '/riwayat-medis',
+      target: 0,
+      daysLeft: 0,
+      formData: {
+        ...previousData,
+        hospitalStatus,
+        treatmentHistory,
+        fundingSource
+      },
+      storyData: getCurrentPageData('medis')
+    };
+
+    const saved = saveDraft(draftData);
+    if (saved) {
+      alert('Draft berhasil disimpan! Anda dapat melanjutkannya nanti dari Dashboard.');
+      navigate('/dashboard');
+    } else {
+      alert('Gagal menyimpan draft. Silakan coba lagi.');
+    }
   };
 
   const steps = [
@@ -162,6 +209,19 @@ const RiwayatMedis = () => {
         <button className="modern-btn" onClick={handleNext}>
           Selanjutnya →
         </button>
+      </div>
+
+      {/* Save as Draft Button */}
+      <div className="draft-save-section">
+        <button className="draft-save-btn" onClick={handleSaveAsDraft}>
+          <svg className="draft-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" strokeLinecap="round" strokeLinejoin="round"/>
+            <polyline points="17 21 17 13 7 13 7 21" strokeLinecap="round" strokeLinejoin="round"/>
+            <polyline points="7 3 7 8 15 8" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Simpan Sebagai Draft
+        </button>
+        <p className="draft-save-hint">Simpan progress Anda dan lanjutkan nanti dari Dashboard</p>
       </div>
     </div>
   );

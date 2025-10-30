@@ -67,12 +67,13 @@
 }
 
 .form-label-modern {
-    font-size: 18px;
-    font-weight: 700;
-    color: #1e293b;
+    font-size: 15px;
+    font-weight: 600;
+    color: #475569;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-    margin: 0 0 8px 0;
+    margin: 0 0 10px 0;
     letter-spacing: -0.01em;
+    display: block;
 }
 
 .form-description-modern {
@@ -83,28 +84,55 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
 }
 
-/* Patient Input */
-.patient-input {
+/* Modern Input - Non-floating */
+.modern-input {
     width: 100%;
-    padding: 18px 24px;
-    border: 2px solid rgba(226, 232, 240, 0.4);
-    border-radius: 20px;
-    font-size: 16px;
-    background: rgba(255, 255, 255, 0.8);
+    padding: 16px 20px;
+    border: 2px solid rgba(226, 232, 240, 0.6);
+    border-radius: 16px;
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(20px);
     color: #1e293b;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 400;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-    box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
+}
+
+.modern-input:focus {
+    outline: none;
+    border-color: #983ced;
+    box-shadow: 0 0 0 3px rgba(152, 60, 237, 0.1), 0 4px 16px -4px rgba(152, 60, 237, 0.2);
+    background: rgba(255, 255, 255, 1);
+}
+
+.modern-input::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
+}
+
+/* Patient Input - Legacy support */
+.patient-input {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid rgba(226, 232, 240, 0.6);
+    border-radius: 16px;
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    color: #1e293b;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 400;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
 }
 
 .patient-input:focus {
     outline: none;
     border-color: #983ced;
-    box-shadow: 0 0 0 4px rgba(152, 60, 237, 0.12), 0 8px 32px -12px rgba(152, 60, 237, 0.3);
-    background: rgba(255, 255, 255, 0.95);
-    transform: translateY(-2px);
+    box-shadow: 0 0 0 3px rgba(152, 60, 237, 0.1), 0 4px 16px -4px rgba(152, 60, 237, 0.2);
+    background: rgba(255, 255, 255, 1);
 }
 
 .patient-input::placeholder {
@@ -277,16 +305,12 @@
 
 /* Touch Device Optimizations */
 @media (hover: none) and (pointer: coarse) {
-    .patient-input:focus {
-        transform: none;
-    }
-    
     .nav-btn-secondary:hover {
         transform: none;
         background: rgba(255, 255, 255, 0.8);
         border-color: rgba(226, 232, 240, 0.4);
     }
-    
+
     .nav-btn-primary:hover:not(.disabled) {
         transform: none;
         box-shadow: 0 6px 24px -6px rgba(152, 60, 237, 0.4);

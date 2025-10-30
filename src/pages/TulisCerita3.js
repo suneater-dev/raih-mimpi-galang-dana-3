@@ -1,17 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/TulisCerita.css';
+import { saveDraft, generateDraftId, getCurrentPageData } from '../utils/draftManager';
 
 const TulisCerita3 = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [familyContent, setFamilyContent] = useState('');
   const [uploadedPhoto, setUploadedPhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState(null);
   const [showExampleModal, setShowExampleModal] = useState(false);
+  const [draftId, setDraftId] = useState(null);
+
+  const previousData = location.state || {};
 
   const exampleText = "Keluarga kami adalah keluarga sederhana yang tinggal di perumahan kecil di Yogyakarta. Ayah bekerja sebagai tukang las dengan penghasilan tidak menentu, sedangkan ibu adalah ibu rumah tangga yang sesekali menerima jahitan dari tetangga.\n\nSebelum Andi sakit, kehidupan kami cukup harmonis. Andi sangat aktif bermain dengan teman-teman di kompleks dan selalu menjadi anak yang ceria. Namun sejak didiagnosis leukemia, suasana rumah berubah menjadi sedih dan penuh kekhawatiran.\n\nSaat ini, seluruh keluarga besar kami bergotong royong membantu biaya pengobatan Andi. Kakek dan nenek dari kedua belah pihak, serta paman dan bibi juga ikut membantu secara finansial dan memberikan dukungan moral kepada keluarga kami.";
 
   useEffect(() => {
+    const currentDraftId = sessionStorage.getItem('current_draft_id');
+    if (currentDraftId) {
+      setDraftId(currentDraftId);
+    } else {
+      const newDraftId = generateDraftId();
+      setDraftId(newDraftId);
+      sessionStorage.setItem('current_draft_id', newDraftId);
+    }
+
     // Load saved content from localStorage
     const saved = localStorage.getItem('cerita_part3');
     const savedPhoto = localStorage.getItem('cerita_part3_photo');
@@ -57,6 +71,42 @@ const TulisCerita3 = () => {
     setShowExampleModal(false);
   };
 
+  const handleSaveAsDraft = () => {
+    if (!draftId) return;
+
+    // Save current story content
+    localStorage.setItem('cerita_part3', familyContent);
+    if (photoPreview) {
+      localStorage.setItem('cerita_part3_photo', photoPreview);
+    }
+
+    const draftData = {
+      id: draftId,
+      category: 'medis',
+      title: previousData.campaignTitle || previousData.patientName || 'Draft Bantuan Medis',
+      image: previousData.photoPreview || null,
+      progress: 86,
+      steps: '6 dari 7 tahap',
+      lastStep: '/tulis-cerita-3',
+      target: previousData.targetData?.amount ? parseInt(previousData.targetData.amount.replace(/\./g, '')) : 0,
+      daysLeft: previousData.targetData?.duration ? parseInt(previousData.targetData.duration) : 0,
+      formData: {
+        ...previousData,
+        storyPart3: familyContent,
+        storyPart3Photo: photoPreview
+      },
+      storyData: getCurrentPageData('medis')
+    };
+
+    const saved = saveDraft(draftData);
+    if (saved) {
+      alert('Draft berhasil disimpan! Anda dapat melanjutkannya nanti dari Dashboard.');
+      navigate('/dashboard');
+    } else {
+      alert('Gagal menyimpan draft. Silakan coba lagi.');
+    }
+  };
+
   const handlePhotoUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -95,9 +145,6 @@ const TulisCerita3 = () => {
       <header className="header white">
         <button className="close-btn" onClick={handleClose}>
           ✕
-        </button>
-        <button className="save-btn" onClick={handleSave}>
-          Simpan cerita
         </button>
       </header>
 
@@ -206,6 +253,19 @@ const TulisCerita3 = () => {
           >
             Selanjutnya →
           </button>
+        </div>
+
+        {/* Save as Draft Button */}
+        <div className="draft-save-section">
+          <button className="draft-save-btn" onClick={handleSaveAsDraft}>
+            <svg className="draft-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" strokeLinecap="round" strokeLinejoin="round"/>
+              <polyline points="17 21 17 13 7 13 7 21" strokeLinecap="round" strokeLinejoin="round"/>
+              <polyline points="7 3 7 8 15 8" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Simpan Sebagai Draft
+          </button>
+          <p className="draft-save-hint">Simpan progress Anda dan lanjutkan nanti dari Dashboard</p>
         </div>
       </div>
 

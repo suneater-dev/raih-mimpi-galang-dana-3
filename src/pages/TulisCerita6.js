@@ -1,15 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/TulisCerita.css';
+import { saveDraft, generateDraftId, getCurrentPageData } from '../utils/draftManager';
 
 const TulisCerita6 = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [storyContent, setStoryContent] = useState('');
   const [showExampleModal, setShowExampleModal] = useState(false);
+  const [draftId, setDraftId] = useState(null);
+
+  const previousData = location.state || {};
 
   const exampleText = "Doa kami yang paling dalam adalah agar Andi dapat sembuh total dari penyakitnya dan kembali menjadi anak yang sehat dan ceria seperti sebelumnya. Kami berharap suatu hari nanti Andi bisa kembali bersekolah, bermain bersama teman-temannya, dan meraih cita-citanya menjadi dokter untuk membantu anak-anak lain yang sakit.\n\nKami percaya bahwa dengan bantuan dari orang-orang baik seperti Anda, doa kami akan terkabul. Semoga Allah SWT memberikan kesembuhan dan kekuatan bagi Andi untuk melewati masa-masa sulit ini.\n\nTerima kasih atas dukungan dan doa dari semua pihak. Semoga kebaikan Anda dibalas berlipat ganda. Amin.";
 
   useEffect(() => {
+    const currentDraftId = sessionStorage.getItem('current_draft_id');
+    if (currentDraftId) {
+      setDraftId(currentDraftId);
+    } else {
+      const newDraftId = generateDraftId();
+      setDraftId(newDraftId);
+      sessionStorage.setItem('current_draft_id', newDraftId);
+    }
+
     // Load saved content from localStorage
     const saved = localStorage.getItem('cerita_part6');
     if (saved) setStoryContent(saved);
@@ -47,15 +61,44 @@ const TulisCerita6 = () => {
     setShowExampleModal(false);
   };
 
+  const handleSaveAsDraft = () => {
+    if (!draftId) return;
+
+    // Save current story content
+    localStorage.setItem('cerita_part6', storyContent);
+
+    const draftData = {
+      id: draftId,
+      category: 'medis',
+      title: previousData.campaignTitle || previousData.patientName || 'Draft Bantuan Medis',
+      image: previousData.photoPreview || null,
+      progress: 86,
+      steps: '6 dari 7 tahap',
+      lastStep: '/tulis-cerita-6',
+      target: previousData.targetData?.amount ? parseInt(previousData.targetData.amount.replace(/\./g, '')) : 0,
+      daysLeft: previousData.targetData?.duration ? parseInt(previousData.targetData.duration) : 0,
+      formData: {
+        ...previousData,
+        storyPart6: storyContent
+      },
+      storyData: getCurrentPageData('medis')
+    };
+
+    const saved = saveDraft(draftData);
+    if (saved) {
+      alert('Draft berhasil disimpan! Anda dapat melanjutkannya nanti dari Dashboard.');
+      navigate('/dashboard');
+    } else {
+      alert('Gagal menyimpan draft. Silakan coba lagi.');
+    }
+  };
+
   return (
     <div className="container">
       {/* Header */}
       <header className="header white">
         <button className="close-btn" onClick={handleClose}>
           ✕
-        </button>
-        <button className="save-btn" onClick={handleSave}>
-          Simpan cerita
         </button>
       </header>
 
@@ -108,6 +151,19 @@ const TulisCerita6 = () => {
           >
             Selesai ✓
           </button>
+        </div>
+
+        {/* Save as Draft Button */}
+        <div className="draft-save-section">
+          <button className="draft-save-btn" onClick={handleSaveAsDraft}>
+            <svg className="draft-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" strokeLinecap="round" strokeLinejoin="round"/>
+              <polyline points="17 21 17 13 7 13 7 21" strokeLinecap="round" strokeLinejoin="round"/>
+              <polyline points="7 3 7 8 15 8" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Simpan Sebagai Draft
+          </button>
+          <p className="draft-save-hint">Simpan progress Anda dan lanjutkan nanti dari Dashboard</p>
         </div>
       </div>
 

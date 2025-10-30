@@ -1,19 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/TulisCerita.css';
+import { saveDraft, generateDraftId, getCurrentPageData } from '../utils/draftManager';
 
 const TulisCerita2 = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [section1Content, setSection1Content] = useState('');
   const [section2Content, setSection2Content] = useState('');
   const [showExampleModal1, setShowExampleModal1] = useState(false);
   const [showExampleModal2, setShowExampleModal2] = useState(false);
+  const [draftId, setDraftId] = useState(null);
+
+  const previousData = location.state || {};
 
   const exampleText1 = "Andi didiagnosis menderita leukemia limfoblastik akut (ALL) pada bulan Maret 2024. Sejak diagnosis ini, kondisinya sangat mengkhawatirkan. Andi yang dulu sangat aktif dan ceria sekarang terlihat pucat dan lemah.\n\nGejala yang dialami Andi sangat beragam. Ia sering mengalami demam tinggi yang tidak kunjung turun, mudah memar meski hanya terbentur ringan, dan nafsu makannya menurun drastis. Berat badannya turun dari 25 kg menjadi 20 kg dalam waktu 2 bulan.\n\nSebagai kakak, saya sangat sedih melihat Andi yang dulu suka berlari-larian sekarang lebih banyak berbaring lemah di tempat tidur. Ia sering mengeluh pusing dan mual, terutama setelah menjalani kemoterapi.";
 
   const exampleText2 = "Sejak diagnosis di bulan Maret, Andi sudah menjalani berbagai upaya pengobatan. Pertama, ia menjalani biopsi sumsum tulang untuk memastikan jenis leukemia yang dideritanya.\n\nAndi telah menjalani 3 siklus kemoterapi di RSUP Dr. Sardjito Yogyakarta. Setiap siklus kemoterapi membutuhkan rawat inap selama 1-2 minggu. Selain kemoterapi, Andi juga rutin mendapat transfusi darah dan trombosit karena kadar dalam tubuhnya yang rendah.\n\nDokter juga memberikan obat-obatan pendukung untuk mengatasi efek samping kemoterapi seperti mual dan muntah. Keluarga kami juga berusaha memberikan nutrisi terbaik dan suplemen untuk menjaga daya tahan tubuh Andi.";
 
   useEffect(() => {
+    const currentDraftId = sessionStorage.getItem('current_draft_id');
+    if (currentDraftId) {
+      setDraftId(currentDraftId);
+    } else {
+      const newDraftId = generateDraftId();
+      setDraftId(newDraftId);
+      sessionStorage.setItem('current_draft_id', newDraftId);
+    }
+
     // Load saved content from localStorage
     const saved1 = localStorage.getItem('cerita_part2_section1');
     const saved2 = localStorage.getItem('cerita_part2_section2');
@@ -63,15 +77,46 @@ const TulisCerita2 = () => {
     setShowExampleModal2(false);
   };
 
+  const handleSaveAsDraft = () => {
+    if (!draftId) return;
+
+    // Save current story content
+    localStorage.setItem('cerita_part2_section1', section1Content);
+    localStorage.setItem('cerita_part2_section2', section2Content);
+
+    const draftData = {
+      id: draftId,
+      category: 'medis',
+      title: previousData.campaignTitle || previousData.patientName || 'Draft Bantuan Medis',
+      image: previousData.photoPreview || null,
+      progress: 86,
+      steps: '6 dari 7 tahap',
+      lastStep: '/tulis-cerita-2',
+      target: previousData.targetData?.amount ? parseInt(previousData.targetData.amount.replace(/\./g, '')) : 0,
+      daysLeft: previousData.targetData?.duration ? parseInt(previousData.targetData.duration) : 0,
+      formData: {
+        ...previousData,
+        storyPart2Section1: section1Content,
+        storyPart2Section2: section2Content
+      },
+      storyData: getCurrentPageData('medis')
+    };
+
+    const saved = saveDraft(draftData);
+    if (saved) {
+      alert('Draft berhasil disimpan! Anda dapat melanjutkannya nanti dari Dashboard.');
+      navigate('/dashboard');
+    } else {
+      alert('Gagal menyimpan draft. Silakan coba lagi.');
+    }
+  };
+
   return (
     <div className="container">
       {/* Header */}
       <header className="header white">
         <button className="close-btn" onClick={handleClose}>
           ✕
-        </button>
-        <button className="save-btn" onClick={handleSave}>
-          Simpan cerita
         </button>
       </header>
 
@@ -143,6 +188,19 @@ const TulisCerita2 = () => {
           >
             Selanjutnya →
           </button>
+        </div>
+
+        {/* Save as Draft Button */}
+        <div className="draft-save-section">
+          <button className="draft-save-btn" onClick={handleSaveAsDraft}>
+            <svg className="draft-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" strokeLinecap="round" strokeLinejoin="round"/>
+              <polyline points="17 21 17 13 7 13 7 21" strokeLinecap="round" strokeLinejoin="round"/>
+              <polyline points="7 3 7 8 15 8" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Simpan Sebagai Draft
+          </button>
+          <p className="draft-save-hint">Simpan progress Anda dan lanjutkan nanti dari Dashboard</p>
         </div>
       </div>
 

@@ -1,17 +1,41 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ProgressSteps from '../components/ProgressSteps';
 import '../styles/JudulKampanye.css';
+import { saveDraft, generateDraftId, getCurrentPageData } from '../utils/draftManager';
 
 const JudulKampanyeKreatif = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [campaignTitle, setCampaignTitle] = useState('');
   const [campaignUrl, setCampaignUrl] = useState('');
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [draftId, setDraftId] = useState(null);
+
+  // Get data from previous steps
+  const previousData = location.state || {};
+
+  useEffect(() => {
+    const currentDraftId = sessionStorage.getItem('current_draft_id');
+    if (currentDraftId) {
+      setDraftId(currentDraftId);
+    } else {
+      const newDraftId = generateDraftId();
+      setDraftId(newDraftId);
+      sessionStorage.setItem('current_draft_id', newDraftId);
+    }
+  }, []);
 
   const handlePhotoUpload = (e) => {
     if (e.target.files.length > 0) {
-      setSelectedPhoto(e.target.files[0]);
+      const file = e.target.files[0];
+      setSelectedPhoto(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPhotoPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -23,7 +47,13 @@ const JudulKampanyeKreatif = () => {
     e.preventDefault();
     const files = e.dataTransfer.files;
     if (files.length > 0) {
-      setSelectedPhoto(files[0]);
+      const file = files[0];
+      setSelectedPhoto(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPhotoPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -33,6 +63,39 @@ const JudulKampanyeKreatif = () => {
 
   const handleBack = () => {
     navigate('/target-donasi-kreatif');
+  };
+
+  const handleSaveAsDraft = () => {
+    if (!draftId) return;
+
+    const rawAmount = previousData.targetData?.amount ? previousData.targetData.amount.replace(/\./g, '') : '0';
+
+    const draftData = {
+      id: draftId,
+      category: 'kreatif',
+      title: campaignTitle || previousData.selectedCategory?.title || 'Draft Karya Kreatif',
+      image: photoPreview || null,
+      progress: 67,
+      steps: '4 dari 6 tahap',
+      lastStep: '/judul-kampanye-kreatif',
+      target: rawAmount ? parseInt(rawAmount) : 0,
+      daysLeft: previousData.targetData?.duration ? parseInt(previousData.targetData.duration) : 0,
+      formData: {
+        ...previousData,
+        campaignTitle,
+        campaignUrl,
+        photoPreview
+      },
+      storyData: getCurrentPageData('kreatif')
+    };
+
+    const saved = saveDraft(draftData);
+    if (saved) {
+      alert('Draft berhasil disimpan! Anda dapat melanjutkannya nanti dari Dashboard.');
+      navigate('/dashboard');
+    } else {
+      alert('Gagal menyimpan draft. Silakan coba lagi.');
+    }
   };
 
   const steps = [
@@ -136,7 +199,19 @@ const JudulKampanyeKreatif = () => {
           Selanjutnya →
         </button>
       </div>
-      
+
+      {/* Save as Draft Button */}
+      <div className="draft-save-section">
+        <button className="draft-save-btn" onClick={handleSaveAsDraft}>
+          <svg className="draft-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" strokeLinecap="round" strokeLinejoin="round"/>
+            <polyline points="17 21 17 13 7 13 7 21" strokeLinecap="round" strokeLinejoin="round"/>
+            <polyline points="7 3 7 8 15 8" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Simpan Sebagai Draft
+        </button>
+        <p className="draft-save-hint">Simpan progress Anda dan lanjutkan nanti dari Dashboard</p>
+      </div>
     </div>
   );
 };
